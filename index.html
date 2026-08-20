@@ -386,43 +386,46 @@
                         </div>
                     </div>
 
-                    <!-- FIXED FORM: USING FETCH API WITH URLSEARCHPARAMS TO TRIGGER GOOGLE SCRIPT RELIABLY -->
-                    <form id="tutorRegForm" onsubmit="handleTutorFormSubmit(event)" class="space-y-4">
+                    <!-- HIDDEN IFRAME FOR SEAMLESS SUBMISSION -->
+                    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+                    
+                    <!-- FORM CONNECTED DIRECTLY TO GOOGLE APPS SCRIPT -->
+                    <form id="tutorRegForm" action="https://script.google.com/macros/s/AKfycbzFDeqKdg8FYoiClmXLWSNCvQIoVxWvq_0HZcCLCzYLrhuxpwyo76WkAVUY8D6vF-iA/exec" method="POST" target="hidden_iframe" onsubmit="handleTutorFormSubmit(event)" class="space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Full Name *</label>
-                                <input type="text" id="t_name" required placeholder="Enter tutor name" class="w-full border border-slate-300 rounded-xl p-3 sm:p-3.5 text-xs sm:text-sm focus:border-brand-blue focus:outline-none font-medium bg-white">
+                                <input type="text" name="name" id="t_name" required placeholder="Enter tutor name" class="w-full border border-slate-300 rounded-xl p-3 sm:p-3.5 text-xs sm:text-sm focus:border-brand-blue focus:outline-none font-medium bg-white">
                             </div>
                             <div>
                                 <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Subject Expertise *</label>
-                                <input type="text" id="t_subject" required placeholder="e.g. Advanced Mathematics" class="w-full border border-slate-300 rounded-xl p-3 sm:p-3.5 text-xs sm:text-sm focus:border-brand-blue focus:outline-none font-medium bg-white">
+                                <input type="text" name="subject" id="t_subject" required placeholder="e.g. Advanced Mathematics" class="w-full border border-slate-300 rounded-xl p-3 sm:p-3.5 text-xs sm:text-sm focus:border-brand-blue focus:outline-none font-medium bg-white">
                             </div>
                         </div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Email Address *</label>
-                                <input type="email" id="t_email" required placeholder="tutor@gmail.com" class="w-full border border-slate-300 rounded-xl p-3 sm:p-3.5 text-xs sm:text-sm focus:border-brand-blue focus:outline-none font-medium bg-white">
+                                <input type="email" name="email" id="t_email" required placeholder="tutor@gmail.com" class="w-full border border-slate-300 rounded-xl p-3 sm:p-3.5 text-xs sm:text-sm focus:border-brand-blue focus:outline-none font-medium bg-white">
                             </div>
                             <div>
                                 <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">WhatsApp Number (Login ID) *</label>
-                                <input type="tel" id="t_phone" required placeholder="9876543210" class="w-full border border-slate-300 rounded-xl p-3 sm:p-3.5 text-xs sm:text-sm focus:border-brand-blue focus:outline-none font-medium bg-white">
+                                <input type="tel" name="phone" id="t_phone" required placeholder="9876543210" class="w-full border border-slate-300 rounded-xl p-3 sm:p-3.5 text-xs sm:text-sm focus:border-brand-blue focus:outline-none font-medium bg-white">
                             </div>
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Rate / Hour *</label>
-                                <input type="text" id="t_price" required placeholder="e.g. ₹700/hr" class="w-full border border-slate-300 rounded-xl p-3 sm:p-3.5 text-xs sm:text-sm focus:border-brand-blue focus:outline-none font-medium bg-white">
+                                <input type="text" name="price" id="t_price" required placeholder="e.g. ₹700/hr" class="w-full border border-slate-300 rounded-xl p-3 sm:p-3.5 text-xs sm:text-sm focus:border-brand-blue focus:outline-none font-medium bg-white">
                             </div>
                             <div>
                                 <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Experience *</label>
-                                <input type="text" id="t_exp" required placeholder="e.g. 5 Years" class="w-full border border-slate-300 rounded-xl p-3 sm:p-3.5 text-xs sm:text-sm focus:border-brand-blue focus:outline-none font-medium bg-white">
+                                <input type="text" name="experience" id="t_exp" required placeholder="e.g. 5 Years" class="w-full border border-slate-300 rounded-xl p-3 sm:p-3.5 text-xs sm:text-sm focus:border-brand-blue focus:outline-none font-medium bg-white">
                             </div>
                         </div>
 
                         <div class="border border-brand-blue bg-blue-50/50 p-3 sm:p-4 rounded-2xl">
                             <label class="block text-[10px] sm:text-xs font-bold text-brand-blue uppercase tracking-wider mb-1.5">Enter UTR / Transaction Reference Number *</label>
-                            <input type="text" id="txnIdInput" required placeholder="Enter valid UTR / Transaction Reference" class="w-full border border-brand-blue rounded-xl p-3 sm:p-3.5 text-xs sm:text-sm focus:outline-none font-mono font-bold bg-white">
+                            <input type="text" name="utr" id="txnIdInput" required placeholder="Enter valid UTR / Transaction Reference" class="w-full border border-brand-blue rounded-xl p-3 sm:p-3.5 text-xs sm:text-sm focus:outline-none font-mono font-bold bg-white">
                         </div>
 
                         <button type="submit" class="w-full bg-brand-blue hover:bg-blue-700 text-white font-bold py-3.5 sm:py-4 rounded-xl transition shadow-md text-sm sm:text-base tracking-wider mt-2">
@@ -1614,17 +1617,12 @@
         }
 
         function handleTutorFormSubmit(e) {
-            e.preventDefault();
             const name = document.getElementById('t_name').value;
-            const subject = document.getElementById('t_subject').value;
-            const price = document.getElementById('t_price').value;
-            const exp = document.getElementById('t_exp').value;
             const phone = document.getElementById('t_phone').value;
-            const email = document.getElementById('t_email').value;
-            const utr = document.getElementById('txnIdInput').value;
 
             let existing = registeredUsers.find(u => u.phone === phone);
             if (existing && existing.role === 'student') {
+                e.preventDefault();
                 alert('Error: This mobile number is already registered as a Student.');
                 return;
             }
@@ -1638,48 +1636,35 @@
             localStorage.setItem('active_user_phone', phone);
             localStorage.setItem('active_user_role', 'tutor');
 
-            // Google Apps Script Email Notification Trigger (URLSearchParams for 100% Reliability)
-            const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxfopdT0BGxfFWKZMYCJ4LqRA8wVBVSbyFu__s0Q9xvmNZxfyrAE6-0baKBjBFSmcxj/exec";
-            
-            const formData = new URLSearchParams();
-            formData.append("name", name);
-            formData.append("email", email);
-            formData.append("phone", phone);
-            formData.append("subject", subject);
-            formData.append("price", price);
-            formData.append("experience", exp);
-            formData.append("utr", utr);
+            setTimeout(() => {
+                const subject = document.getElementById('t_subject').value;
+                const price = document.getElementById('t_price').value;
+                const exp = document.getElementById('t_exp').value;
+                const utr = document.getElementById('txnIdInput').value;
 
-            fetch(SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                body: formData
-            }).catch(err => {
-                console.log("Notification sent");
-            });
+                const newTutor = {
+                    id: tutorsData.length + 100,
+                    name: name,
+                    subject: subject,
+                    exp: exp,
+                    rating: "5.0",
+                    price: price.includes('/') ? price : price + '/hr',
+                    verified: false,
+                    paidStatus: "PENDING",
+                    utr: utr,
+                    phone: phone,
+                    isDummy: false
+                };
 
-            const newTutor = {
-                id: tutorsData.length + 100,
-                name: name,
-                subject: subject,
-                exp: exp,
-                rating: "5.0",
-                price: price.includes('/') ? price : price + '/hr',
-                verified: false,
-                paidStatus: "PENDING",
-                utr: utr,
-                phone: phone,
-                isDummy: false
-            };
+                tutorsData.unshift(newTutor); 
+                saveTutorsStorage();
+                renderTutors(); 
+                if(localStorage.getItem('is_staff_logged') === 'true') renderAdminQueue();
 
-            tutorsData.unshift(newTutor); 
-            saveTutorsStorage();
-            renderTutors(); 
-            if(localStorage.getItem('is_staff_logged') === 'true') renderAdminQueue();
-
-            document.getElementById('tutorRegForm').classList.add('hidden');
-            document.getElementById('tutorPostDashboard').classList.remove('hidden');
-            updateAuthBadge();
+                document.getElementById('tutorRegForm').classList.add('hidden');
+                document.getElementById('tutorPostDashboard').classList.remove('hidden');
+                updateAuthBadge();
+            }, 400);
         }
 
         function handleRequirementSubmit(e) {
