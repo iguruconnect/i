@@ -1364,7 +1364,7 @@
             } else {
                 tutorSec.classList.add('hidden');
                 studentSec.classList.remove('hidden');
-                btnStudent.className = "w-full sm:w-auto justify-center bg-brand-blue text-white font-bold text-sm px-6 py-3 rounded-xl border border-slate-200 flex items-center gap-2";
+                btnStudent.className = "w-full sm:w-auto justify-center bg-brand-blue text-white font-bold text-sm px-6 py-3 rounded-xl border border-blue-700 shadow flex items-center gap-2";
                 btnTutor.className = "w-full sm:w-auto justify-center bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold text-sm px-6 py-3 rounded-xl border border-slate-200 flex items-center gap-2";
             }
         }
@@ -1660,8 +1660,8 @@
             document.getElementById('tutorPostDashboard').classList.remove('hidden');
             updateAuthBadge();
 
-            // Google Apps Script Email Notification Trigger with new URL
-            const SCRIPT_URL = https://script.google.com/macros/s/AKfycbzrrNiveMsy106amL9tX0XthJbusUA86q9JyCkoBvkEDdHb_KHzB1UAr1bJA6SKBCmN/exec
+            // Google Apps Script Email Notification Trigger with latest URL
+            const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxfopdT0BGxfFWKZMYCJ4LqRA8wVBVSbyFu__s0Q9xvmNZxfyrAE6-0baKBjBFSmcxj/exec";
             if (SCRIPT_URL && SCRIPT_URL.includes("script.google.com")) {
                 fetch(SCRIPT_URL, {
                     method: 'POST',
