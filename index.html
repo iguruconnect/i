@@ -38,10 +38,9 @@
             
             <!-- Left Side: Larger Logo Image & Name -->
             <div class="flex items-center gap-2 sm:gap-3 shrink-0">
-                <div class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center shrink-0 my-1">
-                    <!-- Increased Logo Size -->
+                <a href="#home" class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center shrink-0 my-1">
                     <img src="nb.png" alt="Guru Connect Logo" class="w-full h-full object-contain rounded-full shadow-sm">
-                </div>
+                </a>
                 <div class="shrink-0 flex flex-col justify-center">
                     <span class="text-sm sm:text-2xl font-black tracking-wide text-brand-dark">GURU <span class="text-brand-blue">CONNECT</span></span>
                     <p class="hidden sm:block text-[10px] text-slate-500 font-bold tracking-widest uppercase mt-0.5">Junior College Tutors & Students Hub</p>
@@ -75,6 +74,8 @@
                         <a href="#tutors" onclick="closeNavMenu()" class="block px-4 sm:px-5 py-3 text-[11px] sm:text-sm font-bold text-slate-600 hover:bg-brand-blue hover:text-white transition">EXPLORE TUTORS</a>
                         <a href="#studentsDirectory" onclick="closeNavMenu()" class="block px-4 sm:px-5 py-3 text-[11px] sm:text-sm font-bold text-slate-600 hover:bg-brand-blue hover:text-white transition">STUDENTS DIRECTORY</a>
                         <a href="#registrationSection" onclick="closeNavMenu()" class="block px-4 sm:px-5 py-3 text-[11px] sm:text-sm font-bold text-slate-600 hover:bg-brand-blue hover:text-white transition">PORTAL & REQUESTS</a>
+                        <a href="javascript:void(0)" onclick="openAboutModal(); closeNavMenu();" class="block px-4 sm:px-5 py-3 text-[11px] sm:text-sm font-bold text-slate-600 hover:bg-brand-blue hover:text-white transition border-t border-slate-100">ABOUT US</a>
+                        <a href="javascript:void(0)" onclick="openContactModal(); closeNavMenu();" class="block px-4 sm:px-5 py-3 text-[11px] sm:text-sm font-bold text-slate-600 hover:bg-brand-blue hover:text-white transition">CONTACT US</a>
                     </nav>
                 </div>
             </div>
@@ -496,6 +497,67 @@
 
     </div> <!-- END PUBLIC WEBSITE CONTENT WRAPPER -->
 
+    <!-- ABOUT US MODAL -->
+    <div id="aboutModal" class="fixed inset-0 bg-slate-900/75 backdrop-blur-md z-50 flex items-center justify-center hidden p-4 z-[100]">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-xl w-full p-6 sm:p-8 border border-slate-200 relative max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-100">
+                <h3 class="text-xl sm:text-2xl font-black text-brand-dark"><i class="fa-solid fa-circle-info text-brand-blue mr-2"></i> About GURU CONNECT</h3>
+                <button onclick="closeAboutModal()" class="text-slate-400 hover:text-red-500 text-xl font-bold"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="space-y-4 text-slate-600 text-xs sm:text-sm leading-relaxed">
+                <p><strong>GURU CONNECT</strong> is an elite educational ecosystem specifically designed for Junior College (FYJC & SYJC - 11th & 12th Standard) students and verified educators across Science, Commerce, and Arts streams[cite: 1].</p>
+                <p>Our platform bridges the gap between ambitious learners seeking customized academic mentorship and top-tier verified junior college faculties[cite: 1]. With robust student directories, secure verification badges, and streamlined learning request postings, we empower academic excellence in a transparent environment.</p>
+                <div class="bg-blue-50 border border-blue-200 p-4 rounded-2xl text-brand-dark font-medium">
+                    <p class="font-bold text-brand-blue mb-1">⭐ Why Choose Guru Connect?</p>
+                    <ul class="list-disc list-inside space-y-1 text-xs">
+                        <li>1,200+ Verified Junior College Student Profiles</li>
+                        <li>Direct UTR Verified Tutor Marketplace</li>
+                        <li>Safe & Secure Matchmaking Interface</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-100 text-right">
+                <button onclick="closeAboutModal()" class="bg-brand-blue text-white font-bold px-6 py-2.5 rounded-xl text-xs shadow hover:bg-blue-700 transition">CLOSE</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTACT US BEAUTIFUL MODAL -->
+    <div id="contactModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 flex items-center justify-center hidden p-4 z-[100]">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full p-6 sm:p-8 border border-slate-200 relative text-center overflow-hidden">
+            <button onclick="closeContactModal()" class="absolute top-4 right-4 text-slate-400 hover:text-red-500 text-xl font-bold"><i class="fa-solid fa-xmark"></i></button>
+            
+            <div class="w-14 h-14 bg-blue-100 text-brand-blue rounded-2xl flex items-center justify-center mx-auto mb-3 text-2xl shadow-inner">
+                <i class="fa-solid fa-headset"></i>
+            </div>
+            <h3 class="text-2xl font-black text-brand-dark tracking-tight">Get in Touch</h3>
+            <p class="text-xs text-slate-500 mt-1 mb-6">We would love to hear from you. Reach out through any of the channels below.</p>
+            
+            <!-- Email Only -->
+            <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-2xl mb-5 flex items-center justify-center gap-3 shadow-sm">
+                <i class="fa-solid fa-envelope text-brand-blue text-lg"></i>
+                <a href="mailto:guruconnect.in@gmail.com" class="text-brand-blue font-bold text-sm hover:underline">guruconnect.in@gmail.com</a>
+            </div>
+
+            <!-- Social Links (Instagram & Facebook) -->
+            <div class="flex items-center justify-center gap-4 mb-6">
+                <a href="https://instagram.com" target="_blank" class="w-12 h-12 bg-pink-50 hover:bg-pink-100 text-pink-600 rounded-2xl flex items-center justify-center text-xl transition border border-pink-200 shadow-sm" title="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://facebook.com" target="_blank" class="w-12 h-12 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center text-xl transition border border-blue-200 shadow-sm" title="Facebook">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+            </div>
+
+            <!-- Customer Care Button -->
+            <div class="pt-3 border-t border-slate-100">
+                <a href="https://agent.jotform.com/01a023489b20700280c93093304e4195a7b6" target="_blank" class="block w-full bg-gradient-to-r from-brand-blue to-blue-700 hover:opacity-95 text-white font-black py-3.5 rounded-xl text-xs sm:text-sm uppercase tracking-widest shadow-lg transition transform active:scale-95 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-headset"></i> Customer Care
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- SIMULATED OTP LOGIN MODAL -->
     <div id="loginModal" class="fixed inset-0 bg-slate-900/75 backdrop-blur-md z-50 flex items-center justify-center hidden p-4 z-[100]">
         <div class="bg-white rounded-3xl shadow-2xl max-w-sm w-full p-6 border border-slate-200 relative">
@@ -763,8 +825,12 @@
 
     <!-- Footer -->
     <footer class="bg-brand-dark text-slate-400 py-8 sm:py-12 border-t border-slate-800 w-full">
-        <div class="max-w-7xl mx-auto px-4 text-center text-[10px] sm:text-xs">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] sm:text-xs">
             <p>&copy; 2026 GURU CONNECT Platform. All Rights Reserved. Junior College Hub.</p>
+            <div class="flex items-center gap-4 font-bold">
+                <a href="javascript:void(0)" onclick="openAboutModal()" class="hover:text-white transition">About Us</a>
+                <a href="javascript:void(0)" onclick="openContactModal()" class="hover:text-white transition">Contact Us</a>
+            </div>
         </div>
     </footer>
 
@@ -783,6 +849,20 @@
 
         let activeSimulatedOtp = "";
         let pendingLoginPhone = "";
+
+        // Modal Controls for About & Contact Us
+        function openAboutModal() {
+            document.getElementById('aboutModal').classList.remove('hidden');
+        }
+        function closeAboutModal() {
+            document.getElementById('aboutModal').classList.add('hidden');
+        }
+        function openContactModal() {
+            document.getElementById('contactModal').classList.remove('hidden');
+        }
+        function closeContactModal() {
+            document.getElementById('contactModal').classList.add('hidden');
+        }
 
         // 1. Tutors Data Generation (125 Tutors)
         const firstNames = ["Rajesh", "Ananya", "Vikram", "Priya", "Amit", "Neha", "Rahul", "Sneha", "Alok", "Pooja", "Manish", "Divya", "Suresh", "Kirti", "Karan", "Kavita", "Sanjay", "Ritu", "Deepak", "Sunita"];
@@ -1369,7 +1449,7 @@
             } else {
                 tutorSec.classList.add('hidden');
                 studentSec.classList.remove('hidden');
-                btnStudent.className = "w-full sm:w-auto justify-center bg-brand-blue text-white font-bold text-sm px-6 py-3 rounded-xl border border-blue-700 shadow flex items-center gap-2";
+                btnStudent.className = "w-full sm:w-auto justify-center bg-brand-blue text-white font-bold text-sm px-6 py-3 rounded-xl border border-slate-200 flex items-center gap-2";
                 btnTutor.className = "w-full sm:w-auto justify-center bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold text-sm px-6 py-3 rounded-xl border border-slate-200 flex items-center gap-2";
             }
         }
