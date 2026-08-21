@@ -1616,45 +1616,7 @@
             switchTab('requirement');
         }
 
-        function handleTutorFormSubmit(e) {
-            const name = document.getElementById('t_name').value;
-            const phone = document.getElementById('t_phone').value;
-
-            let existing = registeredUsers.find(u => u.phone === phone);
-            if (existing && existing.role === 'student') {
-                e.preventDefault();
-                alert('Error: This mobile number is already registered as a Student.');
-                return;
-            }
-
-            if (!existing) {
-                registeredUsers.push({ name, phone, role: 'tutor' });
-                localStorage.setItem('all_portal_users', JSON.stringify(registeredUsers));
-            }
-
-            localStorage.setItem('active_user_name', name);
-            localStorage.setItem('active_user_phone', phone);
-            localStorage.setItem('active_user_role', 'tutor');
-
-            setTimeout(() => {
-                const subject = document.getElementById('t_subject').value;
-                const price = document.getElementById('t_price').value;
-                const exp = document.getElementById('t_exp').value;
-                const utr = document.getElementById('txnIdInput').value;
-
-                const newTutor = {
-                    id: tutorsData.length + 100,
-                    name: name,
-                    subject: subject,
-                    exp: exp,
-                    rating: "5.0",
-                    price: price.includes('/') ? price : price + '/hr',
-                    verified: false,
-                    paidStatus: "PENDING",
-                    utr: utr,
-                    phone: phone,
-                    isDummy: false
-                };
+        function handleTutorFormSubmit(e)
 
                 tutorsData.unshift(newTutor); 
                 saveTutorsStorage();
