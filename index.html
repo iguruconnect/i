@@ -37,40 +37,40 @@
         <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between relative">
             
             <!-- Left Side: Larger Logo Image & Name -->
-            <div class="flex items-center gap-2 sm:gap-3 shrink-0">
-                <a href="#home" class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center shrink-0 my-1">
+            <div class="flex items-center gap-1.5 sm:gap-3 shrink-0">
+                <a href="#home" class="w-10 h-10 sm:w-16 sm:h-16 flex items-center justify-center shrink-0 my-1">
                     <img src="nb.png" alt="Guru Connect Logo" class="w-full h-full object-contain rounded-full shadow-sm">
                 </a>
                 <div class="shrink-0 flex flex-col justify-center">
-                    <span class="text-sm sm:text-2xl font-black tracking-wide text-brand-dark">GURU <span class="text-brand-blue">CONNECT</span></span>
+                    <span class="text-xs sm:text-2xl font-black tracking-wide text-brand-dark">GURU <span class="text-brand-blue">CONNECT</span></span>
                     <p class="hidden sm:block text-[10px] text-slate-500 font-bold tracking-widest uppercase mt-0.5">Junior College Tutors & Students Hub</p>
                 </div>
             </div>
 
             <!-- Right Side: Buttons & Dropdown Menu -->
-            <div class="flex gap-1.5 sm:gap-2 items-center shrink-0">
+            <div class="flex gap-1 sm:gap-2 items-center shrink-0">
                 
-                <div id="currentUserBadge" class="hidden text-[10px] sm:text-xs font-bold bg-blue-50 text-brand-blue px-2.5 py-1.5 sm:px-3 sm:py-2.5 rounded-lg sm:rounded-xl border border-blue-200 flex items-center gap-1.5">
-                    <span class="truncate max-w-[50px] sm:max-w-[100px]"><i class="fa-solid fa-user-check mr-1 hidden sm:inline"></i> <span id="navLoggedName"></span></span> 
-                    <button onclick="logoutUser()" class="text-red-600 hover:underline text-[9px] sm:text-[10px] uppercase font-black ml-0.5 border-l border-blue-200 pl-1.5 sm:pl-2">Logout</button>
+                <div id="currentUserBadge" class="hidden text-[10px] sm:text-xs font-bold bg-blue-50 text-brand-blue px-2 py-1 sm:px-3 sm:py-2.5 rounded-lg sm:rounded-xl border border-blue-200 flex items-center gap-1">
+                    <span class="truncate max-w-[40px] sm:max-w-[100px]"><i class="fa-solid fa-user-check mr-0.5 hidden sm:inline"></i> <span id="navLoggedName"></span></span> 
+                    <button onclick="logoutUser()" class="text-red-600 hover:underline text-[9px] sm:text-[10px] uppercase font-black ml-0.5 border-l border-blue-200 pl-1 sm:pl-2">Logout</button>
                 </div>
                 
-                <!-- 929 Digital Desk Logo Button -->
+                <!-- 929 Digital Desk Logo Button (Reduced size for mobile to look neat) -->
                 <a href="https://929digitaldesk.github.io/helpline" target="_blank" rel="noopener noreferrer" class="shrink-0 transition transform hover:scale-105 my-1" title="929 Digital Desk">
-                    <img src="929-logo.png" alt="929 Digital Desk Logo" class="h-10 sm:h-12 w-auto object-contain">
+                    <img src="929-logo.png" alt="929 Digital Desk Logo" class="h-7 sm:h-12 w-auto object-contain">
                 </a>
 
-                <button id="navLoginBtn" onclick="openLoginModal()" class="bg-slate-100 hover:bg-slate-200 text-brand-dark text-xs font-bold px-2.5 py-1.5 sm:px-4 sm:py-2.5 rounded-lg sm:rounded-xl transition shadow flex items-center gap-1.5">
+                <button id="navLoginBtn" onclick="openLoginModal()" class="bg-slate-100 hover:bg-slate-200 text-brand-dark text-[11px] sm:text-xs font-bold px-2 py-1.5 sm:px-4 sm:py-2.5 rounded-lg sm:rounded-xl transition shadow flex items-center gap-1">
                     <i class="fa-solid fa-right-to-bracket text-xs sm:text-sm"></i> <span class="hidden sm:inline">LOGIN</span>
                 </button>
                 
-                <button id="navStaffBtn" onclick="openStaffLoginModal()" class="bg-brand-blue hover:bg-blue-700 text-white text-xs font-bold px-2.5 py-1.5 sm:px-4 sm:py-2.5 rounded-lg sm:rounded-xl transition shadow flex items-center gap-1.5">
+                <button id="navStaffBtn" onclick="openStaffLoginModal()" class="bg-brand-blue hover:bg-blue-700 text-white text-[11px] sm:text-xs font-bold px-2 py-1.5 sm:px-4 sm:py-2.5 rounded-lg sm:rounded-xl transition shadow flex items-center gap-1">
                     <i class="fa-solid fa-lock text-xs sm:text-sm"></i> <span class="hidden sm:inline">STAFF</span>
                 </button>
 
                 <!-- MENU DROPDOWN -->
                 <div id="publicMenuWrapper" class="relative">
-                    <button onclick="toggleNavMenu()" class="bg-white border border-slate-300 hover:bg-slate-50 text-brand-dark text-xs font-bold px-2.5 py-1.5 sm:px-4 sm:py-2.5 rounded-lg sm:rounded-xl transition shadow-sm flex items-center gap-1.5">
+                    <button onclick="toggleNavMenu()" class="bg-white border border-slate-300 hover:bg-slate-50 text-brand-dark text-[11px] sm:text-xs font-bold px-2 py-1.5 sm:px-4 sm:py-2.5 rounded-lg sm:rounded-xl transition shadow-sm flex items-center gap-1">
                         <i class="fa-solid fa-bars text-xs sm:text-sm"></i> <span class="hidden sm:inline">MENU</span>
                     </button>
                     <!-- Dropdown Links -->
