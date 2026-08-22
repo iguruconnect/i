@@ -79,6 +79,7 @@
                         <a href="#tutors" onclick="closeNavMenu()" class="block px-4 sm:px-5 py-3 text-[11px] sm:text-sm font-bold text-slate-600 hover:bg-brand-blue hover:text-white transition">EXPLORE TUTORS</a>
                         <a href="#studentsDirectory" onclick="closeNavMenu()" class="block px-4 sm:px-5 py-3 text-[11px] sm:text-sm font-bold text-slate-600 hover:bg-brand-blue hover:text-white transition">STUDENTS DIRECTORY</a>
                         <a href="#registrationSection" onclick="closeNavMenu()" class="block px-4 sm:px-5 py-3 text-[11px] sm:text-sm font-bold text-slate-600 hover:bg-brand-blue hover:text-white transition">PORTAL & REQUESTS</a>
+                        <a href="javascript:void(0)" onclick="openHelplineModal(); closeNavMenu();" class="block px-4 sm:px-5 py-3 text-[11px] sm:text-sm font-bold text-slate-600 hover:bg-brand-blue hover:text-white transition">HELPLINE PLANS</a>
                         <a href="javascript:void(0)" onclick="openAboutModal(); closeNavMenu();" class="block px-4 sm:px-5 py-3 text-[11px] sm:text-sm font-bold text-slate-600 hover:bg-brand-blue hover:text-white transition border-t border-slate-100">ABOUT US</a>
                         <a href="javascript:void(0)" onclick="openContactModal(); closeNavMenu();" class="block px-4 sm:px-5 py-3 text-[11px] sm:text-sm font-bold text-slate-600 hover:bg-brand-blue hover:text-white transition">CONTACT US</a>
                     </nav>
@@ -538,28 +539,78 @@
 
     </div> <!-- END PUBLIC WEBSITE CONTENT WRAPPER -->
 
-    <!-- DIRECT WHATSAPP APP OPEN BUTTON (+15559565917) -->
-    <a href="https://api.whatsapp.com/send?phone=15559565917&text=Hello%20Guru%20Connect,%20I%20need%20assistance." target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-50 bg-emerald-500 hover:bg-emerald-600 text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-3xl transition transform hover:scale-110" title="Chat with us on WhatsApp">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
+    <!-- HELPLINE PLANS MODAL (POPUP) -->
+    <div id="helplineModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 flex items-center justify-center hidden p-4 z-[100]">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-lg w-full p-6 sm:p-8 border border-slate-200 relative max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-100">
+                <h3 class="text-xl sm:text-2xl font-black text-brand-dark flex items-center gap-2">
+                    <i class="fa-solid fa-headset text-brand-blue"></i> Helpline Plans & Services
+                </h3>
+                <button onclick="closeHelplineModal()" class="text-slate-400 hover:text-red-500 text-xl font-bold"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="space-y-4 text-slate-700 text-xs sm:text-sm leading-relaxed">
+                <div class="bg-blue-50 border border-blue-200 p-4 rounded-2xl">
+                    <h4 class="font-bold text-brand-blue text-sm sm:text-base mb-1">🎧 Dedicated Academic Helpline</h4>
+                    <p>Learn or clear your doubts online at the comfort of your home, as and when you require. We serve directly to the students with a dedicated subject expert team!</p>
+                </div>
+                <div>
+                    <h5 class="font-black text-slate-900 uppercase text-xs tracking-wider mb-2">How it works for Students:</h5>
+                    <ul class="list-disc list-inside space-y-1.5 text-xs text-slate-600 font-medium">
+                        <li>Subscribe to our Helpline Service by selecting any of our existing plans.</li>
+                        <li>Get instant access to our expert subject team ready to explain complex topics and clear doubts.</li>
+                        <li>Enjoy seamless academic support right from your home.</li>
+                    </ul>
+                </div>
+                <div class="pt-3 border-t border-slate-100 text-center">
+                    <a href="https://api.whatsapp.com/send?phone=15559565917&text=Hello%20Guru%20Connect,%20I%20want%20to%20know%20more%20about%20Helpline%20Plans." target="_blank" class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-black px-6 py-3 rounded-xl text-xs uppercase tracking-widest shadow-md transition">
+                        <i class="fa-brands fa-whatsapp mr-1"></i> Inquire Helpline Plans Now
+                    </a>
+                </div>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-100 text-right">
+                <button onclick="closeHelplineModal()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-2.5 rounded-xl text-xs transition">CLOSE</button>
+            </div>
+        </div>
+    </div>
 
-    <!-- ABOUT US MODAL -->
+    <!-- ABOUT US MODAL (UPDATED WITH PROFESSIONAL CONTENT) -->
     <div id="aboutModal" class="fixed inset-0 bg-slate-900/75 backdrop-blur-md z-50 flex items-center justify-center hidden p-4 z-[100]">
-        <div class="bg-white rounded-3xl shadow-2xl max-w-xl w-full p-6 sm:p-8 border border-slate-200 relative max-h-[90vh] overflow-y-auto">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-2xl w-full p-6 sm:p-8 border border-slate-200 relative max-h-[90vh] overflow-y-auto">
             <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-100">
                 <h3 class="text-xl sm:text-2xl font-black text-brand-dark"><i class="fa-solid fa-circle-info text-brand-blue mr-2"></i> About GURU CONNECT</h3>
                 <button onclick="closeAboutModal()" class="text-slate-400 hover:text-red-500 text-xl font-bold"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="space-y-4 text-slate-600 text-xs sm:text-sm leading-relaxed">
-                <p><strong>GURU CONNECT</strong> is an elite educational ecosystem specifically designed for Junior College (FYJC & SYJC - 11th & 12th Standard) students and verified educators across Science, Commerce, and Arts streams[cite: 1].</p>
-                <p>Our platform bridges the gap between ambitious learners seeking customized academic mentorship and top-tier verified junior college faculties[cite: 1]. With robust student directories, secure verification badges, and streamlined learning request postings, we empower academic excellence in a transparent environment.</p>
-                <div class="bg-blue-50 border border-blue-200 p-4 rounded-2xl text-brand-dark font-medium">
-                    <p class="font-bold text-brand-blue mb-1">⭐ Why Choose Guru Connect?</p>
-                    <ul class="list-disc list-inside space-y-1 text-xs">
-                        <li>1,200+ Verified Junior College Student Profiles[cite: 1]</li>
-                        <li>Direct UTR Verified Tutor Marketplace[cite: 1]</li>
-                        <li>Safe & Secure Matchmaking Interface[cite: 1]</li>
-                    </ul>
+            <div class="space-y-5 text-slate-600 text-xs sm:text-sm leading-relaxed">
+                <div>
+                    <h4 class="font-black text-brand-dark text-sm sm:text-base uppercase tracking-wide mb-1 text-brand-blue">1. Our Business – Who We Are</h4>
+                    <p><strong>GURU CONNECT</strong> is an elite online educational platform dedicated to bridging the gap between passionate tutors and ambitious students. We act as a powerful catalyst in establishing a seamless Tutor-Student ecosystem[cite: 1].</p>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl">
+                        <h5 class="font-black text-slate-900 text-xs uppercase tracking-wider mb-2 text-brand-blue">For Tutors</h5>
+                        <ul class="list-disc list-inside space-y-1 text-xs">
+                            <li>Register easily and choose your listing plan.</li>
+                            <li>Option to add/upgrade to a Verified Plan badge.</li>
+                            <li>Respond directly to student learning requests.</li>
+                            <li>Secure tuitions through professional profile listings.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl">
+                        <h5 class="font-black text-slate-900 text-xs uppercase tracking-wider mb-2 text-brand-blue">For Students</h5>
+                        <ul class="list-disc list-inside space-y-1 text-xs">
+                            <li>Quick profile registration.</li>
+                            <li>Post custom learning requirements for free.</li>
+                            <li>Browse verified tutor profiles and hire them.</li>
+                            <li>Access premium helpline services for doubt clearance.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 border border-blue-200 p-4 rounded-2xl text-slate-700">
+                    <h4 class="font-black text-brand-blue text-sm sm:text-base uppercase tracking-wide mb-1">2. Helpline Service</h4>
+                    <p class="mb-2">Our dedicated Helpline service enables students to learn or clear doubts online from the comfort of their home whenever required. We deliver direct academic assistance through a team of expert subject specialists.</p>
+                    <p class="font-bold text-xs">Students can easily subscribe to our Helpline service by choosing any existing plan. Contact us today to learn more!</p>
                 </div>
             </div>
             <div class="mt-6 pt-4 border-t border-slate-100 text-right">
@@ -901,7 +952,13 @@
         let activeSimulatedOtp = "";
         let pendingLoginPhone = "";
 
-        // Modal Controls for About & Contact Us
+        // Modal Controls for Helpline, About & Contact Us
+        function openHelplineModal() {
+            document.getElementById('helplineModal').classList.remove('hidden');
+        }
+        function closeHelplineModal() {
+            document.getElementById('helplineModal').classList.add('hidden');
+        }
         function openAboutModal() {
             document.getElementById('aboutModal').classList.remove('hidden');
         }
