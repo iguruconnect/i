@@ -539,41 +539,124 @@
 
     </div> <!-- END PUBLIC WEBSITE CONTENT WRAPPER -->
 
-    <!-- HELPLINE PLANS MODAL (POPUP) -->
+    <!-- HELPLINE PLANS MODAL (POPUP WITH ALL PLANS & RULES) -->
     <div id="helplineModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 flex items-center justify-center hidden p-4 z-[100]">
-        <div class="bg-white rounded-3xl shadow-2xl max-w-lg w-full p-6 sm:p-8 border border-slate-200 relative max-h-[90vh] overflow-y-auto">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-2xl w-full p-6 sm:p-8 border border-slate-200 relative max-h-[90vh] overflow-y-auto">
             <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-100">
                 <h3 class="text-xl sm:text-2xl font-black text-brand-dark flex items-center gap-2">
-                    <i class="fa-solid fa-headset text-brand-blue"></i> Helpline Plans & Services
+                    <i class="fa-solid fa-headset text-brand-blue"></i> Helpline Service Plans & Rules
                 </h3>
                 <button onclick="closeHelplineModal()" class="text-slate-400 hover:text-red-500 text-xl font-bold"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="space-y-4 text-slate-700 text-xs sm:text-sm leading-relaxed">
+            
+            <div class="space-y-6 text-slate-700 text-xs sm:text-sm leading-relaxed">
+                <!-- Introduction Box -->
                 <div class="bg-blue-50 border border-blue-200 p-4 rounded-2xl">
                     <h4 class="font-bold text-brand-blue text-sm sm:text-base mb-1">🎧 Dedicated Academic Helpline</h4>
-                    <p>Learn or clear your doubts online at the comfort of your home, as and when you require. We serve directly to the students with a dedicated subject expert team!</p>
+                    <p>Learn or clear your doubts online at the comfort of your home, as and whenever you require — serving directly to the students with a dedicated subject expert team.</p>
                 </div>
+
+                <!-- Plans Grid / List -->
                 <div>
-                    <h5 class="font-black text-slate-900 uppercase text-xs tracking-wider mb-2">How it works for Students:</h5>
-                    <ul class="list-disc list-inside space-y-1.5 text-xs text-slate-600 font-medium">
-                        <li>Subscribe to our Helpline Service by selecting any of our existing plans.</li>
-                        <li>Get instant access to our expert subject team ready to explain complex topics and clear doubts.</li>
-                        <li>Enjoy seamless academic support right from your home.</li>
+                    <h4 class="font-black text-slate-900 uppercase text-xs tracking-wider mb-3 text-brand-blue">Helpline Service Plans</h4>
+                    
+                    <div class="space-y-3">
+                        <!-- Free Plan -->
+                        <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50">
+                            <div class="flex justify-between items-center font-black text-brand-dark text-sm mb-1">
+                                <span>FREE PLAN</span>
+                                <span class="text-emerald-600">₹0</span>
+                            </div>
+                            <p class="text-xs text-slate-600 mb-1"><strong>Features:</strong> Ask any 1 question on 1 particular topic from 1 chapter of 1 subject (doubt or concept explanation).</p>
+                            <p class="text-xs text-slate-600 mb-1"><strong>Eligibility:</strong> Need to register on our website, submit College ID and Aadhaar Number for verification, and send generated ID card to WhatsApp <strong class="text-brand-blue">+1 (555) 9565-917</strong>.</p>
+                            <p class="text-xs text-red-600"><strong>CONS:</strong> Available only once per applicant. Restricted to 1 specific topic/chapter/subject session.</p>
+                        </div>
+
+                        <!-- Prime Plan -->
+                        <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50">
+                            <div class="flex justify-between items-center font-black text-brand-dark text-sm mb-1">
+                                <span>PRIME PLAN</span>
+                                <span class="text-brand-blue">₹5000</span>
+                            </div>
+                            <p class="text-xs text-slate-600 mb-1"><strong>Features:</strong> Regular weekly classes (1 topic per week). Entire syllabus covered systematically. Stay in regular touch with subject experts for the entire academic year.</p>
+                            <p class="text-xs text-slate-600 mb-1"><strong>Validity:</strong> From registration date to forthcoming year's 10th February (for Class 12) or 31st March (for Class 11).</p>
+                            <p class="text-xs text-red-600"><strong>CONS:</strong> Missed sessions cannot be reclaimed, re-explained, or compensated.</p>
+                        </div>
+
+                        <!-- Pro Plan -->
+                        <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50">
+                            <div class="flex justify-between items-center font-black text-brand-dark text-sm mb-1">
+                                <span>PRO PLAN</span>
+                                <span class="text-brand-blue">₹300</span>
+                            </div>
+                            <p class="text-xs text-slate-600 mb-1"><strong>Features:</strong> Guaranteed session (1 Question of 1 Topic of 1 Chapter). Duration: 25 to 30 minutes.</p>
+                            <p class="text-xs text-slate-600"><strong>Validity:</strong> Up to 10th Feb (Class 12) / 31st March (Class 11).</p>
+                        </div>
+
+                        <!-- Premium Plan -->
+                        <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50">
+                            <div class="flex justify-between items-center font-black text-brand-dark text-sm mb-1">
+                                <span>PREMIUM PLAN</span>
+                                <span class="text-brand-blue">₹6000</span>
+                            </div>
+                            <p class="text-xs text-slate-600 mb-1"><strong>Features:</strong> Guaranteed weekly 1 session for your preferred 1 Question/Topic/Chapter/Subject to learn, clear doubts, and get guidance.</p>
+                            <p class="text-xs text-slate-600"><strong>Validity:</strong> Up to 10th Feb (Class 12) / 31st March (Class 11).</p>
+                        </div>
+
+                        <!-- GenX Plan -->
+                        <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50">
+                            <div class="flex justify-between items-center font-black text-brand-dark text-sm mb-1">
+                                <span>GENX PLAN</span>
+                                <span class="text-brand-blue">₹1000</span>
+                            </div>
+                            <p class="text-xs text-slate-600 mb-1"><strong>Features:</strong> Includes 5 PRO sessions and all Pro Plan features.</p>
+                            <p class="text-xs text-red-600"><strong>CONS:</strong> Cannot be clubbed, transferred, or shared with another person.</p>
+                        </div>
+
+                        <!-- GenX Pro Plan -->
+                        <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50">
+                            <div class="flex justify-between items-center font-black text-brand-dark text-sm mb-1">
+                                <span>GENX PRO</span>
+                                <span class="text-brand-blue">₹3000</span>
+                            </div>
+                            <p class="text-xs text-slate-600 mb-1"><strong>Features:</strong> Includes 15 PRO sessions and all Pro Plan features.</p>
+                            <p class="text-xs text-red-600"><strong>CONS:</strong> Cannot be clubbed, transferred, or shared with another person.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rules & Conditions -->
+                <div class="bg-amber-50 border border-amber-200 p-4 rounded-2xl">
+                    <h4 class="font-black text-amber-900 uppercase text-xs tracking-wider mb-2">📜 Rules | Process & Conditions</h4>
+                    <ul class="list-disc list-inside space-y-1.5 text-xs text-amber-950 font-medium">
+                        <li>Prior submission of Topic Request is mandatory in every plan.</li>
+                        <li>Your scheduled topic details will be conveyed via WhatsApp or registered email.</li>
+                        <li>Fees once paid is strictly non-refundable and non-transferable.</li>
+                        <li>Purchased plans are non-transferable and must be used exclusively by the registered individual.</li>
+                        <li>Submission of College ID and Aadhaar Number is required for verification before scheduling.</li>
+                        <li>All plan services are provided purely online.</li>
+                        <li>Sessions disrupted due to technical, physical, or health issues from admin/expert side will be compensated/rescheduled.</li>
+                        <li>Students must be available on time with essential materials. No rescheduling if issues occur at the student's end (e.g., network failure).</li>
+                        <li>Strict discipline is required during online sessions; misconduct leads to immediate barring/blocking without refund.</li>
+                        <li>Questions must be strictly limited to 1 particular question of 1 topic of 1 chapter and subject per session.</li>
                     </ul>
                 </div>
-                <div class="pt-3 border-t border-slate-100 text-center">
-                    <a href="https://api.whatsapp.com/send?phone=15559565917&text=Hello%20Guru%20Connect,%20I%20want%20to%20know%20more%20about%20Helpline%20Plans." target="_blank" class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-black px-6 py-3 rounded-xl text-xs uppercase tracking-widest shadow-md transition">
-                        <i class="fa-brands fa-whatsapp mr-1"></i> Inquire Helpline Plans Now
+
+                <!-- WhatsApp Inquire Button -->
+                <div class="pt-3 text-center">
+                    <a href="https://api.whatsapp.com/send?phone=15559565917&text=Hello%20Guru%20Connect,%20I%20want%20to%20subscribe%20to%20a%20Helpline%20Plan." target="_blank" class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-black px-6 py-3.5 rounded-xl text-xs uppercase tracking-widest shadow-md transition">
+                        <i class="fa-brands fa-whatsapp mr-1 text-base"></i> Inquire / Subscribe on WhatsApp
                     </a>
                 </div>
             </div>
+
             <div class="mt-6 pt-4 border-t border-slate-100 text-right">
                 <button onclick="closeHelplineModal()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-2.5 rounded-xl text-xs transition">CLOSE</button>
             </div>
         </div>
     </div>
 
-    <!-- ABOUT US MODAL (UPDATED WITH YOUR IMPRESSIVE CONTENT) -->
+    <!-- ABOUT US MODAL -->
     <div id="aboutModal" class="fixed inset-0 bg-slate-900/75 backdrop-blur-md z-50 flex items-center justify-center hidden p-4 z-[100]">
         <div class="bg-white rounded-3xl shadow-2xl max-w-2xl w-full p-6 sm:p-8 border border-slate-200 relative max-h-[90vh] overflow-y-auto">
             <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-100">
