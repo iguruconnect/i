@@ -33,7 +33,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
-            emailjs.init("LHZ617ZwS3g_2O_w2");
+            emailjs.init({ publicKey: "LHZ617ZwS3g_2O_w2" });
         })();
     </script>
 </head>
@@ -184,14 +184,21 @@
                     <span class="text-xs sm:text-sm font-bold text-slate-700">FILTER SUBJECT:</span>
                     <select id="subjectFilter" onchange="filterTutors()" class="w-full sm:w-auto bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm font-bold text-brand-dark focus:outline-none focus:border-emerald-600 shadow-sm">
                         <option value="All">All Subjects</option>
-                        <option value="Mathematics">Mathematics</option>
+                        <option value="English">English</option>
+                        <option value="Hindi">Hindi</option>
+                        <option value="Marathi">Marathi</option>
+                        <option value="Economics">Economics</option>
+                        <option value="Logic">Logic</option>
+                        <option value="Philosophy">Philosophy</option>
+                        <option value="History">History</option>
+                        <option value="Geography">Geography</option>
                         <option value="Physics">Physics</option>
                         <option value="Chemistry">Chemistry</option>
                         <option value="Biology">Biology</option>
-                        <option value="English">English</option>
-                        <option value="Computer Science">Computer Science</option>
-                        <option value="Economics">Economics</option>
-                        <option value="Accountancy">Accountancy</option>
+                        <option value="Maths">Maths</option>
+                        <option value="B.K.">B.K.</option>
+                        <option value="O.C.M.">O.C.M.</option>
+                        <option value="S.P.">S.P.</option>
                     </select>
                 </div>
             </div>
@@ -703,6 +710,10 @@
                 <p class="text-[10px] sm:text-xs text-slate-500 mt-1">Enter your WhatsApp / Mobile Number.</p>
             </div>
             <div id="otpStep1" class="space-y-3">
+                <select id="loginRoleInput" class="w-full border rounded-xl p-3 text-xs sm:text-sm font-bold bg-white">
+                    <option value="student">I am a Student</option>
+                    <option value="tutor">I am a Tutor</option>
+                </select>
                 <input type="tel" id="loginPhoneInput" placeholder="9876543210" class="w-full border rounded-xl p-3 text-xs sm:text-sm font-bold">
                 <button type="button" onclick="sendSimulatedOtp()" class="w-full bg-brand-blue text-white font-bold py-3 rounded-xl text-xs">SEND OTP</button>
             </div>
@@ -827,6 +838,23 @@
         <i class="fa-solid fa-power-off"></i> <span class="hidden sm:inline">EXIT STAFF MODE</span><span class="sm:hidden">EXIT</span>
     </button>
 
+    <!-- CONNECTION / PROTECTED INFORMATION MODAL -->
+    <div id="connectionModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-[200] hidden items-center justify-center p-4">
+        <div class="bg-white rounded-[2rem] shadow-2xl max-w-md w-full overflow-hidden border border-white/30 transform transition">
+            <div id="connectionModalHeader" class="bg-gradient-to-r from-brand-blue to-indigo-700 p-7 text-white text-center">
+                <div id="connectionModalIcon" class="w-16 h-16 mx-auto rounded-2xl bg-white/15 flex items-center justify-center text-3xl mb-4">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h3 id="connectionModalTitle" class="text-xl sm:text-2xl font-black tracking-tight">Protected Information</h3>
+            </div>
+            <div class="p-6 sm:p-7 text-center">
+                <p id="connectionModalMessage" class="text-slate-700 text-sm sm:text-base font-semibold leading-relaxed"></p>
+                <div id="connectionModalAction" class="mt-6"></div>
+                <button type="button" onclick="closeConnectionModal()" class="mt-4 w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-black py-3.5 rounded-xl text-xs tracking-wider transition">CLOSE</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="bg-brand-dark text-slate-400 py-8 border-t border-slate-800 w-full">
         <div class="max-w-7xl mx-auto px-4 flex justify-between text-xs">
@@ -846,17 +874,61 @@
 
         let pendingEmailOtps = { student: "", tutor: "" };
 
-        // Mock Students Directory Data Generator
+        // Junior College subject rules. Every displayed profile is kept inside these stream-specific subjects.
+        const JC_SUBJECTS = {
+            Arts: ["English", "Hindi", "Marathi", "Economics", "Logic", "Philosophy", "History", "Geography"],
+            Science: ["Physics", "Chemistry", "Biology", "English", "Hindi", "Marathi", "Economics", "Geography", "Maths"],
+            Commerce: ["B.K.", "O.C.M.", "S.P.", "Economics", "English", "Hindi", "Marathi"]
+        };
+        const JC_STREAMS = ["Arts", "Science", "Commerce"];
+
+        function deterministicIndex(seed, length) {
+            let x = Math.abs(Number(seed) || 1);
+            x = (x * 9301 + 49297) % 233280;
+            return Math.floor((x / 233280) * length);
+        }
+
+        function validSubjectForStream(stream, subject, seed = 1) {
+            const subjects = JC_SUBJECTS[stream] || JC_SUBJECTS.Commerce;
+            const raw = String(subject || "").trim();
+            const exact = subjects.find(x => x.toLowerCase() === raw.toLowerCase());
+            if (exact) return exact;
+            return subjects[deterministicIndex(seed, subjects.length)];
+        }
+
+        function inferTutorStream(subject, seed = 1) {
+            const raw = String(subject || "").trim().toLowerCase();
+            for (const stream of JC_STREAMS) {
+                if ((JC_SUBJECTS[stream] || []).some(x => x.toLowerCase() === raw)) return stream;
+            }
+            return JC_STREAMS[deterministicIndex(seed, JC_STREAMS.length)];
+        }
+
+        function sanitizeStudentProfile(student, seed = 1) {
+            const stream = JC_STREAMS.includes(student.stream) ? student.stream : JC_STREAMS[deterministicIndex(seed, JC_STREAMS.length)];
+            return { ...student, stream, subject: validSubjectForStream(stream, student.subject, seed) };
+        }
+
+        function sanitizeTutorProfile(tutor, seed = 1) {
+            const stream = JC_STREAMS.includes(tutor.stream) ? tutor.stream : inferTutorStream(tutor.subject, seed);
+            return { ...tutor, stream, subject: validSubjectForStream(stream, tutor.subject, seed) };
+        }
+
+        // Illustrative Junior College student directory. Subjects are randomly varied but always valid for the displayed stream.
         let studentDirectoryList = [];
         const studentNames = ["Student naam hai mera", "Kalyani", "Aarav Sharma", "Priya Kulkarni", "Rahul Deshmukh", "Sneha Joshi", "Amit Patil", "Neha Shinde", "Rohit Verma"];
         for(let i=1; i<=150; i++) {
+            const stream = JC_STREAMS[deterministicIndex(i * 17, JC_STREAMS.length)];
+            const subject = validSubjectForStream(stream, "", i * 31);
             studentDirectoryList.push({
                 id: "GC-STU-" + (1000 + i),
                 name: studentNames[(i - 1) % studentNames.length],
-                std: "SYJC (12th)",
-                stream: "Commerce",
-                subject: i % 2 === 0 ? "MMK" : "Advanced Accounts",
-                phone: ""
+                std: i % 3 === 0 ? "FYJC (11th)" : "SYJC (12th)",
+                stream,
+                subject,
+                phone: "",
+                isDummy: true,
+                registrationStatus: "illustrative"
             });
         }
         let currentStudentPage = 1;
@@ -881,11 +953,11 @@
                             <span class="text-[10px] font-bold text-white/80">ID: ${stu.id}</span>
                         </div>
                         <h4 class="font-black text-white text-xl mt-1 tracking-tight">${stu.name}</h4>
-                        <p class="text-xs text-blue-100 mt-2 font-medium"><strong>JC Subjects:</strong> ${stu.subject}</p>
+                        <p class="text-xs text-blue-100 mt-2 font-medium"><strong>JC Subject:</strong> ${stu.subject}</p>
                     </div>
                     <div class="mt-6 pt-4 border-t border-white/20 flex items-center justify-between">
                         <span class="text-[11px] font-bold text-blue-200"><i class="fa-solid fa-shield-halved mr-1"></i>Protected</span>
-                        <button onclick="alert('Student contact details are protected. Please login or submit a learning request to connect.')" class="bg-white hover:bg-blue-50 text-brand-blue font-black text-xs px-4 py-2 rounded-xl transition shadow">VIEW CONTACT</button>
+                        <button onclick="openStudentProfile('${stu.id}')" class="bg-white hover:bg-blue-50 text-brand-blue font-black text-xs px-4 py-2 rounded-xl transition shadow">VIEW PROFILE</button>
                     </div>
                 `;
                 container.appendChild(card);
@@ -929,31 +1001,65 @@
             }
         }
 
-        // Mock Tutors Directory Data & Renderer (Verified = Green Background, Badge = Golden with Blue Tick and Black Text)
+        // Mock Tutors Directory Data & Renderer. Subjects are restricted to the same JC stream rules.
         let tutorDirectoryList = [];
         const tutorNamesData = [
-            { name: "Kavita Mehta", subject: "Accountancy", rate: "₹650/hr", exp: "8 Years", verified: false },
-            { name: "Vikram Pillai", subject: "Chemistry", rate: "₹700/hr", exp: "9 Years", verified: false },
-            { name: "Sanjay Verma", subject: "Mathematics", rate: "₹800/hr", exp: "11 Years", verified: true },
-            { name: "Dr. Rajesh Sharma", subject: "Physics", rate: "₹750/hr", exp: "10 Years", verified: true },
-            { name: "Anjali Deshmukh", subject: "Biology", rate: "₹600/hr", exp: "6 Years", verified: false }
+            { name: "Kavita Mehta", subject: "B.K.", rate: "₹650/hr", exp: "8 Years", verified: false, stream: "Commerce" },
+            { name: "Vikram Pillai", subject: "Chemistry", rate: "₹700/hr", exp: "9 Years", verified: false, stream: "Science" },
+            { name: "Sanjay Verma", subject: "Maths", rate: "₹800/hr", exp: "11 Years", verified: true, stream: "Science" },
+            { name: "Dr. Rajesh Sharma", subject: "Physics", rate: "₹750/hr", exp: "10 Years", verified: true, stream: "Science" },
+            { name: "Anjali Deshmukh", subject: "History", rate: "₹600/hr", exp: "6 Years", verified: false, stream: "Arts" },
+            { name: "Meera Joshi", subject: "Economics", rate: "₹620/hr", exp: "7 Years", verified: false, stream: "Arts" },
+            { name: "Rakesh Patil", subject: "O.C.M.", rate: "₹680/hr", exp: "8 Years", verified: true, stream: "Commerce" },
+            { name: "Pooja Kulkarni", subject: "English", rate: "₹580/hr", exp: "5 Years", verified: false, stream: "Arts" }
         ];
-        
+
         for(let j=1; j<=108; j++) {
-            let base = tutorNamesData[(j - 1) % tutorNamesData.length];
+            const base = tutorNamesData[(j - 1) % tutorNamesData.length];
+            const stream = base.stream;
             tutorDirectoryList.push({
                 id: j,
-                name: base.name + (j > 5 ? " " + Math.ceil(j/5) : ""),
-                subject: base.subject,
+                name: base.name + (j > tutorNamesData.length ? " " + Math.ceil(j/tutorNamesData.length) : ""),
+                subject: validSubjectForStream(stream, base.subject, j),
+                stream,
                 price: base.rate,
                 experience: base.exp,
                 college: "Junior College Faculty",
                 verified: base.verified,
                 phone: "98" + String(10000000 + j).slice(-8),
                 utr: "100000" + String(j).padStart(6, "0"),
-                paidStatus: base.verified ? "PAID" : "PENDING"
+                paidStatus: base.verified ? "PAID" : "PENDING",
+                isDummy: true,
+                registrationStatus: "illustrative"
             });
         }
+        // Real registrations are persisted locally so the connection rules survive refreshes.
+        try {
+            const savedStudents = JSON.parse(localStorage.getItem('gc_registered_students') || '[]');
+            const savedTutors = JSON.parse(localStorage.getItem('gc_registered_tutors') || '[]');
+            if (Array.isArray(savedStudents)) {
+                savedStudents.forEach((s, idx) => {
+                    s = sanitizeStudentProfile(s, idx + 101);
+                    s.isDummy = false; s.registrationStatus = 'registered';
+                    studentDirectoryList.unshift(s);
+                });
+            }
+            if (Array.isArray(savedTutors)) {
+                savedTutors.forEach((t, idx) => {
+                    t = sanitizeTutorProfile(t, idx + 201);
+                    t.isDummy = false; t.registrationStatus = 'registered';
+                    tutorDirectoryList.unshift(t);
+                });
+            }
+        } catch (e) { console.warn('Saved directory data could not be loaded.', e); }
+
+        function saveRegisteredDirectories() {
+            try {
+                localStorage.setItem('gc_registered_students', JSON.stringify(studentDirectoryList.filter(s => s.isDummy === false)));
+                localStorage.setItem('gc_registered_tutors', JSON.stringify(tutorDirectoryList.filter(t => t.isDummy === false)));
+            } catch (e) { console.warn('Directory persistence unavailable.', e); }
+        }
+
         let currentTutorPage = 1;
         const tutorsPerPage = 6;
 
@@ -979,7 +1085,7 @@
                 card.innerHTML = `
                     <div>
                         <div class="flex justify-between items-start mb-3">
-                            <span class="text-[10px] font-black bg-amber-300 text-brand-dark px-3 py-1 rounded-full uppercase tracking-wider">${t.subject}</span>
+                            <span class="text-[10px] font-black bg-amber-300 text-brand-dark px-3 py-1 rounded-full uppercase tracking-wider">${t.subject} • ${t.stream}</span>
                             <span class="text-xs font-black text-amber-200"><i class="fa-solid fa-star mr-1"></i> 4.8</span>
                         </div>
                         <h4 class="font-black text-white text-xl mt-1 tracking-tight flex items-center gap-1.5 flex-wrap">
@@ -990,7 +1096,7 @@
                     </div>
                     <div class="mt-6 pt-4 border-t border-white/20 flex items-center justify-between">
                         ${t.verified ? '<span class="inline-flex items-center gap-1.5 bg-amber-400 text-black text-[11px] font-black px-3 py-1.5 rounded-xl shadow-sm"><span class="inline-flex items-center justify-center w-3.5 h-3.5 bg-blue-600 text-white rounded-full text-[8px]"><i class="fa-solid fa-check"></i></span> Verified</span>' : '<span class="text-[11px] font-bold text-orange-100">Junior College Faculty</span>'}
-                        <button onclick="openContactModal()" class="bg-white hover:bg-slate-100 ${t.verified ? 'text-emerald-700' : 'text-brand-nagpurOrange'} font-black text-xs px-4 py-2 rounded-xl transition shadow">CONNECT</button>
+                        <button onclick="connectWithTutor(${t.id})" class="bg-white hover:bg-slate-100 ${t.verified ? 'text-emerald-700' : 'text-brand-nagpurOrange'} font-black text-xs px-4 py-2 rounded-xl transition shadow">CONNECT</button>
                     </div>
                 `;
                 container.appendChild(card);
@@ -1062,43 +1168,44 @@
         async function sendEmailOtp(type) {
             const nameInput = document.getElementById(type === 'student' ? 'stu_name' : 't_name');
             const emailInput = document.getElementById(type === 'student' ? 'stu_email' : 't_email');
-            
             const name = nameInput.value.trim();
             const email = emailInput.value.trim();
 
-            if (!name) {
-                alert('Please enter your Name first.');
-                return;
-            }
-            if (!email || !email.includes('@')) {
-                alert('Please enter a valid email address.');
-                return;
+            if (!name) { alert('Please enter your Name first.'); return; }
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                alert('Please enter a valid email address.'); return;
             }
 
             const otp = Math.floor(1000 + Math.random() * 9000).toString();
             pendingEmailOtps[type] = otp;
+            const button = document.querySelector(`button[onclick="sendEmailOtp('\${type}\')"]`);
+            if (button) { button.disabled = true; button.textContent = 'Sending...'; }
 
             const templateParams = {
                 name: name,
                 email: email,
+                to_email: email,
+                recipient_email: email,
+                reply_to: email,
                 otp_code: otp
             };
 
             try {
                 const response = await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_OTP_TEMPLATE_ID, templateParams);
+                console.log('EmailJS OTP response:', response.status, response.text);
                 if (response.status === 200) {
-                    alert(`OTP successfully sent to ${email} via support@guruconnnect.in! Check your inbox.`);
-                    if (type === 'student') {
-                        document.getElementById('stuOtpBox').classList.remove('hidden');
-                    } else {
-                        document.getElementById('tutorOtpBox').classList.remove('hidden');
-                    }
+                    alert(`OTP request accepted for ${email}. Please check Inbox/Spam.`);
+                    document.getElementById(type === 'student' ? 'stuOtpBox' : 'tutorOtpBox').classList.remove('hidden');
                 } else {
-                    alert('Failed to send OTP. Please try again.');
+                    throw new Error(`EmailJS returned ${response.status}: ${response.text}`);
                 }
             } catch (error) {
-                console.error('EmailJS Error:', error);
-                alert('Network error while sending OTP.');
+                console.error('EmailJS OTP error:', error);
+                const detail = error && (error.text || error.message) ? (error.text || error.message) : JSON.stringify(error);
+                alert(`OTP could not be sent. EmailJS error: ${detail}`);
+                pendingEmailOtps[type] = '';
+            } finally {
+                if (button) { button.disabled = false; button.textContent = 'Send OTP'; }
             }
         }
 
@@ -1178,22 +1285,48 @@
         function closeLoginModal() { document.getElementById('loginModal').classList.add('hidden'); }
         
         let activeSimulatedOtp = "";
+
+        function getActiveViewer() {
+            const phone = localStorage.getItem('active_user_phone') || '';
+            const role = localStorage.getItem('active_user_role') || '';
+            const name = localStorage.getItem('active_user_name') || '';
+            const isRegistered = !!phone && (role === 'student' || role === 'tutor');
+            return { phone, role, name, isRegistered };
+        }
+
         function sendSimulatedOtp() {
             const phone = document.getElementById('loginPhoneInput').value.trim();
+            const role = document.getElementById('loginRoleInput').value;
             if (phone.length < 10) { alert('Enter valid number'); return; }
-            activeSimulatedOtp = "1234";
+            activeSimulatedOtp = '1234';
             document.getElementById('generatedOtpDisplay').textContent = activeSimulatedOtp;
             document.getElementById('otpStep1').classList.add('hidden');
             document.getElementById('otpStep2').classList.remove('hidden');
+            localStorage.setItem('pending_login_role', role);
+            localStorage.setItem('pending_login_phone', phone);
         }
+
         function verifySimulatedOtp() {
-            if (document.getElementById('otpCodeInput').value.trim() === activeSimulatedOtp) {
-                localStorage.setItem('active_user_name', "User");
-                alert("Login successful!");
+            if (document.getElementById('otpCodeInput').value.trim() !== activeSimulatedOtp) {
+                alert('Wrong OTP'); return;
+            }
+            const phone = localStorage.getItem('pending_login_phone') || '';
+            const role = localStorage.getItem('pending_login_role') || 'student';
+            const list = role === 'student' ? studentDirectoryList : tutorDirectoryList;
+            const user = list.find(x => String(x.phone || '').replace(/\D/g, '') === phone.replace(/\D/g, '') && x.isDummy === false);
+            if (!user) {
                 closeLoginModal();
-                updateAuthBadge();
-            } else { alert("Wrong OTP"); }
+                showProtectedPopup('YOU ARE NOT ALLOWED TO ACCESS THIS INFORMATION', 'Please register on GURU CONNECT first to use protected profile and connection features.', 'fa-lock');
+                return;
+            }
+            localStorage.setItem('active_user_name', user.name);
+            localStorage.setItem('active_user_phone', user.phone);
+            localStorage.setItem('active_user_role', role);
+            alert('Login successful!');
+            closeLoginModal();
+            updateAuthBadge();
         }
+
         function updateAuthBadge() {
             const active = localStorage.getItem('active_user_name');
             if (active) {
@@ -1202,11 +1335,102 @@
                 document.getElementById('navLoggedName').textContent = active;
             }
         }
+
         function logoutUser() {
-            localStorage.removeItem('active_user_name');
+            ['active_user_name','active_user_phone','active_user_role'].forEach(k => localStorage.removeItem(k));
             location.reload();
         }
-        
+
+        function closeConnectionModal() {
+            const m = document.getElementById('connectionModal');
+            m.classList.add('hidden');
+            m.classList.remove('flex');
+        }
+
+        function showProtectedPopup(title, message, icon='fa-shield-halved', actionHtml='') {
+            const m = document.getElementById('connectionModal');
+            document.getElementById('connectionModalTitle').textContent = title;
+            document.getElementById('connectionModalMessage').textContent = message;
+            document.getElementById('connectionModalIcon').innerHTML = `<i class="fa-solid ${icon}"></i>`;
+            document.getElementById('connectionModalAction').innerHTML = actionHtml || '';
+            m.classList.remove('hidden');
+            m.classList.add('flex');
+        }
+
+        function normalizeSubjects(value) {
+            return String(value || '').toLowerCase().split(/[,/&|]+/).map(x => x.trim()).filter(Boolean);
+        }
+
+        function subjectsMatch(student, tutor) {
+            const studentSubjects = normalizeSubjects(student.subject);
+            const tutorSubjects = normalizeSubjects(tutor.subject);
+            return studentSubjects.some(ss => tutorSubjects.some(ts => ss === ts || ss.includes(ts) || ts.includes(ss)));
+        }
+
+        function openStudentProfile(studentId) {
+            const student = studentDirectoryList.find(s => String(s.id) === String(studentId));
+            if (!student) return;
+            const viewer = getActiveViewer();
+            if (!viewer.isRegistered) {
+                showProtectedPopup('YOU ARE NOT ALLOWED TO ACCESS THIS INFORMATION', 'Student contact information is protected. Please register and log in to use connection features.', 'fa-lock');
+                return;
+            }
+            if (viewer.role === 'student' && String(viewer.phone) === String(student.phone)) {
+                showProtectedPopup('YOUR PROFILE', `${student.name} • ${student.std} • ${student.stream}`, 'fa-user-check');
+                return;
+            }
+            if (student.isDummy) {
+                showProtectedPopup('PROTECTED STUDENT PROFILE', 'This illustrative student does not have a public contact number. Tutors can connect only when a student posts a learning requirement matching their subject.', 'fa-user-shield');
+                return;
+            }
+            const viewerTutor = tutorDirectoryList.find(t => t.isDummy === false && String(t.phone) === String(viewer.phone));
+            if (viewer.role === 'tutor' && viewerTutor) {
+                if (subjectsMatch(student, viewerTutor)) {
+                    showProtectedPopup('CONNECTION AVAILABLE', `${student.name} has a learning requirement matching your subject (${viewerTutor.subject}).`, 'fa-link', `<button onclick="sendConnectionRequest('tutor','${student.id}')" class="w-full bg-brand-blue hover:bg-blue-700 text-white font-black py-3.5 rounded-xl text-xs">SEND CONNECTION REQUEST</button>`);
+                } else {
+                    showProtectedPopup('NO CURRENT MATCH', "CURRENTLY THIS STUDENT DIDN'T HAVE ANY REQUIREMENT OF YOUR SUBJECT. YOU CAN GET CONNECTED WHEN THIS STUDENT POSTS ANY LEARNING REQUIREMENT OF YOUR SUBJECT.", 'fa-book-open');
+                }
+                return;
+            }
+            showProtectedPopup('PROTECTED STUDENT PROFILE', 'Contact information is protected. Connection is available through a matching learning requirement.', 'fa-user-shield');
+        }
+
+        function connectWithTutor(tutorId) {
+            const tutor = tutorDirectoryList.find(t => String(t.id) === String(tutorId));
+            if (!tutor) return;
+            const viewer = getActiveViewer();
+            if (!viewer.isRegistered) {
+                showProtectedPopup('YOU ARE NOT ALLOWED TO ACCESS THIS INFORMATION', 'Please register and log in before connecting with a tutor.', 'fa-lock');
+                return;
+            }
+            if (viewer.role !== 'student') {
+                showProtectedPopup('STUDENT ACCESS REQUIRED', 'Only a registered student can send a connection request to a tutor.', 'fa-user-graduate');
+                return;
+            }
+            if (tutor.isDummy) {
+                showProtectedPopup('TUTOR CURRENTLY UNAVAILABLE', 'ALREADY TOO BUSY - NO TIME FOR NEW ASSIGNMENT', 'fa-clock');
+                return;
+            }
+            const student = studentDirectoryList.find(s => s.isDummy === false && String(s.phone) === String(viewer.phone));
+            if (!student) {
+                showProtectedPopup('YOU ARE NOT ALLOWED TO ACCESS THIS INFORMATION', 'Your registered student profile could not be found. Please register again.', 'fa-lock');
+                return;
+            }
+            if (!subjectsMatch(student, tutor)) {
+                showProtectedPopup('NO CURRENT MATCH', "This tutor is not currently a match for your learning requirement. Please choose a tutor matching your subject.", 'fa-book-open');
+                return;
+            }
+            showProtectedPopup('CONNECTION AVAILABLE', `${tutor.name} is a registered tutor matching your learning requirement.`, 'fa-link', `<button onclick="sendConnectionRequest('student','${tutor.id}')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black py-3.5 rounded-xl text-xs">SEND CONNECTION REQUEST</button>`);
+        }
+
+        function sendConnectionRequest(fromRole, targetId) {
+            const viewer = getActiveViewer();
+            const key = 'gc_connection_requests';
+            const requests = JSON.parse(localStorage.getItem(key) || '[]');
+            requests.push({ fromRole, fromName: viewer.name, fromPhone: viewer.phone, targetId, createdAt: new Date().toISOString() });
+            localStorage.setItem(key, JSON.stringify(requests));
+            showProtectedPopup('REQUEST SENT', 'Your connection request has been recorded. The other registered member can respond when the connection is available.', 'fa-circle-check');
+        }
 
         // ===== STAFF ADMIN DASHBOARD =====
         function openStaffLoginModal() {
@@ -1311,7 +1535,8 @@
             if (!t) return;
 
             t.name = document.getElementById('editTutorName').value.trim() || t.name;
-            t.subject = document.getElementById('editTutorSubject').value.trim() || t.subject;
+            t.stream = JC_STREAMS.includes(t.stream) ? t.stream : inferTutorStream(t.subject, t.id || 1);
+            t.subject = validSubjectForStream(t.stream, document.getElementById('editTutorSubject').value.trim(), t.id || 1);
             t.price = document.getElementById('editTutorPrice').value.trim() || t.price;
             t.experience = document.getElementById('editTutorExp').value.trim() || t.experience;
             t.phone = document.getElementById('editTutorPhone').value.trim();
@@ -1348,8 +1573,8 @@
 
             s.name = document.getElementById('editStudentName').value.trim() || s.name;
             s.std = document.getElementById('editStudentStd').value.trim() || s.std;
-            s.stream = document.getElementById('editStudentStream').value.trim() || s.stream;
-            s.subject = document.getElementById('editStudentSubject').value.trim() || s.subject;
+            s.stream = JC_STREAMS.includes(document.getElementById('editStudentStream').value.trim()) ? document.getElementById('editStudentStream').value.trim() : s.stream;
+            s.subject = validSubjectForStream(s.stream, document.getElementById('editStudentSubject').value.trim(), s.id || 1);
             s.phone = document.getElementById('editStudentPhone').value.trim();
 
             renderStudentDirectory();
@@ -1471,13 +1696,15 @@
             const phone = document.getElementById('stu_phone').value.trim();
             const standard = document.getElementById('stu_std').value;
             const stream = document.getElementById('stu_stream').value;
-            const subject = document.getElementById('stu_subject').value.trim();
+            const requestedSubject = document.getElementById('stu_subject').value.trim();
+            const subject = validSubjectForStream(stream, requestedSubject, Date.now());
 
             studentDirectoryList.unshift({
                 id: `GC-STU-${Date.now().toString().slice(-6)}`,
-                name, std: standard, stream, subject, phone
+                name, std: standard, stream, subject, phone, isDummy: false, registrationStatus: 'registered'
             });
 
+            saveRegisteredDirectories();
             renderStudentDirectory();
             if (localStorage.getItem('is_staff_logged') === 'true') renderAdminQueue();
             localStorage.setItem('active_user_name', name);
@@ -1491,7 +1718,9 @@
         function handleTutorFormSubmit(e) {
             const name = document.getElementById('t_name').value.trim();
             const phone = document.getElementById('t_phone').value.trim();
-            const subject = document.getElementById('t_subject').value.trim();
+            const requestedSubject = document.getElementById('t_subject').value.trim();
+            const tutorStream = inferTutorStream(requestedSubject, Date.now());
+            const subject = validSubjectForStream(tutorStream, requestedSubject, Date.now());
             const price = document.getElementById('t_price').value.trim();
             const exp = document.getElementById('t_exp').value.trim();
             const utrInput = document.getElementById('txnIdInput');
@@ -1501,16 +1730,20 @@
                 id: Date.now(),
                 name,
                 subject,
+                stream: tutorStream,
                 price: price.includes('/') ? price : price + '/hr',
                 experience: exp,
                 college: document.getElementById('t_college')?.value.trim() || 'Junior College Faculty',
                 verified: false,
                 phone,
                 utr,
-                paidStatus: 'PENDING'
+                paidStatus: 'PENDING',
+                isDummy: false,
+                registrationStatus: 'registered'
             };
 
             tutorDirectoryList.unshift(newTutor);
+            saveRegisteredDirectories();
             renderTutorDirectory();
             if (localStorage.getItem('is_staff_logged') === 'true') renderAdminQueue();
 
