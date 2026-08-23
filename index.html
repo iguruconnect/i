@@ -173,7 +173,7 @@
             </div>
         </section>
 
-        <!-- Tutors Listing Showcase Section -->
+        <!-- Tutors Listing Showcase Section (Verified = Green Background, Badge = Golden with Blue Tick and Black Text) -->
         <section id="tutors" class="max-w-7xl mx-auto px-4 py-12 sm:py-16 w-full">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 sm:mb-8 gap-4 border-b border-slate-200 pb-4">
                 <div>
@@ -216,7 +216,7 @@
             </div>
         </section>
 
-        <!-- STUDENT PROFILES DIRECTORY (Navy Blue Theme) -->
+        <!-- STUDENT PROFILES DIRECTORY (Navy Blue Full Color Theme) -->
         <section id="studentsDirectory" class="max-w-7xl mx-auto px-4 py-12 sm:py-16 border-t border-slate-200 w-full">
             <div class="mb-6 sm:mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-4">
                 <div>
@@ -515,31 +515,6 @@
 
     </div>
 
-    <!-- STUDENT POPUP MODAL (For Connecting / View Contact) -->
-    <div id="studentProfileModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 flex items-center justify-center hidden p-4 z-[200]">
-        <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full p-6 sm:p-8 border relative">
-            <button onclick="closeStudentProfileModal()" class="absolute top-5 right-5 text-slate-400 hover:text-red-500 text-xl font-bold"><i class="fa-solid fa-xmark"></i></button>
-            <div class="text-center mb-5">
-                <div class="w-16 h-16 bg-blue-100 text-brand-blue rounded-full flex items-center justify-center mx-auto mb-3 text-2xl shadow-inner">
-                    <i class="fa-solid fa-user-graduate"></i>
-                </div>
-                <span id="modalStuIdBadge" class="text-[10px] font-black bg-blue-50 text-brand-blue px-3 py-1 rounded-full uppercase">GC-STU-XXXX</span>
-                <h3 id="modalStuName" class="text-2xl font-black text-brand-dark mt-2">Student Name</h3>
-                <p id="modalStuStandard" class="text-xs text-slate-500 font-bold mt-0.5">SYJC (12th) • Commerce</p>
-            </div>
-            <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl space-y-2 mb-6">
-                <p class="text-xs text-slate-700"><strong>JC Subjects:</strong> <span id="modalStuSubjects">Accountancy, MMK</span></p>
-                <p class="text-xs text-emerald-700 font-bold"><i class="fa-solid fa-circle-check mr-1"></i> Active Learning Requirement Posted</p>
-            </div>
-            <div class="space-y-3">
-                <a id="modalStuWhatsappBtn" href="#" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition shadow text-xs uppercase flex items-center justify-center gap-2">
-                    <i class="fa-brands fa-whatsapp text-base"></i> Connect via WhatsApp
-                </a>
-                <button onclick="closeStudentProfileModal()" class="w-full bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-3 rounded-xl text-xs">CLOSE</button>
-            </div>
-        </div>
-    </div>
-
     <!-- FLOATING WHATSAPP CHAT BUTTON -->
     <a href="https://api.whatsapp.com/send?phone=15559565917&text=Hello%20Guru%20Connect,%20I%20need%20assistance." target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-50 bg-emerald-500 hover:bg-emerald-600 text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-3xl transition transform hover:scale-110" title="Chat on WhatsApp">
         <i class="fa-brands fa-whatsapp"></i>
@@ -549,13 +524,84 @@
     <div id="helplineModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 flex items-center justify-center hidden p-4 z-[100]">
         <div class="bg-white rounded-3xl shadow-2xl max-w-2xl w-full p-6 sm:p-8 border relative max-h-[90vh] overflow-y-auto">
             <div class="flex justify-between items-center mb-4 pb-3 border-b">
-                <h3 class="text-xl sm:text-2xl font-black text-brand-dark"><i class="fa-solid fa-headset text-brand-blue"></i> Helpline Service Plans</h3>
+                <h3 class="text-xl sm:text-2xl font-black text-brand-dark"><i class="fa-solid fa-headset text-brand-blue"></i> Helpline Service Plans & Rules</h3>
                 <button onclick="closeHelplineModal()" class="text-slate-400 hover:text-red-500 text-xl font-bold"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="space-y-6 text-slate-700 text-xs sm:text-sm">
-                <div class="bg-blue-50 border p-4 rounded-2xl">
-                    <p>Learn or clear your doubts online at home with our dedicated subject expert team.</p>
+            <div class="space-y-6 text-slate-700 text-xs sm:text-sm leading-relaxed">
+                <!-- Introduction Box -->
+                <div class="bg-blue-50 border border-blue-200 p-4 rounded-2xl">
+                    <h4 class="font-bold text-brand-blue text-sm sm:text-base mb-1">🎧 Dedicated Academic Helpline</h4>
+                    <p>Learn or clear your doubts online at the comfort of your home, as and whenever you require — serving directly to the students with a dedicated subject expert team.</p>
                 </div>
+
+                <!-- Plans List -->
+                <div>
+                    <h4 class="font-black text-slate-900 uppercase text-xs tracking-wider mb-3 text-brand-blue">Helpline Service Plans</h4>
+                    <div class="space-y-3">
+                        <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50">
+                            <div class="flex justify-between items-center font-black text-brand-dark text-sm mb-1">
+                                <span>FREE PLAN</span><span class="text-emerald-600">₹0</span>
+                            </div>
+                            <p class="text-xs text-slate-600 mb-1"><strong>Features:</strong> Ask any 1 question on 1 particular topic from 1 chapter of 1 subject (doubt or concept explanation).</p>
+                            <p class="text-xs text-slate-600 mb-1"><strong>Eligibility:</strong> Need to register on our website, submit College ID and Aadhaar Number for verification, and send generated ID card to WhatsApp <strong class="text-brand-blue">+1 (555) 9565-917</strong>.</p>
+                            <p class="text-xs text-red-600"><strong>CONS:</strong> Available only once per applicant. Restricted to 1 specific topic/chapter/subject session.</p>
+                        </div>
+                        <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50">
+                            <div class="flex justify-between items-center font-black text-brand-dark text-sm mb-1">
+                                <span>PRIME PLAN</span><span class="text-brand-blue">₹5000</span>
+                            </div>
+                            <p class="text-xs text-slate-600 mb-1"><strong>Features:</strong> Regular weekly classes (1 topic per week). Entire syllabus covered systematically. Stay in regular touch with subject experts for the entire academic year.</p>
+                            <p class="text-xs text-slate-600 mb-1"><strong>Validity:</strong> From registration date to forthcoming year's 10th February (for Class 12) or 31st March (for Class 11).</p>
+                            <p class="text-xs text-red-600"><strong>CONS:</strong> Missed sessions cannot be reclaimed, re-explained, or compensated.</p>
+                        </div>
+                        <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50">
+                            <div class="flex justify-between items-center font-black text-brand-dark text-sm mb-1">
+                                <span>PRO PLAN</span><span class="text-brand-blue">₹300</span>
+                            </div>
+                            <p class="text-xs text-slate-600 mb-1"><strong>Features:</strong> Guaranteed session (1 Question of 1 Topic of 1 Chapter). Duration: 25 to 30 minutes.</p>
+                            <p class="text-xs text-slate-600"><strong>Validity:</strong> Up to 10th Feb (Class 12) / 31st March (Class 11).</p>
+                        </div>
+                        <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50">
+                            <div class="flex justify-between items-center font-black text-brand-dark text-sm mb-1">
+                                <span>PREMIUM PLAN</span><span class="text-brand-blue">₹6000</span>
+                            </div>
+                            <p class="text-xs text-slate-600 mb-1"><strong>Features:</strong> Guaranteed weekly 1 session for your preferred 1 Question/Topic/Chapter/Subject to learn, clear doubts, and get guidance.</p>
+                            <p class="text-xs text-slate-600"><strong>Validity:</strong> Up to 10th Feb (Class 12) / 31st March (Class 11).</p>
+                        </div>
+                        <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50">
+                            <div class="flex justify-between items-center font-black text-brand-dark text-sm mb-1">
+                                <span>GENX PLAN</span><span class="text-brand-blue">₹1000</span>
+                            </div>
+                            <p class="text-xs text-slate-600 mb-1"><strong>Features:</strong> Includes 5 PRO sessions and all Pro Plan features.</p>
+                            <p class="text-xs text-red-600"><strong>CONS:</strong> Cannot be clubbed, transferred, or shared with another person.</p>
+                        </div>
+                        <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50">
+                            <div class="flex justify-between items-center font-black text-brand-dark text-sm mb-1">
+                                <span>GENX PRO</span><span class="text-brand-blue">₹3000</span>
+                            </div>
+                            <p class="text-xs text-slate-600 mb-1"><strong>Features:</strong> Includes 15 PRO sessions and all Pro Plan features.</p>
+                            <p class="text-xs text-red-600"><strong>CONS:</strong> Cannot be clubbed, transferred, or shared with another person.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rules & Conditions -->
+                <div class="bg-amber-50 border border-amber-200 p-4 rounded-2xl">
+                    <h4 class="font-black text-amber-900 uppercase text-xs tracking-wider mb-2">📜 Rules | Process & Conditions</h4>
+                    <ul class="list-disc list-inside space-y-1.5 text-xs text-amber-950 font-medium">
+                        <li>Prior submission of Topic Request is mandatory in every plan.</li>
+                        <li>Your scheduled topic details will be conveyed via WhatsApp or registered email.</li>
+                        <li>Fees once paid is strictly non-refundable and non-transferable.</li>
+                        <li>Purchased plans are non-transferable and must be used exclusively by the registered individual.</li>
+                        <li>Submission of College ID and Aadhaar Number is required for verification before scheduling.</li>
+                        <li>All plan services are provided purely online.</li>
+                        <li>Sessions disrupted due to technical, physical, or health issues from admin/expert side will be compensated/rescheduled.</li>
+                        <li>Students must be available on time with essential materials. No rescheduling if issues occur at the student's end (e.g., network failure).</li>
+                        <li>Strict discipline is required during online sessions; misconduct leads to immediate barring/blocking without refund.</li>
+                        <li>Questions must be strictly limited to 1 particular question of 1 topic of 1 chapter and subject per session.</li>
+                    </ul>
+                </div>
+
                 <div class="pt-3 text-center">
                     <a href="https://api.whatsapp.com/send?phone=15559565917&text=Hello%20Guru%20Connect,%20I%20want%20to%20subscribe%20to%20a%20Helpline%20Plan." target="_blank" class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-black px-6 py-3.5 rounded-xl text-xs uppercase tracking-widest shadow-md transition">
                         <i class="fa-brands fa-whatsapp mr-1 text-base"></i> Inquire / Subscribe on WhatsApp
@@ -575,7 +621,39 @@
                 <h3 class="text-xl font-black text-brand-dark"><i class="fa-solid fa-circle-info text-brand-blue mr-2"></i> About GURU CONNECT</h3>
                 <button onclick="closeAboutModal()" class="text-slate-400 hover:text-red-500 text-xl font-bold"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <p class="text-slate-600 text-xs sm:text-sm"><strong>GURU CONNECT</strong> is an online platform bridging the gap between tutors and students.</p>
+            <div class="space-y-5 text-slate-600 text-xs sm:text-sm leading-relaxed">
+                <div>
+                    <h4 class="font-black text-brand-dark text-sm sm:text-base uppercase tracking-wide mb-1 text-brand-blue">1. Our Business – What We Are</h4>
+                    <p><strong>GURU CONNECT</strong> is an online platform bridging the gap between tutors and students. We seamlessly connect tutors and students to foster effective academic mentorship.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl">
+                        <h5 class="font-black text-slate-900 text-xs uppercase tracking-wider mb-2 text-brand-blue">Tutor Platform</h5>
+                        <ul class="list-disc list-inside space-y-1 text-xs">
+                            <li>Tutors can easily get registered.</li>
+                            <li>Choose a standard plan or add-on/upgrade to a Verified Plan.</li>
+                            <li>Respond directly to student learning requests and get connected.</li>
+                            <li>Receive tuition opportunities through active profile listings.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl">
+                        <h5 class="font-black text-slate-900 text-xs uppercase tracking-wider mb-2 text-brand-blue">Student Platform</h5>
+                        <ul class="list-disc list-inside space-y-1 text-xs">
+                            <li>Students can easily register.</li>
+                            <li>Free to post learning requirements.</li>
+                            <li>Explore tutor profiles and hire them directly.</li>
+                            <li>Enjoy premium helpline services where subject experts explain topics and clear doubts.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 border border-blue-200 p-4 rounded-2xl text-slate-700">
+                    <h4 class="font-black text-brand-blue text-sm sm:text-base uppercase tracking-wide mb-1">2. Helpline Service</h4>
+                    <p class="mb-2">Our Helpline service allows students to learn or clear doubts online at the comfort of their home as and whenever required—serving directly to students.</p>
+                    <p>Students can subscribe to our Helpline Service by selecting any of our existing plans. Our dedicated subject team is always available to help students succeed.</p>
+                </div>
+            </div>
             <div class="mt-6 pt-4 border-t text-right">
                 <button onclick="closeAboutModal()" class="bg-brand-blue text-white font-bold px-6 py-2.5 rounded-xl text-xs">CLOSE</button>
             </div>
@@ -687,8 +765,7 @@
                 name: studentNames[(i - 1) % studentNames.length],
                 std: "SYJC (12th)",
                 stream: "Commerce",
-                subject: i % 2 === 0 ? "MMK" : "Advanced Accounts",
-                hasRequirement: i % 3 === 0 // Mark some students as having posted requirements
+                subject: i % 2 === 0 ? "MMK" : "Advanced Accounts"
             });
         }
         let currentStudentPage = 1;
@@ -717,7 +794,7 @@
                     </div>
                     <div class="mt-6 pt-4 border-t border-white/20 flex items-center justify-between">
                         <span class="text-[11px] font-bold text-blue-200"><i class="fa-solid fa-shield-halved mr-1"></i>Protected</span>
-                        <button onclick="handleStudentConnect('${stu.id}', '${stu.name}', '${stu.std}', '${stu.stream}', '${stu.subject}', ${stu.hasRequirement})" class="bg-white hover:bg-blue-50 text-brand-blue font-black text-xs px-4 py-2 rounded-xl transition shadow">VIEW CONTACT</button>
+                        <button onclick="alert('Student contact details are protected. Please login or submit a learning request to connect.')" class="bg-white hover:bg-blue-50 text-brand-blue font-black text-xs px-4 py-2 rounded-xl transition shadow">VIEW CONTACT</button>
                     </div>
                 `;
                 container.appendChild(card);
@@ -727,38 +804,6 @@
             document.getElementById('pageJumpInput').value = currentStudentPage;
             document.getElementById('pageJumpInput').max = Math.ceil(studentDirectoryList.length / studentsPerPage);
             renderPaginationNumbers();
-        }
-
-        // Student Connect Authorization Logic based on Visitor / Tutor Role
-        function handleStudentConnect(id, name, std, stream, subject, hasRequirement) {
-            const activeUser = localStorage.getItem('active_user_name');
-            const isTutorLoggedIn = localStorage.getItem('is_tutor_logged') === 'true'; // Simulated tutor check
-
-            if (!activeUser) {
-                alert("YOU ARE ALLOWED TO ACCESS THIS INFORMATION. Please login first to connect.");
-                openLoginModal();
-                return;
-            }
-
-            // If logged in user is a registered tutor
-            if (isTutorLoggedIn || activeUser.includes("Tutor")) {
-                if (!hasRequirement) {
-                    alert("YOU CAN ONLY GET CONNECTED IF THE STUDENT HAS POSTED ANY LEARNING REQUIREMENT OR NEEDS TUTORS.");
-                    return;
-                }
-            }
-
-            // If real student or authorized viewer with requirement
-            document.getElementById('modalStuIdBadge').textContent = id;
-            document.getElementById('modalStuName').textContent = name;
-            document.getElementById('modalStuStandard').textContent = std + " • " + stream;
-            document.getElementById('modalStuSubjects').textContent = subject;
-            document.getElementById('modalStuWhatsappBtn').href = `https://api.whatsapp.com/send?phone=919876543210&text=Hello%20${encodeURIComponent(name)},%20I%20found%20your%20profile%20on%20Guru%20Connect.`;
-            document.getElementById('studentProfileModal').classList.remove('hidden');
-        }
-
-        function closeStudentProfileModal() {
-            document.getElementById('studentProfileModal').classList.add('hidden');
         }
 
         function renderPaginationNumbers() {
@@ -793,7 +838,7 @@
             }
         }
 
-        // Mock Tutors Directory Data & Renderer (Verified = Green Background, Badge = Golden with Blue Tick & Black Text)
+        // Mock Tutors Directory Data & Renderer (Verified = Green Background, Badge = Golden with Blue Tick and Black Text)
         let tutorDirectoryList = [];
         const tutorNamesData = [
             { name: "Kavita Mehta", subject: "Accountancy", rate: "₹650/hr", exp: "8 Years", verified: false },
