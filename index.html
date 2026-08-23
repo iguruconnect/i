@@ -37,7 +37,7 @@
         })();
     </script>
 </head>
-<body class="bg-brand-lightBg text-brand-dark font-sans antialiased min-h-screen flex flex-col justify-between overflow-x-hidden relative">
+<body class="bg-brand-lightBg text-brand-dark font-sans antialiased min-h-screen flex flex-col justify-between overflow-x-hidden">
 
     <!-- Header / Navbar -->
     <header class="bg-white text-brand-dark sticky top-0 z-50 shadow-md border-b border-slate-200 w-full">
@@ -355,40 +355,45 @@
                         <p class="text-slate-600 text-xs sm:text-sm mt-1">Review plan details, complete payment via UPI app, verify email via support@guruconnnect.in, and submit UTR.</p>
                     </div>
 
-                    <!-- Side-by-side Structured Plan Cards -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                        <!-- Plan 1 -->
-                        <div class="bg-white border-2 border-brand-blue/30 rounded-2xl p-4 shadow-sm relative flex flex-col justify-between">
-                            <div class="absolute top-0 right-0 bg-brand-blue text-white text-[8px] font-black px-2 py-0.5 rounded-bl-xl tracking-widest uppercase">RECOMMENDED</div>
-                            <div>
-                                <h4 class="font-black text-brand-dark text-sm">Elite JC Tutor Pass</h4>
-                                <p class="text-[10px] text-slate-500 font-medium mb-3">1 Full Year Listing & Leads</p>
-                                <div class="mb-3">
-                                    <span class="text-xl font-black text-brand-blue">₹200</span>
-                                    <span class="text-[9px] text-slate-400 font-bold uppercase ml-1">One-time</span>
-                                </div>
+                    <!-- Plan 1 -->
+                    <div class="bg-white border-2 border-brand-blue/30 rounded-2xl p-4 sm:p-5 mb-5 sm:mb-6 shadow-sm relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-brand-blue text-white text-[8px] sm:text-[10px] font-black px-2 sm:px-3 py-1 rounded-bl-xl tracking-widest uppercase">RECOMMENDED PLAN</div>
+                        <div class="flex items-center justify-between mb-3 pb-3 border-b border-slate-100 pt-3 sm:pt-0">
+                            <div class="pr-2">
+                                <h4 class="font-black text-brand-dark text-sm sm:text-base">Elite JC Tutor Pass</h4>
+                                <p class="text-[10px] sm:text-xs text-slate-500 font-medium">1 Full Year Listing & Leads</p>
                             </div>
-                            <a href="upi://pay?pa=9876543210@paytm&pn=GuruConnect&am=200&cu=INR" onclick="openUpiQrModal(200); return false;" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-3 rounded-xl shadow transition text-[11px] text-center flex items-center justify-center gap-1.5 cursor-pointer">
-                                <i class="fa-solid fa-qrcode"></i> PAY ₹200 UPI / QR
-                            </a>
+                            <div class="text-right">
+                                <span class="text-xl sm:text-2xl font-black text-brand-blue">₹200</span>
+                                <span class="block text-[8px] sm:text-[10px] text-slate-400 font-bold uppercase">One-time fee</span>
+                            </div>
                         </div>
+                        <div class="pt-2 border-t border-slate-100">
+                            <button type="button" onclick="openUpiQrModal(200)" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 sm:px-4 py-3 sm:py-3.5 rounded-xl shadow transition text-[10px] sm:text-xs text-center flex items-center justify-center gap-1.5 sm:gap-2">
+                                <i class="fa-solid fa-qrcode text-sm sm:text-base"></i> OPEN UPI QR & PAY ₹200
+                            </button>
+                        </div>
+                    </div>
 
-                        <!-- Plan 2 -->
-                        <div class="bg-white border-2 border-brand-blue/30 rounded-2xl p-4 shadow-sm relative flex flex-col justify-between">
-                            <div class="absolute top-0 right-0 bg-brand-blue text-white text-[8px] font-black px-2 py-0.5 rounded-bl-xl tracking-widest uppercase">VERIFIED TICK</div>
-                            <div>
-                                <h4 class="font-black text-brand-dark text-sm flex items-center gap-1">
-                                    Verified Badge <span class="inline-flex items-center justify-center w-3 h-3 bg-blue-600 text-white rounded-full text-[7px]"><i class="fa-solid fa-check"></i></span>
+                    <!-- Plan 2 -->
+                    <div class="bg-white border-2 border-brand-blue/30 rounded-2xl p-4 sm:p-5 mb-5 sm:mb-6 shadow-sm relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-brand-blue text-white text-[8px] sm:text-[10px] font-black px-2 sm:px-3 py-1 rounded-bl-xl tracking-widest uppercase">VERIFICATION BADGE</div>
+                        <div class="flex items-center justify-between mb-3 pb-3 border-b border-slate-100 pt-3 sm:pt-0">
+                            <div class="pr-2">
+                                <h4 class="font-black text-brand-dark text-sm sm:text-base flex items-center gap-1 sm:gap-1.5">
+                                    GET VERIFIED TICK <span class="inline-flex items-center justify-center w-3 h-3 sm:w-4 sm:h-4 bg-blue-600 text-white rounded-full text-[7px] sm:text-[9px]"><i class="fa-solid fa-check"></i></span>
                                 </h4>
-                                <p class="text-[10px] text-slate-500 font-medium mb-3">Aadhaar upload mandatory.</p>
-                                <div class="mb-3">
-                                    <span class="text-xl font-black text-brand-blue">₹300</span>
-                                    <span class="text-[9px] text-slate-400 font-bold uppercase ml-1">For 30 Days</span>
-                                </div>
+                                <p class="text-[10px] sm:text-xs text-slate-500 font-medium">Aadhaar upload mandatory.</p>
                             </div>
-                            <a href="upi://pay?pa=9876543210@paytm&pn=GuruConnect&am=300&cu=INR" onclick="openUpiQrModal(300); return false;" class="w-full bg-brand-blue hover:bg-blue-700 text-white font-bold py-2.5 px-3 rounded-xl shadow transition text-[11px] text-center flex items-center justify-center gap-1.5 cursor-pointer">
-                                <i class="fa-solid fa-qrcode"></i> PAY ₹300 UPI / QR
-                            </a>
+                            <div class="text-right">
+                                <span class="text-xl sm:text-2xl font-black text-brand-blue">₹300</span>
+                                <span class="block text-[8px] sm:text-[10px] text-slate-400 font-bold uppercase">FOR 30 DAYS</span>
+                            </div>
+                        </div>
+                        <div class="pt-2 border-t border-slate-100">
+                            <button type="button" onclick="openUpiQrModal(300)" class="w-full bg-brand-blue hover:bg-blue-700 text-white font-bold px-3 sm:px-4 py-3 sm:py-3.5 rounded-xl shadow transition text-[10px] sm:text-xs text-center flex items-center justify-center gap-1.5 sm:gap-2">
+                                <i class="fa-solid fa-qrcode text-sm sm:text-base"></i> OPEN UPI QR & PAY ₹300
+                            </button>
                         </div>
                     </div>
 
@@ -519,11 +524,6 @@
 
     </div>
 
-    <!-- FLOATING WHATSAPP CHAT BUTTON (Restored) -->
-    <a href="https://api.whatsapp.com/send?phone=15559565917&text=Hello%20Guru%20Connect,%20I%20need%20assistance." target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-50 bg-emerald-500 hover:bg-emerald-600 text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-3xl transition transform hover:scale-110" title="Chat on WhatsApp">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
-
     <!-- HELPLINE PLANS MODAL -->
     <div id="helplineModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 flex items-center justify-center hidden p-4 z-[100]">
         <div class="bg-white rounded-3xl shadow-2xl max-w-2xl w-full p-6 sm:p-8 border relative max-h-[90vh] overflow-y-auto">
@@ -563,35 +563,17 @@
 
     <!-- CONTACT US MODAL -->
     <div id="contactModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 flex items-center justify-center hidden p-4 z-[100]">
-        <div class="bg-white rounded-3xl shadow-2xl max-w-lg w-full p-8 sm:p-10 border text-center relative">
-            <button onclick="closeContactModal()" class="absolute top-5 right-5 text-slate-400 hover:text-red-500 text-2xl font-bold"><i class="fa-solid fa-xmark"></i></button>
-            <div class="w-16 h-16 bg-blue-100 text-brand-blue rounded-2xl flex items-center justify-center mx-auto mb-4 text-3xl shadow-inner">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full p-6 border text-center relative">
+            <button onclick="closeContactModal()" class="absolute top-4 right-4 text-slate-400 hover:text-red-500 text-xl font-bold"><i class="fa-solid fa-xmark"></i></button>
+            <div class="w-14 h-14 bg-blue-100 text-brand-blue rounded-2xl flex items-center justify-center mx-auto mb-3 text-2xl shadow-inner">
                 <i class="fa-solid fa-headset"></i>
             </div>
-            <h3 class="text-2xl sm:text-3xl font-black text-brand-dark mb-2">Get in Touch</h3>
-            
-            <p class="text-xs sm:text-sm text-slate-600 mb-6 font-medium leading-relaxed">
-                Have questions, inquiries, or need assistance? Connect with us through any of the channels below, and <strong>we will reply you shortly!</strong>
-            </p>
-
-            <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-2xl my-3 flex items-center justify-center gap-3 shadow-sm">
+            <h3 class="text-2xl font-black text-brand-dark">Get in Touch</h3>
+            <div class="bg-slate-50 border p-3.5 rounded-2xl my-4 flex items-center justify-center gap-3">
                 <i class="fa-solid fa-envelope text-brand-blue text-lg"></i>
-                <a href="mailto:support@guruconnnect.in" class="text-brand-blue font-black text-sm sm:text-base hover:underline">support@guruconnnect.in</a>
+                <a href="mailto:support@guruconnnect.in" class="text-brand-blue font-bold text-sm hover:underline">support@guruconnnect.in</a>
             </div>
-
-            <div class="flex items-center justify-center gap-3 mt-6 pt-4 border-t border-slate-100">
-                <a href="https://api.whatsapp.com/send?phone=15559565917&text=Hello%20Guru%20Connect,%20I%20want%20support." target="_blank" rel="noopener noreferrer" class="w-11 h-11 bg-emerald-50 hover:bg-emerald-100 text-emerald-600 border border-emerald-200 rounded-2xl flex items-center justify-center text-xl transition shadow-sm" title="WhatsApp Support">
-                    <i class="fa-brands fa-whatsapp"></i>
-                </a>
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="w-11 h-11 bg-blue-50 hover:bg-blue-100 text-blue-600 border border-blue-200 rounded-2xl flex items-center justify-center text-xl transition shadow-sm" title="Facebook">
-                    <i class="fa-brands fa-facebook-f"></i>
-                </a>
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="w-11 h-11 bg-pink-50 hover:bg-pink-100 text-pink-600 border border-pink-200 rounded-2xl flex items-center justify-center text-xl transition shadow-sm" title="Instagram">
-                    <i class="fa-brands fa-instagram"></i>
-                </a>
-            </div>
-
-            <button onclick="closeContactModal()" class="w-full mt-6 bg-brand-blue hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl text-sm transition shadow">CLOSE</button>
+            <button onclick="closeContactModal()" class="w-full bg-brand-blue text-white font-bold py-3 rounded-xl text-xs">CLOSE</button>
         </div>
     </div>
 
@@ -657,27 +639,6 @@
 
         let pendingEmailOtps = { student: "", tutor: "" };
 
-        // UPI QR Code Modal & Deep Link Invoke Logic
-        function openUpiQrModal(amount) {
-            document.getElementById('modalPayAmountText').textContent = "₹" + amount;
-            const upiId = "9876543210@paytm"; 
-            const name = "GuruConnect";
-            
-            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=${upiId}&pn=${name}&am=${amount}&cu=INR`;
-            document.getElementById('dynamicQrImg').src = qrUrl;
-            document.getElementById('upiQrModal').classList.remove('hidden');
-
-            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-            if (isMobile) {
-                const upiDeepLink = `upi://pay?pa=${upiId}&pn=${name}&am=${amount}&cu=INR`;
-                window.location.href = upiDeepLink;
-            }
-        }
-
-        function closeUpiQrModal() {
-            document.getElementById('upiQrModal').classList.add('hidden');
-        }
-
         async function sendEmailOtp(type) {
             const nameInput = document.getElementById(type === 'student' ? 'stu_name' : 't_name');
             const emailInput = document.getElementById(type === 'student' ? 'stu_email' : 't_email');
@@ -729,6 +690,7 @@
             if (entered === pendingEmailOtps[type] && entered !== "") {
                 alert('Email Verified Successfully!');
                 
+                // Send Welcome Onboarding Email automatically
                 const welcomeParams = {
                     name: nameInput.value.trim(),
                     email: emailInput.value.trim()
