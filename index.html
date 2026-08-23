@@ -657,13 +657,23 @@
 
         let pendingEmailOtps = { student: "", tutor: "" };
 
-        // UPI QR Code Modal Logic restored
+        // UPI QR Code Modal & Deep Link Invoke Logic
         function openUpiQrModal(amount) {
             document.getElementById('modalPayAmountText').textContent = "₹" + amount;
-            const upiId = "9876543210@paytm"; // Aap apna UPI ID yahan daal sakte hain
-            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=${upiId}&pn=GuruConnect&am=${amount}&cu=INR`;
+            const upiId = "9876543210@paytm"; 
+            const name = "GuruConnect";
+            
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=${upiId}&pn=${name}&am=${amount}&cu=INR`;
             document.getElementById('dynamicQrImg').src = qrUrl;
             document.getElementById('upiQrModal').classList.remove('hidden');
+
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            if (isMobile) {
+                const upiDeepLink = `upi://pay?pa=${upiId}&pn=${name}&am=${amount}&cu=INR`;
+                setTimeout(() => {
+                    window.location.href = upiDeepLink;
+                }, 500);
+            }
         }
 
         function closeUpiQrModal() {
