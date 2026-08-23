@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GURU CONNECT - Elite Tutoring Platform</title>
+    <!-- Google Fonts: Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Roboto"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            blue: '#2563EB',
+                            dark: '#0F172A',
+                            lightBg: '#F8FAFC',
+                            nagpurOrange: '#F97316'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("LHZ617ZwS3g_2O_w2");
+        })();
+    </script>
+</head>
+<body class="bg-brand-lightBg text-brand-dark font-sans antialiased min-h-screen flex flex-col justify-between overflow-x-hidden relative">
+
+    <!-- Header / Navbar -->
+    <header class="bg-white text-brand-dark sticky top-0 z-50 shadow-md border-b border-slate-200 w-full">
+        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between relative">
+            
+            <!-- Left Side: Larger Logo Image & Name -->
+            <div class="flex items-center gap-1.5 sm:gap-3.5 shrink-0">
+                <a href="#home" class="w-10 h-10 sm:w-16 sm:h-16 flex items-center justify-center shrink-0 my-1">
+                    <img src="nb.png" alt="Guru Connect Logo" class="w-full h-full object-contain rounded-full shadow-sm">
+                </a>
+                <div class="shrink-0 flex flex-col justify-center">
+                    <span class="text-base sm:text-3xl font-black tracking-wide text-brand-dark leading-none sm:leading-tight">GURU <span class="text-brand-blue">CONNECT</span></span>
+                    <p class="hidden sm:block text-[11px] text-slate-500 font-bold tracking-widest uppercase mt-1">Junior College Tutors & Students Hub</p>
+                </div>
+            </div>
+
+            <!-- Right Side: Buttons & Dropdown Menu -->
+            <div class="flex gap-1 sm:gap-2 items-center shrink-0">
+                
+                <div id="currentUserBadge" class="hidden text-[10px] sm:text-xs font-bold bg-blue-50 text-brand-blue px-2 py-1 sm:px-3 sm:py-2.5 rounded-lg sm:rounded-xl border border-blue-200 flex items-center gap-1">
+                    <span class="truncate max-w-[40px] sm:max-w-[100px]"><i class="fa-solid fa-user-check mr-0.5 hidden sm:inline"></i> <span id="navLoggedName"></span></span> 
+                    <button onclick="logoutUser()" class="text-red-600 hover:underline text-[9px] sm:text-[10px] uppercase font-black ml-0.5 border-l border-blue-200 pl-1 sm:pl-2">Logout</button>
+                </div>
+                
+                <!-- 929 Digital Desk Logo Button -->
+                <a href="https://929digitaldesk.github.io/helpline" target="_blank" rel="noopener noreferrer" class="shrink-0 transition transform hover:scale-105 my-1" title="929 Digital Desk">
+                    <img src="929-logo.png" alt="929 Digital Desk Logo" class="h-7 sm:h-12 w-auto object-contain">
+                </a>
+
+                <button id="navLoginBtn" onclick="openLoginModal()" class="bg-slate-100 hover:bg-slate-200 text-brand-dark text-[11px] sm:text-xs font-bold px-2 py-1.5 sm:px-4 sm:py-2.5 rounded-lg sm:rounded-xl transition shadow flex items-center gap-1">
+                    <i class="fa-solid fa-right-to-bracket text-xs sm:text-sm"></i> <span class="hidden sm:inline">LOGIN</span>
+                </button>
+                
+                <button id="navStaffBtn" onclick="openStaffLoginModal()" class="bg-brand-blue hover:bg-blue-700 text-white text-[11px] sm:text-xs font-bold px-2 py-1.5 sm:px-4 sm:py-2.5 rounded-lg sm:rounded-xl transition shadow flex items-center gap-1">
+                    <i class="fa-solid fa-lock text-xs sm:text-sm"></i> <span class="hidden sm:inline">STAFF</span>
+                </button>
+
+                <!-- MENU DROPDOWN -->
+                <div id="publicMenuWrapper" class="relative">
+                    <button onclick="toggleNavMenu()" class="bg-white border border-slate-300 hover:bg-slate-50 text-brand-dark text-[11px] sm:text-xs font-bold px-2 py-1.5 sm:px-4 sm:py-2.5 rounded-lg sm:rounded-xl transition shadow-sm flex items-center gap-1">
+                        <i class="fa-solid fa-bars text-xs sm:text-sm"></i> <span class="hidden sm:inline">MENU</span>
+                    </button>
+                    <!-- Dropdown Links -->
+                    <nav id="publicNavbarLinks" class="absolute top-full right-0 mt-2 sm:mt-3 w-52 sm:w-56 bg-white rounded-xl sm:rounded-2xl shadow-2xl border border-slate-200 py-2 flex-col hidden z-[60] origin-top-right">
+                        <a href="#home" onclick="closeNavMenu()" class="block px-4 sm:px-5 py-3 text-[11px] sm:text-sm font-bold text-slate-600 hover:bg-brand-blue hover:text-white transition">HOME</a>
+                        <a href="#tutors" onclick="closeNavMenu()" class="block px-4 sm:px-5 py-3 text-[11px] sm:text-sm font-bold text-slate-600 hover:bg-brand-blue hover:text-white transition">EXPLORE TUTORS</a>
+                        <a href="#studentsDirectory" onclick="closeNavMenu()" class="block px-4 sm:px-5 py-3 text-[11px] sm:text-sm font-bold text-slate-600 hover:bg-brand-blue hover:text-white transition">STUDENTS DIRECTORY</a>
+                        <a href="#registrationSection" onclick="closeNavMenu()" class="block px-4 sm:px-5 py-3 text-[11px] sm:text-sm font-bold text-slate-600 hover:bg-brand-blue hover:text-white transition">PORTAL & REQUESTS</a>
+                        <a href="javascript:void(0)" onclick="openHelplineModal(); closeNavMenu();" class="block px-4 sm:px-5 py-3 text-[11px] sm:text-sm font-bold text-slate-600 hover:bg-brand-blue hover:text-white transition">HELPLINE PLANS</a>
+                        <a href="javascript:void(0)" onclick="openAboutModal(); closeNavMenu();" class="block px-4 sm:px-5 py-3 text-[11px] sm:text-sm font-bold text-slate-600 hover:bg-brand-blue hover:text-white transition border-t border-slate-100">ABOUT US</a>
+                        <a href="javascript:void(0)" onclick="openContactModal(); closeNavMenu();" class="block px-4 sm:px-5 py-3 text-[11px] sm:text-sm font-bold text-slate-600 hover:bg-brand-blue hover:text-white transition">CONTACT US</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Staff Management Dashboard Panel -->
+    <div id="staffAdminDashboard" class="max-w-7xl mx-auto px-3 sm:px-4 py-6 sm:py-8 w-full hidden">
+        <div class="bg-white text-brand-dark p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl shadow-xl border border-slate-200 overflow-hidden w-full">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 sm:mb-8 pb-6 border-b border-slate-200">
+                <div>
+                    <span class="bg-brand-blue text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Staff Admin Mode</span>
+                    <h2 class="text-2xl sm:text-3xl font-black mt-2">Admin Control Dashboard</h2>
+                    <p class="text-xs sm:text-sm text-slate-600 mt-1">Manage Tutor UTR Payments, Grant Badges, Edit Profiles, and Moderate Student Listings.</p>
+                </div>
+                <button onclick="logoutStaff()" class="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white text-sm font-bold px-5 py-3 rounded-xl transition shadow-lg flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-right-from-bracket"></i> Exit Staff Mode
+                </button>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3 mb-6 w-full">
+                <button id="adminTabTutorsBtn" onclick="switchAdminTab('tutors')" class="w-full sm:w-auto justify-center bg-brand-blue text-white font-bold text-sm px-6 py-3 rounded-xl border border-blue-700 shadow flex items-center gap-2">
+                    <i class="fa-solid fa-chalkboard-user"></i> Tutor & UTR Queue (<span id="adminTutorCount">0</span>)
+                </button>
+                <button id="adminTabStudentsBtn" onclick="switchAdminTab('students')" class="w-full sm:w-auto justify-center bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold text-sm px-6 py-3 rounded-xl border border-slate-200 flex items-center gap-2">
+                    <i class="fa-solid fa-user-graduate"></i> Student Directory (<span id="adminStudentCount">0</span>)
+                </button>
+            </div>
+
+            <!-- SECTION 1: TUTOR MANAGEMENT TABLE -->
+            <div id="adminTutorSection" class="overflow-x-auto rounded-xl sm:rounded-2xl border border-slate-200 w-full">
+                <table class="w-full text-left text-sm text-slate-700 whitespace-nowrap min-w-[800px]">
+                    <thead class="bg-slate-100 text-slate-700 uppercase text-xs">
+                        <tr>
+                            <th class="p-3 sm:p-4">Tutor Name</th>
+                            <th class="p-3 sm:p-4">Subject</th>
+                            <th class="p-3 sm:p-4">Phone</th>
+                            <th class="p-3 sm:p-4">UTR / Payment Ref</th>
+                            <th class="p-3 sm:p-4">Badge Status</th>
+                            <th class="p-3 sm:p-4 text-right min-w-[280px]">Admin Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminTutorQueueTable" class="divide-y divide-slate-200 bg-white"></tbody>
+                </table>
+            </div>
+
+            <!-- SECTION 2: STUDENT MANAGEMENT TABLE -->
+            <div id="adminStudentSection" class="overflow-x-auto rounded-xl sm:rounded-2xl border border-slate-200 w-full hidden">
+                <table class="w-full text-left text-sm text-slate-700 whitespace-nowrap min-w-[700px]">
+                    <thead class="bg-slate-100 text-slate-700 uppercase text-xs">
+                        <tr>
+                            <th class="p-3 sm:p-4">Student ID</th>
+                            <th class="p-3 sm:p-4">Student Name</th>
+                            <th class="p-3 sm:p-4">Standard & Stream</th>
+                            <th class="p-3 sm:p-4">Subjects</th>
+                            <th class="p-3 sm:p-4 text-right">Admin Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminStudentQueueTable" class="divide-y divide-slate-200 bg-white"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- WRAPPER FOR PUBLIC WEBSITE CONTENT -->
+    <div id="publicWebsiteContent" class="w-full">
+
+        <!-- Hero Banner -->
+        <section id="home" class="bg-brand-blue text-white py-10 sm:py-20 relative overflow-hidden px-4 w-full">
+            <div class="max-w-5xl mx-auto text-center relative z-10">
+                <span class="bg-white/10 text-white border border-white/20 text-[10px] sm:text-xs font-bold px-3.5 py-1.5 rounded-full uppercase tracking-widest inline-block mb-4 sm:mb-6 backdrop-blur-sm whitespace-normal sm:whitespace-nowrap leading-relaxed">
+                    ⭐ Junior College (FYJC & SYJC) Hub
+                </span>
+                <h1 class="text-[24px] leading-snug sm:text-4xl md:text-6xl font-black tracking-tight mb-4 sm:mb-6 sm:leading-tight px-1">
+                    Empowering Education with <br class="block sm:hidden">
+                    <span class="text-amber-300 whitespace-nowrap">GURU CONNECT</span>
+                </h1>
+                <p class="text-slate-100 max-w-2xl mx-auto text-xs sm:text-base md:text-lg mb-8 sm:mb-10 font-normal leading-relaxed px-1 sm:px-0">
+                    Find elite verified tutors for Junior College, post custom learning requests, and manage academics securely.
+                </p>
+                <div class="flex justify-center w-full">
+                    <a href="#registrationSection" class="w-full sm:w-auto bg-white text-brand-blue hover:bg-slate-100 font-bold px-6 py-3.5 sm:px-8 sm:py-4 rounded-xl transition shadow-xl text-xs sm:text-base tracking-wider text-center">
+                        GET STARTED <i class="fa-solid fa-arrow-down ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tutors Listing Showcase Section -->
+        <section id="tutors" class="max-w-7xl mx-auto px-4 py-12 sm:py-16 w-full">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 sm:mb-8 gap-4 border-b border-slate-200 pb-4">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-brand-dark tracking-tight">Featured Verified Tutors</h2>
+                    <p class="text-slate-500 text-xs sm:text-sm font-medium mt-1">Top-rated junior college educators</p>
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 w-full sm:w-auto">
+                    <span class="text-xs sm:text-sm font-bold text-slate-700">FILTER SUBJECT:</span>
+                    <select id="subjectFilter" onchange="filterTutors()" class="w-full sm:w-auto bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm font-bold text-brand-dark focus:outline-none focus:border-brand-blue shadow-sm">
+                        <option value="All">All Subjects</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Physics">Physics</option>
+                        <option value="Chemistry">Chemistry</option>
+                        <option value="Biology">Biology</option>
+                        <option value="English">English</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Economics">Economics</option>
+                        <option value="Accountancy">Accountancy</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Tutors Grid Container -->
+            <div id="tutorGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 w-full"></div>
+
+            <!-- Tutors Pagination Controls -->
+            <div class="flex flex-wrap justify-center items-center gap-2 sm:gap-3 mt-8 sm:mt-10">
+                <button id="tutorPrevBtn" onclick="changeTutorPage(-1)" class="bg-slate-200 text-slate-700 hover:bg-slate-300 px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-bold disabled:opacity-50 transition flex items-center gap-1">
+                    <i class="fa-solid fa-chevron-left"></i> <span class="hidden sm:inline">PREVIOUS</span>
+                </button>
+                <div id="tutorPaginationNumbers" class="flex items-center gap-1 sm:gap-1.5 overflow-x-auto py-1 max-w-[150px] sm:max-w-none no-scrollbar"></div>
+                <button id="tutorNextBtn" onclick="changeTutorPage(1)" class="bg-brand-blue text-white hover:bg-blue-700 px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-bold shadow transition flex items-center gap-1">
+                    <span class="hidden sm:inline">NEXT</span> <i class="fa-solid fa-chevron-right"></i>
+                </button>
+                <div class="flex items-center gap-2 border-l border-slate-300 pl-2 sm:pl-3 ml-1 sm:ml-2">
+                    <span class="text-[10px] sm:text-xs font-bold text-slate-600 hidden sm:inline">Go to Page:</span>
+                    <input type="number" id="tutorPageJumpInput" min="1" value="1" onchange="jumpToTutorPageInput(this.value)" class="w-12 sm:w-16 border border-slate-300 rounded-lg p-1 sm:p-1.5 text-xs text-center font-bold focus:outline-none focus:border-brand-blue bg-white">
+                    <span id="tutorTotalPagesText" class="text-[10px] sm:text-xs font-bold text-slate-500">/ 21</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- STUDENT PROFILES DIRECTORY -->
+        <section id="studentsDirectory" class="max-w-7xl mx-auto px-4 py-12 sm:py-16 border-t border-slate-200 w-full">
+            <div class="mb-6 sm:mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-4">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-brand-dark tracking-tight">Junior College Students Directory</h2>
+                    <p class="text-slate-500 text-xs sm:text-sm font-medium mt-1">Browse FYJC & SYJC student profiles across Science, Commerce & Arts. Phone numbers are protected.</p>
+                </div>
+                <span class="bg-orange-100 text-orange-700 text-[10px] sm:text-xs font-bold px-3 py-1.5 rounded-full uppercase self-start md:self-auto text-center w-full md:w-auto shadow-sm">
+                    1,200+ Profiles Listed
+                </span>
+            </div>
+
+            <!-- Cards Grid Container -->
+            <div id="studentGridContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 w-full"></div>
+
+            <!-- Pagination Controls -->
+            <div class="flex flex-wrap justify-center items-center gap-2 sm:gap-3 mt-8 sm:mt-10">
+                <button id="prevBtn" onclick="changePage(-1)" class="bg-slate-200 text-slate-700 hover:bg-slate-300 px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-bold disabled:opacity-50 transition flex items-center gap-1">
+                    <i class="fa-solid fa-chevron-left"></i> <span class="hidden sm:inline">PREVIOUS</span>
+                </button>
+                <div id="paginationNumbers" class="flex items-center gap-1 sm:gap-1.5 overflow-x-auto py-1 max-w-[150px] sm:max-w-none no-scrollbar"></div>
+                <button id="nextBtn" onclick="changePage(1)" class="bg-brand-blue text-white hover:bg-blue-700 px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-bold shadow transition flex items-center gap-1">
+                    <span class="hidden sm:inline">NEXT</span> <i class="fa-solid fa-chevron-right"></i>
+                </button>
+                <div class="flex items-center gap-2 border-l border-slate-300 pl-2 sm:pl-3 ml-1 sm:ml-2">
+                    <span class="text-[10px] sm:text-xs font-bold text-slate-600 hidden sm:inline">Go to Page:</span>
+                    <input type="number" id="pageJumpInput" min="1" max="200" value="1" onchange="jumpToPageInput(this.value)" class="w-12 sm:w-16 border border-slate-300 rounded-lg p-1 sm:p-1.5 text-xs text-center font-bold focus:outline-none focus:border-brand-blue bg-white">
+                    <span id="totalPagesText" class="text-[10px] sm:text-xs font-bold text-slate-500">/ 200</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Registration & Learning Requests Section -->
+        <section id="registrationSection" class="py-12 sm:py-16 bg-white border-t border-slate-200 w-full px-4">
+            <div class="max-w-3xl mx-auto w-full">
+                
+                <!-- Tabs -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 bg-slate-100 p-1.5 rounded-2xl shadow-inner mb-6 sm:mb-8 border border-slate-200 gap-1 sm:gap-2">
+                    <button id="tabStudentBtn" onclick="switchTab('student')" class="py-3 rounded-xl text-xs sm:text-sm font-bold transition bg-brand-blue text-white shadow text-center tracking-wide">
+                        <i class="fa-solid fa-user-graduate mr-1"></i>STUDENT
+                    </button>
+                    <button id="tabTutorBtn" onclick="switchTab('tutor')" class="py-3 rounded-xl text-xs sm:text-sm font-bold transition text-slate-600 hover:text-brand-dark hover:bg-slate-200 text-center tracking-wide">
+                        <i class="fa-solid fa-chalkboard-user mr-1"></i>TUTOR
+                    </button>
+                    <button id="tabRequirementBtn" onclick="switchTab('requirement')" class="py-3 rounded-xl text-xs sm:text-sm font-bold transition text-slate-600 hover:text-brand-dark hover:bg-slate-200 text-center tracking-wide">
+                        <i class="fa-solid fa-clipboard-list mr-1"></i>LEARNING REQUESTS
+                    </button>
+                </div>
+
+                <!-- Student Form Card -->
+                <div id="studentFormCard" class="bg-brand-lightBg rounded-2xl sm:rounded-3xl shadow-lg border border-slate-200 p-5 sm:p-8 md:p-10 w-full">
+                    <div class="text-center mb-6 sm:mb-8">
+                        <span class="bg-orange-100 text-orange-700 text-[10px] sm:text-xs font-bold px-3.5 py-1.5 rounded-full uppercase tracking-wider">Junior College Section</span>
+                        <h2 class="text-2xl sm:text-3xl font-black text-brand-dark mt-3 tracking-tight">Student Registration</h2>
+                        <p class="text-slate-600 text-xs sm:text-sm mt-1">Register to verify your identity with Email OTP via <strong class="text-brand-blue">support@guruconnnect.in</strong>.</p>
+                    </div>
+                    <form onsubmit="handleStudentFormSubmit(event)" class="space-y-4 sm:space-y-5">
+                        <div>
+                            <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Student Full Name *</label>
+                            <input type="text" id="stu_name" required placeholder="Enter your full name" class="w-full border border-slate-300 rounded-xl p-3 sm:p-3.5 text-xs sm:text-sm focus:border-brand-blue focus:outline-none font-medium bg-white">
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Email Address *</label>
+                                <div class="flex gap-2">
+                                    <input type="email" id="stu_email" required placeholder="student@gmail.com" class="w-full border border-slate-300 rounded-xl p-3 text-xs sm:text-sm focus:border-brand-blue focus:outline-none font-medium bg-white">
+                                    <button type="button" onclick="sendEmailOtp('student')" class="bg-brand-blue hover:bg-blue-700 text-white font-bold px-3 py-2 rounded-xl text-[10px] sm:text-xs shrink-0 shadow">Send OTP</button>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">WhatsApp Number (Login ID) *</label>
+                                <input type="tel" id="stu_phone" required placeholder="9876543210" class="w-full border border-slate-300 rounded-xl p-3 sm:p-3.5 text-xs sm:text-sm focus:border-brand-blue focus:outline-none font-medium bg-white">
+                            </div>
+                        </div>
+
+                        <!-- Email OTP Verification Box for Student -->
+                        <div id="stuOtpBox" class="hidden bg-blue-50 border border-blue-200 p-3.5 rounded-xl space-y-2">
+                            <p class="text-[11px] font-bold text-brand-blue">Enter the 4-digit code sent from support@guruconnnect.in:</p>
+                            <div class="flex gap-2">
+                                <input type="text" maxlength="4" id="stuEnteredOtp" placeholder="1234" class="w-32 border border-blue-300 rounded-xl p-2 text-center font-black text-sm tracking-widest bg-white">
+                                <button type="button" onclick="verifyEmailOtp('student')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2 rounded-xl text-xs shadow">Verify OTP</button>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Junior College Standard *</label>
+                                <select id="stu_std" required class="w-full border border-slate-300 rounded-xl p-3 sm:p-3.5 text-xs sm:text-sm focus:border-brand-blue focus:outline-none font-bold bg-white">
+                                    <option value="">Select Standard</option>
+                                    <option value="FYJC (11th)">FYJC (11th Standard)</option>
+                                    <option value="SYJC (12th)">SYJC (12th Standard)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Stream *</label>
+                                <select id="stu_stream" required class="w-full border border-slate-300 rounded-xl p-3 sm:p-3.5 text-xs sm:text-sm focus:border-brand-blue focus:outline-none font-bold bg-white">
+                                    <option value="">Select Stream</option>
+                                    <option value="Arts">Arts</option>
+                                    <option value="Science">Science</option>
+                                    <option value="Commerce">Commerce</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Junior College Subject(s) *</label>
+                            <input type="text" id="stu_subject" required placeholder="e.g. Physics, Chemistry, Mathematics" class="w-full border border-slate-300 rounded-xl p-3 sm:p-3.5 text-xs sm:text-sm focus:border-brand-blue focus:outline-none font-bold bg-white">
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2 border-t border-slate-200">
+                            <div>
+                                <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Student Photo (Optional)</label>
+                                <input type="file" id="stu_photo" accept="image/*" class="w-full text-xs text-slate-500 file:mr-2 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-blue-50 file:text-brand-blue hover:file:bg-blue-100">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">College ID Card (Optional)</label>
+                                <input type="file" id="stu_college_id" accept="image/*,application/pdf" class="w-full text-xs text-slate-500 file:mr-2 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-blue-50 file:text-brand-blue hover:file:bg-blue-100">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Aadhaar Card (Optional)</label>
+                                <input type="file" id="stu_aadhaar" accept="image/*,application/pdf" class="w-full text-xs text-slate-500 file:mr-2 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-blue-50 file:text-brand-blue hover:file:bg-blue-100">
+                            </div>
+                        </div>
+                        <button type="submit" id="stuSubmitBtn" class="w-full bg-slate-300 text-slate-600 font-bold py-3.5 sm:py-4 rounded-xl transition shadow-md text-sm sm:text-base tracking-wider mt-2 cursor-not-allowed" disabled>
+                            PLEASE VERIFY EMAIL FIRST
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Tutor Form Card -->
+                <div id="tutorFormCard" class="bg-brand-lightBg rounded-2xl sm:rounded-3xl shadow-lg border border-slate-200 p-5 sm:p-8 md:p-10 w-full hidden">
+                    <div class="text-center mb-6 sm:mb-8">
+                        <span class="bg-blue-100 text-brand-blue text-[10px] sm:text-xs font-bold px-3.5 py-1.5 rounded-full uppercase tracking-wider">Tutor Pass</span>
+                        <h2 class="text-2xl sm:text-3xl font-black text-brand-dark mt-3 tracking-tight">Tutor Registration & Payment</h2>
+                        <p class="text-slate-600 text-xs sm:text-sm mt-1">Review plan details, complete payment via UPI app, verify email via support@guruconnnect.in, and submit UTR.</p>
+                    </div>
+
+                    <!-- Side-by-side Structured Plan Cards -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                        <!-- Plan 1 -->
+                        <div class="bg-white border-2 border-brand-blue/30 rounded-2xl p-4 shadow-sm relative flex flex-col justify-between">
+                            <div class="absolute top-0 right-0 bg-brand-blue text-white text-[8px] font-black px-2 py-0.5 rounded-bl-xl tracking-widest uppercase">RECOMMENDED</div>
+                            <div>
+                                <h4 class="font-black text-brand-dark text-sm">Elite JC Tutor Pass</h4>
+                                <p class="text-[10px] text-slate-500 font-medium mb-3">1 Full Year Listing & Leads</p>
+                                <div class="mb-3">
+                                    <span class="text-xl font-black text-brand-blue">₹200</span>
+                                    <span class="text-[9px] text-slate-400 font-bold uppercase ml-1">One-time</span>
+                                </div>
+                            </div>
+                            <a href="upi://pay?pa=9876543210@paytm&pn=GuruConnect&am=200&cu=INR" onclick="openUpiQrModal(200); return false;" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-3 rounded-xl shadow transition text-[11px] text-center flex items-center justify-center gap-1.5 cursor-pointer">
+                                <i class="fa-solid fa-qrcode"></i> PAY ₹200 UPI / QR
+                            </a>
+                        </div>
+
+                        <!-- Plan 2 -->
+                        <div class="bg-white border-2 border-brand-blue/30 rounded-2xl p-4 shadow-sm relative flex flex-col justify-between">
+                            <div class="absolute top-0 right-0 bg-brand-blue text-white text-[8px] font-black px-2 py-0.5 rounded-bl-xl tracking-widest uppercase">VERIFIED TICK</div>
+                            <div>
+                                <h4 class="font-black text-brand-dark text-sm flex items-center gap-1">
+                                    Verified Badge <span class="inline-flex items-center justify-center w-3 h-3 bg-blue-600 text-white rounded-full text-[7px]"><i class="fa-solid fa-check"></i></span>
+                                </h4>
+                                <p class="text-[10px] text-slate-500 font-medium mb-3">Aadhaar upload mandatory.</p>
+                                <div class="mb-3">
+                                    <span class="text-xl font-black text-brand-blue">₹300</span>
+                                    <span class="text-[9px] text-slate-400 font-bold uppercase ml-1">For 30 Days</span>
+                                </div>
+                            </div>
+                            <a href="upi://pay?pa=9876543210@paytm&pn=GuruConnect&am=300&cu=INR" onclick="openUpiQrModal(300); return false;" class="w-full bg-brand-blue hover:bg-blue-700 text-white font-bold py-2.5 px-3 rounded-xl shadow transition text-[11px] text-center flex items-center justify-center gap-1.5 cursor-pointer">
+                                <i class="fa-solid fa-qrcode"></i> PAY ₹300 UPI / QR
+                            </a>
+                        </div>
+                    </div>
+
+                    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
+                    <form id="tutorRegForm" action="https://script.google.com/macros/s/AKfycbzFDeqKdg8FYoiClmXLWSNCvQIoVxWvq_0HZcCLCzYLrhuxpwyo76WkAVUY8D6vF-iA/exec" method="POST" target="hidden_iframe" onsubmit="handleTutorFormSubmit(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Full Name *</label>
+                                <input type="text" name="name" id="t_name" required placeholder="Enter tutor name" class="w-full border border-slate-300 rounded-xl p-3 text-xs sm:text-sm bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Subject Expertise *</label>
+                                <input type="text" name="subject" id="t_subject" required placeholder="e.g. Advanced Mathematics" class="w-full border border-slate-300 rounded-xl p-3 text-xs sm:text-sm bg-white">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Email Address *</label>
+                                <div class="flex gap-2">
+                                    <input type="email" name="email" id="t_email" required placeholder="tutor@gmail.com" class="w-full border border-slate-300 rounded-xl p-3 text-xs sm:text-sm bg-white">
+                                    <button type="button" onclick="sendEmailOtp('tutor')" class="bg-brand-blue hover:bg-blue-700 text-white font-bold px-3 py-2 rounded-xl text-[10px] sm:text-xs shrink-0 shadow">Send OTP</button>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">WhatsApp Number (Login ID) *</label>
+                                <input type="tel" name="phone" id="t_phone" required placeholder="9876543210" class="w-full border border-slate-300 rounded-xl p-3 text-xs sm:text-sm bg-white">
+                            </div>
+                        </div>
+
+                        <!-- Email OTP Verification Box for Tutor -->
+                        <div id="tutorOtpBox" class="hidden bg-blue-50 border border-blue-200 p-3.5 rounded-xl space-y-2">
+                            <p class="text-[11px] font-bold text-brand-blue">Enter the 4-digit code sent from support@guruconnnect.in:</p>
+                            <div class="flex gap-2">
+                                <input type="text" maxlength="4" id="tutorEnteredOtp" placeholder="1234" class="w-32 border border-blue-300 rounded-xl p-2 text-center font-black text-sm tracking-widest bg-white">
+                                <button type="button" onclick="verifyEmailOtp('tutor')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2 rounded-xl text-xs shadow">Verify OTP</button>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Rate / Hour *</label>
+                                <input type="text" name="price" id="t_price" required placeholder="e.g. ₹700/hr" class="w-full border border-slate-300 rounded-xl p-3 text-xs sm:text-sm bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Experience *</label>
+                                <input type="text" name="experience" id="t_exp" required placeholder="e.g. 5 Years" class="w-full border border-slate-300 rounded-xl p-3 text-xs sm:text-sm bg-white">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">College Name (Optional)</label>
+                                <input type="text" name="college_name" id="t_college" placeholder="e.g. Ruia College / Freelance" class="w-full border border-slate-300 rounded-xl p-3 text-xs sm:text-sm bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Tutor Photo (Optional)</label>
+                                <input type="file" id="t_photo" accept="image/*" class="w-full text-xs text-slate-500 file:mr-2 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-blue-50 file:text-brand-blue">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">College ID Card (Optional)</label>
+                                <input type="file" id="t_college_id" accept="image/*,application/pdf" class="w-full text-xs text-slate-500 file:mr-2 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-blue-50 file:text-brand-blue">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Aadhaar Card (Mandatory for Verified Tick)</label>
+                                <input type="file" id="t_aadhaar" accept="image/*,application/pdf" class="w-full text-xs text-slate-500 file:mr-2 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-blue-50 file:text-brand-blue">
+                            </div>
+                        </div>
+
+                        <div class="border border-brand-blue bg-blue-50/50 p-3 sm:p-4 rounded-2xl">
+                            <label class="block text-[10px] sm:text-xs font-bold text-brand-blue uppercase tracking-wider mb-1.5">Enter UTR / Transaction Reference Number *</label>
+                            <input type="text" name="utr" id="txnIdInput" required placeholder="Enter valid UTR / Transaction Reference" class="w-full border border-brand-blue rounded-xl p-3 text-xs sm:text-sm font-mono font-bold bg-white">
+                        </div>
+
+                        <button type="submit" id="tutorSubmitBtn" class="w-full bg-slate-300 text-slate-600 font-bold py-3.5 sm:py-4 rounded-xl transition shadow-md text-sm sm:text-base tracking-wider mt-2 cursor-not-allowed" disabled>
+                            PLEASE VERIFY EMAIL FIRST
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Learning Requests Form Card -->
+                <div id="requirementFormCard" class="bg-brand-lightBg rounded-2xl sm:rounded-3xl shadow-lg border border-slate-200 p-5 sm:p-8 md:p-10 w-full hidden">
+                    <div class="text-center mb-6 sm:mb-8">
+                        <span class="bg-orange-100 text-orange-800 text-[10px] sm:text-xs font-bold px-3.5 py-1.5 rounded-full uppercase tracking-wider">Verified Matchmaking</span>
+                        <h2 class="text-2xl sm:text-3xl font-black text-brand-dark mt-3 tracking-tight">Submit Learning Requests</h2>
+                        <p class="text-slate-600 text-xs sm:text-sm mt-1">Only registered & logged-in students can post learning requirements.</p>
+                    </div>
+
+                    <div id="notLoggedInAlert" class="bg-orange-50 border border-orange-300 p-5 rounded-2xl text-center mb-6">
+                        <i class="fa-solid fa-triangle-exclamation text-orange-600 text-2xl mb-2"></i>
+                        <h4 class="font-bold text-orange-900 text-sm sm:text-base">Authentication Required!</h4>
+                        <p class="text-[10px] sm:text-xs text-orange-700 mt-1 mb-4">Please login using your student WhatsApp number to post requirements.</p>
+                        <button onclick="openLoginModal()" class="bg-brand-blue text-white font-bold text-[10px] sm:text-xs px-6 py-2.5 rounded-xl shadow">LOGIN NOW VIA OTP</button>
+                    </div>
+
+                    <form id="protectedReqForm" onsubmit="handleRequirementSubmit(event)" class="space-y-4 hidden">
+                        <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-xl text-[10px] sm:text-xs text-emerald-800 font-bold mb-4 flex justify-between items-center">
+                            <span>Posting as Logged-in Student: <span id="activeStudentNameDisplay" class="underline"></span></span>
+                            <button type="button" onclick="logoutUser()" class="text-red-600 hover:underline">Logout</button>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase mb-1">Subject / Skill Needed *</label>
+                            <input type="text" id="req_subject" required placeholder="e.g. Physics / Python Coding" class="w-full border rounded-xl p-3 text-xs sm:text-sm bg-white">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase mb-1">Mode of Learning *</label>
+                            <select id="req_mode" required class="w-full border rounded-xl p-3 text-xs sm:text-sm bg-white font-bold">
+                                <option value="Online">Online Tuition</option>
+                                <option value="Home Tutor">Home Tutor (Offline)</option>
+                                <option value="Hybrid">Hybrid / Both</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase mb-1">Detailed Description *</label>
+                            <textarea id="req_desc" rows="3" required placeholder="Mention timing, budget, etc." class="w-full border rounded-xl p-3 text-xs sm:text-sm bg-white"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-brand-blue hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl transition shadow-md tracking-wider text-sm sm:text-base mt-2">
+                            POST VERIFIED LEARNING REQUEST
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <!-- FLOATING WHATSAPP CHAT BUTTON -->
+    <a href="https://api.whatsapp.com/send?phone=15559565917&text=Hello%20Guru%20Connect,%20I%20need%20assistance." target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-50 bg-emerald-500 hover:bg-emerald-600 text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-3xl transition transform hover:scale-110" title="Chat on WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- HELPLINE PLANS MODAL -->
+    <div id="helplineModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 flex items-center justify-center hidden p-4 z-[100]">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-2xl w-full p-6 sm:p-8 border relative max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-4 pb-3 border-b">
+                <h3 class="text-xl sm:text-2xl font-black text-brand-dark"><i class="fa-solid fa-headset text-brand-blue"></i> Helpline Service Plans</h3>
+                <button onclick="closeHelplineModal()" class="text-slate-400 hover:text-red-500 text-xl font-bold"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="space-y-6 text-slate-700 text-xs sm:text-sm">
+                <div class="bg-blue-50 border p-4 rounded-2xl">
+                    <p>Learn or clear your doubts online at home with our dedicated subject expert team.</p>
+                </div>
+                <div class="pt-3 text-center">
+                    <a href="https://api.whatsapp.com/send?phone=15559565917&text=Hello%20Guru%20Connect,%20I%20want%20to%20subscribe%20to%20a%20Helpline%20Plan." target="_blank" class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-black px-6 py-3.5 rounded-xl text-xs uppercase tracking-widest shadow-md transition">
+                        <i class="fa-brands fa-whatsapp mr-1 text-base"></i> Inquire / Subscribe on WhatsApp
+                    </a>
+                </div>
+            </div>
+            <div class="mt-6 pt-4 border-t text-right">
+                <button onclick="closeHelplineModal()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-2.5 rounded-xl text-xs">CLOSE</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ABOUT US MODAL -->
+    <div id="aboutModal" class="fixed inset-0 bg-slate-900/75 backdrop-blur-md z-50 flex items-center justify-center hidden p-4 z-[100]">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-2xl w-full p-6 sm:p-8 border relative max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-4 pb-3 border-b">
+                <h3 class="text-xl font-black text-brand-dark"><i class="fa-solid fa-circle-info text-brand-blue mr-2"></i> About GURU CONNECT</h3>
+                <button onclick="closeAboutModal()" class="text-slate-400 hover:text-red-500 text-xl font-bold"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <p class="text-slate-600 text-xs sm:text-sm"><strong>GURU CONNECT</strong> is an online platform bridging the gap between tutors and students.</p>
+            <div class="mt-6 pt-4 border-t text-right">
+                <button onclick="closeAboutModal()" class="bg-brand-blue text-white font-bold px-6 py-2.5 rounded-xl text-xs">CLOSE</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTACT US MODAL -->
+    <div id="contactModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 flex items-center justify-center hidden p-4 z-[100]">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-lg w-full p-8 sm:p-10 border text-center relative">
+            <button onclick="closeContactModal()" class="absolute top-5 right-5 text-slate-400 hover:text-red-500 text-2xl font-bold"><i class="fa-solid fa-xmark"></i></button>
+            <div class="w-16 h-16 bg-blue-100 text-brand-blue rounded-2xl flex items-center justify-center mx-auto mb-4 text-3xl shadow-inner">
+                <i class="fa-solid fa-headset"></i>
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-black text-brand-dark mb-2">Get in Touch</h3>
+            
+            <p class="text-xs sm:text-sm text-slate-600 mb-6 font-medium leading-relaxed">
+                Have questions, inquiries, or need assistance? Connect with us through any of the channels below, and <strong>we will reply you shortly!</strong>
+            </p>
+
+            <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-2xl my-3 flex items-center justify-center gap-3 shadow-sm">
+                <i class="fa-solid fa-envelope text-brand-blue text-lg"></i>
+                <a href="mailto:support@guruconnnect.in" class="text-brand-blue font-black text-sm sm:text-base hover:underline">support@guruconnnect.in</a>
+            </div>
+
+            <div class="flex items-center justify-center gap-3 mt-6 pt-4 border-t border-slate-100">
+                <a href="https://api.whatsapp.com/send?phone=15559565917&text=Hello%20Guru%20Connect,%20I%20want%20support." target="_blank" rel="noopener noreferrer" class="w-11 h-11 bg-emerald-50 hover:bg-emerald-100 text-emerald-600 border border-emerald-200 rounded-2xl flex items-center justify-center text-xl transition shadow-sm" title="WhatsApp Support">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="w-11 h-11 bg-blue-50 hover:bg-blue-100 text-blue-600 border border-blue-200 rounded-2xl flex items-center justify-center text-xl transition shadow-sm" title="Facebook">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="w-11 h-11 bg-pink-50 hover:bg-pink-100 text-pink-600 border border-pink-200 rounded-2xl flex items-center justify-center text-xl transition shadow-sm" title="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+            </div>
+
+            <button onclick="closeContactModal()" class="w-full mt-6 bg-brand-blue hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl text-sm transition shadow">CLOSE</button>
+        </div>
+    </div>
+
+    <!-- LOGIN MODAL -->
+    <div id="loginModal" class="fixed inset-0 bg-slate-900/75 backdrop-blur-md z-50 flex items-center justify-center hidden p-4 z-[100]">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-sm w-full p-6 border relative">
+            <div class="text-center mb-4">
+                <h3 class="text-xl font-black text-brand-dark">Student / Tutor Login</h3>
+                <p class="text-[10px] sm:text-xs text-slate-500 mt-1">Enter your WhatsApp / Mobile Number.</p>
+            </div>
+            <div id="otpStep1" class="space-y-3">
+                <input type="tel" id="loginPhoneInput" placeholder="9876543210" class="w-full border rounded-xl p-3 text-xs sm:text-sm font-bold">
+                <button type="button" onclick="sendSimulatedOtp()" class="w-full bg-brand-blue text-white font-bold py-3 rounded-xl text-xs">SEND OTP</button>
+            </div>
+            <div id="otpStep2" class="space-y-3 hidden">
+                <p class="text-xs text-center text-slate-600">Code: <span id="generatedOtpDisplay" class="font-black text-brand-blue"></span></p>
+                <input type="text" maxlength="4" id="otpCodeInput" placeholder="1234" class="w-full border rounded-xl p-3 text-center text-sm font-black tracking-widest">
+                <button type="button" onclick="verifySimulatedOtp()" class="w-full bg-emerald-600 text-white font-bold py-3 rounded-xl text-xs">VERIFY & LOGIN</button>
+            </div>
+            <button type="button" onclick="closeLoginModal()" class="w-full mt-4 text-slate-400 text-xs font-bold">CANCEL</button>
+        </div>
+    </div>
+
+    <!-- UPI QR Code Modal -->
+    <div id="upiQrModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-md z-50 flex items-center justify-center hidden p-4 z-[100]">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-sm w-full p-6 border text-center relative">
+            <h3 class="text-xl font-black text-brand-dark mb-2">Scan & Pay <span id="modalPayAmountText">₹200</span></h3>
+            <img id="dynamicQrImg" src="" alt="UPI QR Code" class="w-40 h-40 mx-auto rounded-lg mb-4">
+            <button type="button" onclick="closeUpiQrModal()" class="w-full bg-slate-100 text-slate-700 font-bold py-3 rounded-xl text-xs">CLOSE</button>
+        </div>
+    </div>
+
+    <!-- Staff Login Modal -->
+    <div id="staffLoginModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4 z-[100]">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-sm w-full border overflow-hidden">
+            <div class="bg-gradient-to-r from-[#990000] via-[#CC0000] to-[#003399] p-6 text-center text-white">
+                <h3 class="text-xl font-black">Staff Login</h3>
+            </div>
+            <form onsubmit="handleStaffLogin(event)" class="p-6 space-y-4">
+                <input type="text" id="staffUserInput" required placeholder="Username" class="w-full border rounded-xl p-3 text-sm bg-slate-50">
+                <input type="password" id="staffPassInput" required placeholder="Password" class="w-full border rounded-xl p-3 text-sm bg-slate-50">
+                <button type="submit" class="w-full bg-[#CC0000] text-white font-black py-3 rounded-xl text-xs">LOGIN</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark text-slate-400 py-8 border-t border-slate-800 w-full">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between text-xs">
+            <p>&copy; 2026 GURU CONNECT Platform.</p>
+            <div class="flex gap-4 font-bold">
+                <a href="javascript:void(0)" onclick="openAboutModal()">About Us</a>
+                <a href="javascript:void(0)" onclick="openContactModal()">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        const EMAILJS_SERVICE_ID = "service_vsaryin";
+        const EMAILJS_OTP_TEMPLATE_ID = "template_614awwn";
+        const EMAILJS_WELCOME_TEMPLATE_ID = "template_soaa79s";
+
+        let pendingEmailOtps = { student: "", tutor: "" };
+
+        // Mock Students Directory Data Generator
+        let studentDirectoryList = [];
+        for(let i=1; i<=150; i++) {
+            studentDirectoryList.push({
+                id: "GC-STU-" + (1000 + i),
+                name: "Student " + i,
+                std: i % 2 === 0 ? "SYJC (12th)" : "FYJC (11th)",
+                stream: i % 3 === 0 ? "Commerce" : (i % 2 === 0 ? "Science" : "Arts"),
+                subject: "Junior College Core Subjects"
+            });
+        }
+        let currentStudentPage = 1;
+        const studentsPerPage = 9;
+
+        function renderStudentDirectory() {
+            const container = document.getElementById('studentGridContainer');
+            if(!container) return;
+            container.innerHTML = "";
+
+            const start = (currentStudentPage - 1) * studentsPerPage;
+            const end = start + studentsPerPage;
+            const pageItems = studentDirectoryList.slice(start, end);
+
+            pageItems.forEach(stu => {
+                const card = document.createElement('div');
+                card.className = "bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-md transition";
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-[10px] font-black bg-blue-50 text-brand-blue px-2.5 py-1 rounded-lg">${stu.id}</span>
+                            <span class="text-[10px] font-bold bg-orange-50 text-orange-700 px-2.5 py-1 rounded-lg">${stu.stream}</span>
+                        </div>
+                        <h4 class="font-black text-brand-dark text-base mt-2">${stu.name}</h4>
+                        <p class="text-xs text-slate-500 font-bold mt-0.5">${stu.std}</p>
+                        <p class="text-xs text-slate-600 mt-2"><strong>Subjects:</strong> ${stu.subject}</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-[11px] font-bold text-emerald-600"><i class="fa-solid fa-shield-check mr-1"></i>Verified Student</span>
+                        <button onclick="alert('Student contact details are protected. Please login or submit a learning request to connect.')" class="bg-brand-blue/10 hover:bg-brand-blue text-brand-blue hover:text-white font-bold text-xs px-3 py-1.5 rounded-xl transition">Connect</button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            document.getElementById('totalPagesText').textContent = "/ " + Math.ceil(studentDirectoryList.length / studentsPerPage);
+            document.getElementById('pageJumpInput').value = currentStudentPage;
+            document.getElementById('pageJumpInput').max = Math.ceil(studentDirectoryList.length / studentsPerPage);
+            renderPaginationNumbers();
+        }
+
+        function renderPaginationNumbers() {
+            const numContainer = document.getElementById('paginationNumbers');
+            if(!numContainer) return;
+            numContainer.innerHTML = "";
+            const totalPages = Math.ceil(studentDirectoryList.length / studentsPerPage);
+            
+            for(let i=1; i<=Math.min(5, totalPages); i++) {
+                const btn = document.createElement('button');
+                btn.textContent = i;
+                btn.className = `w-8 h-8 rounded-lg text-xs font-bold transition ${i === currentStudentPage ? 'bg-brand-blue text-white shadow' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`;
+                btn.onclick = () => { currentStudentPage = i; renderStudentDirectory(); };
+                numContainer.appendChild(btn);
+            }
+        }
+
+        function changePage(direction) {
+            const totalPages = Math.ceil(studentDirectoryList.length / studentsPerPage);
+            currentStudentPage += direction;
+            if(currentStudentPage < 1) currentStudentPage = 1;
+            if(currentStudentPage > totalPages) currentStudentPage = totalPages;
+            renderStudentDirectory();
+        }
+
+        function jumpToPageInput(val) {
+            const p = parseInt(val);
+            const totalPages = Math.ceil(studentDirectoryList.length / studentsPerPage);
+            if(p >= 1 && p <= totalPages) {
+                currentStudentPage = p;
+                renderStudentDirectory();
+            }
+        }
+
+        // Mock Tutors Directory Data & Renderer
+        let tutorDirectoryList = [];
+        for(let j=1; j<=30; j++) {
+            tutorDirectoryList.push({
+                name: "Dr. Tutor " + j,
+                subject: j % 2 === 0 ? "Mathematics" : "Physics",
+                price: "₹" + (500 + j * 50) + "/hr",
+                experience: (3 + (j % 10)) + " Years",
+                college: "Junior College Expert"
+            });
+        }
+        let currentTutorPage = 1;
+        const tutorsPerPage = 6;
+
+        function renderTutorDirectory() {
+            const container = document.getElementById('tutorGrid');
+            if(!container) return;
+            container.innerHTML = "";
+
+            const start = (currentTutorPage - 1) * tutorsPerPage;
+            const end = start + tutorsPerPage;
+            const pageItems = tutorDirectoryList.slice(start, end);
+
+            pageItems.forEach(t => {
+                const card = document.createElement('div');
+                card.className = "bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-md transition";
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-[10px] font-black bg-brand-blue/10 text-brand-blue px-2.5 py-1 rounded-lg">${t.subject}</span>
+                            <span class="text-xs font-black text-slate-800">${t.price}</span>
+                        </div>
+                        <h4 class="font-black text-brand-dark text-base mt-2">${t.name}</h4>
+                        <p class="text-xs text-slate-500 font-bold mt-0.5">${t.college}</p>
+                        <p class="text-xs text-slate-600 mt-2"><strong>Experience:</strong> ${t.experience}</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-[11px] font-bold text-emerald-600"><i class="fa-solid fa-check-circle mr-1"></i>Verified Tutor</span>
+                        <button onclick="openContactModal()" class="bg-brand-blue text-white font-bold text-xs px-3.5 py-1.5 rounded-xl shadow transition">Book Demo</button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            document.getElementById('tutorTotalPagesText').textContent = "/ " + Math.ceil(tutorDirectoryList.length / tutorsPerPage);
+            document.getElementById('tutorPageJumpInput').value = currentTutorPage;
+            document.getElementById('tutorPageJumpInput').max = Math.ceil(tutorDirectoryList.length / tutorsPerPage);
+            renderTutorPaginationNumbers();
+        }
+
+        function renderTutorPaginationNumbers() {
+            const numContainer = document.getElementById('tutorPaginationNumbers');
+            if(!numContainer) return;
+            numContainer.innerHTML = "";
+            const totalPages = Math.ceil(tutorDirectoryList.length / tutorsPerPage);
+            
+            for(let i=1; i<=Math.min(5, totalPages); i++) {
+                const btn = document.createElement('button');
+                btn.textContent = i;
+                btn.className = `w-8 h-8 rounded-lg text-xs font-bold transition ${i === currentTutorPage ? 'bg-brand-blue text-white shadow' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`;
+                btn.onclick = () => { currentTutorPage = i; renderTutorDirectory(); };
+                numContainer.appendChild(btn);
+            }
+        }
+
+        function changeTutorPage(direction) {
+            const totalPages = Math.ceil(tutorDirectoryList.length / tutorsPerPage);
+            currentTutorPage += direction;
+            if(currentTutorPage < 1) currentTutorPage = 1;
+            if(currentTutorPage > totalPages) currentTutorPage = totalPages;
+            renderTutorDirectory();
+        }
+
+        function jumpToTutorPageInput(val) {
+            const p = parseInt(val);
+            const totalPages = Math.ceil(tutorDirectoryList.length / tutorsPerPage);
+            if(p >= 1 && p <= totalPages) {
+                currentTutorPage = p;
+                renderTutorDirectory();
+            }
+        }
+
+        function filterTutors() {
+            const sub = document.getElementById('subjectFilter').value;
+            // Filter logic can be extended here
+            renderTutorDirectory();
+        }
+
+        // UPI QR Code Modal & Deep Link Invoke Logic
+        function openUpiQrModal(amount) {
+            document.getElementById('modalPayAmountText').textContent = "₹" + amount;
+            const upiId = "9876543210@paytm"; 
+            const name = "GuruConnect";
+            
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=${upiId}&pn=${name}&am=${amount}&cu=INR`;
+            document.getElementById('dynamicQrImg').src = qrUrl;
+            document.getElementById('upiQrModal').classList.remove('hidden');
+
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            if (isMobile) {
+                const upiDeepLink = `upi://pay?pa=${upiId}&pn=${name}&am=${amount}&cu=INR`;
+                window.location.href = upiDeepLink;
+            }
+        }
+
+        function closeUpiQrModal() {
+            document.getElementById('upiQrModal').classList.add('hidden');
+        }
+
+        async function sendEmailOtp(type) {
+            const nameInput = document.getElementById(type === 'student' ? 'stu_name' : 't_name');
+            const emailInput = document.getElementById(type === 'student' ? 'stu_email' : 't_email');
+            
+            const name = nameInput.value.trim();
+            const email = emailInput.value.trim();
+
+            if (!name) {
+                alert('Please enter your Name first.');
+                return;
+            }
+            if (!email || !email.includes('@')) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+
+            const otp = Math.floor(1000 + Math.random() * 9000).toString();
+            pendingEmailOtps[type] = otp;
+
+            const templateParams = {
+                name: name,
+                email: email,
+                otp_code: otp
+            };
+
+            try {
+                const response = await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_OTP_TEMPLATE_ID, templateParams);
+                if (response.status === 200) {
+                    alert(`OTP successfully sent to ${email} via support@guruconnnect.in! Check your inbox.`);
+                    if (type === 'student') {
+                        document.getElementById('stuOtpBox').classList.remove('hidden');
+                    } else {
+                        document.getElementById('tutorOtpBox').classList.remove('hidden');
+                    }
+                } else {
+                    alert('Failed to send OTP. Please try again.');
+                }
+            } catch (error) {
+                console.error('EmailJS Error:', error);
+                alert('Network error while sending OTP.');
+            }
+        }
+
+        async function verifyEmailOtp(type) {
+            const nameInput = document.getElementById(type === 'student' ? 'stu_name' : 't_name');
+            const emailInput = document.getElementById(type === 'student' ? 'stu_email' : 't_email');
+            const entered = document.getElementById(type === 'student' ? 'stuEnteredOtp' : 'tutorEnteredOtp').value.trim();
+            
+            if (entered === pendingEmailOtps[type] && entered !== "") {
+                alert('Email Verified Successfully!');
+                
+                const welcomeParams = {
+                    name: nameInput.value.trim(),
+                    email: emailInput.value.trim()
+                };
+                
+                try {
+                    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_WELCOME_TEMPLATE_ID, welcomeParams);
+                } catch(err) {
+                    console.error("Welcome email error:", err);
+                }
+
+                if (type === 'student') {
+                    document.getElementById('stuOtpBox').classList.add('hidden');
+                    const btn = document.getElementById('stuSubmitBtn');
+                    btn.disabled = false;
+                    btn.className = "w-full bg-brand-blue hover:bg-blue-700 text-white font-bold py-3.5 sm:py-4 rounded-xl transition shadow-md text-sm sm:text-base tracking-wider mt-2";
+                    btn.textContent = "REGISTER STUDENT PROFILE";
+                } else {
+                    document.getElementById('tutorOtpBox').classList.add('hidden');
+                    const btn = document.getElementById('tutorSubmitBtn');
+                    btn.disabled = false;
+                    btn.className = "w-full bg-brand-blue hover:bg-blue-700 text-white font-bold py-3.5 sm:py-4 rounded-xl transition shadow-md text-sm sm:text-base tracking-wider mt-2";
+                    btn.textContent = "SUBMIT TUTOR APPLICATION";
+                }
+            } else {
+                alert('Invalid OTP code. Please enter the correct code.');
+            }
+        }
+
+        function openHelplineModal() { document.getElementById('helplineModal').classList.remove('hidden'); }
+        function closeHelplineModal() { document.getElementById('helplineModal').classList.add('hidden'); }
+        function openAboutModal() { document.getElementById('aboutModal').classList.remove('hidden'); }
+        function closeAboutModal() { document.getElementById('aboutModal').classList.add('hidden'); }
+        function openContactModal() { document.getElementById('contactModal').classList.remove('hidden'); }
+        function closeContactModal() { document.getElementById('contactModal').classList.add('hidden'); }
+        function toggleNavMenu() { document.getElementById('publicNavbarLinks').classList.toggle('hidden'); }
+        function closeNavMenu() { document.getElementById('publicNavbarLinks').classList.add('hidden'); }
+
+        function switchTab(tab) {
+            document.getElementById('studentFormCard').classList.add('hidden');
+            document.getElementById('tutorFormCard').classList.add('hidden');
+            document.getElementById('requirementFormCard').classList.add('hidden');
+            if (tab === 'student') document.getElementById('studentFormCard').classList.remove('hidden');
+            else if (tab === 'tutor') document.getElementById('tutorFormCard').classList.remove('hidden');
+            else if (tab === 'requirement') { document.getElementById('requirementFormCard').classList.remove('hidden'); checkUserLoginState(); }
+        }
+
+        function openLoginModal() { document.getElementById('loginModal').classList.remove('hidden'); }
+        function closeLoginModal() { document.getElementById('loginModal').classList.add('hidden'); }
+        
+        let activeSimulatedOtp = "";
+        function sendSimulatedOtp() {
+            const phone = document.getElementById('loginPhoneInput').value.trim();
+            if (phone.length < 10) { alert('Enter valid number'); return; }
+            activeSimulatedOtp = "1234";
+            document.getElementById('generatedOtpDisplay').textContent = activeSimulatedOtp;
+            document.getElementById('otpStep1').classList.add('hidden');
+            document.getElementById('otpStep2').classList.remove('hidden');
+        }
+        function verifySimulatedOtp() {
+            if (document.getElementById('otpCodeInput').value.trim() === activeSimulatedOtp) {
+                localStorage.setItem('active_user_name', "User");
+                alert("Login successful!");
+                closeLoginModal();
+                updateAuthBadge();
+            } else { alert("Wrong OTP"); }
+        }
+        function updateAuthBadge() {
+            const active = localStorage.getItem('active_user_name');
+            if (active) {
+                document.getElementById('currentUserBadge').classList.remove('hidden');
+                document.getElementById('navLoginBtn').classList.add('hidden');
+                document.getElementById('navLoggedName').textContent = active;
+            }
+        }
+        function logoutUser() {
+            localStorage.removeItem('active_user_name');
+            location.reload();
+        }
+        function openStaffLoginModal() { document.getElementById('staffLoginModal').classList.remove('hidden'); }
+        function closeStaffLoginModal() { document.getElementById('staffLoginModal').classList.add('hidden'); }
+        function handleStaffLogin(e) {
+            e.preventDefault();
+            if(document.getElementById('staffUserInput').value === 'Swami@gmail.com' && document.getElementById('staffPassInput').value === 'Roller@1329007/') {
+                localStorage.setItem('is_staff_logged', 'true');
+                location.reload();
+            } else { alert('Invalid credentials'); }
+        }
+
+        window.onload = function() {
+            updateAuthBadge();
+            renderStudentDirectory();
+            renderTutorDirectory();
+        };
+    </script>
+</body>
+</html>
