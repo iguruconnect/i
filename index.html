@@ -58,7 +58,10 @@
             <div class="flex gap-1 sm:gap-2 items-center shrink-0">
                 
                 <div id="currentUserBadge" class="hidden text-[10px] sm:text-xs font-bold bg-blue-50 text-brand-blue px-2 py-1 sm:px-3 sm:py-2.5 rounded-lg sm:rounded-xl border border-blue-200 flex items-center gap-1">
-                    <span class="truncate max-w-[40px] sm:max-w-[100px]"><i class="fa-solid fa-user-check mr-0.5 hidden sm:inline"></i> <span id="navLoggedName"></span></span> 
+                    <button onclick="openUserDashboard()" class="truncate max-w-[70px] sm:max-w-[130px] hover:underline text-left" title="Open My Dashboard">
+                        <i class="fa-solid fa-user-check mr-0.5 hidden sm:inline"></i> <span id="navLoggedName"></span>
+                    </button>
+                    <button onclick="openUserDashboard()" class="bg-brand-blue text-white hover:bg-blue-700 px-2 py-1 rounded-lg text-[9px] sm:text-[10px] uppercase font-black shadow-sm">Dashboard</button>
                     <button onclick="logoutUser()" class="text-red-600 hover:underline text-[9px] sm:text-[10px] uppercase font-black ml-0.5 border-l border-blue-200 pl-1 sm:pl-2">Logout</button>
                 </div>
                 
@@ -94,6 +97,34 @@
             </div>
         </div>
     </header>
+
+
+    <!-- USER DASHBOARD: STUDENT + TUTOR -->
+    <section id="userDashboardSection" class="hidden max-w-7xl mx-auto px-3 sm:px-4 py-6 sm:py-10 w-full">
+        <div class="bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden">
+            <div class="bg-gradient-to-r from-brand-dark via-slate-900 to-brand-blue text-white p-5 sm:p-7 md:p-9">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <span id="dashboardRoleBadge" class="inline-flex items-center gap-2 bg-white/15 border border-white/20 rounded-full px-3 py-1.5 text-[10px] sm:text-xs font-black uppercase tracking-wider">My Dashboard</span>
+                        <h2 id="dashboardHeading" class="text-2xl sm:text-3xl md:text-4xl font-black mt-3">My Profile</h2>
+                        <p id="dashboardSubheading" class="text-blue-100 text-xs sm:text-sm mt-1">Your Guru Connect profile and account information.</p>
+                    </div>
+                    <button onclick="closeUserDashboard()" class="bg-white/10 hover:bg-white/20 border border-white/20 text-white font-black px-4 py-2.5 rounded-xl text-xs sm:text-sm transition">
+                        <i class="fa-solid fa-arrow-left mr-1"></i> BACK TO WEBSITE
+                    </button>
+                </div>
+            </div>
+            <div id="userDashboardContent" class="p-4 sm:p-6 md:p-9"></div>
+        </div>
+    </section>
+
+
+    <!-- PUBLIC TUTOR PROFILE SHOWCASE MODAL -->
+    <div id="publicTutorProfileModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-[220] hidden items-center justify-center p-3 sm:p-5">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-3xl w-full max-h-[92vh] overflow-y-auto border border-slate-200">
+            <div id="publicTutorProfileContent"></div>
+        </div>
+    </div>
 
     <!-- Staff Management Dashboard Panel -->
     <div id="staffAdminDashboard" class="max-w-7xl mx-auto px-3 sm:px-4 py-6 sm:py-8 w-full hidden">
@@ -514,7 +545,7 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Junior College Standard *</label>
-                                <select id="stu_std" required class="w-full border border-slate-300 rounded-xl p-3 sm:p-3.5 text-xs sm:text-sm focus:border-brand-blue focus:outline-none font-bold bg-white">
+                                <select id="stu_std" required onchange="syncStudentCourseFromStandardStream()" class="w-full border border-slate-300 rounded-xl p-3 sm:p-3.5 text-xs sm:text-sm focus:border-brand-blue focus:outline-none font-bold bg-white">
                                     <option value="">Select Standard</option>
                                     <option value="FYJC (11th)">FYJC (11th Standard)</option>
                                     <option value="SYJC (12th)">SYJC (12th Standard)</option>
@@ -522,7 +553,7 @@
                             </div>
                             <div>
                                 <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Stream *</label>
-                                <select id="stu_stream" required class="w-full border border-slate-300 rounded-xl p-3 sm:p-3.5 text-xs sm:text-sm focus:border-brand-blue focus:outline-none font-bold bg-white">
+                                <select id="stu_stream" required onchange="syncStudentCourseFromStandardStream()" class="w-full border border-slate-300 rounded-xl p-3 sm:p-3.5 text-xs sm:text-sm focus:border-brand-blue focus:outline-none font-bold bg-white">
                                     <option value="">Select Stream</option>
                                     <option value="Arts">Arts</option>
                                     <option value="Science">Science</option>
@@ -530,17 +561,58 @@
                                 </select>
                             </div>
                         </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Course in Which Studying *</label>
+                                <select id="stu_course" required onchange="syncStudentCourseFields()" class="w-full border border-slate-300 rounded-xl p-3 sm:p-3.5 text-xs sm:text-sm focus:border-brand-blue focus:outline-none font-bold bg-white">
+                                    <option value="">Select Course</option>
+                                    <option value="XI ARTS">XI ARTS</option>
+                                    <option value="XI SCIENCE">XI SCIENCE</option>
+                                    <option value="XI COMMERCE">XI COMMERCE</option>
+                                    <option value="XII ARTS">XII ARTS</option>
+                                    <option value="XII SCIENCE">XII SCIENCE</option>
+                                    <option value="XII COMMERCE">XII COMMERCE</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Name of the College *</label>
+                                <input type="text" id="stu_college" required placeholder="Enter your college name" class="w-full border border-slate-300 rounded-xl p-3 sm:p-3.5 text-xs sm:text-sm focus:border-brand-blue focus:outline-none font-medium bg-white">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Division *</label>
+                                <input type="text" id="stu_division" required placeholder="e.g. A" class="w-full border border-slate-300 rounded-xl p-3 sm:p-3.5 text-xs sm:text-sm focus:border-brand-blue focus:outline-none font-bold bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Roll Number *</label>
+                                <input type="text" id="stu_roll" required placeholder="Enter roll number" class="w-full border border-slate-300 rounded-xl p-3 sm:p-3.5 text-xs sm:text-sm focus:border-brand-blue focus:outline-none font-bold bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Registration Date</label>
+                                <input type="text" id="stu_registration_date" readonly class="w-full border border-slate-300 rounded-xl p-3 sm:p-3.5 text-xs sm:text-sm bg-slate-50 font-bold text-slate-600">
+                            </div>
+                        </div>
+
                         <div>
                             <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Junior College Subject(s) *</label>
                             <input type="text" id="stu_subject" required placeholder="e.g. Physics, Chemistry, Mathematics" class="w-full border border-slate-300 rounded-xl p-3 sm:p-3.5 text-xs sm:text-sm focus:border-brand-blue focus:outline-none font-bold bg-white">
                         </div>
+
+                        <div>
+                            <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Learning Requirement / Educational Needs</label>
+                            <textarea id="stu_learning_requirement" rows="3" placeholder="Write your educational needs, subjects/topics where you need support, goals, etc." class="w-full border border-slate-300 rounded-xl p-3 sm:p-3.5 text-xs sm:text-sm focus:border-brand-blue focus:outline-none font-medium bg-white"></textarea>
+                        </div>
+
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2 border-t border-slate-200">
                             <div>
                                 <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Student Photo (Optional)</label>
                                 <input type="file" id="stu_photo" accept="image/*" class="w-full text-xs text-slate-500 file:mr-2 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-blue-50 file:text-brand-blue hover:file:bg-blue-100">
                             </div>
                             <div>
-                                <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">College ID Card (Optional)</label>
+                                <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Testimonials / College ID Card (Optional)</label>
                                 <input type="file" id="stu_college_id" accept="image/*,application/pdf" class="w-full text-xs text-slate-500 file:mr-2 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-blue-50 file:text-brand-blue hover:file:bg-blue-100">
                             </div>
                             <div>
@@ -644,6 +716,28 @@
                                 <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Experience *</label>
                                 <input type="text" name="experience" id="t_exp" required placeholder="e.g. 5 Years" class="w-full border border-slate-300 rounded-xl p-3 text-xs sm:text-sm bg-white">
                             </div>
+                        </div>
+
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Educational Qualification *</label>
+                                <input type="text" name="qualification" id="t_qualification" required placeholder="e.g. M.Sc. Physics, B.Ed." class="w-full border border-slate-300 rounded-xl p-3 text-xs sm:text-sm bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">College in Which You Are Teaching *</label>
+                                <input type="text" name="teaching_college" id="t_teaching_college" required placeholder="Enter teaching college name" class="w-full border border-slate-300 rounded-xl p-3 text-xs sm:text-sm bg-white">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Residential Address *</label>
+                            <textarea name="address" id="t_address" required rows="2" placeholder="Enter residential address" class="w-full border border-slate-300 rounded-xl p-3 text-xs sm:text-sm bg-white"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">About Me / Tutor Showcase *</label>
+                            <textarea name="about_me" id="t_about" required rows="4" placeholder="Tell students/coaching classes about your teaching ability, strengths, experience, methodology and what makes you a good tutor." class="w-full border border-slate-300 rounded-xl p-3 text-xs sm:text-sm bg-white"></textarea>
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -1072,6 +1166,221 @@
 
     <!-- JavaScript Application Logic -->
     <script>
+
+        // =========================================================
+        // GURU CONNECT USER DASHBOARD
+        // =========================================================
+        // Put the supplied blue verified-tick image in the same GitHub
+        // folder as index.html using this filename, or replace this
+        // value with its raw GitHub URL.
+        const VERIFIED_TICK_LOGO_URL = "verified-tick.png";
+
+        function escapeHtml(value) {
+            return String(value ?? "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function formatRegistrationDate(value) {
+            if (!value) return new Date().toLocaleDateString('en-IN');
+            const d = new Date(value);
+            return Number.isNaN(d.getTime()) ? String(value) : d.toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' });
+        }
+
+        function readImageDataUrl(file, maxSize = 500) {
+            return new Promise((resolve) => {
+                if (!file || !file.type || !file.type.startsWith('image/')) {
+                    resolve('');
+                    return;
+                }
+                const reader = new FileReader();
+                reader.onload = () => {
+                    const img = new Image();
+                    img.onload = () => {
+                        const scale = Math.min(1, maxSize / Math.max(img.width, img.height));
+                        const canvas = document.createElement('canvas');
+                        canvas.width = Math.max(1, Math.round(img.width * scale));
+                        canvas.height = Math.max(1, Math.round(img.height * scale));
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        resolve(canvas.toDataURL('image/jpeg', 0.82));
+                    };
+                    img.onerror = () => resolve('');
+                    img.src = reader.result;
+                };
+                reader.onerror = () => resolve('');
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function getCurrentUserProfile() {
+            const phone = localStorage.getItem('active_user_phone') || '';
+            const role = localStorage.getItem('active_user_role') || '';
+            if (!phone || !['student', 'tutor'].includes(role)) return null;
+            const list = role === 'student' ? studentDirectoryList : tutorDirectoryList;
+            return list.find(x => String(x.phone || '').replace(/\D/g, '') === phone.replace(/\D/g, '') && x.isDummy === false) || null;
+        }
+
+        function verifiedTickHtml(tutor, size = 'large') {
+            if (!tutor || !tutor.verified) return '';
+            const box = size === 'large' ? 'w-16 h-16 sm:w-20 sm:h-20' : 'w-7 h-7';
+            const icon = size === 'large' ? 'text-2xl sm:text-3xl' : 'text-xs';
+            return `
+                <div class="flex flex-col items-center gap-1" title="Verified Tutor">
+                    <div class="${box} rounded-full bg-blue-600 border-4 border-white shadow-xl flex items-center justify-center overflow-hidden">
+                        <img src="${VERIFIED_TICK_LOGO_URL}" alt="Verified" class="w-full h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+                        <span class="${icon} text-white font-black hidden"><i class="fa-solid fa-check"></i></span>
+                    </div>
+                    <span class="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-blue-700">Verified Tutor</span>
+                </div>`;
+        }
+
+        function profilePhotoHtml(photoData, name, role) {
+            if (photoData) {
+                return `<img src="${photoData}" alt="${escapeHtml(name)}" class="w-28 h-28 sm:w-36 sm:h-36 rounded-3xl object-cover border-4 border-white shadow-xl">`;
+            }
+            const icon = role === 'tutor' ? 'fa-chalkboard-user' : 'fa-user-graduate';
+            return `<div class="w-28 h-28 sm:w-36 sm:h-36 rounded-3xl bg-slate-100 border-4 border-white shadow-xl flex items-center justify-center text-slate-400 text-4xl"><i class="fa-solid ${icon}"></i></div>`;
+        }
+
+        function dashboardField(label, value, icon = 'fa-circle-info') {
+            return `
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+                    <div class="flex items-center gap-2 text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-slate-500">
+                        <i class="fa-solid ${icon} text-brand-blue"></i>${escapeHtml(label)}
+                    </div>
+                    <div class="mt-2 text-sm sm:text-[15px] font-bold text-brand-dark break-words">${escapeHtml(value || 'Not provided')}</div>
+                </div>`;
+        }
+
+        function openUserDashboard() {
+            const profile = getCurrentUserProfile();
+            if (!profile) {
+                openLoginModal();
+                return;
+            }
+            const section = document.getElementById('userDashboardSection');
+            if (!section) return;
+            section.classList.remove('hidden');
+            renderUserDashboard(profile);
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function closeUserDashboard() {
+            const section = document.getElementById('userDashboardSection');
+            if (section) section.classList.add('hidden');
+        }
+
+        function renderUserDashboard(profile) {
+            const content = document.getElementById('userDashboardContent');
+            if (!content || !profile) return;
+
+            const role = profile.registrationRole || localStorage.getItem('active_user_role') || 'student';
+            const heading = document.getElementById('dashboardHeading');
+            const badge = document.getElementById('dashboardRoleBadge');
+            const sub = document.getElementById('dashboardSubheading');
+
+            if (role === 'tutor') {
+                badge.innerHTML = '<i class="fa-solid fa-chalkboard-user"></i> Tutor Dashboard';
+                heading.textContent = 'Tutor Profile Showcase';
+                sub.textContent = 'Your public-facing tutor profile, qualifications and verification status.';
+                const helplineText = profile.paidStatus === 'PAID' ? 'Active / Paid Tutor Listing' : 'Listing status: Pending payment verification';
+
+                content.innerHTML = `
+                    <div class="grid grid-cols-1 lg:grid-cols-[auto_1fr_auto] gap-6 items-start">
+                        <div class="flex justify-center lg:justify-start">${profilePhotoHtml(profile.photoData, profile.name, 'tutor')}</div>
+                        <div>
+                            <div class="flex flex-wrap items-center gap-3">
+                                <h3 class="text-2xl sm:text-3xl font-black text-brand-dark">${escapeHtml(profile.name)}</h3>
+                                ${profile.verified ? '<span class="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 text-blue-700 rounded-full px-3 py-1.5 text-xs font-black"><i class="fa-solid fa-circle-check"></i> VERIFIED TUTOR</span>' : ''}
+                            </div>
+                            <p class="text-brand-blue font-black text-sm sm:text-base mt-1">${escapeHtml(profile.subject || 'Junior College Tutor')} • ${escapeHtml(profile.stream || '')}</p>
+                            <p class="text-slate-600 text-xs sm:text-sm mt-2">${escapeHtml(profile.experience || '')} ${profile.price ? '• ' + escapeHtml(profile.price) : ''}</p>
+                        </div>
+                        ${verifiedTickHtml(profile, 'large')}
+                    </div>
+
+                    <div class="mt-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        ${dashboardField('Educational Qualification', profile.qualification, 'fa-graduation-cap')}
+                        ${dashboardField('Teaching College', profile.teachingCollege || profile.college, 'fa-school')}
+                        ${dashboardField('Residential Address', profile.address, 'fa-location-dot')}
+                        ${dashboardField('Subject Expertise', profile.subject, 'fa-book-open')}
+                        ${dashboardField('Experience', profile.experience, 'fa-briefcase')}
+                        ${dashboardField('Rate / Hour', profile.price, 'fa-indian-rupee-sign')}
+                        ${dashboardField('Listing / Subscription', helplineText, 'fa-id-card')}
+                        ${dashboardField('Registration Date', formatRegistrationDate(profile.registrationDate), 'fa-calendar-days')}
+                    </div>
+
+                    <div class="mt-5 bg-gradient-to-br from-blue-50 to-white border border-blue-200 rounded-3xl p-5 sm:p-6">
+                        <div class="flex items-center gap-2 text-brand-blue font-black uppercase tracking-wider text-xs">
+                            <i class="fa-solid fa-user-tie"></i> About Me
+                        </div>
+                        <p class="mt-3 text-sm sm:text-base text-slate-700 leading-7 whitespace-pre-line">${escapeHtml(profile.aboutMe || 'No About Me information added yet.')}</p>
+                    </div>
+
+                    <div class="mt-5 flex flex-wrap gap-3 text-xs font-bold">
+                        <span class="bg-slate-100 text-slate-700 px-3 py-2 rounded-xl"><i class="fa-solid fa-file-shield mr-1 text-brand-blue"></i>College ID: ${escapeHtml(profile.collegeIdName || 'Not uploaded')}</span>
+                        <span class="bg-slate-100 text-slate-700 px-3 py-2 rounded-xl"><i class="fa-solid fa-id-card mr-1 text-brand-blue"></i>Aadhaar: ${escapeHtml(profile.aadhaarName || 'Not uploaded')}</span>
+                    </div>
+
+                    <div class="mt-6 bg-brand-dark text-white rounded-3xl p-5 sm:p-6">
+                        <div class="flex items-center gap-2 font-black"><i class="fa-solid fa-bullhorn text-blue-300"></i> Tutor Showcase</div>
+                        <p class="text-slate-300 text-xs sm:text-sm mt-2 leading-6">This profile is designed as your professional showcase so students, parents and coaching classes can understand your expertise and connect with you.</p>
+                    </div>`;
+            } else {
+                badge.innerHTML = '<i class="fa-solid fa-user-graduate"></i> Student Dashboard';
+                heading.textContent = 'Student Profile';
+                sub.textContent = 'Your academic profile, Helpline subscription and learning requirements.';
+                const h = profile.helpline || { registered: false };
+                const hStatus = h.registered ? `Subscribed • ${h.plan || 'Plan'} • ₹${Number(h.amount || 0).toLocaleString('en-IN')}` : 'Not subscribed to Helpline Service';
+
+                content.innerHTML = `
+                    <div class="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-6 items-start">
+                        <div class="flex justify-center lg:justify-start">${profilePhotoHtml(profile.photoData, profile.name, 'student')}</div>
+                        <div>
+                            <h3 class="text-2xl sm:text-3xl font-black text-brand-dark">${escapeHtml(profile.name)}</h3>
+                            <p class="text-brand-blue font-black text-sm sm:text-base mt-1">${escapeHtml(profile.course || ((profile.std || '') + ' ' + (profile.stream || '')))}</p>
+                            <p class="text-slate-600 text-xs sm:text-sm mt-2">${escapeHtml(profile.college || 'College not provided')}</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        ${dashboardField('Name', profile.name, 'fa-user')}
+                        ${dashboardField('Course in Which Studying', profile.course, 'fa-graduation-cap')}
+                        ${dashboardField('Name of the College', profile.college, 'fa-school')}
+                        ${dashboardField('Class', profile.std, 'fa-layer-group')}
+                        ${dashboardField('Division', profile.division, 'fa-users')}
+                        ${dashboardField('Roll Number', profile.rollNumber, 'fa-hashtag')}
+                        ${dashboardField('Date of Registration', formatRegistrationDate(profile.registrationDate), 'fa-calendar-days')}
+                        ${dashboardField('Helpline Subscription', hStatus, 'fa-headset')}
+                        ${dashboardField('College ID / Testimonial', profile.testimonialDocumentName || profile.collegeIdName, 'fa-file-circle-check')}
+                    </div>
+
+                    <div class="mt-5 bg-gradient-to-br from-blue-50 to-white border border-blue-200 rounded-3xl p-5 sm:p-6">
+                        <div class="flex items-center gap-2 text-brand-blue font-black uppercase tracking-wider text-xs">
+                            <i class="fa-solid fa-lightbulb"></i> Learning Requirement
+                        </div>
+                        <p class="mt-3 text-sm sm:text-base text-slate-700 leading-7 whitespace-pre-line">${escapeHtml(profile.learningRequirement || 'No learning requirement has been added yet.')}</p>
+                    </div>
+
+                    <div class="mt-5 bg-slate-50 border border-slate-200 rounded-3xl p-5 sm:p-6">
+                        <h4 class="font-black text-brand-dark text-sm sm:text-base">Helpline Subscription Details</h4>
+                        <div class="mt-3 text-xs sm:text-sm text-slate-600 leading-6">
+                            ${h.registered ? `
+                                <p><strong>Plan:</strong> ${escapeHtml(h.plan)}</p>
+                                <p><strong>Course:</strong> ${escapeHtml(h.course)}</p>
+                                <p><strong>Subject:</strong> ${escapeHtml(h.subject)}</p>
+                                <p><strong>Number of Subjects:</strong> ${escapeHtml(h.subjectCount)}</p>
+                                <p><strong>Total Amount:</strong> ₹${Number(h.amount || 0).toLocaleString('en-IN')}</p>
+                            ` : '<p>Student is currently registered without a Helpline Service subscription.</p>'}
+                        </div>
+                    </div>`;
+            }
+        }
+
         const EMAILJS_SERVICE_ID = "service_vsaryin";
         const EMAILJS_OTP_TEMPLATE_ID = "template_614awwn";
         const EMAILJS_WELCOME_TEMPLATE_ID = "template_soaa79s";
@@ -1294,13 +1603,16 @@
                         </div>
                         <h4 class="font-black text-white text-xl mt-1 tracking-tight flex items-center gap-1.5 flex-wrap">
                             ${t.name} 
-                            ${t.verified ? '<span class="inline-flex items-center justify-center w-4 h-4 bg-blue-600 text-white rounded-full text-[9px]" title="Verified Tutor"><i class="fa-solid fa-check"></i></span>' : ''}
+                            ${t.verified ? '<span class="inline-flex items-center justify-center w-7 h-7 bg-blue-600 text-white rounded-full text-sm shadow-lg ring-2 ring-white" title="Verified Tutor"><i class="fa-solid fa-check"></i></span>' : ''}
                         </h4>
                         <p class="text-xs ${t.verified ? 'text-emerald-100' : 'text-orange-100'} mt-2 font-medium">Experience: ${t.experience} | Rate: ${t.price}</p>
                     </div>
                     <div class="mt-6 pt-4 border-t border-white/20 flex items-center justify-between">
-                        ${t.verified ? '<span class="inline-flex items-center gap-1.5 bg-amber-400 text-black text-[11px] font-black px-3 py-1.5 rounded-xl shadow-sm"><span class="inline-flex items-center justify-center w-3.5 h-3.5 bg-blue-600 text-white rounded-full text-[8px]"><i class="fa-solid fa-check"></i></span> Verified</span>' : '<span class="text-[11px] font-bold text-orange-100">Junior College Faculty</span>'}
-                        <button onclick="connectWithTutor(${t.id})" class="bg-white hover:bg-slate-100 ${t.verified ? 'text-emerald-700' : 'text-brand-nagpurOrange'} font-black text-xs px-4 py-2 rounded-xl transition shadow">CONNECT</button>
+                        ${t.verified ? '<span class="inline-flex items-center gap-2 bg-blue-600 text-white text-[11px] font-black px-3 py-1.5 rounded-xl shadow-lg ring-1 ring-white/60"><span class="inline-flex items-center justify-center w-5 h-5 bg-white text-blue-600 rounded-full text-[10px]"><i class="fa-solid fa-check"></i></span> VERIFIED TUTOR</span>' : '<span class="text-[11px] font-bold text-orange-100">Junior College Faculty</span>'}
+                        <div class="flex items-center gap-2">
+                            <button onclick="openPublicTutorProfile('${t.id}')" class="bg-white/15 hover:bg-white/25 border border-white/30 text-white font-black text-[10px] px-3 py-2 rounded-xl transition">VIEW PROFILE</button>
+                            <button onclick="connectWithTutor(${t.id})" class="bg-white hover:bg-slate-100 ${t.verified ? 'text-emerald-700' : 'text-brand-nagpurOrange'} font-black text-xs px-4 py-2 rounded-xl transition shadow">CONNECT</button>
+                        </div>
                     </div>
                 `;
                 container.appendChild(card);
@@ -1559,14 +1871,22 @@
             alert('Login successful!');
             closeLoginModal();
             updateAuthBadge();
+            setTimeout(() => openUserDashboard(), 250);
         }
 
         function updateAuthBadge() {
             const active = localStorage.getItem('active_user_name');
-            if (active) {
-                document.getElementById('currentUserBadge').classList.remove('hidden');
-                document.getElementById('navLoginBtn').classList.add('hidden');
-                document.getElementById('navLoggedName').textContent = active;
+            const role = localStorage.getItem('active_user_role');
+            const badge = document.getElementById('currentUserBadge');
+            const loginBtn = document.getElementById('navLoginBtn');
+            if (active && (role === 'student' || role === 'tutor')) {
+                if (badge) badge.classList.remove('hidden');
+                if (loginBtn) loginBtn.classList.add('hidden');
+                const nameEl = document.getElementById('navLoggedName');
+                if (nameEl) nameEl.textContent = active;
+            } else {
+                if (badge) badge.classList.add('hidden');
+                if (loginBtn) loginBtn.classList.remove('hidden');
             }
         }
 
@@ -1599,6 +1919,85 @@
             const studentSubjects = normalizeSubjects(student.subject);
             const tutorSubjects = normalizeSubjects(tutor.subject);
             return studentSubjects.some(ss => tutorSubjects.some(ts => ss === ts || ss.includes(ts) || ts.includes(ss)));
+        }
+
+
+        function closePublicTutorProfile() {
+            const modal = document.getElementById('publicTutorProfileModal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        function openPublicTutorProfile(tutorId) {
+            const tutor = tutorDirectoryList.find(t => String(t.id) === String(tutorId));
+            if (!tutor) return;
+
+            const modal = document.getElementById('publicTutorProfileModal');
+            const content = document.getElementById('publicTutorProfileContent');
+            if (!modal || !content) return;
+
+            const viewer = getActiveViewer();
+            const canConnect = viewer.isRegistered && viewer.role === 'student' && !tutor.isDummy;
+
+            content.innerHTML = `
+                <div class="bg-gradient-to-r from-brand-dark via-slate-900 to-brand-blue text-white p-5 sm:p-7">
+                    <div class="flex justify-between items-start gap-4">
+                        <div>
+                            <span class="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-3 py-1.5 text-[10px] font-black uppercase tracking-wider">
+                                <i class="fa-solid fa-chalkboard-user"></i> Tutor Profile Showcase
+                            </span>
+                            <h3 class="text-2xl sm:text-3xl font-black mt-3">${escapeHtml(tutor.name)}</h3>
+                            <p class="text-blue-100 text-xs sm:text-sm mt-1">${escapeHtml(tutor.subject || 'Junior College Tutor')} • ${escapeHtml(tutor.stream || '')}</p>
+                        </div>
+                        <button onclick="closePublicTutorProfile()" class="w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="p-5 sm:p-7">
+                    <div class="grid grid-cols-1 sm:grid-cols-[auto_1fr_auto] gap-5 items-center">
+                        <div class="flex justify-center">${profilePhotoHtml(tutor.photoData, tutor.name, 'tutor')}</div>
+                        <div>
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="bg-blue-50 text-brand-blue border border-blue-200 px-3 py-1.5 rounded-full text-xs font-black">${escapeHtml(tutor.subject)}</span>
+                                ${tutor.verified ? '<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-xs font-black"><i class="fa-solid fa-circle-check mr-1"></i> VERIFIED</span>' : ''}
+                            </div>
+                            <p class="text-slate-600 text-sm mt-3"><strong>${escapeHtml(tutor.experience || '')}</strong> teaching experience • <strong>${escapeHtml(tutor.price || '')}</strong></p>
+                            <p class="text-slate-500 text-xs mt-2">${escapeHtml(tutor.teachingCollege || tutor.college || '')}</p>
+                        </div>
+                        ${verifiedTickHtml(tutor, 'large')}
+                    </div>
+
+                    <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        ${dashboardField('Educational Qualification', tutor.qualification, 'fa-graduation-cap')}
+                        ${dashboardField('College in Which Teaching', tutor.teachingCollege || tutor.college, 'fa-school')}
+                        ${dashboardField('Residential Address', tutor.address, 'fa-location-dot')}
+                        ${dashboardField('Subject Expertise', tutor.subject, 'fa-book-open')}
+                        ${dashboardField('Experience', tutor.experience, 'fa-briefcase')}
+                        ${dashboardField('Rate / Hour', tutor.price, 'fa-indian-rupee-sign')}
+                    </div>
+
+                    <div class="mt-5 bg-blue-50 border border-blue-200 rounded-3xl p-5">
+                        <h4 class="font-black text-brand-blue text-sm uppercase tracking-wider"><i class="fa-solid fa-user-tie mr-1"></i> About Me</h4>
+                        <p class="mt-3 text-sm sm:text-base text-slate-700 leading-7 whitespace-pre-line">${escapeHtml(tutor.aboutMe || 'This tutor has not added an About Me description yet.')}</p>
+                    </div>
+
+                    <div class="mt-5 flex flex-wrap gap-3 text-xs font-bold">
+                        <span class="bg-slate-100 text-slate-700 px-3 py-2 rounded-xl"><i class="fa-solid fa-calendar-days mr-1 text-brand-blue"></i>Registered: ${escapeHtml(formatRegistrationDate(tutor.registrationDate))}</span>
+                        <span class="bg-slate-100 text-slate-700 px-3 py-2 rounded-xl"><i class="fa-solid fa-file-shield mr-1 text-brand-blue"></i>College ID: ${escapeHtml(tutor.collegeIdName || 'Not uploaded')}</span>
+                    </div>
+
+                    <div class="mt-6 flex flex-col sm:flex-row gap-3">
+                        ${canConnect ? `<button onclick="closePublicTutorProfile(); connectWithTutor('${tutor.id}')" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-black py-3.5 rounded-xl text-sm shadow"><i class="fa-solid fa-link mr-1"></i> CONNECT WITH TUTOR</button>` : ''}
+                        <button onclick="closePublicTutorProfile()" class="${canConnect ? 'sm:w-40' : 'w-full'} bg-slate-100 hover:bg-slate-200 text-slate-700 font-black py-3.5 rounded-xl text-sm">CLOSE PROFILE</button>
+                    </div>
+                </div>`;
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
         }
 
         function openStudentProfile(studentId) {
@@ -1942,6 +2341,28 @@
             "GENX PRO": "Includes 15 PRO sessions and all Pro Plan features."
         };
 
+
+        function syncStudentCourseFields() {
+            const course = document.getElementById('stu_course')?.value || '';
+            const std = document.getElementById('stu_std');
+            const stream = document.getElementById('stu_stream');
+            if (!course || !std || !stream) return;
+            const parts = course.split(' ');
+            const classPart = parts[0];
+            const streamPart = parts.slice(1).join(' ');
+            std.value = classPart === 'XI' ? 'FYJC (11th)' : 'SYJC (12th)';
+            stream.value = streamPart.charAt(0) + streamPart.slice(1).toLowerCase();
+        }
+
+        function syncStudentCourseFromStandardStream() {
+            const std = document.getElementById('stu_std')?.value || '';
+            const stream = document.getElementById('stu_stream')?.value || '';
+            const course = document.getElementById('stu_course');
+            if (!course || !std || !stream) return;
+            const cls = std.includes('11') ? 'XI' : 'XII';
+            course.value = `${cls} ${stream.toUpperCase()}`;
+        }
+
         function syncStudentHelplineCourseToRegistration() {
             const course = document.getElementById('stuHelplineCourse')?.value || '';
             const std = document.getElementById('stu_std');
@@ -2066,12 +2487,15 @@
             }
         }
 
-        function handleStudentFormSubmit(e) {
+        async function handleStudentFormSubmit(e) {
             e.preventDefault();
+
             const name = document.getElementById('stu_name').value.trim();
+            const email = document.getElementById('stu_email').value.trim();
             const phone = document.getElementById('stu_phone').value.trim();
             const standard = document.getElementById('stu_std').value;
             const stream = document.getElementById('stu_stream').value;
+            const course = document.getElementById('stu_course')?.value || `${standard.includes('11') ? 'XI' : 'XII'} ${stream.toUpperCase()}`;
             const requestedSubject = document.getElementById('stu_subject').value.trim();
             const subject = validSubjectForStream(stream, requestedSubject, Date.now());
 
@@ -2107,35 +2531,67 @@
                 };
             }
 
+            const photoFile = document.getElementById('stu_photo')?.files?.[0];
+            const photoData = await readImageDataUrl(photoFile);
+            const collegeIdFile = document.getElementById('stu_college_id')?.files?.[0];
+            const aadhaarFile = document.getElementById('stu_aadhaar')?.files?.[0];
             const helplinePhoto = document.getElementById('stu_helpline_photo')?.files?.[0]?.name || '';
             const helplineCollegeId = document.getElementById('stu_helpline_college_id')?.files?.[0]?.name || '';
             const helplineAadhaar = document.getElementById('stu_helpline_aadhaar')?.files?.[0]?.name || '';
 
+            const registrationDate = new Date().toISOString();
+            const division = document.getElementById('stu_division')?.value.trim() || '';
+            const rollNumber = document.getElementById('stu_roll')?.value.trim() || '';
+            const college = document.getElementById('stu_college')?.value.trim() || '';
+            const learningRequirement = document.getElementById('stu_learning_requirement')?.value.trim() || '';
+
             studentDirectoryList.unshift({
                 id: `GC-STU-${Date.now().toString().slice(-6)}`,
-                name, std: standard, stream, subject, phone,
+                name,
+                email,
+                phone,
+                std: standard,
+                stream,
+                course,
+                college,
+                division,
+                rollNumber,
+                subject,
+                photoData,
+                collegeIdName: collegeIdFile?.name || helplineCollegeId || '',
+                aadhaarName: aadhaarFile?.name || helplineAadhaar || '',
+                testimonialDocumentName: collegeIdFile?.name || helplineCollegeId || '',
+                learningRequirement,
+                registrationDate,
                 helpline: helplineData,
                 helplineDocuments: {
                     photo: helplinePhoto,
                     collegeId: helplineCollegeId,
                     aadhaar: helplineAadhaar
                 },
-                isDummy: false, registrationStatus: 'registered'
+                isDummy: false,
+                registrationStatus: 'registered',
+                registrationRole: 'student'
             });
 
             saveRegisteredDirectories();
             renderStudentDirectory();
             if (localStorage.getItem('is_staff_logged') === 'true') renderAdminQueue();
+
             localStorage.setItem('active_user_name', name);
             localStorage.setItem('active_user_phone', phone);
             localStorage.setItem('active_user_role', 'student');
             updateAuthBadge();
             alert(`Student Registration Successful for ${name}!`);
+            closeUserDashboard();
             switchTab('requirement');
         }
 
-        function handleTutorFormSubmit(e) {
+        async function handleTutorFormSubmit(e) {
+            e.preventDefault();
+
             const name = document.getElementById('t_name').value.trim();
+            const email = document.getElementById('t_email').value.trim();
             const phone = document.getElementById('t_phone').value.trim();
             const requestedSubject = document.getElementById('t_subject').value.trim();
             const tutorStream = inferTutorStream(requestedSubject, Date.now());
@@ -2145,20 +2601,35 @@
             const utrInput = document.getElementById('txnIdInput');
             const utr = utrInput ? utrInput.value.trim() : '';
 
+            const photoFile = document.getElementById('t_photo')?.files?.[0];
+            const photoData = await readImageDataUrl(photoFile);
+            const collegeIdFile = document.getElementById('t_college_id')?.files?.[0];
+            const aadhaarFile = document.getElementById('t_aadhaar')?.files?.[0];
+
             const newTutor = {
                 id: Date.now(),
                 name,
+                email,
                 subject,
                 stream: tutorStream,
                 price: price.includes('/') ? price : price + '/hr',
                 experience: exp,
                 college: document.getElementById('t_college')?.value.trim() || 'Junior College Faculty',
+                teachingCollege: document.getElementById('t_teaching_college')?.value.trim() || document.getElementById('t_college')?.value.trim() || '',
+                qualification: document.getElementById('t_qualification')?.value.trim() || '',
+                address: document.getElementById('t_address')?.value.trim() || '',
+                aboutMe: document.getElementById('t_about')?.value.trim() || '',
+                photoData,
+                collegeIdName: collegeIdFile?.name || '',
+                aadhaarName: aadhaarFile?.name || '',
                 verified: false,
                 phone,
                 utr,
                 paidStatus: 'PENDING',
+                registrationDate: new Date().toISOString(),
                 isDummy: false,
-                registrationStatus: 'registered'
+                registrationStatus: 'registered',
+                registrationRole: 'tutor'
             };
 
             tutorDirectoryList.unshift(newTutor);
@@ -2171,12 +2642,10 @@
             localStorage.setItem('active_user_role', 'tutor');
             updateAuthBadge();
 
-            setTimeout(() => {
-                const form = document.getElementById('tutorRegForm');
-                if (form) form.classList.add('hidden');
-                const postDash = document.getElementById('tutorPostDashboard');
-                if (postDash) postDash.classList.remove('hidden');
-            }, 400);
+            const form = document.getElementById('tutorRegForm');
+            if (form) form.classList.add('hidden');
+
+            openUserDashboard();
         }
 
         function handleRequirementSubmit(e) {
@@ -2186,6 +2655,8 @@
         }
 
         window.addEventListener('load', function() {
+            const dateInput = document.getElementById('stu_registration_date');
+            if (dateInput) dateInput.value = new Date().toLocaleDateString('en-IN');
             updateAuthBadge();
             renderStudentDirectory();
             renderTutorDirectory();
