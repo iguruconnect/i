@@ -1274,6 +1274,32 @@
             if (section) section.classList.add('hidden');
         }
 
+        function getStudentPrivacy(student) {
+            return {
+                showContactToConnectedTutors: student?.privacy?.showContactToConnectedTutors !== false,
+                showDetailsToConnectedTutors: student?.privacy?.showDetailsToConnectedTutors !== false
+            };
+        }
+
+        function saveStudentPrivacy(student, privacy) {
+            if (!student || student.isDummy) return;
+            student.privacy = { ...getStudentPrivacy(student), ...privacy };
+            saveRegisteredDirectories();
+            renderUserDashboard(student);
+        }
+
+        function toggleStudentPrivacy(field) {
+            const student = getCurrentUserProfile();
+            if (!student || student.registrationRole !== 'student') return;
+            const current = getStudentPrivacy(student);
+            saveStudentPrivacy(student, { [field]: !current[field] });
+        }
+
+        function studentHasConnectedToTutor(studentId, tutorId) {
+            const requests = JSON.parse(localStorage.getItem('gc_connection_requests') || '[]');
+            return requests.some(r => r.fromRole === 'student' && String(r.fromStudentId || '') === String(studentId) && String(r.targetId) === String(tutorId));
+        }
+
         function renderUserDashboard(profile) {
             const content = document.getElementById('userDashboardContent');
             if (!content || !profile) return;
@@ -1364,6 +1390,26 @@
                             <i class="fa-solid fa-lightbulb"></i> Learning Requirement
                         </div>
                         <p class="mt-3 text-sm sm:text-base text-slate-700 leading-7 whitespace-pre-line">${escapeHtml(profile.learningRequirement || 'No learning requirement has been added yet.')}</p>
+                    </div>
+
+                    <div class="mt-5 bg-slate-50 border border-slate-200 rounded-3xl p-5 sm:p-6">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                            <div>
+                                <h4 class="font-black text-brand-dark text-sm sm:text-base">Profile Privacy Controls</h4>
+                                <p class="text-[11px] sm:text-xs text-slate-500 mt-1">These settings apply only to registered tutors after you initiate a connection with them.</p>
+                            </div>
+                        </div>
+                        <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            ${(() => { const pv = getStudentPrivacy(profile); return `
+                                <button onclick="toggleStudentPrivacy('showContactToConnectedTutors')" class="flex items-center justify-between gap-3 text-left bg-white border border-slate-200 rounded-2xl p-4 hover:border-brand-blue transition">
+                                    <span><span class="block font-black text-xs text-brand-dark">CONTACT DETAILS</span><span class="block text-[11px] text-slate-500 mt-1">${pv.showContactToConnectedTutors ? 'Visible to connected tutors' : 'Hidden from connected tutors'}</span></span>
+                                    <span class="shrink-0 px-3 py-1.5 rounded-full text-[10px] font-black ${pv.showContactToConnectedTutors ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-200 text-slate-600'}">${pv.showContactToConnectedTutors ? 'VISIBLE' : 'HIDDEN'}</span>
+                                </button>
+                                <button onclick="toggleStudentPrivacy('showDetailsToConnectedTutors')" class="flex items-center justify-between gap-3 text-left bg-white border border-slate-200 rounded-2xl p-4 hover:border-brand-blue transition">
+                                    <span><span class="block font-black text-xs text-brand-dark">OTHER PROFILE DETAILS</span><span class="block text-[11px] text-slate-500 mt-1">${pv.showDetailsToConnectedTutors ? 'Visible to connected tutors' : 'Hidden from connected tutors'}</span></span>
+                                    <span class="shrink-0 px-3 py-1.5 rounded-full text-[10px] font-black ${pv.showDetailsToConnectedTutors ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-200 text-slate-600'}">${pv.showDetailsToConnectedTutors ? 'VISIBLE' : 'HIDDEN'}</span>
+                                </button>`; })()}
+                        </div>
                     </div>
 
                     <div class="mt-5 bg-slate-50 border border-slate-200 rounded-3xl p-5 sm:p-6">
@@ -1461,14 +1507,14 @@
                 card.className = "bg-gradient-to-br from-brand-blue to-blue-800 text-white p-6 rounded-3xl shadow-xl flex flex-col justify-between hover:scale-[1.02] transition";
                 card.innerHTML = `
                     <div>
-                        <div class="flex justify-between items-start mb-3">
+                        <div class="flex justify-between items-start gap-2 mb-2 sm:mb-3">
                             <span class="text-[10px] font-black bg-amber-300 text-brand-dark px-3 py-1 rounded-full uppercase tracking-wider">${stu.std} • ${stu.stream}</span>
                             <span class="text-[10px] font-bold text-white/80">ID: ${stu.id}</span>
                         </div>
                         <h4 class="font-black text-white text-xl mt-1 tracking-tight">${stu.name}</h4>
                         <p class="text-xs text-blue-100 mt-2 font-medium"><strong>JC Subject:</strong> ${stu.subject}</p>
                     </div>
-                    <div class="mt-6 pt-4 border-t border-white/20 flex items-center justify-between">
+                    <div class="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-white/20 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
                         <span class="text-[11px] font-bold text-blue-200"><i class="fa-solid fa-shield-halved mr-1"></i>Protected</span>
                         <button onclick="openStudentProfile('${stu.id}')" class="bg-white hover:bg-blue-50 text-brand-blue font-black text-xs px-4 py-2 rounded-xl transition shadow">VIEW PROFILE</button>
                     </div>
@@ -1590,28 +1636,28 @@
                 
                 // If verified, background is Green, else Nagpur Orange
                 if(t.verified) {
-                    card.className = "bg-gradient-to-br from-emerald-600 to-green-700 text-white p-6 rounded-3xl shadow-xl flex flex-col justify-between hover:scale-[1.02] transition relative overflow-hidden";
+                    card.className = "bg-gradient-to-br from-emerald-600 to-green-700 text-white p-4 sm:p-6 rounded-2xl sm:rounded-3xl shadow-xl flex flex-col justify-between transition relative overflow-hidden";
                 } else {
-                    card.className = "bg-gradient-to-br from-brand-nagpurOrange to-orange-600 text-white p-6 rounded-3xl shadow-xl flex flex-col justify-between hover:scale-[1.02] transition relative overflow-hidden";
+                    card.className = "bg-gradient-to-br from-brand-nagpurOrange to-orange-600 text-white p-4 sm:p-6 rounded-2xl sm:rounded-3xl shadow-xl flex flex-col justify-between transition relative overflow-hidden";
                 }
 
                 card.innerHTML = `
                     <div>
                         <div class="flex justify-between items-start mb-3">
-                            <span class="text-[10px] font-black bg-amber-300 text-brand-dark px-3 py-1 rounded-full uppercase tracking-wider">${t.subject} • ${t.stream}</span>
-                            <span class="text-xs font-black text-amber-200"><i class="fa-solid fa-star mr-1"></i> 4.8</span>
+                            <span class="text-[9px] sm:text-[10px] font-black bg-amber-300 text-brand-dark px-2.5 py-1 rounded-full uppercase tracking-wider leading-tight">${t.subject} • ${t.stream}</span>
+                            <span class="text-[10px] sm:text-xs font-black text-amber-200 shrink-0"><i class="fa-solid fa-star mr-1"></i> 4.8</span>
                         </div>
-                        <h4 class="font-black text-white text-xl mt-1 tracking-tight flex items-center gap-1.5 flex-wrap">
+                        <h4 class="font-black text-white text-lg sm:text-xl mt-1 tracking-tight flex items-center gap-1.5 flex-wrap leading-tight">
                             ${t.name} 
                             ${t.verified ? '<span class="inline-flex items-center justify-center w-7 h-7 bg-blue-600 text-white rounded-full text-sm shadow-lg ring-2 ring-white" title="Verified Tutor"><i class="fa-solid fa-check"></i></span>' : ''}
                         </h4>
-                        <p class="text-xs ${t.verified ? 'text-emerald-100' : 'text-orange-100'} mt-2 font-medium">Experience: ${t.experience} | Rate: ${t.price}</p>
+                        <p class="text-[11px] sm:text-xs ${t.verified ? 'text-emerald-100' : 'text-orange-100'} mt-2 font-medium leading-5">Experience: ${t.experience}<span class="hidden sm:inline"> | </span><span class="block sm:inline">Rate: ${t.price}</span></p>
                     </div>
-                    <div class="mt-6 pt-4 border-t border-white/20 flex items-center justify-between">
-                        ${t.verified ? '<span class="inline-flex items-center gap-2 bg-blue-600 text-white text-[11px] font-black px-3 py-1.5 rounded-xl shadow-lg ring-1 ring-white/60"><span class="inline-flex items-center justify-center w-5 h-5 bg-white text-blue-600 rounded-full text-[10px]"><i class="fa-solid fa-check"></i></span> VERIFIED TUTOR</span>' : '<span class="text-[11px] font-bold text-orange-100">Junior College Faculty</span>'}
-                        <div class="flex items-center gap-2">
-                            <button onclick="openPublicTutorProfile('${t.id}')" class="bg-white/15 hover:bg-white/25 border border-white/30 text-white font-black text-[10px] px-3 py-2 rounded-xl transition">VIEW PROFILE</button>
-                            <button onclick="connectWithTutor(${t.id})" class="bg-white hover:bg-slate-100 ${t.verified ? 'text-emerald-700' : 'text-brand-nagpurOrange'} font-black text-xs px-4 py-2 rounded-xl transition shadow">CONNECT</button>
+                    <div class="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-white/20 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
+                        ${t.verified ? '<span class="inline-flex items-center gap-2 bg-blue-600 text-white text-[10px] sm:text-[11px] font-black px-2.5 sm:px-3 py-1.5 rounded-xl shadow-lg ring-1 ring-white/60"><span class="inline-flex items-center justify-center w-5 h-5 bg-white text-blue-600 rounded-full text-[10px]"><i class="fa-solid fa-check"></i></span> VERIFIED TUTOR</span>' : '<span class="text-[11px] font-bold text-orange-100">Junior College Faculty</span>'}
+                        <div class="grid grid-cols-2 gap-2 w-full sm:w-auto">
+                            <button onclick="openPublicTutorProfile('${t.id}')" class="bg-white/15 hover:bg-white/25 border border-white/30 text-white font-black text-[10px] px-2.5 py-2.5 rounded-xl transition min-w-0">VIEW PROFILE</button>
+                            <button onclick="connectWithTutor(${t.id})" class="bg-white hover:bg-slate-100 ${t.verified ? 'text-emerald-700' : 'text-brand-nagpurOrange'} font-black text-[10px] sm:text-xs px-2.5 py-2.5 rounded-xl transition shadow min-w-0">CONNECT</button>
                         </div>
                     </div>
                 `;
@@ -1934,11 +1980,20 @@
             const tutor = tutorDirectoryList.find(t => String(t.id) === String(tutorId));
             if (!tutor) return;
 
+            const viewer = getActiveViewer();
+            if (!viewer.isRegistered) {
+                showProtectedPopup('STUDENT REGISTRATION REQUIRED', 'Please register as a Student and log in first. Tutor profiles are protected and cannot be viewed by public visitors.', 'fa-user-graduate', `<button onclick="closeProtectedPopup(); document.getElementById('registrationSection')?.scrollIntoView({behavior:'smooth'}); switchTab('student');" class="w-full bg-brand-blue hover:bg-blue-700 text-white font-black py-3.5 rounded-xl text-xs">REGISTER AS STUDENT</button>`);
+                return;
+            }
+            if (viewer.role !== 'student') {
+                showProtectedPopup('STUDENT ACCESS REQUIRED', 'Only a registered Student can view Tutor Profile Showcases.', 'fa-lock');
+                return;
+            }
+
             const modal = document.getElementById('publicTutorProfileModal');
             const content = document.getElementById('publicTutorProfileContent');
             if (!modal || !content) return;
 
-            const viewer = getActiveViewer();
             const canConnect = viewer.isRegistered && viewer.role === 'student' && !tutor.isDummy;
 
             content.innerHTML = `
@@ -2004,28 +2059,57 @@
             const student = studentDirectoryList.find(s => String(s.id) === String(studentId));
             if (!student) return;
             const viewer = getActiveViewer();
+
             if (!viewer.isRegistered) {
-                showProtectedPopup('YOU ARE NOT ALLOWED TO ACCESS THIS INFORMATION', 'Student contact information is protected. Please register and log in to use connection features.', 'fa-lock');
+                showProtectedPopup('STUDENT PROFILE PROTECTED', 'Student profiles are private. Only a registered tutor can view a student profile after that student has initiated a connection request.', 'fa-user-shield');
                 return;
             }
-            if (viewer.role === 'student' && String(viewer.phone) === String(student.phone)) {
-                showProtectedPopup('YOUR PROFILE', `${student.name} • ${student.std} • ${student.stream}`, 'fa-user-check');
+
+            if (viewer.role === 'student' && String(viewer.phone).replace(/\D/g,'') === String(student.phone || '').replace(/\D/g,'')) {
+                openUserDashboard();
                 return;
             }
+
             if (student.isDummy) {
-                showProtectedPopup('PROTECTED STUDENT PROFILE', 'This illustrative student does not have a public contact number. Tutors can connect only when a student posts a learning requirement matching their subject.', 'fa-user-shield');
+                showProtectedPopup('PROTECTED STUDENT PROFILE', 'Illustrative student profiles do not expose personal information. Genuine student profiles are visible only to registered tutors after the student initiates a connection.', 'fa-user-shield');
                 return;
             }
-            const viewerTutor = tutorDirectoryList.find(t => t.isDummy === false && String(t.phone) === String(viewer.phone));
-            if (viewer.role === 'tutor' && viewerTutor) {
-                if (subjectsMatch(student, viewerTutor)) {
-                    showProtectedPopup('CONNECTION AVAILABLE', `${student.name} has a learning requirement matching your subject (${viewerTutor.subject}).`, 'fa-link', `<button onclick="sendConnectionRequest('tutor','${student.id}')" class="w-full bg-brand-blue hover:bg-blue-700 text-white font-black py-3.5 rounded-xl text-xs">SEND CONNECTION REQUEST</button>`);
-                } else {
-                    showProtectedPopup('NO CURRENT MATCH', "CURRENTLY THIS STUDENT DIDN'T HAVE ANY REQUIREMENT OF YOUR SUBJECT. YOU CAN GET CONNECTED WHEN THIS STUDENT POSTS ANY LEARNING REQUIREMENT OF YOUR SUBJECT.", 'fa-book-open');
-                }
+
+            const viewerTutor = tutorDirectoryList.find(t => t.isDummy === false && String(t.phone).replace(/\D/g,'') === String(viewer.phone).replace(/\D/g,''));
+            if (viewer.role !== 'tutor' || !viewerTutor) {
+                showProtectedPopup('REGISTERED TUTOR ACCESS ONLY', 'Only a genuine registered Tutor can view a Student Profile, and only after the student has initiated a connection.', 'fa-lock');
                 return;
             }
-            showProtectedPopup('PROTECTED STUDENT PROFILE', 'Contact information is protected. Connection is available through a matching learning requirement.', 'fa-user-shield');
+
+            if (!studentHasConnectedToTutor(student.id, viewerTutor.id)) {
+                showProtectedPopup('STUDENT PROFILE IS PRIVATE', 'This student has not initiated a connection with you. Their profile remains hidden until the student chooses to connect with you.', 'fa-user-lock');
+                return;
+            }
+
+            const privacy = getStudentPrivacy(student);
+            const visibleDetails = privacy.showDetailsToConnectedTutors;
+            const visibleContact = privacy.showContactToConnectedTutors;
+            const detailHtml = visibleDetails ? `
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-5">
+                    ${dashboardField('Course', student.course || ((student.std || '') + ' ' + (student.stream || '')), 'fa-graduation-cap')}
+                    ${dashboardField('College', student.college, 'fa-school')}
+                    ${dashboardField('Class', student.std, 'fa-layer-group')}
+                    ${dashboardField('Division', student.division, 'fa-users')}
+                    ${dashboardField('Roll Number', student.rollNumber, 'fa-hashtag')}
+                    ${dashboardField('Learning Requirement', student.learningRequirement, 'fa-lightbulb')}
+                </div>` : `<div class="mt-5 bg-slate-50 border border-slate-200 rounded-2xl p-4 text-xs text-slate-500"><i class="fa-solid fa-eye-slash mr-1"></i> Student has hidden additional profile details.</div>`;
+            const contactHtml = visibleContact ? `
+                <div class="mt-4 bg-emerald-50 border border-emerald-200 rounded-2xl p-4">
+                    <div class="text-[10px] font-black uppercase tracking-wider text-emerald-700">Contact Details</div>
+                    <div class="mt-2 text-sm font-black text-slate-800">${escapeHtml(student.phone || 'Not provided')}</div>
+                    <div class="text-xs font-medium text-slate-600 break-all">${escapeHtml(student.email || 'Not provided')}</div>
+                </div>` : `<div class="mt-4 bg-slate-50 border border-slate-200 rounded-2xl p-4 text-xs text-slate-500"><i class="fa-solid fa-eye-slash mr-1"></i> Student has hidden contact details.</div>`;
+
+            showProtectedPopup('CONNECTED STUDENT PROFILE', 'This student has initiated a connection with you. Only the information allowed by the student privacy settings is shown below.', 'fa-user-check', `<div class="text-left">
+                <div class="flex items-center gap-4">${profilePhotoHtml(student.photoData, student.name, 'student')}<div><h3 class="text-xl font-black text-brand-dark">${escapeHtml(student.name)}</h3><p class="text-xs text-brand-blue font-bold mt-1">Student • ${escapeHtml(student.stream || '')}</p></div></div>
+                ${detailHtml}${contactHtml}
+                <div class="mt-4 text-[10px] text-slate-400">Profile access granted because this student initiated a connection with you.</div>
+            </div>`);
         }
 
         function connectWithTutor(tutorId) {
@@ -2058,11 +2142,31 @@
 
         function sendConnectionRequest(fromRole, targetId) {
             const viewer = getActiveViewer();
+            if (!viewer.isRegistered) return;
             const key = 'gc_connection_requests';
             const requests = JSON.parse(localStorage.getItem(key) || '[]');
-            requests.push({ fromRole, fromName: viewer.name, fromPhone: viewer.phone, targetId, createdAt: new Date().toISOString() });
-            localStorage.setItem(key, JSON.stringify(requests));
-            showProtectedPopup('REQUEST SENT', 'Your connection request has been recorded. The other registered member can respond when the connection is available.', 'fa-circle-check');
+            const student = viewer.role === 'student' ? studentDirectoryList.find(s => s.isDummy === false && String(s.phone).replace(/\D/g,'') === String(viewer.phone).replace(/\D/g,'')) : null;
+            const tutor = viewer.role === 'tutor' ? tutorDirectoryList.find(t => t.isDummy === false && String(t.phone).replace(/\D/g,'') === String(viewer.phone).replace(/\D/g,'')) : null;
+
+            const request = {
+                fromRole,
+                fromName: viewer.name,
+                fromPhone: viewer.phone,
+                fromStudentId: student ? student.id : '',
+                fromTutorId: tutor ? tutor.id : '',
+                targetId,
+                createdAt: new Date().toISOString()
+            };
+
+            const duplicate = requests.some(r => r.fromRole === fromRole && String(r.targetId) === String(targetId) && String(r.fromPhone) === String(viewer.phone));
+            if (!duplicate) {
+                requests.push(request);
+                localStorage.setItem(key, JSON.stringify(requests));
+            }
+
+            showProtectedPopup('REQUEST SENT', fromRole === 'student'
+                ? 'Your connection request has been sent. You can now control which profile details connected tutors may see from your Student Dashboard.'
+                : 'Your connection request has been recorded. The other registered member can respond when the connection is available.', 'fa-circle-check');
         }
 
         // ===== STAFF ADMIN DASHBOARD =====
@@ -2568,6 +2672,10 @@
                     photo: helplinePhoto,
                     collegeId: helplineCollegeId,
                     aadhaar: helplineAadhaar
+                },
+                privacy: {
+                    showContactToConnectedTutors: true,
+                    showDetailsToConnectedTutors: true
                 },
                 isDummy: false,
                 registrationStatus: 'registered',
