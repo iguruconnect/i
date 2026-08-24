@@ -307,6 +307,210 @@
                             </div>
                         </div>
 
+                        <!-- STUDENT HELPLINE SERVICE REGISTRATION -->
+                        <div class="border-2 border-blue-200 bg-blue-50/50 rounded-2xl p-4 sm:p-5 space-y-4">
+                            <div class="flex items-start gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-blue-100 text-brand-blue flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-headset text-lg"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-black text-brand-dark text-base sm:text-lg">Helpline Service Registration</h3>
+                                    <p class="text-[13px] sm:text-sm text-slate-600 mt-0.5">Get academic support from subject experts for missed lessons, difficult topics and doubts.</p>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-[13px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">REGISTER FOR HELPLINE SERVICE *</label>
+                                <select id="stuHelplineRegister" required onchange="toggleStudentHelpline()" class="w-full border border-slate-300 rounded-xl p-3.5 text-[13px] sm:text-sm focus:border-brand-blue focus:outline-none font-bold bg-white">
+                                    <option value="">Select an option</option>
+                                    <option value="yes">YES – Register with Helpline Service</option>
+                                    <option value="no">NO – Continue Without Helpline Service</option>
+                                </select>
+                            </div>
+
+                            <div id="studentHelplineDetails" class="hidden space-y-4">
+                                <div class="border border-blue-200 bg-white rounded-2xl p-4">
+                                    <div class="flex justify-between items-center gap-3 mb-2">
+                                        <h4 class="font-black text-brand-dark text-sm sm:text-base">Helpline Service Plans & Rules</h4>
+                                        <span class="text-[12px] font-bold text-brand-blue whitespace-nowrap">Scroll to read</span>
+                                    </div>
+
+                                    <!-- Scrollable plan/rules area; text is intentionally readable (13px+) -->
+                                    <div class="max-h-[360px] overflow-y-auto pr-2 space-y-4 text-[13px] sm:text-sm leading-6 text-slate-700 border-t border-slate-200 pt-3">
+                                        <div class="bg-blue-50 border border-blue-200 rounded-xl p-3.5">
+                                            <h5 class="font-black text-brand-blue text-[14px] mb-1">🎧 Dedicated Academic Helpline</h5>
+                                            <p>Learn or clear your doubts online at the comfort of your home, as and whenever you require — serving directly to the students with a dedicated subject expert team.</p>
+                                        </div>
+
+                                        <div>
+                                            <h5 class="font-black text-slate-900 uppercase tracking-wide text-[14px] mb-2">Helpline Service Plans</h5>
+                                            <div class="space-y-3">
+                                                <div class="border border-slate-200 rounded-xl p-3 bg-slate-50">
+                                                    <div class="flex justify-between gap-3 font-black"><span>FREE PLAN</span><span class="text-emerald-600">₹0</span></div>
+                                                    <p><strong>Features:</strong> Ask any 1 question on 1 particular topic from 1 chapter of 1 subject (doubt or concept explanation).</p>
+                                                    <p><strong>Eligibility:</strong> Need to register on our website, submit College ID and Aadhaar Number for verification, and send generated ID card to WhatsApp <strong>+1 (555) 9565-917</strong>.</p>
+                                                    <p><strong>CONS:</strong> Available only once per applicant. Restricted to 1 specific topic/chapter/subject session.</p>
+                                                </div>
+
+                                                <div class="border border-slate-200 rounded-xl p-3 bg-slate-50">
+                                                    <div class="flex justify-between gap-3 font-black"><span>PRIME PLAN</span><span class="text-brand-blue">₹5000</span></div>
+                                                    <p><strong>Features:</strong> Regular weekly classes (1 topic per week). Entire syllabus covered systematically. Stay in regular touch with subject experts for the entire academic year.</p>
+                                                    <p><strong>Validity:</strong> From registration date to forthcoming year's 10th February (Class 12) or 31st March (Class 11).</p>
+                                                    <p><strong>CONS:</strong> Missed sessions cannot be reclaimed, re-explained, or compensated.</p>
+                                                </div>
+
+                                                <div class="border border-slate-200 rounded-xl p-3 bg-slate-50">
+                                                    <div class="flex justify-between gap-3 font-black"><span>PRO PLAN</span><span class="text-brand-blue">₹300</span></div>
+                                                    <p><strong>Features:</strong> Guaranteed session (1 Question of 1 Topic of 1 Chapter). Duration: 25 to 30 minutes.</p>
+                                                    <p><strong>Validity:</strong> Up to 10th Feb (Class 12) / 31st March (Class 11).</p>
+                                                </div>
+
+                                                <div class="border border-slate-200 rounded-xl p-3 bg-slate-50">
+                                                    <div class="flex justify-between gap-3 font-black"><span>PREMIUM PLAN</span><span class="text-brand-blue">₹6000</span></div>
+                                                    <p><strong>Features:</strong> Guaranteed weekly 1 session for your preferred 1 Question/Topic/Chapter/Subject to learn, clear doubts, and get guidance.</p>
+                                                    <p><strong>Validity:</strong> Up to 10th Feb (Class 12) / 31st March (Class 11).</p>
+                                                </div>
+
+                                                <div class="border border-slate-200 rounded-xl p-3 bg-slate-50">
+                                                    <div class="flex justify-between gap-3 font-black"><span>GENX PLAN</span><span class="text-brand-blue">₹1000</span></div>
+                                                    <p><strong>Features:</strong> Includes 5 PRO sessions and all Pro Plan features.</p>
+                                                    <p><strong>CONS:</strong> Cannot be clubbed, transferred, or shared with another person.</p>
+                                                </div>
+
+                                                <div class="border border-slate-200 rounded-xl p-3 bg-slate-50">
+                                                    <div class="flex justify-between gap-3 font-black"><span>GENX PRO</span><span class="text-brand-blue">₹3000</span></div>
+                                                    <p><strong>Features:</strong> Includes 15 PRO sessions and all Pro Plan features.</p>
+                                                    <p><strong>CONS:</strong> Cannot be clubbed, transferred, or shared with another person.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <h5 class="font-black text-slate-900 uppercase tracking-wide text-[14px] mb-2">📜 Rules | Process & Conditions</h5>
+                                            <ul class="list-disc pl-5 space-y-1.5">
+                                                <li><strong>Prior submission of Topic Request is mandatory in every plan.</strong></li>
+                                                <li><strong>Your scheduled topic details will be conveyed via WhatsApp or registered email.</strong></li>
+                                                <li><strong>Fees once paid is strictly non-refundable and non-transferable.</strong></li>
+                                                <li><strong>Purchased plans are non-transferable and must be used exclusively by the registered individual.</strong></li>
+                                                <li><strong>Submission of College ID and Aadhaar Number is required for verification before scheduling.</strong></li>
+                                                <li><strong>All plan services are provided purely online.</strong></li>
+                                                <li><strong>Sessions disrupted due to technical, physical, or health issues from admin/expert side will be compensated/rescheduled.</strong></li>
+                                                <li><strong>Students must be available on time with essential materials. No rescheduling if issues occur at the student's end (e.g., network failure).</strong></li>
+                                                <li><strong>Strict discipline is required during online sessions; misconduct leads to immediate barring/blocking without refund.</strong></li>
+                                                <li><strong>Questions must be strictly limited to 1 particular question of 1 topic of 1 chapter and subject per session.</strong></li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="pt-1">
+                                            <a href="https://api.whatsapp.com/send?phone=15559565917&text=Hello%20Guru%20Connect,%20I%20want%20to%20subscribe%20to%20a%20Helpline%20Plan." target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-black px-5 py-3 rounded-xl text-[13px] shadow-md transition w-full sm:w-auto">
+                                                <i class="fa-brands fa-whatsapp text-base"></i> Inquire / Subscribe on WhatsApp
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-[13px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">SELECT HELPLINE PLAN *</label>
+                                    <select id="stuHelplinePlan" onchange="updateStudentHelplinePricing()" class="w-full border border-slate-300 rounded-xl p-3.5 text-[13px] sm:text-sm focus:border-brand-blue focus:outline-none font-bold bg-white">
+                                        <option value="">Select One Helpline Plan</option>
+                                        <option value="FREE">FREE PLAN — ₹0</option>
+                                        <option value="PRIME">PRIME PLAN — ₹5000 / subject</option>
+                                        <option value="PRO">PRO PLAN — ₹300 / subject</option>
+                                        <option value="PREMIUM">PREMIUM PLAN — ₹6000 / subject</option>
+                                        <option value="GENX">GENX PLAN — ₹1000 / subject</option>
+                                        <option value="GENX PRO">GENX PRO — ₹3000 / subject</option>
+                                    </select>
+                                </div>
+
+                                <div id="selectedHelplinePlanSummary" class="hidden bg-slate-50 border border-slate-200 rounded-xl p-3.5 text-[13px] leading-6">
+                                    <div class="font-black text-brand-blue" id="selectedHelplinePlanTitle"></div>
+                                    <div id="selectedHelplinePlanText" class="text-slate-700 mt-1"></div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-[13px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">SELECT COURSE *</label>
+                                    <select id="stuHelplineCourse" onchange="syncStudentHelplineCourseToRegistration()" class="w-full border border-slate-300 rounded-xl p-3.5 text-[13px] sm:text-sm focus:border-brand-blue focus:outline-none font-bold bg-white">
+                                        <option value="">Select Course</option>
+                                        <option value="XI ARTS">XI ARTS</option>
+                                        <option value="XI SCIENCE">XI SCIENCE</option>
+                                        <option value="XI COMMERCE">XI COMMERCE</option>
+                                        <option value="XII ARTS">XII ARTS</option>
+                                        <option value="XII SCIENCE">XII SCIENCE</option>
+                                        <option value="XII COMMERCE">XII COMMERCE</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-[13px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">NAME OF THE SUBJECT FOR WHICH HELPLINE SERVICE IS REQUIRED *</label>
+                                    <input type="text" id="stuHelplineSubject" oninput="document.getElementById('stu_subject').value=this.value" placeholder="Enter subject name" class="w-full border border-slate-300 rounded-xl p-3.5 text-[13px] sm:text-sm focus:border-brand-blue focus:outline-none font-bold bg-white">
+                                    <p class="text-[12px] text-slate-500 mt-1">If more than one subject is required, enter subject names separated by commas.</p>
+                                </div>
+
+                                <div>
+                                    <label class="block text-[13px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">SELECT THE NUMBER OF SUBJECTS FOR WHICH HELPLINE IS REQUIRED *</label>
+                                    <select id="stuHelplineSubjectCount" onchange="updateStudentHelplinePricing()" class="w-full border border-slate-300 rounded-xl p-3.5 text-[13px] sm:text-sm focus:border-brand-blue focus:outline-none font-bold bg-white">
+                                        <option value="">Select Number of Subjects</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                    </select>
+                                    <p class="text-[12px] text-slate-500 mt-1">Pricing is calculated automatically as selected plan fee × number of subjects.</p>
+                                </div>
+
+                                <!-- Payment Section -->
+                                <div id="studentHelplinePayment" class="border-2 border-emerald-200 bg-emerald-50/60 rounded-2xl p-4 space-y-4">
+                                    <div>
+                                        <h4 class="font-black text-brand-dark text-base sm:text-lg">PAYMENT SECTION</h4>
+                                        <p class="text-[13px] text-slate-600 mt-1">Payment will be directed to <strong>Verizon@UPI</strong>.</p>
+                                    </div>
+
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+                                        <div class="bg-white border border-emerald-200 rounded-2xl p-4 text-center">
+                                            <p class="text-[13px] font-black text-slate-700 mb-2">QR CODE</p>
+                                            <img id="studentHelplineQr" src="" alt="Helpline UPI QR Code" class="w-44 h-44 mx-auto rounded-xl border border-slate-200 object-contain bg-white">
+                                            <p id="studentHelplineQrNote" class="text-[12px] text-slate-500 mt-2">Select a paid plan and number of subjects to generate the payment QR.</p>
+                                        </div>
+
+                                        <div class="space-y-3">
+                                            <div class="bg-white border border-emerald-200 rounded-2xl p-4">
+                                                <p class="text-[13px] font-bold text-slate-600">SELECTED PLAN × SUBJECTS</p>
+                                                <p id="studentHelplineCalculation" class="text-2xl font-black text-brand-dark mt-1">₹0</p>
+                                                <p id="studentHelplineCalculationText" class="text-[12px] text-slate-500 mt-1">Choose a plan and number of subjects.</p>
+                                            </div>
+
+                                            <a id="studentHelplineUpiButton" href="javascript:void(0)" onclick="payStudentHelplineViaUpi(); return false;" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black py-3.5 px-4 rounded-xl shadow-md transition text-[13px] text-center flex items-center justify-center gap-2">
+                                                <i class="fa-solid fa-mobile-screen-button"></i> PAY VIA UPI
+                                            </a>
+                                            <p class="text-[12px] text-slate-500 text-center">On a phone, this button will try to open an installed UPI app. On desktop, use the QR code.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Optional Helpline Registration Documents -->
+                                <div class="border border-blue-200 bg-white rounded-2xl p-4">
+                                    <h4 class="font-black text-brand-dark text-sm sm:text-base mb-1">Registration Documents (Optional)</h4>
+                                    <p class="text-[12px] text-slate-500 mb-3">Student Photo, College ID Card and Aadhaar Card can be attached for the registration/verification process.</p>
+                                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                        <div>
+                                            <label class="block text-[13px] font-bold text-slate-700 mb-1.5">Student Photo (Optional)</label>
+                                            <input type="file" id="stu_helpline_photo" accept="image/*" class="w-full text-[12px] text-slate-500 file:mr-2 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-[12px] file:font-bold file:bg-blue-50 file:text-brand-blue hover:file:bg-blue-100">
+                                        </div>
+                                        <div>
+                                            <label class="block text-[13px] font-bold text-slate-700 mb-1.5">College ID Card (Optional)</label>
+                                            <input type="file" id="stu_helpline_college_id" accept="image/*,application/pdf" class="w-full text-[12px] text-slate-500 file:mr-2 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-[12px] file:font-bold file:bg-blue-50 file:text-brand-blue hover:file:bg-blue-100">
+                                        </div>
+                                        <div>
+                                            <label class="block text-[13px] font-bold text-slate-700 mb-1.5">Aadhaar Card (Optional)</label>
+                                            <input type="file" id="stu_helpline_aadhaar" accept="image/*,application/pdf" class="w-full text-[12px] text-slate-500 file:mr-2 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-[12px] file:font-bold file:bg-blue-50 file:text-brand-blue hover:file:bg-blue-100">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Junior College Standard *</label>
@@ -1194,7 +1398,7 @@
                 const response = await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_OTP_TEMPLATE_ID, templateParams);
                 console.log('EmailJS OTP response:', response.status, response.text);
                 if (response.status === 200) {
-                    alert(`OTP request accepted for ${email}. Please check Inbox/Spam.`);
+                    alert('OTP sent to your entered Email Please verify');
                     document.getElementById(type === 'student' ? 'stuOtpBox' : 'tutorOtpBox').classList.remove('hidden');
                 } else {
                     throw new Error(`EmailJS returned ${response.status}: ${response.text}`);
@@ -1215,7 +1419,7 @@
             const entered = document.getElementById(type === 'student' ? 'stuEnteredOtp' : 'tutorEnteredOtp').value.trim();
             
             if (entered === pendingEmailOtps[type] && entered !== "") {
-                alert('Email Verified Successfully!');
+                alert('Email verified successfully.');
                 
                 const welcomeParams = {
                     name: nameInput.value.trim(),
@@ -1256,12 +1460,42 @@
         function closeNavMenu() { document.getElementById('publicNavbarLinks').classList.add('hidden'); }
 
         function switchTab(tab) {
+            // Hide all registration/request cards first
             document.getElementById('studentFormCard').classList.add('hidden');
             document.getElementById('tutorFormCard').classList.add('hidden');
             document.getElementById('requirementFormCard').classList.add('hidden');
-            if (tab === 'student') document.getElementById('studentFormCard').classList.remove('hidden');
-            else if (tab === 'tutor') document.getElementById('tutorFormCard').classList.remove('hidden');
-            else if (tab === 'requirement') { document.getElementById('requirementFormCard').classList.remove('hidden'); checkUserLoginState(); }
+
+            // Reset all registration tab buttons to their inactive style
+            const tabButtons = [
+                document.getElementById('tabStudentBtn'),
+                document.getElementById('tabTutorBtn'),
+                document.getElementById('tabRequirementBtn')
+            ];
+
+            tabButtons.forEach(btn => {
+                if (!btn) return;
+                btn.classList.remove('bg-brand-blue', 'text-white', 'shadow');
+                btn.classList.add('text-slate-600', 'hover:text-brand-dark', 'hover:bg-slate-200');
+            });
+
+            // Show the selected card and make the selected tab BLUE
+            if (tab === 'student') {
+                document.getElementById('studentFormCard').classList.remove('hidden');
+                const btn = document.getElementById('tabStudentBtn');
+                btn.classList.remove('text-slate-600', 'hover:text-brand-dark', 'hover:bg-slate-200');
+                btn.classList.add('bg-brand-blue', 'text-white', 'shadow');
+            } else if (tab === 'tutor') {
+                document.getElementById('tutorFormCard').classList.remove('hidden');
+                const btn = document.getElementById('tabTutorBtn');
+                btn.classList.remove('text-slate-600', 'hover:text-brand-dark', 'hover:bg-slate-200');
+                btn.classList.add('bg-brand-blue', 'text-white', 'shadow');
+            } else if (tab === 'requirement') {
+                document.getElementById('requirementFormCard').classList.remove('hidden');
+                const btn = document.getElementById('tabRequirementBtn');
+                btn.classList.remove('text-slate-600', 'hover:text-brand-dark', 'hover:bg-slate-200');
+                btn.classList.add('bg-brand-blue', 'text-white', 'shadow');
+                checkUserLoginState();
+            }
         }
 
 
@@ -1690,6 +1924,148 @@
             }
         }
 
+        const STUDENT_HELPLINE_PLAN_PRICES = {
+            "FREE": 0,
+            "PRIME": 5000,
+            "PRO": 300,
+            "PREMIUM": 6000,
+            "GENX": 1000,
+            "GENX PRO": 3000
+        };
+
+        const STUDENT_HELPLINE_PLAN_DETAILS = {
+            "FREE": "Ask any 1 question on 1 particular topic from 1 chapter of 1 subject. Available only once per applicant.",
+            "PRIME": "Regular weekly classes (1 topic per week) with systematic syllabus coverage for the academic year.",
+            "PRO": "Guaranteed 25–30 minute session for 1 Question of 1 Topic of 1 Chapter.",
+            "PREMIUM": "Guaranteed weekly 1 session for your preferred Question/Topic/Chapter/Subject.",
+            "GENX": "Includes 5 PRO sessions and all Pro Plan features.",
+            "GENX PRO": "Includes 15 PRO sessions and all Pro Plan features."
+        };
+
+        function syncStudentHelplineCourseToRegistration() {
+            const course = document.getElementById('stuHelplineCourse')?.value || '';
+            const std = document.getElementById('stu_std');
+            const stream = document.getElementById('stu_stream');
+            if (!course || !std || !stream) return;
+
+            const parts = course.split(' ');
+            const classPart = parts[0];
+            const streamPart = parts.slice(1).join(' ');
+            std.value = classPart === 'XI' ? 'FYJC (11th)' : 'SYJC (12th)';
+            stream.value = streamPart.charAt(0) + streamPart.slice(1).toLowerCase();
+        }
+
+        function toggleStudentHelpline() {
+            const choice = document.getElementById('stuHelplineRegister')?.value;
+            const details = document.getElementById('studentHelplineDetails');
+            const plan = document.getElementById('stuHelplinePlan');
+            const course = document.getElementById('stuHelplineCourse');
+            const subject = document.getElementById('stuHelplineSubject');
+            const count = document.getElementById('stuHelplineSubjectCount');
+
+            if (!details) return;
+
+            const enabled = choice === 'yes';
+            details.classList.toggle('hidden', !enabled);
+
+            [plan, course, subject, count].forEach(el => {
+                if (el) el.required = enabled;
+            });
+
+            const existingSubject = document.getElementById('stu_subject');
+            if (existingSubject) {
+                existingSubject.required = !enabled;
+                if (enabled) {
+                    const helplineSubject = document.getElementById('stuHelplineSubject')?.value.trim() || '';
+                    if (helplineSubject) existingSubject.value = helplineSubject;
+                }
+            }
+
+            if (enabled) syncStudentHelplineCourseToRegistration();
+
+            if (!enabled) {
+                if (plan) plan.value = '';
+                if (course) course.value = '';
+                if (subject) subject.value = '';
+                if (count) count.value = '';
+                updateStudentHelplinePricing();
+            }
+        }
+
+        function updateStudentHelplinePricing() {
+            const plan = document.getElementById('stuHelplinePlan')?.value || '';
+            const count = parseInt(document.getElementById('stuHelplineSubjectCount')?.value || '0', 10);
+            const pricePerSubject = STUDENT_HELPLINE_PLAN_PRICES[plan] ?? 0;
+            const total = plan && count ? pricePerSubject * count : 0;
+
+            const summary = document.getElementById('selectedHelplinePlanSummary');
+            const title = document.getElementById('selectedHelplinePlanTitle');
+            const detail = document.getElementById('selectedHelplinePlanText');
+            const calculation = document.getElementById('studentHelplineCalculation');
+            const calculationText = document.getElementById('studentHelplineCalculationText');
+            const qr = document.getElementById('studentHelplineQr');
+            const qrNote = document.getElementById('studentHelplineQrNote');
+
+            if (summary && title && detail) {
+                if (plan) {
+                    summary.classList.remove('hidden');
+                    const optionText = document.querySelector(`#stuHelplinePlan option[value="${CSS.escape(plan)}"]`)?.textContent || plan;
+                    title.textContent = optionText;
+                    detail.textContent = STUDENT_HELPLINE_PLAN_DETAILS[plan] || '';
+                } else {
+                    summary.classList.add('hidden');
+                }
+            }
+
+            if (calculation) calculation.textContent = `₹${total.toLocaleString('en-IN')}`;
+            if (calculationText) {
+                calculationText.textContent = plan && count
+                    ? `${plan} plan: ₹${pricePerSubject.toLocaleString('en-IN')} × ${count} subject${count > 1 ? 's' : ''}`
+                    : 'Choose a plan and number of subjects.';
+            }
+
+            if (qr) {
+                if (plan && count && total > 0) {
+                    const upiUri = `upi://pay?pa=verizon@upi&pn=GuruConnect&am=${total}&cu=INR`;
+                    qr.src = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=${encodeURIComponent(upiUri)}`;
+                    qrNote.textContent = `Scan to pay ₹${total.toLocaleString('en-IN')} to Verizon@UPI.`;
+                } else {
+                    qr.removeAttribute('src');
+                    qrNote.textContent = plan === 'FREE'
+                        ? 'FREE PLAN selected — no payment is required.'
+                        : 'Select a paid plan and number of subjects to generate the payment QR.';
+                }
+            }
+        }
+
+        function payStudentHelplineViaUpi() {
+            const plan = document.getElementById('stuHelplinePlan')?.value || '';
+            const count = parseInt(document.getElementById('stuHelplineSubjectCount')?.value || '0', 10);
+            const pricePerSubject = STUDENT_HELPLINE_PLAN_PRICES[plan] ?? 0;
+            const amount = pricePerSubject * count;
+
+            if (!plan || !count) {
+                alert('Please select a Helpline Plan and number of subjects first.');
+                return;
+            }
+
+            if (amount <= 0) {
+                alert('FREE PLAN selected. No payment is required.');
+                return;
+            }
+
+            const upiUri = `upi://pay?pa=verizon@upi&pn=GuruConnect&am=${amount}&cu=INR`;
+            const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+            if (isMobile) {
+                // Native UPI intent. This lets the phone choose an installed UPI app.
+                window.location.href = upiUri;
+            } else {
+                // Desktop fallback: open the existing QR modal with the calculated amount.
+                openUpiQrModal(amount);
+            }
+        }
+
         function handleStudentFormSubmit(e) {
             e.preventDefault();
             const name = document.getElementById('stu_name').value.trim();
@@ -1699,9 +2075,52 @@
             const requestedSubject = document.getElementById('stu_subject').value.trim();
             const subject = validSubjectForStream(stream, requestedSubject, Date.now());
 
+            const helplineChoice = document.getElementById('stuHelplineRegister')?.value || 'no';
+            let helplineData = {
+                registered: false,
+                plan: '',
+                course: '',
+                subject: '',
+                subjectCount: 0,
+                amount: 0
+            };
+
+            if (helplineChoice === 'yes') {
+                const helplinePlan = document.getElementById('stuHelplinePlan')?.value || '';
+                const helplineCourse = document.getElementById('stuHelplineCourse')?.value || '';
+                const helplineSubject = document.getElementById('stuHelplineSubject')?.value.trim() || '';
+                const helplineCount = parseInt(document.getElementById('stuHelplineSubjectCount')?.value || '0', 10);
+
+                if (!helplinePlan || !helplineCourse || !helplineSubject || !helplineCount) {
+                    alert('Please complete the Helpline Plan, Course, Subject and Number of Subjects fields.');
+                    return;
+                }
+
+                const pricePerSubject = STUDENT_HELPLINE_PLAN_PRICES[helplinePlan] ?? 0;
+                helplineData = {
+                    registered: true,
+                    plan: helplinePlan,
+                    course: helplineCourse,
+                    subject: helplineSubject,
+                    subjectCount: helplineCount,
+                    amount: pricePerSubject * helplineCount
+                };
+            }
+
+            const helplinePhoto = document.getElementById('stu_helpline_photo')?.files?.[0]?.name || '';
+            const helplineCollegeId = document.getElementById('stu_helpline_college_id')?.files?.[0]?.name || '';
+            const helplineAadhaar = document.getElementById('stu_helpline_aadhaar')?.files?.[0]?.name || '';
+
             studentDirectoryList.unshift({
                 id: `GC-STU-${Date.now().toString().slice(-6)}`,
-                name, std: standard, stream, subject, phone, isDummy: false, registrationStatus: 'registered'
+                name, std: standard, stream, subject, phone,
+                helpline: helplineData,
+                helplineDocuments: {
+                    photo: helplinePhoto,
+                    collegeId: helplineCollegeId,
+                    aadhaar: helplineAadhaar
+                },
+                isDummy: false, registrationStatus: 'registered'
             });
 
             saveRegisteredDirectories();
