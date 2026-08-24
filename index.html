@@ -184,14 +184,21 @@
                     <span class="text-xs sm:text-sm font-bold text-slate-700">FILTER SUBJECT:</span>
                     <select id="subjectFilter" onchange="filterTutors()" class="w-full sm:w-auto bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm font-bold text-brand-dark focus:outline-none focus:border-emerald-600 shadow-sm">
                         <option value="All">All Subjects</option>
-                        <option value="Mathematics">Mathematics</option>
+                        <option value="English">English</option>
+                        <option value="Hindi">Hindi</option>
+                        <option value="Marathi">Marathi</option>
+                        <option value="Economics">Economics</option>
+                        <option value="Logic">Logic</option>
+                        <option value="Philosophy">Philosophy</option>
+                        <option value="History">History</option>
+                        <option value="Geography">Geography</option>
                         <option value="Physics">Physics</option>
                         <option value="Chemistry">Chemistry</option>
                         <option value="Biology">Biology</option>
-                        <option value="English">English</option>
-                        <option value="Computer Science">Computer Science</option>
-                        <option value="Economics">Economics</option>
-                        <option value="Accountancy">Accountancy</option>
+                        <option value="Maths">Maths</option>
+                        <option value="B.K.">B.K.</option>
+                        <option value="O.C.M.">O.C.M.</option>
+                        <option value="S.P.">S.P.</option>
                     </select>
                 </div>
             </div>
@@ -867,16 +874,58 @@
 
         let pendingEmailOtps = { student: "", tutor: "" };
 
-        // Mock Students Directory Data Generator
+        // Junior College subject rules. Every displayed profile is kept inside these stream-specific subjects.
+        const JC_SUBJECTS = {
+            Arts: ["English", "Hindi", "Marathi", "Economics", "Logic", "Philosophy", "History", "Geography"],
+            Science: ["Physics", "Chemistry", "Biology", "English", "Hindi", "Marathi", "Economics", "Geography", "Maths"],
+            Commerce: ["B.K.", "O.C.M.", "S.P.", "Economics", "English", "Hindi", "Marathi"]
+        };
+        const JC_STREAMS = ["Arts", "Science", "Commerce"];
+
+        function deterministicIndex(seed, length) {
+            let x = Math.abs(Number(seed) || 1);
+            x = (x * 9301 + 49297) % 233280;
+            return Math.floor((x / 233280) * length);
+        }
+
+        function validSubjectForStream(stream, subject, seed = 1) {
+            const subjects = JC_SUBJECTS[stream] || JC_SUBJECTS.Commerce;
+            const raw = String(subject || "").trim();
+            const exact = subjects.find(x => x.toLowerCase() === raw.toLowerCase());
+            if (exact) return exact;
+            return subjects[deterministicIndex(seed, subjects.length)];
+        }
+
+        function inferTutorStream(subject, seed = 1) {
+            const raw = String(subject || "").trim().toLowerCase();
+            for (const stream of JC_STREAMS) {
+                if ((JC_SUBJECTS[stream] || []).some(x => x.toLowerCase() === raw)) return stream;
+            }
+            return JC_STREAMS[deterministicIndex(seed, JC_STREAMS.length)];
+        }
+
+        function sanitizeStudentProfile(student, seed = 1) {
+            const stream = JC_STREAMS.includes(student.stream) ? student.stream : JC_STREAMS[deterministicIndex(seed, JC_STREAMS.length)];
+            return { ...student, stream, subject: validSubjectForStream(stream, student.subject, seed) };
+        }
+
+        function sanitizeTutorProfile(tutor, seed = 1) {
+            const stream = JC_STREAMS.includes(tutor.stream) ? tutor.stream : inferTutorStream(tutor.subject, seed);
+            return { ...tutor, stream, subject: validSubjectForStream(stream, tutor.subject, seed) };
+        }
+
+        // Illustrative Junior College student directory. Subjects are randomly varied but always valid for the displayed stream.
         let studentDirectoryList = [];
         const studentNames = ["Student naam hai mera", "Kalyani", "Aarav Sharma", "Priya Kulkarni", "Rahul Deshmukh", "Sneha Joshi", "Amit Patil", "Neha Shinde", "Rohit Verma"];
         for(let i=1; i<=150; i++) {
+            const stream = JC_STREAMS[deterministicIndex(i * 17, JC_STREAMS.length)];
+            const subject = validSubjectForStream(stream, "", i * 31);
             studentDirectoryList.push({
                 id: "GC-STU-" + (1000 + i),
                 name: studentNames[(i - 1) % studentNames.length],
-                std: "SYJC (12th)",
-                stream: "Commerce",
-                subject: i % 2 === 0 ? "MMK" : "Advanced Accounts",
+                std: i % 3 === 0 ? "FYJC (11th)" : "SYJC (12th)",
+                stream,
+                subject,
                 phone: "",
                 isDummy: true,
                 registrationStatus: "illustrative"
@@ -904,7 +953,7 @@
                             <span class="text-[10px] font-bold text-white/80">ID: ${stu.id}</span>
                         </div>
                         <h4 class="font-black text-white text-xl mt-1 tracking-tight">${stu.name}</h4>
-                        <p class="text-xs text-blue-100 mt-2 font-medium"><strong>JC Subjects:</strong> ${stu.subject}</p>
+                        <p class="text-xs text-blue-100 mt-2 font-medium"><strong>JC Subject:</strong> ${stu.subject}</p>
                     </div>
                     <div class="mt-6 pt-4 border-t border-white/20 flex items-center justify-between">
                         <span class="text-[11px] font-bold text-blue-200"><i class="fa-solid fa-shield-halved mr-1"></i>Protected</span>
@@ -952,22 +1001,27 @@
             }
         }
 
-        // Mock Tutors Directory Data & Renderer (Verified = Green Background, Badge = Golden with Blue Tick and Black Text)
+        // Mock Tutors Directory Data & Renderer. Subjects are restricted to the same JC stream rules.
         let tutorDirectoryList = [];
         const tutorNamesData = [
-            { name: "Kavita Mehta", subject: "Accountancy", rate: "₹650/hr", exp: "8 Years", verified: false },
-            { name: "Vikram Pillai", subject: "Chemistry", rate: "₹700/hr", exp: "9 Years", verified: false },
-            { name: "Sanjay Verma", subject: "Mathematics", rate: "₹800/hr", exp: "11 Years", verified: true },
-            { name: "Dr. Rajesh Sharma", subject: "Physics", rate: "₹750/hr", exp: "10 Years", verified: true },
-            { name: "Anjali Deshmukh", subject: "Biology", rate: "₹600/hr", exp: "6 Years", verified: false }
+            { name: "Kavita Mehta", subject: "B.K.", rate: "₹650/hr", exp: "8 Years", verified: false, stream: "Commerce" },
+            { name: "Vikram Pillai", subject: "Chemistry", rate: "₹700/hr", exp: "9 Years", verified: false, stream: "Science" },
+            { name: "Sanjay Verma", subject: "Maths", rate: "₹800/hr", exp: "11 Years", verified: true, stream: "Science" },
+            { name: "Dr. Rajesh Sharma", subject: "Physics", rate: "₹750/hr", exp: "10 Years", verified: true, stream: "Science" },
+            { name: "Anjali Deshmukh", subject: "History", rate: "₹600/hr", exp: "6 Years", verified: false, stream: "Arts" },
+            { name: "Meera Joshi", subject: "Economics", rate: "₹620/hr", exp: "7 Years", verified: false, stream: "Arts" },
+            { name: "Rakesh Patil", subject: "O.C.M.", rate: "₹680/hr", exp: "8 Years", verified: true, stream: "Commerce" },
+            { name: "Pooja Kulkarni", subject: "English", rate: "₹580/hr", exp: "5 Years", verified: false, stream: "Arts" }
         ];
-        
+
         for(let j=1; j<=108; j++) {
-            let base = tutorNamesData[(j - 1) % tutorNamesData.length];
+            const base = tutorNamesData[(j - 1) % tutorNamesData.length];
+            const stream = base.stream;
             tutorDirectoryList.push({
                 id: j,
-                name: base.name + (j > 5 ? " " + Math.ceil(j/5) : ""),
-                subject: base.subject,
+                name: base.name + (j > tutorNamesData.length ? " " + Math.ceil(j/tutorNamesData.length) : ""),
+                subject: validSubjectForStream(stream, base.subject, j),
+                stream,
                 price: base.rate,
                 experience: base.exp,
                 college: "Junior College Faculty",
@@ -984,10 +1038,18 @@
             const savedStudents = JSON.parse(localStorage.getItem('gc_registered_students') || '[]');
             const savedTutors = JSON.parse(localStorage.getItem('gc_registered_tutors') || '[]');
             if (Array.isArray(savedStudents)) {
-                savedStudents.forEach(s => { s.isDummy = false; s.registrationStatus = 'registered'; studentDirectoryList.unshift(s); });
+                savedStudents.forEach((s, idx) => {
+                    s = sanitizeStudentProfile(s, idx + 101);
+                    s.isDummy = false; s.registrationStatus = 'registered';
+                    studentDirectoryList.unshift(s);
+                });
             }
             if (Array.isArray(savedTutors)) {
-                savedTutors.forEach(t => { t.isDummy = false; t.registrationStatus = 'registered'; tutorDirectoryList.unshift(t); });
+                savedTutors.forEach((t, idx) => {
+                    t = sanitizeTutorProfile(t, idx + 201);
+                    t.isDummy = false; t.registrationStatus = 'registered';
+                    tutorDirectoryList.unshift(t);
+                });
             }
         } catch (e) { console.warn('Saved directory data could not be loaded.', e); }
 
@@ -1023,7 +1085,7 @@
                 card.innerHTML = `
                     <div>
                         <div class="flex justify-between items-start mb-3">
-                            <span class="text-[10px] font-black bg-amber-300 text-brand-dark px-3 py-1 rounded-full uppercase tracking-wider">${t.subject}</span>
+                            <span class="text-[10px] font-black bg-amber-300 text-brand-dark px-3 py-1 rounded-full uppercase tracking-wider">${t.subject} • ${t.stream}</span>
                             <span class="text-xs font-black text-amber-200"><i class="fa-solid fa-star mr-1"></i> 4.8</span>
                         </div>
                         <h4 class="font-black text-white text-xl mt-1 tracking-tight flex items-center gap-1.5 flex-wrap">
@@ -1473,7 +1535,8 @@
             if (!t) return;
 
             t.name = document.getElementById('editTutorName').value.trim() || t.name;
-            t.subject = document.getElementById('editTutorSubject').value.trim() || t.subject;
+            t.stream = JC_STREAMS.includes(t.stream) ? t.stream : inferTutorStream(t.subject, t.id || 1);
+            t.subject = validSubjectForStream(t.stream, document.getElementById('editTutorSubject').value.trim(), t.id || 1);
             t.price = document.getElementById('editTutorPrice').value.trim() || t.price;
             t.experience = document.getElementById('editTutorExp').value.trim() || t.experience;
             t.phone = document.getElementById('editTutorPhone').value.trim();
@@ -1510,8 +1573,8 @@
 
             s.name = document.getElementById('editStudentName').value.trim() || s.name;
             s.std = document.getElementById('editStudentStd').value.trim() || s.std;
-            s.stream = document.getElementById('editStudentStream').value.trim() || s.stream;
-            s.subject = document.getElementById('editStudentSubject').value.trim() || s.subject;
+            s.stream = JC_STREAMS.includes(document.getElementById('editStudentStream').value.trim()) ? document.getElementById('editStudentStream').value.trim() : s.stream;
+            s.subject = validSubjectForStream(s.stream, document.getElementById('editStudentSubject').value.trim(), s.id || 1);
             s.phone = document.getElementById('editStudentPhone').value.trim();
 
             renderStudentDirectory();
@@ -1633,7 +1696,8 @@
             const phone = document.getElementById('stu_phone').value.trim();
             const standard = document.getElementById('stu_std').value;
             const stream = document.getElementById('stu_stream').value;
-            const subject = document.getElementById('stu_subject').value.trim();
+            const requestedSubject = document.getElementById('stu_subject').value.trim();
+            const subject = validSubjectForStream(stream, requestedSubject, Date.now());
 
             studentDirectoryList.unshift({
                 id: `GC-STU-${Date.now().toString().slice(-6)}`,
@@ -1654,7 +1718,9 @@
         function handleTutorFormSubmit(e) {
             const name = document.getElementById('t_name').value.trim();
             const phone = document.getElementById('t_phone').value.trim();
-            const subject = document.getElementById('t_subject').value.trim();
+            const requestedSubject = document.getElementById('t_subject').value.trim();
+            const tutorStream = inferTutorStream(requestedSubject, Date.now());
+            const subject = validSubjectForStream(tutorStream, requestedSubject, Date.now());
             const price = document.getElementById('t_price').value.trim();
             const exp = document.getElementById('t_exp').value.trim();
             const utrInput = document.getElementById('txnIdInput');
@@ -1664,6 +1730,7 @@
                 id: Date.now(),
                 name,
                 subject,
+                stream: tutorStream,
                 price: price.includes('/') ? price : price + '/hr',
                 experience: exp,
                 college: document.getElementById('t_college')?.value.trim() || 'Junior College Faculty',
