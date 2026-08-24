@@ -120,9 +120,29 @@
 
 
     <!-- PUBLIC TUTOR PROFILE SHOWCASE MODAL -->
-    <div id="publicTutorProfileModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-[220] hidden items-center justify-center p-3 sm:p-5">
-        <div class="bg-white rounded-3xl shadow-2xl max-w-3xl w-full max-h-[92vh] overflow-y-auto border border-slate-200">
+    <div id="publicTutorProfileModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-[220] hidden items-center justify-center p-2 sm:p-5">
+        <div class="bg-white rounded-[1.75rem] sm:rounded-3xl shadow-2xl max-w-3xl w-full max-h-[94vh] overflow-y-auto border border-slate-200">
             <div id="publicTutorProfileContent"></div>
+        </div>
+    </div>
+
+
+    <!-- PRELISTED / ILLUSTRATIVE TUTOR BUSY MODAL -->
+    <div id="prelistedTutorBusyModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-[260] hidden items-center justify-center p-4">
+        <div class="w-full max-w-md rounded-[2rem] bg-white shadow-2xl overflow-hidden border border-slate-200">
+            <div class="bg-gradient-to-br from-slate-800 via-slate-900 to-slate-950 p-6 text-white text-center">
+                <div class="mx-auto w-20 h-20 rounded-3xl bg-white/10 border border-white/15 flex items-center justify-center shadow-lg">
+                    <i class="fa-solid fa-calendar-xmark text-4xl text-amber-300"></i>
+                </div>
+                <h3 class="mt-4 text-xl sm:text-2xl font-black">Tutor Currently Unavailable</h3>
+                <p class="mt-2 text-slate-300 text-xs sm:text-sm leading-6">This tutor is already too busy and is not FREE to take new assignments at the moment.</p>
+            </div>
+            <div class="p-5 sm:p-6">
+                <div class="rounded-2xl bg-amber-50 border border-amber-200 p-4 text-center">
+                    <p class="text-sm font-bold text-slate-700">Please explore the available registered tutors and choose a tutor who is currently accepting new students.</p>
+                </div>
+                <button onclick="closePrelistedTutorBusyModal()" class="mt-4 w-full bg-brand-blue hover:bg-blue-700 text-white font-black py-3.5 rounded-xl shadow-lg">OK, VIEW AVAILABLE TUTORS</button>
+            </div>
         </div>
     </div>
 
@@ -1173,7 +1193,7 @@
         // Put the supplied blue verified-tick image in the same GitHub
         // folder as index.html using this filename, or replace this
         // value with its raw GitHub URL.
-        const VERIFIED_TICK_LOGO_URL = "verified-tick.png";
+        const VERIFIED_TICK_LOGO_URL = "Blue%20Tick%201.jpg";
 
         function escapeHtml(value) {
             return String(value ?? "")
@@ -1226,15 +1246,16 @@
 
         function verifiedTickHtml(tutor, size = 'large') {
             if (!tutor || !tutor.verified) return '';
-            const box = size === 'large' ? 'w-16 h-16 sm:w-20 sm:h-20' : 'w-7 h-7';
-            const icon = size === 'large' ? 'text-2xl sm:text-3xl' : 'text-xs';
+            const imageBox = size === 'large'
+                ? 'w-20 h-20 sm:w-24 sm:h-24'
+                : 'w-8 h-8';
             return `
-                <div class="flex flex-col items-center gap-1" title="Verified Tutor">
-                    <div class="${box} rounded-full bg-blue-600 border-4 border-white shadow-xl flex items-center justify-center overflow-hidden">
-                        <img src="${VERIFIED_TICK_LOGO_URL}" alt="Verified" class="w-full h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
-                        <span class="${icon} text-white font-black hidden"><i class="fa-solid fa-check"></i></span>
+                <div class="flex flex-col items-center gap-1.5 shrink-0" title="Verified Tutor">
+                    <div class="${imageBox} rounded-2xl bg-white border-2 border-blue-500 shadow-lg flex items-center justify-center overflow-hidden">
+                        <img src="${VERIFIED_TICK_LOGO_URL}" alt="Verified Tutor" class="w-full h-full object-cover"
+                             onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=&quot;w-full h-full bg-blue-600 text-white flex items-center justify-center font-black text-2xl&quot;><i class=&quot;fa-solid fa-check&quot;></i></span>';">
                     </div>
-                    <span class="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-blue-700">Verified Tutor</span>
+                    ${size === 'large' ? '<span class="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-blue-700 text-center">Verified Tutor</span>' : ''}
                 </div>`;
         }
 
@@ -1649,12 +1670,12 @@
                         </div>
                         <h4 class="font-black text-white text-lg sm:text-xl mt-1 tracking-tight flex items-center gap-1.5 flex-wrap leading-tight">
                             ${t.name} 
-                            ${t.verified ? '<span class="inline-flex items-center justify-center w-7 h-7 bg-blue-600 text-white rounded-full text-sm shadow-lg ring-2 ring-white" title="Verified Tutor"><i class="fa-solid fa-check"></i></span>' : ''}
+                            ${t.verified ? `<span class="inline-flex items-center justify-center w-9 h-9 bg-white rounded-xl shadow-lg ring-2 ring-white overflow-hidden" title="Verified Tutor"><img src="${VERIFIED_TICK_LOGO_URL}" alt="Verified" class="w-full h-full object-cover"></span>` : ''}
                         </h4>
                         <p class="text-[11px] sm:text-xs ${t.verified ? 'text-emerald-100' : 'text-orange-100'} mt-2 font-medium leading-5">Experience: ${t.experience}<span class="hidden sm:inline"> | </span><span class="block sm:inline">Rate: ${t.price}</span></p>
                     </div>
                     <div class="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-white/20 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
-                        ${t.verified ? '<span class="inline-flex items-center gap-2 bg-blue-600 text-white text-[10px] sm:text-[11px] font-black px-2.5 sm:px-3 py-1.5 rounded-xl shadow-lg ring-1 ring-white/60"><span class="inline-flex items-center justify-center w-5 h-5 bg-white text-blue-600 rounded-full text-[10px]"><i class="fa-solid fa-check"></i></span> VERIFIED TUTOR</span>' : '<span class="text-[11px] font-bold text-orange-100">Junior College Faculty</span>'}
+                        ${t.verified ? `<span class="inline-flex items-center gap-1.5 bg-white text-blue-700 text-[10px] sm:text-[11px] font-black px-2.5 sm:px-3 py-1.5 rounded-xl shadow-lg ring-1 ring-blue-200"><img src="${VERIFIED_TICK_LOGO_URL}" alt="Verified" class="w-5 h-5 rounded-md object-cover"> VERIFIED TUTOR</span>` : '<span class="text-[11px] font-bold text-orange-100">Junior College Faculty</span>'}
                         <div class="grid grid-cols-2 gap-2 w-full sm:w-auto">
                             <button onclick="openPublicTutorProfile('${t.id}')" class="bg-white/15 hover:bg-white/25 border border-white/30 text-white font-black text-[10px] px-2.5 py-2.5 rounded-xl transition min-w-0">VIEW PROFILE</button>
                             <button onclick="connectWithTutor(${t.id})" class="bg-white hover:bg-slate-100 ${t.verified ? 'text-emerald-700' : 'text-brand-nagpurOrange'} font-black text-[10px] sm:text-xs px-2.5 py-2.5 rounded-xl transition shadow min-w-0">CONNECT</button>
@@ -1976,17 +1997,72 @@
             }
         }
 
+
+        function tutorContactHtml(tutor) {
+            if (!tutor) return '';
+            const email = String(tutor.email || '').trim();
+            const phone = String(tutor.phone || '').trim();
+            const digits = phone.replace(/\D/g, '');
+            const whatsappNumber = digits ? (digits.length === 10 ? '91' + digits : digits) : '';
+            const whatsappUrl = whatsappNumber
+                ? `https://wa.me/${whatsappNumber}?text=${encodeURIComponent('Hello ' + (tutor.name || 'Tutor') + ', I found your profile on Guru Connect and would like to discuss tuition.')}`
+                : '';
+
+            return `
+                <div class="mt-5 rounded-3xl border border-emerald-200 bg-emerald-50 p-4 sm:p-5">
+                    <div class="flex items-center gap-2 text-emerald-800 font-black text-xs sm:text-sm uppercase tracking-wider">
+                        <i class="fa-solid fa-address-card"></i> Tutor Contact Details
+                    </div>
+                    <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        ${email ? `<a href="mailto:${escapeHtml(email)}" class="flex items-center gap-3 bg-white border border-emerald-100 rounded-2xl p-3 hover:border-emerald-400 transition">
+                            <span class="w-10 h-10 rounded-xl bg-blue-50 text-brand-blue flex items-center justify-center shrink-0"><i class="fa-solid fa-envelope"></i></span>
+                            <span class="min-w-0"><span class="block text-[10px] font-black uppercase text-slate-500">Email</span><span class="block text-xs sm:text-sm font-bold text-slate-800 break-all">${escapeHtml(email)}</span></span>
+                        </a>` : ''}
+                        ${phone ? `<a href="tel:${escapeHtml(phone)}" class="flex items-center gap-3 bg-white border border-emerald-100 rounded-2xl p-3 hover:border-emerald-400 transition">
+                            <span class="w-10 h-10 rounded-xl bg-blue-50 text-brand-blue flex items-center justify-center shrink-0"><i class="fa-solid fa-phone"></i></span>
+                            <span class="min-w-0"><span class="block text-[10px] font-black uppercase text-slate-500">Phone / WhatsApp</span><span class="block text-xs sm:text-sm font-bold text-slate-800">${escapeHtml(phone)}</span></span>
+                        </a>` : ''}
+                        ${whatsappUrl ? `<a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 bg-white border border-emerald-100 rounded-2xl p-3 hover:border-emerald-400 transition">
+                            <span class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0"><i class="fa-brands fa-whatsapp text-xl"></i></span>
+                            <span class="min-w-0"><span class="block text-[10px] font-black uppercase text-slate-500">WhatsApp</span><span class="block text-xs sm:text-sm font-bold text-emerald-700">Chat with Tutor</span></span>
+                        </a>` : ''}
+                    </div>
+                </div>`;
+        }
+
+        function closePrelistedTutorBusyModal() {
+            const modal = document.getElementById('prelistedTutorBusyModal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        function showPrelistedTutorBusyModal() {
+            const modal = document.getElementById('prelistedTutorBusyModal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
+        }
+
         function openPublicTutorProfile(tutorId) {
             const tutor = tutorDirectoryList.find(t => String(t.id) === String(tutorId));
             if (!tutor) return;
 
             const viewer = getActiveViewer();
-            if (!viewer.isRegistered) {
-                showProtectedPopup('STUDENT REGISTRATION REQUIRED', 'Please register as a Student and log in first. Tutor profiles are protected and cannot be viewed by public visitors.', 'fa-user-graduate', `<button onclick="closeProtectedPopup(); document.getElementById('registrationSection')?.scrollIntoView({behavior:'smooth'}); switchTab('student');" class="w-full bg-brand-blue hover:bg-blue-700 text-white font-black py-3.5 rounded-xl text-xs">REGISTER AS STUDENT</button>`);
+
+            // Visitors and tutors cannot browse tutor profiles.
+            if (!viewer.isRegistered || viewer.role !== 'student') {
+                if (typeof openLoginModal === 'function') openLoginModal();
                 return;
             }
-            if (viewer.role !== 'student') {
-                showProtectedPopup('STUDENT ACCESS REQUIRED', 'Only a registered Student can view Tutor Profile Showcases.', 'fa-lock');
+
+            // Prelisted / illustrative tutors are intentionally not treated as
+            // organically registered tutors. They remain visible in the directory
+            // as showcase examples but cannot be opened or connected to.
+            if (tutor.isDummy !== false) {
+                showPrelistedTutorBusyModal();
                 return;
             }
 
@@ -1994,60 +2070,100 @@
             const content = document.getElementById('publicTutorProfileContent');
             if (!modal || !content) return;
 
-            const canConnect = viewer.isRegistered && viewer.role === 'student' && !tutor.isDummy;
+            const verified = tutor.verified === true;
+            const canConnect = !tutor.connectionDisabled;
+
+            const theme = verified ? {
+                shell: 'bg-gradient-to-br from-blue-50 via-white to-indigo-50',
+                hero: 'bg-gradient-to-br from-blue-950 via-blue-800 to-indigo-700',
+                accent: 'text-blue-700',
+                soft: 'bg-blue-50 border-blue-200',
+                button: 'bg-blue-700 hover:bg-blue-800',
+                badge: 'bg-white/15 border-white/25 text-blue-50',
+                ring: 'ring-blue-400/50'
+            } : {
+                shell: 'bg-gradient-to-br from-slate-50 via-white to-slate-100',
+                hero: 'bg-gradient-to-br from-slate-800 via-slate-700 to-slate-900',
+                accent: 'text-slate-700',
+                soft: 'bg-slate-50 border-slate-200',
+                button: 'bg-slate-800 hover:bg-slate-900',
+                badge: 'bg-white/10 border-white/20 text-slate-100',
+                ring: 'ring-slate-300/60'
+            };
 
             content.innerHTML = `
-                <div class="bg-gradient-to-r from-brand-dark via-slate-900 to-brand-blue text-white p-5 sm:p-7">
-                    <div class="flex justify-between items-start gap-4">
-                        <div>
-                            <span class="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-3 py-1.5 text-[10px] font-black uppercase tracking-wider">
-                                <i class="fa-solid fa-chalkboard-user"></i> Tutor Profile Showcase
-                            </span>
-                            <h3 class="text-2xl sm:text-3xl font-black mt-3">${escapeHtml(tutor.name)}</h3>
-                            <p class="text-blue-100 text-xs sm:text-sm mt-1">${escapeHtml(tutor.subject || 'Junior College Tutor')} • ${escapeHtml(tutor.stream || '')}</p>
-                        </div>
-                        <button onclick="closePublicTutorProfile()" class="w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center">
-                            <i class="fa-solid fa-xmark"></i>
-                        </button>
-                    </div>
-                </div>
+                <div class="${theme.shell}">
+                    <div class="${theme.hero} text-white relative overflow-hidden p-5 sm:p-7">
+                        <div class="absolute -top-20 -right-20 w-52 h-52 rounded-full bg-white/10 blur-2xl"></div>
+                        <div class="absolute -bottom-24 -left-16 w-56 h-56 rounded-full bg-blue-400/10 blur-3xl"></div>
 
-                <div class="p-5 sm:p-7">
-                    <div class="grid grid-cols-1 sm:grid-cols-[auto_1fr_auto] gap-5 items-center">
-                        <div class="flex justify-center">${profilePhotoHtml(tutor.photoData, tutor.name, 'tutor')}</div>
-                        <div>
-                            <div class="flex flex-wrap items-center gap-2">
-                                <span class="bg-blue-50 text-brand-blue border border-blue-200 px-3 py-1.5 rounded-full text-xs font-black">${escapeHtml(tutor.subject)}</span>
-                                ${tutor.verified ? '<span class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-xs font-black"><i class="fa-solid fa-circle-check mr-1"></i> VERIFIED</span>' : ''}
+                        <div class="relative flex items-start justify-between gap-3">
+                            <div>
+                                <span class="inline-flex items-center gap-2 ${theme.badge} border rounded-full px-3 py-1.5 text-[10px] font-black uppercase tracking-wider">
+                                    <i class="fa-solid fa-chalkboard-user"></i>
+                                    ${verified ? 'Verified Tutor Profile' : 'Tutor Profile Showcase'}
+                                </span>
+                                <h3 class="text-2xl sm:text-3xl font-black mt-3">${escapeHtml(tutor.name)}</h3>
+                                <p class="text-white/80 text-xs sm:text-sm mt-1">${escapeHtml(tutor.subject || 'Junior College Tutor')} • ${escapeHtml(tutor.stream || '')}</p>
                             </div>
-                            <p class="text-slate-600 text-sm mt-3"><strong>${escapeHtml(tutor.experience || '')}</strong> teaching experience • <strong>${escapeHtml(tutor.price || '')}</strong></p>
-                            <p class="text-slate-500 text-xs mt-2">${escapeHtml(tutor.teachingCollege || tutor.college || '')}</p>
+                            <button onclick="closePublicTutorProfile()" class="w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
                         </div>
-                        ${verifiedTickHtml(tutor, 'large')}
+
+                        <div class="relative mt-6 flex flex-col sm:flex-row items-center sm:items-end gap-5">
+                            <div class="relative">
+                                ${profilePhotoHtml(tutor.photoData, tutor.name, 'tutor')}
+                                ${verified ? `<div class="absolute -bottom-3 -right-3 bg-white rounded-2xl p-1.5 shadow-xl ring-2 ${theme.ring}">
+                                    <img src="${VERIFIED_TICK_LOGO_URL}" alt="Verified Tutor" class="w-11 h-11 rounded-xl object-cover">
+                                </div>` : ''}
+                            </div>
+                            <div class="text-center sm:text-left flex-1">
+                                <div class="flex flex-wrap justify-center sm:justify-start items-center gap-2">
+                                    <span class="bg-white/15 border border-white/20 px-3 py-1.5 rounded-full text-[10px] sm:text-xs font-black">${escapeHtml(tutor.experience || 'Tutor')}</span>
+                                    <span class="bg-white/15 border border-white/20 px-3 py-1.5 rounded-full text-[10px] sm:text-xs font-black">${escapeHtml(tutor.price || '')}</span>
+                                    ${verified ? '<span class="bg-white text-blue-700 px-3 py-1.5 rounded-full text-[10px] font-black"><i class="fa-solid fa-circle-check mr-1"></i> VERIFIED</span>' : '<span class="bg-white/10 text-white px-3 py-1.5 rounded-full text-[10px] font-black">REGISTERED TUTOR</span>'}
+                                </div>
+                                <p class="text-white/70 text-xs mt-3">${escapeHtml(tutor.teachingCollege || tutor.college || '')}</p>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        ${dashboardField('Educational Qualification', tutor.qualification, 'fa-graduation-cap')}
-                        ${dashboardField('College in Which Teaching', tutor.teachingCollege || tutor.college, 'fa-school')}
-                        ${dashboardField('Residential Address', tutor.address, 'fa-location-dot')}
-                        ${dashboardField('Subject Expertise', tutor.subject, 'fa-book-open')}
-                        ${dashboardField('Experience', tutor.experience, 'fa-briefcase')}
-                        ${dashboardField('Rate / Hour', tutor.price, 'fa-indian-rupee-sign')}
-                    </div>
+                    <div class="p-5 sm:p-7">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            ${dashboardField('Educational Qualification', tutor.qualification, 'fa-graduation-cap')}
+                            ${dashboardField('College in Which Teaching', tutor.teachingCollege || tutor.college, 'fa-school')}
+                            ${dashboardField('Residential Address', tutor.address, 'fa-location-dot')}
+                            ${dashboardField('Subject Expertise', tutor.subject, 'fa-book-open')}
+                            ${dashboardField('Experience', tutor.experience, 'fa-briefcase')}
+                            ${dashboardField('Rate / Hour', tutor.price, 'fa-indian-rupee-sign')}
+                        </div>
 
-                    <div class="mt-5 bg-blue-50 border border-blue-200 rounded-3xl p-5">
-                        <h4 class="font-black text-brand-blue text-sm uppercase tracking-wider"><i class="fa-solid fa-user-tie mr-1"></i> About Me</h4>
-                        <p class="mt-3 text-sm sm:text-base text-slate-700 leading-7 whitespace-pre-line">${escapeHtml(tutor.aboutMe || 'This tutor has not added an About Me description yet.')}</p>
-                    </div>
+                        <div class="mt-5 ${theme.soft} border rounded-3xl p-5">
+                            <h4 class="${theme.accent} font-black text-sm uppercase tracking-wider">
+                                <i class="fa-solid fa-user-tie mr-1"></i> About Me
+                            </h4>
+                            <p class="mt-3 text-sm sm:text-base text-slate-700 leading-7 whitespace-pre-line">${escapeHtml(tutor.aboutMe || 'This tutor has not added an About Me description yet.')}</p>
+                        </div>
 
-                    <div class="mt-5 flex flex-wrap gap-3 text-xs font-bold">
-                        <span class="bg-slate-100 text-slate-700 px-3 py-2 rounded-xl"><i class="fa-solid fa-calendar-days mr-1 text-brand-blue"></i>Registered: ${escapeHtml(formatRegistrationDate(tutor.registrationDate))}</span>
-                        <span class="bg-slate-100 text-slate-700 px-3 py-2 rounded-xl"><i class="fa-solid fa-file-shield mr-1 text-brand-blue"></i>College ID: ${escapeHtml(tutor.collegeIdName || 'Not uploaded')}</span>
-                    </div>
+                        ${tutorContactHtml(tutor)}
 
-                    <div class="mt-6 flex flex-col sm:flex-row gap-3">
-                        ${canConnect ? `<button onclick="closePublicTutorProfile(); connectWithTutor('${tutor.id}')" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-black py-3.5 rounded-xl text-sm shadow"><i class="fa-solid fa-link mr-1"></i> CONNECT WITH TUTOR</button>` : ''}
-                        <button onclick="closePublicTutorProfile()" class="${canConnect ? 'sm:w-40' : 'w-full'} bg-slate-100 hover:bg-slate-200 text-slate-700 font-black py-3.5 rounded-xl text-sm">CLOSE PROFILE</button>
+                        <div class="mt-5 flex flex-wrap gap-2 text-[10px] sm:text-xs font-bold">
+                            <span class="bg-white border border-slate-200 text-slate-600 px-3 py-2 rounded-xl">
+                                <i class="fa-solid fa-calendar-days mr-1 ${theme.accent}"></i>
+                                Registered: ${escapeHtml(formatRegistrationDate(tutor.registrationDate))}
+                            </span>
+                            ${verified ? '<span class="bg-blue-50 border border-blue-200 text-blue-700 px-3 py-2 rounded-xl"><i class="fa-solid fa-shield-check mr-1"></i> Identity Verified</span>' : ''}
+                        </div>
+
+                        <div class="mt-6 flex flex-col sm:flex-row gap-3">
+                            ${canConnect ? `<button onclick="closePublicTutorProfile(); connectWithTutor('${tutor.id}')" class="flex-1 ${theme.button} text-white font-black py-3.5 rounded-xl text-sm shadow-lg">
+                                <i class="fa-solid fa-link mr-1"></i> CONNECT WITH TUTOR
+                            </button>` : ''}
+                            <button onclick="closePublicTutorProfile()" class="${canConnect ? 'sm:w-40' : 'w-full'} bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-black py-3.5 rounded-xl text-sm">
+                                CLOSE PROFILE
+                            </button>
+                        </div>
                     </div>
                 </div>`;
 
@@ -2113,6 +2229,12 @@
         }
 
         function connectWithTutor(tutorId) {
+            const targetTutor = tutorDirectoryList.find(t => String(t.id) === String(tutorId));
+            if (targetTutor && targetTutor.isDummy !== false) {
+                showPrelistedTutorBusyModal();
+                return;
+            }
+
             const tutor = tutorDirectoryList.find(t => String(t.id) === String(tutorId));
             if (!tutor) return;
             const viewer = getActiveViewer();
