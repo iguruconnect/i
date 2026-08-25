@@ -123,6 +123,23 @@
 </style>
 
 
+<style id="gc-profile-card-52-smaller">
+/* Tutor + Student directory profile cards: 52% smaller */
+.gc-profile-card{min-height:346px!important;padding:8px 9px 9px!important;border-radius:14px!important}
+.gc-profile-card .gc-card-top{transform:scale(.62);transform-origin:top center;margin-bottom:-12px}
+.gc-profile-card .gc-chip-row{transform:scale(.62);transform-origin:top center;height:29px!important;margin-bottom:-6px}
+.gc-profile-card .gc-photo-wrap{width:68px!important;height:68px!important;padding:4px!important;margin-bottom:5px!important}
+.gc-profile-card .gc-name-area{margin-bottom:6px!important}
+.gc-profile-card .gc-name-patch{padding:3px 8px 4px!important;border-radius:8px!important}
+.gc-profile-card .gc-name-patch h3{font-size:17px!important;line-height:1!important}
+.gc-profile-card .gc-blue-tick{width:14px!important;height:14px!important}
+.gc-profile-card .gc-subtitle{font-size:9px!important;gap:5px!important;margin-top:4px!important}.gc-profile-card .gc-subtitle span{width:16px!important;height:1px!important}
+.gc-profile-card .gc-info-grid{gap:4px!important;margin-bottom:6px!important}.gc-profile-card .gc-info-box{min-height:47px!important;padding:5px 6px!important;gap:5px!important;border-radius:8px!important}.gc-profile-card .gc-info-icon{width:28px!important;height:28px!important;flex-basis:28px!important;font-size:12px!important}.gc-profile-card .gc-info-box small{font-size:7px!important}.gc-profile-card .gc-info-box strong{font-size:10px!important;line-height:1.05!important;margin-top:2px!important}
+.gc-profile-card .gc-rating-strip{min-height:49px!important;border-radius:8px!important;margin-bottom:6px!important}.gc-profile-card .gc-rating-strip>div{padding:5px 7px!important;gap:5px!important}.gc-profile-card .gc-rating-strip>div>i{font-size:21px!important}.gc-profile-card .gc-rating-strip>div:nth-child(3)>i{font-size:16px!important}.gc-profile-card .gc-rating-strip small{font-size:7px!important}.gc-profile-card .gc-rating-strip strong{font-size:9px!important}.gc-profile-card .gc-rating-strip em{font-size:6px!important}.gc-profile-card .gc-rating-strip b{height:30px!important}
+.gc-profile-card .gc-subject-box{min-height:34px!important;padding:5px!important;margin-bottom:5px!important;border-radius:8px!important}.gc-profile-card .gc-subject-box div{font-size:7px!important}.gc-profile-card .gc-subject-box div i{font-size:11px!important}.gc-profile-card .gc-subject-box>strong{font-size:10px!important}.gc-profile-card .gc-action-row{gap:4px!important}.gc-profile-card .gc-view-btn,.gc-profile-card .gc-connect-btn{min-height:31px!important;font-size:9px!important;border-radius:7px!important;padding:4px 6px!important}.gc-profile-card .gc-full-connect{min-height:31px!important}
+@media(max-width:640px){.gc-profile-card{min-height:293px!important;padding:7px!important}.gc-profile-card .gc-photo-wrap{width:55px!important;height:55px!important}.gc-profile-card .gc-name-patch h3{font-size:14px!important}}
+</style>
+
 <style id="gc-aksen-overflow-fix">
 /* Aksen card typography + overflow protection */
 .gc-profile-card{
@@ -316,6 +333,30 @@
 }
 </style>
 
+
+<style id="compact-student-cards">
+.gc-student-card{min-height:0!important;padding:10px 12px 12px!important;border-radius:20px!important}
+.gc-student-card .gc-card-top{margin-bottom:4px}
+.gc-student-card .gc-chip-row{height:30px!important;margin-bottom:5px}
+.gc-student-card .gc-chip{width:48px!important;height:29px!important}
+.gc-student-card .gc-contactless{font-size:24px!important}
+.gc-student-card .gc-photo-wrap{width:78px!important;height:78px!important;padding:4px!important;margin-bottom:6px!important}
+.gc-student-card .gc-name-area{margin-bottom:7px!important}
+.gc-student-card .gc-name-patch{padding:3px 8px 4px!important;border-radius:8px!important}
+.gc-student-card .gc-name-patch h3{font-size:19px!important;line-height:1.05!important}
+.gc-student-card .gc-subtitle{font-size:9px!important;gap:5px!important;margin-top:4px!important}
+.gc-student-card .gc-subtitle span{width:16px!important}
+.gc-student-card .gc-info-grid{gap:4px!important;margin-bottom:7px!important}
+.gc-student-card .gc-info-box{min-height:54px!important;padding:5px 6px!important;gap:5px!important;border-radius:9px!important}
+.gc-student-card .gc-info-icon{width:27px!important;height:27px!important;flex-basis:27px!important;font-size:11px!important}
+.gc-student-card .gc-info-box small{font-size:7px!important}
+.gc-student-card .gc-info-box strong{font-size:10px!important;margin-top:2px!important}
+.gc-student-card .gc-subject-box{min-height:45px!important;padding:6px!important;margin-bottom:6px!important;border-radius:9px!important}
+.gc-student-card .gc-subject-box div{font-size:7px!important}
+.gc-student-card .gc-subject-box div i{font-size:11px!important}
+.gc-student-card .gc-subject-box>strong{font-size:11px!important}
+.gc-student-card .gc-connect-btn{min-height:34px!important;font-size:10px!important;border-radius:8px!important}
+</style>
 </head>
 <body class="bg-brand-lightBg text-brand-dark font-sans antialiased min-h-screen flex flex-col justify-between overflow-x-hidden relative">
 
@@ -1868,17 +1909,6 @@
                             <div><small>MEMBER SINCE</small><strong>${memberSince}</strong></div>
                         </div>
                     </div>
-
-                    <div class="gc-rating-strip">
-                        <div>
-                            <i class="fa-solid fa-star"></i>
-                            <div><small>RATING</small><strong>${rating} <em>(${reviews} reviews)</em></strong></div>
-                        </div>
-                        <b></b>
-                        <div>
-                            <i class="fa-solid fa-user-group"></i>
-                            <div><small>SUBJECTS</small><strong>${subjectsCount}</strong></div>
-                        </div>
                     </div>
 
                     <div class="gc-subject-box">
