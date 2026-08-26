@@ -1067,6 +1067,356 @@
 .gc-verified-card .gc-role-pill::after{content:"✓ Verified"!important;font-size:8px!important;font-weight:800!important;letter-spacing:0!important;text-transform:none!important;color:#1d4ed8!important;}
 .gc-verified-card .gc-blue-tick{width:23px!important;height:23px!important;min-width:23px!important;}
 </style>
+
+<style id="gc-mobile-comfort-fix">
+/*
+  Mobile readability fix:
+  - removes the old 6cm x 4cm / zoom-based mobile sizing
+  - uses the available phone width
+  - restores readable typography and touch targets
+  - keeps the 3 information cards in one row
+*/
+@media (max-width: 640px) {
+  #tutorGrid,
+  #studentGridContainer {
+    width: 100% !important;
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+    justify-items: stretch !important;
+    align-items: start !important;
+    gap: 14px !important;
+  }
+
+  .gc-profile-card {
+    zoom: 1 !important;
+    width: calc(100vw - 24px) !important;
+    max-width: 560px !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    padding: 12px !important;
+    border-radius: 18px !important;
+    margin: 0 auto !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+    justify-content: flex-start !important;
+  }
+
+  .gc-profile-card .gc-card-top {
+    height: 28px !important;
+    min-height: 28px !important;
+    margin: 0 0 5px !important;
+    transform: none !important;
+  }
+
+  .gc-profile-card .gc-role-pill {
+    height: 26px !important;
+    min-height: 26px !important;
+    padding: 4px 8px !important;
+    font-size: 10px !important;
+    gap: 5px !important;
+    border-radius: 13px !important;
+  }
+
+  .gc-profile-card .gc-role-icon {
+    width: 20px !important;
+    height: 20px !important;
+    font-size: 10px !important;
+  }
+
+  .gc-profile-card .gc-card-brand {
+    width: 94px !important;
+    min-width: 94px !important;
+    height: 25px !important;
+    min-height: 25px !important;
+    border-radius: 6px !important;
+  }
+
+  .gc-profile-card .gc-card-code {
+    font-size: 9px !important;
+  }
+
+  .gc-profile-card .gc-chip-row {
+    height: 28px !important;
+    min-height: 28px !important;
+    margin: 0 0 4px !important;
+    transform: none !important;
+    gap: 5px !important;
+  }
+
+  .gc-profile-card .gc-chip {
+    width: 44px !important;
+    height: 27px !important;
+    min-width: 44px !important;
+    border-radius: 5px !important;
+  }
+
+  .gc-profile-card .gc-contactless {
+    font-size: 22px !important;
+  }
+
+  .gc-profile-card .gc-profile-identity {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 9px !important;
+    height: auto !important;
+    min-height: 62px !important;
+    margin: 2px 0 8px !important;
+  }
+
+  .gc-profile-card .gc-profile-identity .gc-photo-wrap {
+    width: 62px !important;
+    height: 62px !important;
+    flex: 0 0 62px !important;
+    padding: 4px !important;
+    margin: 0 !important;
+  }
+
+  .gc-profile-card .gc-name-area {
+    min-width: 0 !important;
+    max-width: calc(100% - 71px) !important;
+    height: auto !important;
+    min-height: 0 !important;
+    align-items: flex-start !important;
+  }
+
+  .gc-profile-card .gc-name-patch {
+    max-width: 100% !important;
+    padding: 5px 9px !important;
+    border-radius: 8px !important;
+    gap: 5px !important;
+  }
+
+  .gc-profile-card .gc-name-patch h3 {
+    max-width: 100% !important;
+    font-size: 18px !important;
+    line-height: 1.08 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .gc-profile-card .gc-blue-tick {
+    width: 20px !important;
+    height: 20px !important;
+    min-width: 20px !important;
+    flex: 0 0 20px !important;
+  }
+
+  .gc-profile-card .gc-subtitle {
+    display: flex !important;
+    font-size: 9px !important;
+    gap: 5px !important;
+    margin-top: 4px !important;
+    justify-content: flex-start !important;
+  }
+
+  .gc-profile-card .gc-subtitle span {
+    width: 15px !important;
+  }
+
+  .gc-profile-card .gc-info-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 6px !important;
+    margin: 0 0 8px !important;
+    height: auto !important;
+  }
+
+  .gc-profile-card .gc-info-box {
+    min-width: 0 !important;
+    min-height: 66px !important;
+    height: auto !important;
+    padding: 7px 4px !important;
+    gap: 4px !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+  }
+
+  .gc-profile-card .gc-info-icon {
+    width: 31px !important;
+    height: 31px !important;
+    flex: 0 0 31px !important;
+    font-size: 13px !important;
+  }
+
+  .gc-profile-card .gc-info-box > div {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .gc-profile-card .gc-info-box small {
+    font-size: 8px !important;
+    line-height: 1.05 !important;
+    white-space: nowrap !important;
+  }
+
+  .gc-profile-card .gc-info-box strong {
+    font-size: 12px !important;
+    line-height: 1.08 !important;
+    margin-top: 4px !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .gc-profile-card .gc-rating-strip {
+    min-height: 58px !important;
+    height: auto !important;
+    margin: 0 0 8px !important;
+    border-radius: 11px !important;
+  }
+
+  .gc-profile-card .gc-rating-strip > div {
+    flex-direction: row !important;
+    justify-content: center !important;
+    padding: 7px 8px !important;
+    gap: 7px !important;
+  }
+
+  .gc-profile-card .gc-rating-strip > div > i {
+    font-size: 25px !important;
+  }
+
+  .gc-profile-card .gc-rating-strip > div:nth-child(3) > i {
+    font-size: 20px !important;
+  }
+
+  .gc-profile-card .gc-rating-strip small {
+    font-size: 8px !important;
+    white-space: nowrap !important;
+  }
+
+  .gc-profile-card .gc-rating-strip strong {
+    font-size: 12px !important;
+    white-space: nowrap !important;
+  }
+
+  .gc-profile-card .gc-rating-strip em {
+    font-size: 7px !important;
+  }
+
+  .gc-profile-card .gc-rating-strip b {
+    height: 38px !important;
+  }
+
+  .gc-profile-card .gc-subject-box {
+    min-height: 54px !important;
+    height: auto !important;
+    padding: 7px 8px !important;
+    margin: 0 0 8px !important;
+    border-radius: 10px !important;
+  }
+
+  .gc-profile-card .gc-subject-box div {
+    font-size: 8px !important;
+    gap: 5px !important;
+  }
+
+  .gc-profile-card .gc-subject-box div i {
+    font-size: 14px !important;
+  }
+
+  .gc-profile-card .gc-subject-box > strong {
+    font-size: 13px !important;
+    line-height: 1.1 !important;
+    margin-top: 3px !important;
+    white-space: normal !important;
+  }
+
+  .gc-profile-card .gc-student-contact-strip {
+    min-height: 48px !important;
+    height: auto !important;
+    margin: 0 0 8px !important;
+    border-radius: 10px !important;
+  }
+
+  .gc-profile-card .gc-student-contact-cell {
+    padding: 6px 4px !important;
+    gap: 5px !important;
+  }
+
+  .gc-profile-card .gc-student-contact-cell > i {
+    font-size: 13px !important;
+  }
+
+  .gc-profile-card .gc-student-contact-cell small {
+    font-size: 7px !important;
+  }
+
+  .gc-profile-card .gc-student-contact-cell strong {
+    font-size: 10px !important;
+    max-width: 100px !important;
+  }
+
+  .gc-profile-card .gc-action-row {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 7px !important;
+    width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .gc-profile-card .gc-view-btn,
+  .gc-profile-card .gc-connect-btn {
+    width: 100% !important;
+    min-height: 44px !important;
+    height: 44px !important;
+    padding: 9px 7px !important;
+    font-size: 12px !important;
+    border-radius: 9px !important;
+    white-space: nowrap !important;
+  }
+}
+
+/* Small phones: keep everything readable without horizontal overflow. */
+@media (max-width: 390px) {
+  .gc-profile-card {
+    width: calc(100vw - 18px) !important;
+    padding: 10px !important;
+  }
+
+  .gc-profile-card .gc-card-brand {
+    width: 82px !important;
+    min-width: 82px !important;
+  }
+
+  .gc-profile-card .gc-profile-identity .gc-photo-wrap {
+    width: 56px !important;
+    height: 56px !important;
+    flex-basis: 56px !important;
+  }
+
+  .gc-profile-card .gc-name-patch h3 {
+    font-size: 16px !important;
+  }
+
+  .gc-profile-card .gc-info-box {
+    min-height: 61px !important;
+  }
+
+  .gc-profile-card .gc-info-box small {
+    font-size: 7px !important;
+  }
+
+  .gc-profile-card .gc-info-box strong {
+    font-size: 11px !important;
+  }
+
+  .gc-profile-card .gc-rating-strip {
+    min-height: 54px !important;
+  }
+
+  .gc-profile-card .gc-view-btn,
+  .gc-profile-card .gc-connect-btn {
+    min-height: 42px !important;
+    height: 42px !important;
+    font-size: 11px !important;
+  }
+}
+</style>
+
 </head>
 <body class="bg-brand-lightBg text-brand-dark font-sans antialiased min-h-screen flex flex-col justify-between overflow-x-hidden relative">
 
