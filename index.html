@@ -5409,3 +5409,86 @@ html,body{width:100%!important;max-width:100%!important;overflow-x:hidden!import
 @media(max-width:390px){#tutorGrid,#studentGridContainer{grid-template-columns:minmax(0,calc(100vw - 24px))!important}.gc-profile-card{width:calc(100vw - 24px)!important;max-width:355px!important;height:222px!important;min-height:222px!important;max-height:222px!important}}
 @media(min-width:641px){.gc-profile-card{zoom:1!important;transform:none!important;width:100%!important;max-width:310px!important;min-height:0!important;height:auto!important}}
 </style>
+
+<style id="gc-final-swipe-zoom-fix">
+/* FINAL: prevent card drift/zoom while swiping on mobile */
+html, body { width:100% !important; max-width:100% !important; overflow-x:hidden !important; }
+body { touch-action: pan-y !important; }
+#publicWebsiteContent { width:100% !important; max-width:100% !important; overflow-x:hidden !important; }
+
+@media (max-width:640px){
+  #tutors, #studentsDirectory {
+    width:100% !important; max-width:100% !important;
+    padding-left:12px !important; padding-right:12px !important;
+    box-sizing:border-box !important; overflow-x:hidden !important;
+  }
+  #tutorGrid, #studentGridContainer {
+    width:100% !important; max-width:100% !important;
+    margin:0 !important; padding:0 !important;
+    display:grid !important;
+    grid-template-columns:minmax(0, 1fr) !important;
+    justify-content:center !important; justify-items:center !important;
+    gap:14px !important;
+    overflow:visible !important;
+    box-sizing:border-box !important;
+  }
+  .gc-profile-card {
+    zoom:1 !important;
+    transform:none !important;
+    transform-origin:center center !important;
+    width:min(355px, 100%) !important;
+    max-width:355px !important;
+    min-width:0 !important;
+    height:228px !important;
+    min-height:228px !important;
+    max-height:228px !important;
+    margin:0 auto !important;
+    box-sizing:border-box !important;
+    overflow:hidden !important;
+  }
+  /* Disable any old scaling applied to internal card rows. */
+  .gc-profile-card .gc-card-top,
+  .gc-profile-card .gc-chip-row,
+  .gc-profile-card .gc-profile-identity,
+  .gc-profile-card .gc-info-grid,
+  .gc-profile-card .gc-rating-strip,
+  .gc-profile-card .gc-subject-box,
+  .gc-profile-card .gc-student-contact-strip,
+  .gc-profile-card .gc-action-row {
+    transform:none !important;
+  }
+}
+
+@media (max-width:390px){
+  #tutors, #studentsDirectory { padding-left:10px !important; padding-right:10px !important; }
+  .gc-profile-card {
+    width:100% !important;
+    max-width:355px !important;
+    height:222px !important; min-height:222px !important; max-height:222px !important;
+  }
+}
+
+@media (min-width:641px){
+  .gc-profile-card { zoom:1 !important; transform:none !important; }
+}
+</style>
+<style id="gc-final-rating-only-and-swipe-fix">
+/* FINAL TARGETED REPAIR: card shows Rating only; preserve review logic internally */
+.gc-profile-card .gc-rating-strip em,
+.gc-profile-card .gc-rating-strip .review-count,
+.gc-profile-card .gc-rating-strip .reviews-count,
+.gc-profile-card .gc-rating-strip [class*="review-count"] { display:none!important; }
+.gc-profile-card .gc-rating-strip strong { white-space:nowrap!important; display:inline-flex!important; align-items:center!important; gap:3px!important; }
+/* prevent page zoom/drift on touch */
+html,body { max-width:100%!important; overflow-x:hidden!important; touch-action:pan-y!important; }
+#publicWebsiteContent { width:100%!important; max-width:100%!important; overflow-x:hidden!important; }
+@media(max-width:640px){
+  #tutorGrid,#studentGridContainer { width:100%!important; max-width:100%!important; margin:0!important; padding:0 12px!important; grid-template-columns:minmax(0,355px)!important; justify-content:center!important; justify-items:center!important; overflow:visible!important; }
+  .gc-profile-card { zoom:1!important; transform:none!important; width:100%!important; max-width:355px!important; min-width:0!important; height:228px!important; min-height:228px!important; max-height:228px!important; margin:0 auto!important; box-sizing:border-box!important; overflow:hidden!important; }
+}
+@media(max-width:390px){
+  #tutorGrid,#studentGridContainer { grid-template-columns:minmax(0,calc(100vw - 24px))!important; }
+  .gc-profile-card { width:calc(100vw - 24px)!important; max-width:355px!important; }
+}
+@media(min-width:641px){ .gc-profile-card { zoom:1!important; transform:none!important; } }
+</style>
