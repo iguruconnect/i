@@ -1787,6 +1787,98 @@
 .gc-profile-card .gc-blue-tick{width:28.5px!important;height:28.5px!important;min-width:28.5px!important;min-height:28.5px!important}
 @media(max-width:640px){.gc-profile-card .gc-name-patch h3{font-size:20px!important}.gc-verified-card .gc-role-pill{min-height:30px!important;padding:6px 10px!important;border-radius:15px!important}.gc-verified-card .gc-role-pill::after{font-size:10px!important}}
 </style>
+
+<style id="gc-final-layout-centering-fix">
+/* FINAL LAYOUT FIX
+   Keep tutor/student cards inside their grid column and centered on every viewport.
+   This overrides older fixed-size/zoom patches without changing the card content. */
+html, body {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#tutors,
+#studentsDirectory {
+  width: 100% !important;
+  max-width: 1280px !important;
+  box-sizing: border-box !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+#tutorGrid,
+#studentGridContainer {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  box-sizing: border-box !important;
+  justify-items: stretch !important;
+  align-items: start !important;
+}
+
+.gc-profile-card {
+  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  justify-self: center !important;
+  align-self: start !important;
+  transform: none !important;
+  zoom: 1 !important;
+  box-sizing: border-box !important;
+}
+
+@media (min-width: 641px) {
+  .gc-profile-card {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  #tutors,
+  #studentsDirectory {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  #tutorGrid,
+  #studentGridContainer {
+    width: 100% !important;
+    max-width: 100% !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    justify-items: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .gc-profile-card {
+    width: 100% !important;
+    max-width: 560px !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 12px !important;
+    zoom: 1 !important;
+    transform: none !important;
+  }
+}
+</style>
+
 </head>
 <body class="bg-brand-lightBg text-brand-dark font-sans antialiased min-h-screen flex flex-col justify-between overflow-x-hidden relative">
 
