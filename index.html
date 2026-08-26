@@ -1642,6 +1642,140 @@
 }
 </style>
 
+
+<style id="gc-final-color-name-badge-arrangement">
+/* ===== FINAL TUTOR / STUDENT VISUAL UPDATE ===== */
+
+/* 1) Unverified tutors -> Nagpur-style orange */
+.gc-tutor-card:not(.gc-verified-card),
+.gc-tutor-card.gc-unregistered-tutor-card,
+.gc-tutor-card.gc-registered-card:not(.gc-verified-card),
+.gc-unverified-tutor-card {
+  background: linear-gradient(145deg,#FF8A00 0%,#F56A00 48%,#D94A00 100%) !important;
+  border-color: rgba(255,214,120,.85) !important;
+  box-shadow:
+    0 18px 40px rgba(217,74,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.25) !important;
+}
+
+/* 2) Verified tutors -> shiny German/electric blue */
+.gc-tutor-card.gc-verified-card,
+.gc-verified-card {
+  background:
+    radial-gradient(circle at 20% 10%,rgba(255,255,255,.25),transparent 28%),
+    linear-gradient(145deg,#42A5FF 0%,#0878FF 42%,#0047B8 100%) !important;
+  border-color: rgba(190,225,255,.95) !important;
+  box-shadow:
+    0 18px 42px rgba(0,72,184,.38),
+    inset 0 1px 0 rgba(255,255,255,.38) !important;
+}
+
+/* 3) Student profiles -> red */
+.gc-student-card {
+  background:
+    radial-gradient(circle at 20% 10%,rgba(255,255,255,.18),transparent 28%),
+    linear-gradient(145deg,#FF4B4B 0%,#E21B23 48%,#A90012 100%) !important;
+  border-color: rgba(255,190,190,.9) !important;
+  box-shadow:
+    0 18px 42px rgba(169,0,18,.30),
+    inset 0 1px 0 rgba(255,255,255,.28) !important;
+}
+
+/* 4) Tutor name: slightly larger and still safely inside mobile card */
+.gc-profile-card .gc-name-patch h3 {
+  font-size: 20px !important;
+  line-height: 1.08 !important;
+}
+
+@media (max-width: 640px) {
+  .gc-profile-card .gc-name-patch h3 {
+    font-size: 20px !important;
+    line-height: 1.08 !important;
+    max-width: 170px !important;
+  }
+
+  /* 35% larger than the previous 21px mobile verified tick */
+  .gc-profile-card .gc-blue-tick {
+    width: 28.5px !important;
+    height: 28.5px !important;
+    min-width: 28.5px !important;
+    max-width: 28.5px !important;
+    flex: 0 0 28.5px !important;
+  }
+}
+
+/* 5) Verified badge:
+      TOP-LEFT = tutor/person icon + verified tick + "Verified"
+      Hide the old text/icon and rebuild the compact badge cleanly. */
+.gc-verified-card .gc-role-pill {
+  font-size: 0 !important;
+  padding: 5px 10px 5px 8px !important;
+  gap: 7px !important;
+  min-height: 30px !important;
+  border-radius: 16px !important;
+  color: #0759C9 !important;
+  background: #fff !important;
+  border: 1px solid rgba(255,255,255,.95) !important;
+  box-shadow: 0 5px 14px rgba(0,35,100,.20) !important;
+}
+
+/* Remove old role icon so there is only one clean tutor icon. */
+.gc-verified-card .gc-role-pill .gc-role-icon {
+  display: none !important;
+}
+
+/* Tutor icon on the TOP-LEFT */
+.gc-verified-card .gc-role-pill::before {
+  content: "\f007" !important;
+  font-family: "Font Awesome 6 Free" !important;
+  font-weight: 900 !important;
+  font-size: 14px !important;
+  line-height: 1 !important;
+  color: #0759C9 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Verified tick + Verified */
+.gc-verified-card .gc-role-pill::after {
+  content: "\f00c  Verified" !important;
+  font-family: "Font Awesome 6 Free" !important;
+  font-weight: 900 !important;
+  font-size: 11px !important;
+  line-height: 1 !important;
+  letter-spacing: .01em !important;
+  text-transform: none !important;
+  color: #0759C9 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+/* Keep the badge at the card's top-left, not drifting with inner content. */
+.gc-verified-card .gc-card-top {
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+}
+
+/* Mobile badge sizing */
+@media (max-width: 640px) {
+  .gc-verified-card .gc-role-pill {
+    min-height: 30px !important;
+    padding: 5px 9px 5px 7px !important;
+    gap: 6px !important;
+    border-radius: 15px !important;
+  }
+
+  .gc-verified-card .gc-role-pill::before {
+    font-size: 12px !important;
+  }
+
+  .gc-verified-card .gc-role-pill::after {
+    font-size: 9px !important;
+  }
+}
+</style>
+
 </head>
 <body class="bg-brand-lightBg text-brand-dark font-sans antialiased min-h-screen flex flex-col justify-between overflow-x-hidden relative">
 
