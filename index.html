@@ -1,5 +1,230 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"> <style id="gc-final-compact-brand-header">
+
+/* =========================================================
+   GURU CONNECT — COMPACT PREMIUM CARD HEADER
+   Logo centered + SIM/WiFi in same top line
+   Removes unnecessary vertical space
+   ========================================================= */
+
+.gc-profile-card .gc-card-top {
+    position: relative !important;
+    height: 42px !important;
+    min-height: 42px !important;
+    margin: 0 0 3px !important;
+    padding: 0 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    box-sizing: border-box !important;
+}
+
+
+/* GURU CONNECT — PERFECTLY CENTERED */
+.gc-profile-card .gc-brand,
+.gc-profile-card .gc-card-brand {
+    position: absolute !important;
+
+    left: 50% !important;
+    top: 50% !important;
+
+    transform: translate(-50%, -50%) !important;
+
+    margin: 0 !important;
+
+    z-index: 5 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+
+/* SIM + WiFi row moves INTO the same header line */
+.gc-profile-card .gc-chip-row {
+
+    position: absolute !important;
+
+    right: 0 !important;
+    top: 50% !important;
+
+    transform: translateY(-50%) !important;
+
+    height: 32px !important;
+    min-height: 32px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+
+    gap: 5px !important;
+
+    z-index: 6 !important;
+}
+
+
+/* SIM CHIP */
+.gc-profile-card .gc-chip {
+
+    width: 42px !important;
+    height: 27px !important;
+
+    min-width: 42px !important;
+
+    margin: 0 !important;
+
+    transform: none !important;
+}
+
+
+/* WiFi / contactless icon */
+.gc-profile-card .gc-contactless {
+
+    font-size: 22px !important;
+
+    width: 23px !important;
+    height: 23px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    margin: 0 !important;
+}
+
+
+/* Remove any old separate vertical chip spacing */
+.gc-profile-card > .gc-chip-row,
+.gc-profile-card .gc-card-top + .gc-chip-row {
+
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+
+/* If chip row was accidentally given flex-basis before */
+.gc-profile-card .gc-chip-row {
+
+    flex: 0 0 auto !important;
+}
+
+
+/* Remove unnecessary blank area after header */
+.gc-profile-card .gc-card-top + .gc-profile-identity {
+
+    margin-top: 0 !important;
+}
+
+
+/* Identity starts immediately after compact header */
+.gc-profile-card .gc-profile-identity {
+
+    margin-top: 0 !important;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 640px) {
+
+    .gc-profile-card .gc-card-top {
+
+        height: 38px !important;
+        min-height: 38px !important;
+
+        margin-bottom: 2px !important;
+    }
+
+
+    .gc-profile-card .gc-brand,
+    .gc-profile-card .gc-card-brand {
+
+        left: 50% !important;
+        top: 50% !important;
+
+        transform: translate(-50%, -50%) !important;
+    }
+
+
+    .gc-profile-card .gc-chip-row {
+
+        right: 0 !important;
+
+        top: 50% !important;
+
+        transform: translateY(-50%) !important;
+
+        height: 29px !important;
+        min-height: 29px !important;
+
+        gap: 4px !important;
+    }
+
+
+    .gc-profile-card .gc-chip {
+
+        width: 37px !important;
+        height: 24px !important;
+        min-width: 37px !important;
+    }
+
+
+    .gc-profile-card .gc-contactless {
+
+        width: 20px !important;
+        height: 20px !important;
+
+        font-size: 19px !important;
+    }
+
+
+    /* Completely remove accidental blank vertical space */
+    .gc-profile-card .gc-card-top + .gc-chip-row {
+        display: none !important;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 390px) {
+
+    .gc-profile-card .gc-card-top {
+
+        height: 36px !important;
+        min-height: 36px !important;
+    }
+
+    .gc-profile-card .gc-chip-row {
+
+        right: -1px !important;
+    }
+
+    .gc-profile-card .gc-chip {
+
+        width: 34px !important;
+        height: 22px !important;
+        min-width: 34px !important;
+    }
+
+    .gc-profile-card .gc-contactless {
+
+        font-size: 18px !important;
+    }
+}
+
+</style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
