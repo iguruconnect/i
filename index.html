@@ -2426,24 +2426,6 @@ body > header{
 .gc-tutor-card.gc-registered-card:not(.gc-verified-card){background:linear-gradient(145deg,#ffb347 0%,#f59e0b 52%,#ea580c 100%)!important;}
 .gc-student-card{background:linear-gradient(145deg,#d9f99d 0%,#a3e635 52%,#65a30d 100%)!important;}
 </style>
-
-<style id="gc-name-rating-visibility-final">
-/* Give names maximum practical width; keep rating compact. */
-.gc-profile-card .gc-name-patch{width:100%!important;max-width:none!important;min-width:0!important;padding-left:8px!important;padding-right:8px!important;}
-.gc-profile-card .gc-name-patch h3{flex:1 1 auto!important;min-width:0!important;max-width:none!important;font-size:14px!important;line-height:1.05!important;white-space:nowrap!important;overflow:visible!important;text-overflow:clip!important;}
-.gc-profile-card .gc-rating-strip{min-height:28px!important;padding:2px 5px!important;gap:3px!important;}
-.gc-profile-card .gc-rating-strip small{font-size:5px!important;line-height:1!important;}
-.gc-profile-card .gc-rating-strip strong{font-size:6.5px!important;line-height:1!important;}
-/* Student: shrink the hidden phone/contact area and use the white name patch for its content. */
-.gc-profile-card .gc-student-contact-strip{min-height:27px!important;height:27px!important;margin-bottom:3px!important;}
-.gc-profile-card .gc-student-contact-cell{padding:2px 3px!important;gap:3px!important;}
-.gc-profile-card .gc-student-contact-cell>i{font-size:11px!important;}
-.gc-profile-card .gc-student-contact-cell small{font-size:5px!important;}
-.gc-profile-card .gc-student-contact-cell strong{font-size:7px!important;}
-.gc-profile-card .gc-student-contact-divider{height:17px!important;}
-.gc-profile-card .gc-name-patch .gc-student-contact-cell{background:#fff!important;color:#111827!important;border-radius:7px!important;}
-.gc-profile-card .gc-name-patch .gc-student-contact-cell small,.gc-profile-card .gc-name-patch .gc-student-contact-cell strong{color:#111827!important;}
-</style>
 </head>
 <body class="bg-brand-lightBg text-brand-dark font-sans antialiased min-h-screen flex flex-col justify-between overflow-x-hidden relative">
 
@@ -5699,15 +5681,3 @@ html, body, button, input, select, textarea {
 </style>
 
 <style id="gc-inter-font-final">html,body,.gc-profile-card,.gc-profile-card *{font-family:Inter,Arial,sans-serif!important;} .gc-profile-card .gc-name-patch h3{font-family:"Roboto Condensed",Inter,Arial,sans-serif!important;}</style>
-
-<style id="final-card-layout-fix">
-.gc-profile-card .gc-name-patch{max-width:calc(100% - 72px)!important;min-width:0!important;overflow:hidden!important;box-sizing:border-box!important;padding-right:10px!important;}
-.gc-profile-card .gc-name-patch h3{max-width:100%!important;min-width:0!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;box-sizing:border-box!important;margin-right:0!important;}
-.gc-profile-card .gc-rating-strip{width:68px!important;min-width:68px!important;flex:0 0 68px!important;overflow:hidden!important;box-sizing:border-box!important;}
-.gc-profile-card .gc-rating-strip *{max-width:100%!important;overflow:hidden!important;text-overflow:ellipsis!important;box-sizing:border-box!important;}
-.gc-profile-card .gc-student-contact-strip{min-height:34px!important;height:34px!important;overflow:hidden!important;}
-.gc-profile-card .gc-student-contact-cell{padding:3px 4px!important;overflow:hidden!important;}
-.gc-profile-card .gc-student-contact-cell>div{min-width:0!important;max-width:100%!important;overflow:hidden!important;}
-.gc-profile-card .gc-student-contact-cell strong{color:#111827!important;max-width:100%!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;}
-.gc-profile-card .gc-student-contact-cell small{max-width:100%!important;overflow:hidden!important;}
-</style>
