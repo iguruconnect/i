@@ -989,6 +989,25 @@
 .gc-profile-card .gc-card-brand{flex-shrink:0!important}
 </style>
 
+<style id="gc-readable-40-percent-scale">
+/* Readability upgrade: 40% larger than the compact 6 x 4 cm cards */
+.gc-profile-card{
+  zoom:1.4!important;
+  transform:none!important;
+  margin-bottom:0!important;
+}
+/* Give the larger cards enough grid breathing room */
+#tutorGrid,#studentGridContainer{
+  align-items:start!important;
+  justify-items:center!important;
+}
+@media(max-width:900px){
+  .gc-profile-card{zoom:1.32!important;}
+}
+@media(max-width:640px){
+  .gc-profile-card{zoom:1.18!important;}
+}
+</style>
 </head>
 <body class="bg-brand-lightBg text-brand-dark font-sans antialiased min-h-screen flex flex-col justify-between overflow-x-hidden relative">
 
