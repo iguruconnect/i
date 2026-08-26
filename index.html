@@ -1879,6 +1879,105 @@ html, body {
 }
 </style>
 
+
+<style id="gc-root-width-final-fix">
+/* ROOT WIDTH FIX
+   The mobile page was being laid out inside a shrunken flex item instead of
+   the actual browser viewport. That made the hero/header/cards occupy only
+   the left side of the screen. Force the public UI to use the viewport width.
+*/
+html {
+  width: 100% !important;
+  min-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden !important;
+}
+
+body {
+  width: 100vw !important;
+  min-width: 100vw !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden !important;
+  align-items: stretch !important;
+}
+
+body > header,
+body > #publicWebsiteContent,
+body > footer {
+  width: 100vw !important;
+  max-width: none !important;
+  min-width: 100vw !important;
+  box-sizing: border-box !important;
+  flex: 0 0 100vw !important;
+}
+
+#publicWebsiteContent {
+  width: 100vw !important;
+  max-width: none !important;
+  min-width: 100vw !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+#publicWebsiteContent > section,
+#tutors,
+#studentsDirectory {
+  width: 100% !important;
+  max-width: 1280px !important;
+  box-sizing: border-box !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+#tutorGrid,
+#studentGridContainer {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 640px) {
+  #publicWebsiteContent > section,
+  #tutors,
+  #studentsDirectory {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    box-sizing: border-box !important;
+  }
+
+  #tutorGrid,
+  #studentGridContainer {
+    width: 100% !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    justify-items: center !important;
+    box-sizing: border-box !important;
+  }
+
+  .gc-profile-card {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+    zoom: 1 !important;
+    width: 100% !important;
+    max-width: 560px !important;
+    min-width: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box !important;
+  }
+}
+</style>
+
 </head>
 <body class="bg-brand-lightBg text-brand-dark font-sans antialiased min-h-screen flex flex-col justify-between overflow-x-hidden relative">
 
