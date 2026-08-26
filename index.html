@@ -5565,3 +5565,50 @@ body > header{
   }
 }
 </style>
+
+<style id="gc-final-tutor-name-width-fix">
+/* FINAL: give tutor names enough horizontal room so long names don't get clipped. */
+.gc-tutor-card .gc-name-area{
+  width:auto !important;
+  max-width:calc(100% - 52px) !important;
+  min-width:0 !important;
+  flex:1 1 auto !important;
+}
+.gc-tutor-card .gc-name-patch{
+  width:auto !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  padding-left:8px !important;
+  padding-right:8px !important;
+}
+.gc-tutor-card .gc-name-patch h3{
+  width:auto !important;
+  max-width:220px !important;
+  min-width:0 !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+  white-space:nowrap !important;
+  font-size:17px !important;
+}
+.gc-tutor-card .gc-blue-tick{
+  flex:0 0 28px !important;
+  width:28px !important;
+  height:28px !important;
+  min-width:28px !important;
+  max-width:28px !important;
+}
+
+@media(max-width:900px){
+  .gc-tutor-card .gc-name-area{max-width:calc(100% - 50px) !important;}
+  .gc-tutor-card .gc-name-patch h3{max-width:190px !important;font-size:16px !important;}
+}
+
+@media(max-width:640px){
+  .gc-tutor-card .gc-name-area{max-width:calc(100% - 48px) !important;}
+  .gc-tutor-card .gc-name-patch{padding-left:7px !important;padding-right:7px !important;}
+  .gc-tutor-card .gc-name-patch h3{max-width:170px !important;font-size:15px !important;}
+  .gc-tutor-card .gc-blue-tick{
+    flex-basis:28px !important;width:28px !important;height:28px !important;min-width:28px !important;
+  }
+}
+</style>
