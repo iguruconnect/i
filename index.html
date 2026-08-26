@@ -2420,6 +2420,12 @@ body > header{
 }
 </style>
 
+<style id="gc-user-color-theme-v2">
+/* User-requested card colors */
+.gc-tutor-card.gc-verified-card{background:linear-gradient(145deg,#38bdf8 0%,#7dd3fc 52%,#0ea5e9 100%)!important;}
+.gc-tutor-card.gc-registered-card:not(.gc-verified-card){background:linear-gradient(145deg,#ffb347 0%,#f59e0b 52%,#ea580c 100%)!important;}
+.gc-student-card{background:linear-gradient(145deg,#d9f99d 0%,#a3e635 52%,#65a30d 100%)!important;}
+</style>
 </head>
 <body class="bg-brand-lightBg text-brand-dark font-sans antialiased min-h-screen flex flex-col justify-between overflow-x-hidden relative">
 
@@ -3978,11 +3984,6 @@ body > header{
                             <i class="fa-solid fa-phone"></i>
                             <div><small>PHONE</small><strong>${maskPhoneNumber(stu.phone)}</strong></div>
                         </button>
-                        <span class="gc-student-contact-divider"></span>
-                        <div class="gc-student-contact-cell">
-                            <i class="fa-solid fa-book-open"></i>
-                            <div><small>SUBJECT</small><strong>${stu.subject || 'No requirement'}</strong></div>
-                        </div>
                     </div>
 
                     <div class="gc-action-row">
@@ -5565,3 +5566,118 @@ body > header{
   }
 }
 </style>
+<style id="gc-final-user-color-name-polish">
+/* Final requested profile-card color + readability polish. */
+.gc-tutor-card.gc-verified-card,
+.gc-verified-card{
+  background:#2563EB !important;
+  background-image:linear-gradient(135deg,#2563EB 0%,#1D4ED8 52%,#1E40AF 100%) !important;
+  color:#fff !important;
+}
+.gc-tutor-card.gc-registered-card,
+.gc-registered-card{
+  background:#C2410C !important;
+  background-image:linear-gradient(135deg,#EA580C 0%,#C2410C 55%,#9A3412 100%) !important;
+  color:#fff !important;
+}
+.gc-student-card{
+  background:#4D7C0F !important;
+  background-image:linear-gradient(135deg,#65A30D 0%,#4D7C0F 55%,#3F6212 100%) !important;
+  color:#fff !important;
+}
+
+/* Stronger white text/labels for readability on darker profiles. */
+.gc-profile-card .gc-name-patch h3,
+.gc-profile-card .gc-subtitle strong,
+.gc-profile-card .gc-info-box small,
+.gc-profile-card .gc-info-box strong,
+.gc-profile-card .gc-rating-strip small,
+.gc-profile-card .gc-rating-strip strong,
+.gc-profile-card .gc-student-contact-cell small,
+.gc-profile-card .gc-student-contact-cell strong{
+  color:#fff !important;
+  text-shadow:0 1px 2px rgba(0,0,0,.28) !important;
+}
+
+/* Give tutor/student name area more horizontal room; keep verified tick large. */
+.gc-profile-card .gc-name-area{
+  flex:1 1 auto !important;
+  width:100% !important;
+  max-width:calc(100% - 72px) !important;
+}
+.gc-profile-card .gc-name-patch{
+  width:100% !important;
+  min-width:0 !important;
+  padding:5px 10px !important;
+}
+.gc-profile-card .gc-name-patch h3{
+  width:100% !important;
+  max-width:none !important;
+  font-size:18px !important;
+  line-height:1.08 !important;
+}
+.gc-profile-card .gc-blue-tick{
+  width:36px !important;
+  height:36px !important;
+  min-width:36px !important;
+  min-height:36px !important;
+  max-width:36px !important;
+  max-height:36px !important;
+  flex:0 0 36px !important;
+}
+
+/* Student contact area now contains only the protected/hidden phone. */
+.gc-student-card .gc-student-contact-strip{
+  grid-template-columns:1fr !important;
+}
+.gc-student-card .gc-phone-cell{
+  width:100% !important;
+}
+
+@media(max-width:900px){
+  .gc-profile-card .gc-name-patch h3{font-size:16px !important;}
+}
+@media(max-width:640px){
+  .gc-profile-card .gc-name-area{max-width:calc(100% - 66px) !important;}
+  .gc-profile-card .gc-name-patch{padding:5px 8px !important;}
+  .gc-profile-card .gc-name-patch h3{font-size:15px !important;}
+  .gc-profile-card .gc-blue-tick{
+    width:31px !important;height:31px !important;min-width:31px !important;min-height:31px !important;
+    max-width:31px !important;max-height:31px !important;flex-basis:31px !important;
+  }
+}
+</style>
+
+<style id="gc-name-visibility-fix">
+.gc-profile-card .gc-name-patch h3,
+.gc-profile-card .gc-name-patch h3 * {
+  color:#111827 !important;
+  -webkit-text-fill-color:#111827 !important;
+  text-shadow:none !important;
+  opacity:1 !important;
+  visibility:visible !important;
+  font-weight:900 !important;
+}
+.gc-profile-card .gc-name-patch {
+  color:#111827 !important;
+  background:rgba(255,255,255,.94) !important;
+}
+</style>
+
+<style id="gc-tutor-name-rating-final">
+.gc-profile-card .gc-name-patch h3{font-family:"Roboto Condensed",Roboto,Arial,sans-serif!important;font-size:13px!important;font-weight:800!important;line-height:1.05!important;color:#111827!important;}
+.gc-profile-card .gc-rating-strip,.gc-profile-card .gc-rating-strip small,.gc-profile-card .gc-rating-strip strong,.gc-profile-card .gc-rating-strip i{color:#111827!important;}
+</style>
+
+<style id="gc-canva-font-readability">
+/* Global Canva-style typography for improved readability */
+html, body, button, input, select, textarea {
+  font-family: "Canva Sans", "Avenir Next", Avenir, Arial, sans-serif !important;
+  font-optical-sizing: auto;
+}
+.gc-profile-card, .gc-profile-card * {
+  font-family: "Canva Sans", "Avenir Next", Avenir, Arial, sans-serif !important;
+}
+</style>
+
+<style id="gc-inter-font-final">html,body,.gc-profile-card,.gc-profile-card *{font-family:Inter,Arial,sans-serif!important;} .gc-profile-card .gc-name-patch h3{font-family:"Roboto Condensed",Inter,Arial,sans-serif!important;}</style>
