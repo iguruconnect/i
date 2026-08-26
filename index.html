@@ -1,4 +1,186 @@
-<!DOCTYPE html>
+<style>
+/* ===== MOBILE-FIRST PROFILE CARDS ===== */
+@media (max-width: 600px) {
+
+  .gc-profile-card {
+    width: 92vw !important;
+    max-width: 360px !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 12px auto !important;
+    padding: 8px !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    border-radius: 14px !important;
+  }
+
+  .gc-profile-card .gc-card-inner {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  /* Avatar + name */
+  .gc-profile-card .gc-profile-identity {
+    width: 100% !important;
+    min-height: 48px !important;
+    margin: 3px 0 5px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 5px !important;
+  }
+
+  .gc-profile-card .gc-photo-wrap {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+  }
+
+  .gc-profile-card .gc-name-patch h3 {
+    font-size: 14px !important;
+    line-height: 1.05 !important;
+    max-width: 145px !important;
+  }
+
+  /* Details */
+  .gc-profile-card .gc-info-grid {
+    width: 100% !important;
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 4px !important;
+    margin-bottom: 5px !important;
+  }
+
+  .gc-profile-card .gc-info-box {
+    min-width: 0 !important;
+    min-height: 47px !important;
+    padding: 3px 2px !important;
+    box-sizing: border-box !important;
+  }
+
+  .gc-profile-card .gc-info-box small {
+    font-size: 5px !important;
+  }
+
+  .gc-profile-card .gc-info-box strong {
+    font-size: 8px !important;
+  }
+
+  /* Rating — no overlap */
+  .gc-profile-card .gc-rating-strip {
+    position: relative !important;
+    inset: auto !important;
+    transform: none !important;
+    width: 58% !important;
+    min-width: 150px !important;
+    max-width: 205px !important;
+    min-height: 38px !important;
+    margin: 0 auto 5px !important;
+  }
+
+  /* Subject */
+  .gc-profile-card .gc-subject-box {
+    width: 100% !important;
+    min-height: 34px !important;
+    margin-bottom: 5px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Buttons */
+  .gc-profile-card .gc-action-row {
+    width: 100% !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 4px !important;
+  }
+
+  .gc-profile-card .gc-view-btn,
+  .gc-profile-card .gc-connect-btn {
+    width: 100% !important;
+    min-height: 34px !important;
+    font-size: 9px !important;
+    padding: 6px 3px !important;
+  }
+}
+
+
+/* ===== NORMAL / UNVERIFIED TUTOR = WHITE ===== */
+
+.gc-tutor-card:not(.gc-verified-card),
+.gc-unverified-tutor-card {
+    background: #ffffff !important;
+    color: #102a43 !important;
+    border: 1px solid #d9e2ec !important;
+    box-shadow: 0 6px 18px rgba(16,42,67,.14) !important;
+}
+
+.gc-tutor-card:not(.gc-verified-card) .gc-info-box,
+.gc-tutor-card:not(.gc-verified-card) .gc-subject-box {
+    background: #f8fafc !important;
+    color: #102a43 !important;
+    border-color: #d9e2ec !important;
+}
+
+.gc-tutor-card:not(.gc-verified-card) .gc-view-btn {
+    background: #eef3f8 !important;
+    color: #173b72 !important;
+}
+
+.gc-tutor-card:not(.gc-verified-card) .gc-connect-btn {
+    background: #173b72 !important;
+    color: white !important;
+}
+
+
+/* ===== VERIFIED TUTOR = PREMIUM ROYAL BLUE ===== */
+
+.gc-verified-card {
+    background: linear-gradient(
+        145deg,
+        #2563eb 0%,
+        #1d4ed8 48%,
+        #172554 100%
+    ) !important;
+
+    box-shadow: 0 6px 18px rgba(23,37,84,.28) !important;
+}
+
+
+/* ===== VERIFIED BADGE ===== */
+
+.gc-verified-card .gc-role-pill {
+    font-size: 0 !important;
+    padding: 3px 7px !important;
+    background: white !important;
+    color: #1d4ed8 !important;
+    border-radius: 6px !important;
+}
+
+.gc-verified-card .gc-role-pill::after {
+    content: "✓ Verified" !important;
+    font-size: 8px !important;
+    font-weight: 800 !important;
+    text-transform: none !important;
+    color: #1d4ed8 !important;
+}
+
+
+/* ===== STUDENT = PEANUT GREEN ===== */
+
+.gc-student-card {
+    background: linear-gradient(
+        145deg,
+        #9aaa3b 0%,
+        #788f25 52%,
+        #566d18 100%
+    ) !important;
+}
+</style><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
