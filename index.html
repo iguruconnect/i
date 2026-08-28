@@ -7336,6 +7336,121 @@ body.gc-v3-profile-page{
   });
 })();
 </script>
+
+<!-- GURU CONNECT: FINAL STUDENT MORE PROFILE GLITCH FIX -->
+<script id="gc-final-student-more-fix">
+(function(){
+  /*
+   * FINAL FIX:
+   * Student MORE must never pass through the tutor-profile opener.
+   * The page contains several historical profile-handler patches, so this
+   * handler deliberately becomes the last authoritative student opener.
+   */
+
+  function gcOpenStudentProfileFinal(studentId){
+    var list = (typeof studentDirectoryList !== 'undefined' && Array.isArray(studentDirectoryList))
+      ? studentDirectoryList : [];
+    var student = list.find(function(s){
+      return String(s.id) === String(studentId);
+    });
+    if(!student) return;
+
+    var viewer = (typeof getActiveViewer === 'function') ? getActiveViewer() : null;
+
+    /* Registered student viewing their own profile -> dashboard. */
+    if(viewer && viewer.isRegistered && viewer.role === 'student' &&
+       String(viewer.phone || '').replace(/\D/g,'') === String(student.phone || '').replace(/\D/g,'')){
+      if(typeof openUserDashboard === 'function') openUserDashboard();
+      return;
+    }
+
+    /* Unregistered users cannot open student profile details. */
+    if(!viewer || !viewer.isRegistered){
+      if(typeof showProtectedPopup === 'function'){
+        showProtectedPopup(
+          'STUDENT PROFILE PROTECTED',
+          'Please register and verify your email before accessing student profiles.',
+          'fa-lock'
+        );
+      }
+      return;
+    }
+
+    /* Only a genuine registered tutor may open a genuine student profile. */
+    if(viewer.role !== 'tutor'){
+      if(typeof showProtectedPopup === 'function'){
+        showProtectedPopup(
+          'REGISTERED TUTOR ACCESS ONLY',
+          'Only a registered Tutor can access student profile information.',
+          'fa-user-tie'
+        );
+      }
+      return;
+    }
+
+    if(typeof isRealStudent === 'function' && !isRealStudent(student)){
+      if(typeof contactSentPopup === 'function'){
+        contactSentPopup();
+      } else if(typeof showProtectedPopup === 'function'){
+        showProtectedPopup(
+          'PROTECTED STUDENT PROFILE',
+          'Illustrative student profiles do not expose personal information.',
+          'fa-user-shield'
+        );
+      }
+      return;
+    }
+
+    /*
+     * Important: call the student renderer directly, NOT openFull() and NOT
+     * any tutor opener. This prevents the old tutor surface from appearing
+     * for even one frame before the student profile is rendered.
+     */
+    if(typeof studentFull === 'function'){
+      studentFull(student.id);
+      var modal = document.getElementById('gcV3FullProfileModal');
+      if(modal) modal.classList.add('open');
+      document.documentElement.classList.add('gc-profile-open');
+      document.body.classList.add('gc-profile-open','gc-v3-profile-page');
+    }
+  }
+
+  /* Replace the final public API with the student-only implementation. */
+  window.openStudentProfile = gcOpenStudentProfileFinal;
+
+  /*
+   * Capture both current MORE-card variants before their inline onclick
+   * handlers or older delegated handlers can execute.
+   */
+  document.addEventListener('click', function(e){
+    var btn = e.target && e.target.closest
+      ? e.target.closest(
+          '#studentGridContainer .gc-v4-student-more,' +
+          '#studentGridContainer .gc-clean-student-more,' +
+          '#studentGridContainer .gc-v3-student .gc-v3-more'
+        )
+      : null;
+
+    if(!btn) return;
+
+    var id = btn.getAttribute('data-student-id');
+
+    /* V3/V4 cards store the ID in their inline onclick instead. */
+    if(!id){
+      var onclick = btn.getAttribute('onclick') || '';
+      var match = onclick.match(/openStudentProfile\(['"]([^'"]+)['"]\)/);
+      if(match) id = match[1];
+    }
+
+    if(!id) return;
+
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    gcOpenStudentProfileFinal(id);
+  }, true);
+})();
+</script>
+
 </body>
 </html>
 <style id="gc-profile-fullscreen-final">
