@@ -2621,6 +2621,141 @@ html, body, button, input, select, textarea {
 .gc-v4-tutor .gc-v4-preview-meta, .gc-v4-tutor .gc-v4-preview-meta span,
 .gc-v4-tutor .gc-v4-preview-meta b { color:#fff !important; }
 </style>
+
+<style id="gc-final-uniform-profile-colors">
+/* FINAL UNIFORM PROFILE COLORS */
+.gc-v4-tutor, .gc-v4-tutor.gc-v4-verified, .gc-v4-tutor.gc-v4-registered,
+.gc-v3-tutor, .gc-v3-tutor-card, .gc-v4-tutor-head, .gc-v3-full-head.gc-v4-tutor-head {
+  background: #2563EB !important;
+  background-image: none !important;
+  color: #fff !important;
+  border-color: #2563EB !important;
+}
+.gc-v4-student, .gc-v3-student, .gc-v3-student-card,
+.gc-v3-full-head.gc-v4-student-head {
+  background: #DC2626 !important;
+  background-image: none !important;
+  color: #fff !important;
+  border-color: #DC2626 !important;
+}
+/* Ensure common profile/card wrappers inherit the role color */
+.gc-v4-tutor *:not(.gc-v4-preview-name h3), .gc-v3-tutor * { color: inherit; }
+.gc-v4-student *, .gc-v3-student * { color: inherit; }
+</style>
+
+<style id="gc-verified-tutor-final-fix">
+  /* Final verified-tutor badge: keep the supplied blue tick fixed beside the tutor name. */
+  .gc-clean-name-shell{
+    display:inline-flex!important;
+    align-items:center!important;
+    vertical-align:middle!important;
+    max-width:100%!important;
+  }
+  .gc-clean-tick{
+    position:relative!important;
+    z-index:5!important;
+    width:40px!important;
+    height:40px!important;
+    min-width:40px!important;
+    flex:0 0 40px!important;
+    padding:2px!important;
+    margin:0!important;
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    background:#fff!important;
+    border-radius:0 10px 10px 0!important;
+    box-sizing:border-box!important;
+  }
+  .gc-clean-tick img{
+    width:100%!important;
+    height:100%!important;
+    object-fit:contain!important;
+    display:block!important;
+  }
+  .gc-clean-verified-label{
+    display:inline-flex!important;
+    align-items:center!important;
+    gap:5px!important;
+    margin-top:5px!important;
+    padding:4px 8px!important;
+    border-radius:999px!important;
+    background:rgba(255,255,255,.16)!important;
+    border:1px solid rgba(255,255,255,.42)!important;
+    color:#fff!important;
+    font-size:8px!important;
+    line-height:1!important;
+    font-weight:950!important;
+    letter-spacing:.04em!important;
+    width:max-content!important;
+    max-width:100%!important;
+    box-sizing:border-box!important;
+  }
+  .gc-clean-verified-label i{font-size:9px!important}
+  .gc-clean-profile-head.verified .gc-clean-profile-role{
+    display:inline-flex!important;
+    align-items:center!important;
+    gap:5px!important;
+    font-weight:950!important;
+  }
+  .gc-clean-profile-head.verified .gc-clean-profile-role::before{
+    content:"✓"!important;
+    width:16px!important;
+    height:16px!important;
+    border-radius:50%!important;
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    background:#fff!important;
+    color:#173b91!important;
+    font-size:10px!important;
+    font-weight:1000!important;
+  }
+  @media(max-width:760px){
+    .gc-clean-tick{width:34px!important;height:34px!important;min-width:34px!important;flex-basis:34px!important}
+    .gc-clean-verified-label{font-size:7px!important;padding:3px 6px!important}
+  }
+</style>
+
+<style id="gc-complete-message-center-v2">
+/* ===== GURU CONNECT MESSAGE CENTER ===== */
+.gc-msg-overlay{position:fixed;inset:0;background:rgba(2,8,23,.72);backdrop-filter:blur(8px);z-index:10050;display:none;align-items:center;justify-content:center;padding:16px}
+.gc-msg-overlay.open{display:flex}
+.gc-msg-modal{width:min(980px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:24px;box-shadow:0 25px 70px rgba(0,0,0,.3)}
+.gc-msg-head{padding:18px 20px;background:linear-gradient(135deg,#0f2f63,#2563eb);color:#fff;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.gc-msg-head h3{font-size:20px;font-weight:900;margin:0}
+.gc-msg-body{padding:18px}
+.gc-msg-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.gc-msg-field{display:flex;flex-direction:column;gap:6px}
+.gc-msg-field.full{grid-column:1/-1}
+.gc-msg-field label{font-size:11px;font-weight:900;text-transform:uppercase;color:#475569;letter-spacing:.05em}
+.gc-msg-field select,.gc-msg-field input,.gc-msg-field textarea{width:100%;border:1px solid #cbd5e1;border-radius:12px;padding:11px 12px;font-size:13px;outline:none;background:#fff}
+.gc-msg-field textarea{min-height:130px;resize:vertical}
+.gc-msg-field select:focus,.gc-msg-field input:focus,.gc-msg-field textarea:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.gc-msg-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:14px;flex-wrap:wrap}
+.gc-msg-btn{border:0;border-radius:11px;padding:10px 15px;font-size:12px;font-weight:900;cursor:pointer}
+.gc-msg-primary{background:#2563eb;color:#fff}.gc-msg-secondary{background:#e2e8f0;color:#172033}
+.gc-msg-tabs{display:flex;gap:6px;overflow:auto;padding:12px 18px 0;border-bottom:1px solid #e2e8f0}
+.gc-msg-tab{border:0;background:transparent;padding:10px 13px;font-size:12px;font-weight:900;color:#64748b;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap}
+.gc-msg-tab.active{color:#2563eb;border-bottom-color:#2563eb}
+.gc-msg-panel{display:none;padding:16px 18px}.gc-msg-panel.active{display:block}
+.gc-msg-list{display:grid;gap:9px}
+.gc-msg-item{border:1px solid #e2e8f0;border-radius:14px;padding:12px;background:#f8fafc}
+.gc-msg-item.unread{background:#eff6ff;border-color:#93c5fd}
+.gc-msg-item-top{display:flex;justify-content:space-between;gap:10px;align-items:start}
+.gc-msg-item-title{font-size:12px;font-weight:900;color:#0f172a}
+.gc-msg-item-meta{font-size:10px;color:#64748b;margin-top:3px}
+.gc-msg-item-body{font-size:12px;line-height:1.55;color:#334155;margin-top:8px;white-space:pre-wrap}
+.gc-msg-empty{text-align:center;padding:28px;color:#64748b;font-size:12px;font-weight:700}
+.gc-msg-badge{display:inline-flex;min-width:18px;height:18px;padding:0 5px;align-items:center;justify-content:center;border-radius:999px;background:#ef4444;color:#fff;font-size:9px;font-weight:900}
+.gc-msg-shortcut{position:relative}
+@media(max-width:680px){
+ .gc-msg-grid{grid-template-columns:1fr}.gc-msg-field.full{grid-column:auto}
+ .gc-msg-modal{max-height:95vh;border-radius:18px}.gc-msg-body{padding:13px}
+ .gc-msg-head{padding:15px}.gc-msg-head h3{font-size:17px}
+}
+</style>
+
 </head>
 <body class="bg-brand-lightBg text-brand-dark font-sans antialiased min-h-screen flex flex-col justify-between overflow-x-hidden relative">
 
@@ -2749,7 +2884,7 @@ html, body, button, input, select, textarea {
                 <button id="adminTabTutorsBtn" onclick="switchAdminTab('tutors')" class="w-full sm:w-auto justify-center bg-brand-blue text-white font-bold text-sm px-6 py-3 rounded-xl border border-blue-700 shadow flex items-center gap-2">
                     <i class="fa-solid fa-chalkboard-user"></i> Tutor & UTR Queue (<span id="adminTutorCount">0</span>)
                 </button>
-                <button id="adminTabStudentsBtn" onclick="switchAdminTab('students')" class="w-full sm:w-auto justify-center bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold text-sm px-6 py-3 rounded-xl border border-slate-200 flex items-center gap-2">
+                <button type="button" onclick="openAdminMessageCenter()" class="w-full sm:w-auto justify-center bg-indigo-50 text-indigo-700 hover:bg-indigo-100 font-bold text-sm px-6 py-3 rounded-xl border border-indigo-200 flex items-center gap-2"><i class="fa-solid fa-comments"></i> Message Center</button><button id="adminTabStudentsBtn" onclick="switchAdminTab('students')" class="w-full sm:w-auto justify-center bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold text-sm px-6 py-3 rounded-xl border border-slate-200 flex items-center gap-2">
                     <i class="fa-solid fa-user-graduate"></i> Student Directory (<span id="adminStudentCount">0</span>)
                 </button>
             </div>
@@ -3843,8 +3978,7 @@ html, body, button, input, select, textarea {
             if (photoData) {
                 return `<img src="${photoData}" alt="${escapeHtml(name)}" class="w-28 h-28 sm:w-36 sm:h-36 rounded-3xl object-cover border-4 border-white shadow-xl">`;
             }
-            const icon = role === 'tutor' ? 'fa-chalkboard-user' : 'fa-user-graduate';
-            return `<div class="w-28 h-28 sm:w-36 sm:h-36 rounded-3xl bg-slate-100 border-4 border-white shadow-xl flex items-center justify-center text-slate-400 text-4xl"><i class="fa-solid ${icon}"></i></div>`;
+            return `<div class="gc-no-profile-avatar" aria-hidden="true"></div>`;
         }
 
         function dashboardField(label, value, icon = 'fa-circle-info') {
@@ -6876,8 +7010,9 @@ html, body, button, input, select, textarea {
         '<div class="gc-clean-main">'+
           '<div class="gc-clean-name-shell">'+
             '<h3 class="gc-clean-name" title="'+esc(name)+'">'+esc(name)+'</h3>'+
-            (verified && tick ? '<span class="gc-clean-tick"><img src="'+esc(tick)+'" alt="Verified Tutor"></span>' : '')+
+            (verified && tick ? '<span class="gc-clean-tick" title="Verified Tutor"><img src="'+esc(tick)+'" alt="Verified Tutor"></span>' : '')+
           '</div>'+
+          (verified ? '<div class="gc-clean-verified-label"><i class="fa-solid fa-circle-check"></i> VERIFIED TUTOR</div>' : '')+
           '<div class="gc-clean-meta">'+
             '<span><b>RATING</b> ★ '+esc(rating(t))+'</span>'+
             '<span><b>SUBJECT</b> '+esc(subject)+'</span>'+
@@ -7589,107 +7724,1601 @@ body.gc-v3-profile-page{
 .gc-v4-student, .gc-student-card, .gc-profile-card.gc-student-card { background:linear-gradient(135deg,#EF4444 0%,#DC2626 55%,#991B1B 100%) !important; color:#fff !important; }
 .gc-v4-tutor *, .gc-tutor-card *, .gc-profile-card.gc-tutor-card *, .gc-v4-student *, .gc-student-card *, .gc-profile-card.gc-student-card * { }
 </style>
-</body>
-</html>
-<style id="gc-profile-fullscreen-final">
-/* FINAL: More opens a true full-screen profile surface. The directory underneath is
-   completely hidden and locked; only the profile surface can scroll. */
-html.gc-profile-open, body.gc-profile-open{overflow:hidden!important;height:100%!important;overscroll-behavior:none!important}
-#gcV3FullProfileModal.gc-v3-modal,
-#gcV3FullProfileModal.gc-v3-modal.open{
-  position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;
-  margin:0!important;padding:0!important;z-index:2147483000!important;
-  display:block!important;background:#f8fafc!important;overflow:hidden!important;
+
+<style id="GC-UNIFORM-PROFILE-COLORS-FINAL">
+/* FINAL OVERRIDE — EVERY TUTOR = ROYAL BLUE, EVERY STUDENT = RED */
+.gc-tutor-card, .gc-new-tutor-card, .gc-v4-tutor, .gc-v3-tutor, .gc-clean-tutor, .gc-clean-registered, .gc-verified-card, .gc-registered-card, .gc-unregistered-tutor-card, .gc-v4-tutor-head, .gc-v3-tutor-head, .gc-v3-full-head.tutor-head {
+  background:#4169E1 !important;
+  background-image:none !important;
+  color:#fff !important;
+  border-color:rgba(255,255,255,.28) !important;
 }
-#gcV3FullProfileModal .gc-v3-modal-backdrop{
-  position:fixed!important;inset:0!important;width:100%!important;height:100%!important;
-  background:#f8fafc!important;opacity:1!important;pointer-events:none!important;
+.gc-student-card, .gc-new-student-card, .gc-v4-student, .gc-v3-student, .gc-clean-student, .gc-navy-student-card, .gc-v4-student-head, .gc-v3-student-head, .gc-v3-full-head.student-head {
+  background:#DC2626 !important;
+  background-image:none !important;
+  color:#fff !important;
+  border-color:rgba(255,255,255,.28) !important;
 }
-#gcV3FullProfileModal .gc-v3-modal-card{
-  position:relative!important;z-index:2!important;width:100%!important;max-width:none!important;
-  height:100dvh!important;max-height:none!important;margin:0!important;border-radius:0!important;
-  border:0!important;box-shadow:none!important;background:#f8fafc!important;
-  overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scrolling:touch!important;
-  overscroll-behavior:contain!important;padding-bottom:env(safe-area-inset-bottom)!important;
+/* Keep text readable on the uniform colored cards. */
+.gc-tutor-card *, .gc-new-tutor-card *, .gc-v4-tutor *, .gc-v3-tutor *, .gc-clean-tutor *, .gc-clean-registered *,
+.gc-student-card *, .gc-new-student-card *, .gc-v4-student *, .gc-v3-student *, .gc-clean-student * {
+  --tw-text-opacity:1;
 }
-#gcV3FullProfileModal .gc-v3-page-topbar{
-  position:sticky!important;top:0!important;z-index:20!important;
-  background:rgba(248,250,252,.97)!important;backdrop-filter:blur(10px)!important;
-  border-bottom:1px solid #e2e8f0!important;padding:12px max(16px,env(safe-area-inset-left))!important;
+/* Preserve white name panels where they are part of the design. */
+.gc-new-tutor-card .gc-new-name, .gc-new-student-card .gc-new-name,
+.gc-clean-name-shell, .gc-v4-preview-name h3 {
+  background:#fff !important;
 }
-#gcV3FullProfileModal .gc-v3-close{display:none!important}
-#gcV3FullProfileModal #gcV3FullProfileContent{width:100%!important;min-height:100%!important}
-#gcV3FullProfileModal .gc-v3-full-body{padding-bottom:32px!important}
+.gc-new-tutor-card .gc-new-name, .gc-new-student-card .gc-new-name, .gc-clean-name, .gc-v4-preview-name h3 {
+  color:#0f172a !important;
+}
+/* Uniform role-color accents; no orange, green or sky-blue tutor variants. */
+.gc-new-tutor-card .gc-new-role, .gc-new-student-card .gc-new-role { color:#fff !important; }
+</style>
+
+<style id="gc-final-grey-orange-profile-theme" data-disabled="true">
+/* FINAL REQUEST: uniform Royal Grey tutors + uniform Orange students */
+.gc-v4-tutor,
+.gc-v4-tutor.gc-v4-verified,
+.gc-v4-tutor.gc-v4-registered,
+.gc-v3-tutor,
+.gc-v3-tutor-head,
+.gc-v4-tutor-head,
+.gc-v6-head-verified,
+.gc-v6-head-registered {
+  background: #4B5563 !important;
+  background-image: none !important;
+  color: #FFFFFF !important;
+  border-color: rgba(255,255,255,.25) !important;
+}
+.gc-v4-student,
+.gc-v3-student {
+  background: #F97316 !important;
+  background-image: none !important;
+  color: #FFFFFF !important;
+  border-color: rgba(255,255,255,.25) !important;
+}
+/* Keep all tutor/student text readable on the solid role colors. */
+.gc-v4-tutor .gc-v4-preview-meta span,
+.gc-v4-tutor .gc-v4-preview-meta b,
+.gc-v3-tutor *,
+.gc-v4-student .gc-v4-preview-meta span,
+.gc-v4-student .gc-v4-preview-meta b,
+.gc-v3-student * { color: inherit !important; }
+/* Remove profile/avatar images and fallback avatar icons. */
+.gc-clean-avatar,
+.gc-clean-avatar-fallback,
+.gc-clean-profile-avatar,
+.gc-new-avatar,
+.gc-new-avatar-fallback,
+.gc-v2-avatar-fallback,
+.gc-v3-avatar,
+.gc-v3-avatar-fallback,
+.gc-v3-full-avatar,
+.gc-default-avatar-img {
+  display: none !important;
+}
+.gc-no-profile-avatar { display:none !important; }
+</style>
+
+<style id="gc-modern-idcard-final">
+/* FINAL MODERN HORIZONTAL ID-CARD DESIGN */
+.gc-v4-preview-card{
+  position:relative!important; display:grid!important; grid-template-columns:64px minmax(0,1fr) auto!important;
+  align-items:center!important; gap:12px!important; min-height:96px!important;
+  padding:12px 14px!important; border-radius:16px!important; overflow:hidden!important;
+  box-shadow:0 8px 24px rgba(15,23,42,.16)!important;
+}
+.gc-v4-tutor{background:#4b5563!important;color:#fff!important;border-color:rgba(255,255,255,.28)!important}
+.gc-v4-student{background:#f97316!important;color:#fff!important;border-color:rgba(255,255,255,.28)!important}
+/* Never allow old variant colors to leak through */
+.gc-v4-tutor.gc-v4-verified,.gc-v4-tutor.gc-v4-registered{background:#4b5563!important;color:#fff!important}
+.gc-v4-preview-name h3{margin:0!important;line-height:1.1!important}
+.gc-v4-tutor .gc-v4-preview-name h3{background:rgba(255,255,255,.96)!important;color:#1f2937!important}
+.gc-v4-student .gc-v4-preview-name h3{background:rgba(255,255,255,.96)!important;color:#9a3412!important}
+/* Avatar is back, circular, compact and ID-card-like */
+.gc-v4-preview-card .gc-v4-preview-avatar,.gc-v4-preview-card .gc-v4-avatar{
+  width:64px!important;height:64px!important;min-width:64px!important;display:flex!important;
+  align-items:center!important;justify-content:center!important;border-radius:14px!important;
+  overflow:hidden!important;background:rgba(255,255,255,.92)!important;
+  border:2px solid rgba(255,255,255,.9)!important;box-shadow:0 5px 14px rgba(0,0,0,.2)!important;
+}
+.gc-v4-preview-card .gc-v4-preview-avatar img,.gc-v4-preview-card .gc-v4-avatar img{
+  width:100%!important;height:100%!important;object-fit:cover!important;display:block!important;
+}
+.gc-v4-more{white-space:nowrap!important;align-self:center!important}
+/* Full popup/profile: horizontal ID card within existing modal space */
+.gc-v3-full-head,.gc-v6-profile-head{
+  display:flex!important;align-items:center!important;gap:16px!important;min-height:112px!important;
+  padding:16px 20px!important;border-radius:18px 18px 0 0!important;
+}
+.gc-v3-full-head.gc-v4-tutor-head,.gc-v6-head-verified,.gc-v6-head-registered{
+  background:#4b5563!important;color:#fff!important;
+}
+.gc-v3-full-head .gc-v3-full-avatar,.gc-v6-profile-head .gc-v6-avatar{
+  flex:0 0 76px!important;width:76px!important;height:76px!important;border-radius:16px!important;
+  overflow:hidden!important;background:#fff!important;border:3px solid rgba(255,255,255,.9)!important;
+}
+.gc-v3-full-head .gc-v3-full-avatar img,.gc-v6-profile-head .gc-v6-avatar img{width:100%!important;height:100%!important;object-fit:cover!important}
+.gc-v3-full-title{min-width:0!important;flex:1!important}
+.gc-v3-full-title h2{display:flex!important;align-items:center!important;gap:7px!important;flex-wrap:wrap!important;margin:3px 0!important}
+.gc-v3-full-body{padding:16px 20px!important}
+.gc-v3-stat-row{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:8px!important}
+.gc-v3-detail-grid{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:8px!important}
 @media(max-width:640px){
- #gcV3FullProfileModal .gc-v3-page-topbar{padding:10px 12px!important}
- #gcV3FullProfileModal .gc-v3-back{font-size:13px!important;padding:9px 12px!important}
+ .gc-v4-preview-card{grid-template-columns:52px minmax(0,1fr) auto!important;min-height:78px!important;padding:9px!important;gap:8px!important}
+ .gc-v4-preview-card .gc-v4-preview-avatar,.gc-v4-preview-card .gc-v4-avatar{width:52px!important;height:52px!important;min-width:52px!important;border-radius:12px!important}
+ .gc-v3-full-head,.gc-v6-profile-head{padding:12px!important;gap:10px!important;min-height:88px!important}
+ .gc-v3-full-head .gc-v3-full-avatar,.gc-v6-profile-head .gc-v6-avatar{flex-basis:58px!important;width:58px!important;height:58px!important;border-radius:13px!important}
+ .gc-v3-stat-row,.gc-v3-detail-grid{grid-template-columns:1fr!important}
 }
 </style>
-<script id="gc-profile-fullscreen-final-js">
+<script id="gc-modern-idcard-avatar-fix">
 (function(){
-  function lockPage(){document.documentElement.classList.add('gc-profile-open');document.body.classList.add('gc-profile-open');}
-  function unlockPage(){document.documentElement.classList.remove('gc-profile-open');document.body.classList.remove('gc-profile-open');}
-  var oldOpen=window.openTutorProfile;
-  if(typeof oldOpen==='function'){
-    window.openTutorProfile=function(id){lockPage(); oldOpen(id); var m=document.getElementById('gcV3FullProfileModal'); if(m)m.classList.add('open');};
+  // Remove only decorative avatar-hide rules from the live DOM; preserve actual profile images.
+  document.querySelectorAll('.gc-v4-preview-card, .gc-v3-full-head, .gc-v6-profile-head').forEach(function(card){
+    card.classList.add('gc-modern-id-card');
+  });
+})();
+</script>
+
+<!-- GURU CONNECT: UNIQUE NAVY/ORANGE ID-CARD PROFILE SYSTEM -->
+<style id="gc-unique-idcard-design">
+:root{--gc-navy:#071f49;--gc-navy2:#0b3a7a;--gc-blue:#1769d1;--gc-orange:#f36b16;--gc-orange2:#ff8a1f;--gc-ink:#0b1f3a;--gc-white:#fff;--gc-line:rgba(255,255,255,.18)}
+
+/* DIRECTORY CARDS */
+#tutorGrid,#studentGridContainer{gap:12px!important}
+.gc-clean-card{
+  position:relative!important; display:grid!important;
+  grid-template-columns:58px minmax(0,1fr) auto!important;
+  align-items:center!important; gap:13px!important;
+  min-height:104px!important; padding:12px 14px!important;
+  border-radius:18px!important; overflow:hidden!important;
+  border:1px solid rgba(255,255,255,.18)!important;
+  box-shadow:0 10px 28px rgba(2,12,30,.18)!important;
+  isolation:isolate!important;
+}
+.gc-clean-card::before{content:"GURU CONNECT";position:absolute;right:14px;top:8px;font-size:8px;font-weight:950;letter-spacing:1.5px;opacity:.45;pointer-events:none}
+.gc-clean-card::after{content:"";position:absolute;left:-35px;bottom:-55px;width:190px;height:110px;border:1px solid rgba(255,255,255,.12);border-radius:50%;transform:rotate(-9deg);pointer-events:none}
+.gc-clean-card.gc-clean-registered,.gc-clean-card.gc-clean-verified{background:linear-gradient(135deg,var(--gc-navy),var(--gc-navy2))!important;color:#fff!important}
+.gc-clean-card.gc-clean-student{background:linear-gradient(135deg,#c94b08,var(--gc-orange2))!important;color:#fff!important}
+
+.gc-clean-avatar{width:58px!important;height:58px!important;min-width:58px!important;border-radius:50%!important;overflow:hidden!important;background:#fff!important;border:3px solid rgba(255,255,255,.95)!important;box-shadow:0 5px 15px rgba(0,0,0,.25)!important;display:flex!important;align-items:center!important;justify-content:center!important;position:relative!important;z-index:2!important}
+.gc-clean-avatar img{width:100%!important;height:100%!important;object-fit:cover!important;display:block!important}
+.gc-clean-avatar .gc-clean-avatar-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--gc-navy);font-size:24px;background:#eef4ff}
+.gc-clean-student .gc-clean-avatar .gc-clean-avatar-fallback{color:var(--gc-orange);background:#fff3e8}
+.gc-clean-main{min-width:0!important;position:relative!important;z-index:2!important;padding-top:5px!important}
+.gc-clean-name-shell{display:flex!important;align-items:center!important;gap:7px!important;min-width:0!important;margin:0 0 7px!important}
+.gc-clean-name{font-size:17px!important;font-weight:950!important;line-height:1.1!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;margin:0!important;color:#fff!important;letter-spacing:.1px!important}
+.gc-clean-tick{width:22px!important;height:22px!important;min-width:22px!important;border-radius:50%!important;background:#fff!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;padding:2px!important;box-shadow:0 2px 8px rgba(0,0,0,.22)!important}
+.gc-clean-tick img{width:100%!important;height:100%!important;object-fit:contain!important;border-radius:50%!important}
+.gc-clean-meta{display:flex!important;flex-wrap:wrap!important;gap:5px!important;align-items:center!important}
+.gc-clean-meta span{display:inline-flex!important;align-items:center!important;gap:3px!important;border:1px solid rgba(255,255,255,.18)!important;background:rgba(255,255,255,.08)!important;border-radius:8px!important;padding:5px 7px!important;font-size:9px!important;line-height:1!important;color:rgba(255,255,255,.94)!important;max-width:100%!important}
+.gc-clean-meta b{font-size:7px!important;letter-spacing:.5px!important;opacity:.68!important}
+.gc-clean-more{position:relative!important;z-index:5!important;align-self:end!important;border:1px solid rgba(255,255,255,.28)!important;background:rgba(255,255,255,.10)!important;color:#fff!important;border-radius:11px!important;padding:9px 12px!important;font-weight:950!important;font-size:10px!important;cursor:pointer!important;white-space:nowrap!important;transition:.18s!important}
+.gc-clean-more:hover{background:#fff!important;color:var(--gc-navy)!important;transform:translateY(-1px)!important}
+.gc-clean-student-more:hover{color:#c94b08!important}
+
+/* MODAL AS HORIZONTAL PREMIUM ID CARD */
+#gcV3FullProfileModal.gc-v3-modal.open{background:rgba(3,12,28,.76)!important;backdrop-filter:blur(8px)!important;z-index:99999!important}
+#gcV3FullProfileModal .gc-v3-modal-backdrop{background:rgba(3,12,28,.76)!important;pointer-events:auto!important}
+#gcV3FullProfileModal .gc-v3-modal-card{
+  width:min(980px,calc(100vw - 28px))!important;max-width:980px!important;height:auto!important;max-height:calc(100vh - 34px)!important;
+  margin:17px auto!important;border-radius:24px!important;overflow:auto!important;background:#f7f9fc!important;
+  box-shadow:0 30px 90px rgba(0,0,0,.38)!important;border:1px solid rgba(255,255,255,.7)!important;
+}
+#gcV3FullProfileModal .gc-v3-close{display:flex!important;position:absolute!important;right:14px!important;top:14px!important;z-index:30!important;width:36px!important;height:36px!important;border-radius:50%!important;border:1px solid rgba(255,255,255,.5)!important;background:rgba(0,0,0,.18)!important;color:#fff!important;align-items:center!important;justify-content:center!important;cursor:pointer!important}
+#gcV3FullProfileModal #gcV3FullProfileContent{min-height:0!important}
+.gc-clean-profile-head{
+  position:relative!important;display:grid!important;grid-template-columns:104px minmax(0,1fr) auto!important;align-items:center!important;gap:18px!important;
+  padding:22px 54px 20px 24px!important;color:#fff!important;overflow:hidden!important;
+}
+.gc-clean-profile-head::before{content:"GURU CONNECT • GC CARD";position:absolute;right:58px;top:14px;font-size:9px;font-weight:950;letter-spacing:1.8px;opacity:.6}
+.gc-clean-profile-head::after{content:"";position:absolute;right:-90px;bottom:-110px;width:370px;height:210px;border:1px solid rgba(255,255,255,.13);border-radius:50%;transform:rotate(-8deg)}
+.gc-clean-profile-head.verified,.gc-clean-profile-head.registered{background:linear-gradient(135deg,var(--gc-navy),#0c438d)!important}
+.gc-clean-profile-head.student{background:linear-gradient(135deg,#c94b08,var(--gc-orange2))!important}
+.gc-clean-profile-avatar{width:104px!important;height:104px!important;border-radius:22px!important;overflow:hidden!important;border:4px solid #fff!important;background:#fff!important;box-shadow:0 9px 24px rgba(0,0,0,.3)!important;position:relative!important;z-index:2!important}
+.gc-clean-profile-avatar img{width:100%!important;height:100%!important;object-fit:cover!important;display:block!important}
+.gc-clean-profile-avatar i{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--gc-navy);font-size:42px;background:#eef4ff}
+.gc-clean-profile-title{position:relative!important;z-index:2!important;min-width:0!important}
+.gc-clean-profile-role{font-size:10px!important;font-weight:950!important;letter-spacing:1.5px!important;opacity:.78!important;margin-bottom:6px!important}
+.gc-clean-profile-name-shell{display:flex!important;align-items:center!important;gap:8px!important;flex-wrap:wrap!important}
+.gc-clean-profile-name{font-size:29px!important;font-weight:950!important;line-height:1.05!important;margin:0!important;color:#fff!important}
+.gc-clean-profile-sub{margin-top:8px!important;font-size:13px!important;font-weight:650!important;opacity:.9!important}
+#gcV3FullProfileModal .gc-v3-full-body{padding:18px 22px 22px!important;background:#f7f9fc!important}
+#gcV3FullProfileModal .gc-v3-stat-row,#gcV3FullProfileModal .gc-v3-detail-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:9px!important;margin-bottom:9px!important}
+#gcV3FullProfileModal .gc-v3-stat-row>span,#gcV3FullProfileModal .gc-v3-detail-grid>div{display:flex!important;flex-direction:column!important;justify-content:center!important;min-height:64px!important;padding:11px 13px!important;border-radius:13px!important;border:1px solid #dbe4f0!important;background:#fff!important;color:var(--gc-ink)!important;box-shadow:0 5px 15px rgba(15,23,42,.05)!important}
+#gcV3FullProfileModal .gc-v3-stat-row b,#gcV3FullProfileModal .gc-v3-detail-grid small{font-size:8px!important;letter-spacing:1px!important;color:#6b7b91!important;font-weight:950!important}
+#gcV3FullProfileModal .gc-v3-stat-row strong,#gcV3FullProfileModal .gc-v3-detail-grid strong{font-size:13px!important;margin-top:4px!important;color:var(--gc-ink)!important}
+#gcV3FullProfileModal .gc-v3-about{margin-top:10px!important;padding:14px 16px!important;border-radius:14px!important;background:#eef3f9!important;border:1px solid #dce5ef!important}
+#gcV3FullProfileModal .gc-v3-about h3{margin:0 0 6px!important;font-size:11px!important;color:var(--gc-navy)!important;letter-spacing:.7px!important}
+#gcV3FullProfileModal .gc-v3-about p{margin:0!important;font-size:12px!important;line-height:1.55!important;color:#334155!important}
+#gcV3FullProfileModal .gc-v3-modal-actions{display:flex!important;gap:9px!important;margin-top:13px!important}
+#gcV3FullProfileModal .gc-v3-primary{flex:1!important;border:0!important;border-radius:12px!important;padding:12px 16px!important;background:linear-gradient(135deg,var(--gc-navy),var(--gc-blue))!important;color:#fff!important;font-weight:950!important;cursor:pointer!important}
+#gcV3FullProfileModal .gc-v3-secondary{border:1px solid #cbd5e1!important;border-radius:12px!important;padding:12px 18px!important;background:#fff!important;color:#334155!important;font-weight:900!important;cursor:pointer!important}
+
+@media(max-width:760px){
+ .gc-clean-card{grid-template-columns:50px minmax(0,1fr) auto!important;min-height:90px!important;padding:10px!important;gap:9px!important;border-radius:15px!important}
+ .gc-clean-avatar{width:50px!important;height:50px!important;min-width:50px!important}
+ .gc-clean-name{font-size:14px!important}.gc-clean-meta span{font-size:8px!important;padding:4px 5px!important}.gc-clean-meta b{font-size:6.5px!important}.gc-clean-more{font-size:8px!important;padding:8px 8px!important}
+ .gc-clean-profile-head{grid-template-columns:72px minmax(0,1fr)!important;padding:18px 48px 16px 16px!important;gap:12px!important}
+ .gc-clean-profile-avatar{width:72px!important;height:72px!important;border-radius:17px!important}
+ .gc-clean-profile-name{font-size:21px!important}.gc-clean-profile-sub{font-size:11px!important}
+ #gcV3FullProfileModal .gc-v3-stat-row,#gcV3FullProfileModal .gc-v3-detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ #gcV3FullProfileModal .gc-v3-modal-card{width:calc(100vw - 14px)!important;max-height:calc(100vh - 14px)!important;margin:7px auto!important;border-radius:19px!important}
+}
+@media(max-width:460px){
+ .gc-clean-card{grid-template-columns:46px minmax(0,1fr)!important}.gc-clean-more{grid-column:2;justify-self:end;margin-top:-2px}.gc-clean-avatar{width:46px!important;height:46px!important;min-width:46px!important}
+ #gcV3FullProfileModal .gc-v3-stat-row,#gcV3FullProfileModal .gc-v3-detail-grid{grid-template-columns:1fr!important}
+ .gc-clean-profile-head{grid-template-columns:60px minmax(0,1fr)!important}.gc-clean-profile-avatar{width:60px!important;height:60px!important}.gc-clean-profile-name{font-size:19px!important}
+}
+</style>
+<script id="gc-unique-idcard-runtime">
+(function(){
+  'use strict';
+  function esc(v){return String(v??'').replace(/[&<>"']/g,function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]})}
+  function arr(list){return Array.isArray(list)?list:[]}
+  function tutorList(){try{return Array.isArray(tutorDirectoryList)?tutorDirectoryList:[]}catch(e){return[]}}
+  function studentList(){try{return Array.isArray(studentDirectoryList)?studentDirectoryList:[]}catch(e){return[]}}
+  function photo(obj){return obj&&(obj.photoData||obj.photo||obj.image||obj.avatar||obj.profileImage)||''}
+  function tick(){try{return (typeof VERIFIED_TICK_LOGO_URL!=='undefined'&&VERIFIED_TICK_LOGO_URL)||(typeof VERIFIED_TICK_V3!=='undefined'&&VERIFIED_TICK_V3)||''}catch(e){return''}}
+  function rating(t){try{if(t._manualRating)return Number(t._manualRating).toFixed(1);if(t.rating)return String(t.rating)}catch(e){}var n=Math.abs(Number(String(t&&t.id||t&&t.name||'1').replace(/\D/g,''))||1);return Math.min(5,(t&&t.verified?4.7:4.3)+((n*29)%31)/100).toFixed(1)}
+  function tutorAvatar(t){var p=photo(t);return p?'<img src="'+esc(p)+'" alt="'+esc(t.name||'Tutor')+'">':'<i class="fa-solid fa-chalkboard-user"></i>'}
+  function studentAvatar(s){var p=photo(s);return p?'<img src="'+esc(p)+'" alt="'+esc(s.name||'Student')+'">':'<i class="fa-solid fa-user-graduate"></i>'}
+
+  window.renderTutorDirectory=function(){
+    var c=document.getElementById('tutorGrid');if(!c)return;c.classList.add('gc-clean-directory');var list=tutorList();var per=6,page=1;
+    try{page=typeof currentTutorPage!=='undefined'?currentTutorPage:1;per=typeof tutorsPerPage!=='undefined'?tutorsPerPage:6}catch(e){}
+    var items=list.slice((page-1)*per,page*per);c.innerHTML='';
+    items.forEach(function(t){var verified=t.verified===true,id=String(t.id||'');c.insertAdjacentHTML('beforeend','<article class="gc-clean-card '+(verified?'gc-clean-verified':'gc-clean-registered')+'" data-tutor-id="'+esc(id)+'">'+
+      '<div class="gc-clean-avatar">'+tutorAvatar(t)+'</div><div class="gc-clean-main"><div class="gc-clean-name-shell"><h3 class="gc-clean-name">'+esc(t.name||'Tutor')+'</h3>'+(verified&&tick()?'<span class="gc-clean-tick"><img src="'+esc(tick())+'" alt="Verified"></span>':'')+'</div>'+
+      '<div class="gc-clean-meta"><span><b>RATING</b> ★ '+esc(rating(t))+'</span><span><b>SUBJECT</b> '+esc(t.subject||'Not specified')+'</span><span><b>RATE</b> '+esc(t.price||t.rate||'—')+'/hr</span><span><b>EXP</b> '+esc(t.experience||'—')+'</span></div></div>'+
+      '<button type="button" class="gc-clean-more" data-tutor-id="'+esc(id)+'">MORE <i class="fa-solid fa-chevron-right"></i></button></article>')});
+    try{if(typeof renderTutorPaginationNumbers==='function')renderTutorPaginationNumbers()}catch(e){}
+  };
+
+  window.renderStudentDirectory=function(){
+    var c=document.getElementById('studentGridContainer');if(!c)return;c.classList.add('gc-clean-directory');var list=studentList(),page=1;try{page=typeof currentStudentPage!=='undefined'?currentStudentPage:1}catch(e){}
+    var items=list.slice((page-1)*6,page*6);c.innerHTML='';
+    items.forEach(function(s){var id=String(s.id||'');var req='';try{req=typeof window.gcGetStudentRequirementV2==='function'?window.gcGetStudentRequirementV2(s):(s.learningRequirement||s.subject||'Not specified')}catch(e){req=s.learningRequirement||s.subject||'Not specified'}
+      c.insertAdjacentHTML('beforeend','<article class="gc-clean-card gc-clean-student" data-student-id="'+esc(id)+'"><div class="gc-clean-avatar">'+studentAvatar(s)+'</div><div class="gc-clean-main"><div class="gc-clean-name-shell"><h3 class="gc-clean-name">'+esc(s.name||'Student')+'</h3></div><div class="gc-clean-meta"><span><b>CLASS</b> '+esc(s.course||s.std||'—')+'</span><span><b>STREAM</b> '+esc(s.stream||'—')+'</span><span><b>LOOKING FOR</b> '+esc(req)+'</span></div></div><button type="button" class="gc-clean-more gc-clean-student-more" data-student-id="'+esc(id)+'">MORE <i class="fa-solid fa-chevron-right"></i></button></article>')});
+    try{if(typeof renderPaginationNumbers==='function')renderPaginationNumbers()}catch(e){}
+  };
+
+  function modal(){var m=document.getElementById('gcV3FullProfileModal');if(!m){m=document.createElement('div');m.id='gcV3FullProfileModal';m.className='gc-v3-modal';m.innerHTML='<div class="gc-v3-modal-backdrop"></div><div class="gc-v3-modal-card" role="dialog" aria-modal="true"><button class="gc-v3-close" type="button" aria-label="Close"><i class="fa-solid fa-xmark"></i></button><div id="gcV3FullProfileContent"></div></div>';document.body.appendChild(m)}m.querySelector('.gc-v3-close').onclick=function(){if(typeof gcV3CloseProfile==='function')gcV3CloseProfile();else m.classList.remove('open')};m.querySelector('.gc-v3-modal-backdrop').onclick=function(){if(typeof gcV3CloseProfile==='function')gcV3CloseProfile();else m.classList.remove('open')};return m}
+  function openCard(type,id){var isTutor=type==='tutor', list=isTutor?tutorList():studentList(),o=list.find(function(x){return String(x.id)===String(id)});if(!o)return;var m=modal(),c=document.getElementById('gcV3FullProfileContent');var p=photo(o),avatar=p?'<img src="'+esc(p)+'" alt="'+esc(o.name||'')+'">':(isTutor?'<i class="fa-solid fa-chalkboard-user"></i>':'<i class="fa-solid fa-user-graduate"></i>');
+    var verified=isTutor&&o.verified===true, role=isTutor?(verified?'VERIFIED TUTOR':'REGISTERED TUTOR'):'STUDENT', theme=isTutor?(verified?'verified':'registered'):'student';
+    var subject=isTutor?(o.subject||'Not specified'):(o.subject||o.learningRequirement||'Not specified');
+    var req='';try{req=typeof window.gcGetStudentRequirementV2==='function'?window.gcGetStudentRequirementV2(o):(o.learningRequirement||o.subject||'Not specified')}catch(e){req=o.learningRequirement||o.subject||'Not specified'}
+    var connectLabel=isTutor?'CONNECT WITH TUTOR':'CONNECT WITH STUDENT';
+    c.innerHTML='<div class="gc-clean-profile-head '+theme+'"><div class="gc-clean-profile-avatar">'+avatar+'</div><div class="gc-clean-profile-title"><div class="gc-clean-profile-role">'+role+'</div><div class="gc-clean-profile-name-shell"><h2 class="gc-clean-profile-name">'+esc(o.name||role)+'</h2>'+(verified&&tick()?'<span class="gc-clean-tick"><img src="'+esc(tick())+'" alt="Verified Tutor"></span>':'')+'</div><div class="gc-clean-profile-sub">'+esc(subject)+(o.stream?' • '+esc(o.stream):'')+'</div></div></div>'+ 
+      '<div class="gc-v3-full-body"><div class="gc-v3-stat-row">'+(isTutor?'<span><b>RATING</b><strong>★ '+esc(rating(o))+'</strong></span><span><b>RATE / HR</b><strong>'+esc(o.price||o.rate||'Not provided')+'</strong></span><span><b>EXPERIENCE</b><strong>'+esc(o.experience||'Not provided')+'</strong></span>':'<span><b>CLASS</b><strong>'+esc(o.course||o.std||'Not provided')+'</strong></span><span><b>STREAM</b><strong>'+esc(o.stream||'Not provided')+'</strong></span><span><b>MEMBER SINCE</b><strong>'+esc(o.memberSince||'Not provided')+'</strong></span>')+'</div>'+ 
+      '<div class="gc-v3-detail-grid">'+(isTutor?'<div><small>QUALIFICATION</small><strong>'+esc(o.qualification||'Not provided')+'</strong></div><div><small>COLLEGE / INSTITUTE</small><strong>'+esc(o.teachingCollege||o.college||'Not provided')+'</strong></div><div><small>SUBJECTS</small><strong>'+esc(o.subject||'Not provided')+'</strong></div><div><small>LOCATION</small><strong>'+esc(o.address||o.location||'Not provided')+'</strong></div><div><small>STUDENTS</small><strong>'+esc(o.students||'—')+'</strong></div><div><small>GC ID</small><strong>'+esc(o.gcId||o.id||'—')+'</strong></div>':'<div><small>NAME</small><strong>'+esc(o.name||'Not provided')+'</strong></div><div><small>COURSE</small><strong>'+esc(o.course||o.std||'Not provided')+'</strong></div><div><small>STREAM</small><strong>'+esc(o.stream||'Not provided')+'</strong></div><div><small>LOCATION</small><strong>'+esc(o.address||o.location||'Not provided')+'</strong></div><div><small>SUBJECT REQUIREMENT</small><strong>'+esc(req)+'</strong></div><div><small>GC ID</small><strong>'+esc(o.gcId||o.id||'—')+'</strong></div>')+'</div>'+ 
+      '<section class="gc-v3-about"><h3><i class="fa-solid fa-id-card"></i> GURU CONNECT PROFILE</h3><p>'+esc(o.aboutMe||(isTutor?'Professional educator profile on GURU CONNECT.':'Learning requirement profile on GURU CONNECT.'))+'</p></section>'+ 
+      '<div class="gc-v3-modal-actions"><button class="gc-v3-primary" type="button" id="gc-unique-connect"><i class="fa-solid fa-link"></i> '+connectLabel+'</button><button class="gc-v3-secondary" type="button" id="gc-unique-close">CLOSE</button></div></div>';
+    document.getElementById('gc-unique-close').onclick=function(){if(typeof gcV3CloseProfile==='function')gcV3CloseProfile();else m.classList.remove('open')};
+    document.getElementById('gc-unique-connect').onclick=function(){if(typeof gcV3CloseProfile==='function')gcV3CloseProfile();if(isTutor&&typeof connectWithTutor==='function')connectWithTutor(o.id);if(!isTutor&&typeof connectWithStudent==='function')connectWithStudent(o.id)};
+    m.classList.add('open');document.documentElement.classList.add('gc-profile-open');document.body.classList.add('gc-profile-open','gc-v3-profile-page');
   }
-  var oldStudent=window.openStudentProfile;
-  if(typeof oldStudent==='function'){
-    window.openStudentProfile=function(id){lockPage(); oldStudent(id); var m=document.getElementById('gcV3FullProfileModal'); if(m)m.classList.add('open');};
-  }
-  /* Do not override gcV3CloseProfile here. The authoritative close handler
-     above also unlocks the page and catches dynamically-created CLOSE buttons. */
+
+  /* Preserve the existing access rules, but use the new branded surface after access is granted. */
+  window.openTutorProfile=function(id){var t=tutorList().find(function(x){return String(x.id)===String(id)});if(!t)return;openCard('tutor',id)};
+  window.openStudentProfile=function(id){var s=studentList().find(function(x){return String(x.id)===String(id)});if(!s)return;var viewer=typeof getActiveViewer==='function'?getActiveViewer():null;
+    if(viewer&&viewer.isRegistered&&viewer.role==='student'&&String(viewer.phone||'').replace(/\D/g,'')===String(s.phone||'').replace(/\D/g,'')){if(typeof openUserDashboard==='function')openUserDashboard();return}
+    if(!viewer||!viewer.isRegistered){if(typeof showProtectedPopup==='function')showProtectedPopup('STUDENT PROFILE PROTECTED','Please register and verify your email before accessing student profiles.','fa-lock');return}
+    if(viewer.role!=='tutor'){if(typeof showProtectedPopup==='function')showProtectedPopup('REGISTERED TUTOR ACCESS ONLY','Only a registered Tutor can access student profile information.','fa-user-tie');return}
+    if(typeof isRealStudent==='function'&&!isRealStudent(s)){if(typeof contactSentPopup==='function')contactSentPopup();return}
+    openCard('student',id);
+  };
+
+  document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('#tutorGrid .gc-clean-more[data-tutor-id]');if(t){e.preventDefault();e.stopImmediatePropagation();window.openTutorProfile(t.getAttribute('data-tutor-id'));return}var s=e.target.closest&&e.target.closest('#studentGridContainer .gc-clean-student-more[data-student-id]');if(s){e.preventDefault();e.stopImmediatePropagation();window.openStudentProfile(s.getAttribute('data-student-id'));return}},true);
+  function render(){try{window.renderTutorDirectory()}catch(e){}try{window.renderStudentDirectory()}catch(e){}}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(render,80)});else setTimeout(render,80);
 })();
 </script>
 
 
-<style id="gc-close-final-css">
-/* FINAL CLOSE FIX:
-   The profile surface must be invisible unless it explicitly has .open.
-   This overrides the earlier fullscreen display:block rule. */
-#gcV3FullProfileModal.gc-v3-modal:not(.open){
-  display:none!important;
-  visibility:hidden!important;
-  pointer-events:none!important;
+<!-- GURU CONNECT — AUTHORITATIVE DIRECTORY REPAIR -->
+<style id="gc-authoritative-directory-repair">
+  /* The existing HTML structure is preserved; these rules only repair the cards. */
+  #tutorGrid, #studentGridContainer{
+    display:grid !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:14px !important;
+    width:100% !important;
+    visibility:visible !important;
+    opacity:1 !important;
+  }
+  #tutorGrid > .gc-clean-card, #studentGridContainer > .gc-clean-card{
+    display:grid !important;
+    visibility:visible !important;
+    opacity:1 !important;
+  }
+  /* ONE color for every tutor, regardless of verified/registered state. */
+  #tutorGrid > .gc-clean-card.gc-clean-verified,
+  #tutorGrid > .gc-clean-card.gc-clean-registered{
+    background:linear-gradient(135deg,#16a34a 0%,#15803d 58%,#166534 100%) !important;
+    background-color:#15803d !important;
+    color:#fff !important;
+    border-color:rgba(255,255,255,.28) !important;
+  }
+  /* Keep students on one consistent warm color. */
+  #studentGridContainer > .gc-clean-card.gc-clean-student{
+    background:linear-gradient(135deg,#f97316 0%,#ea580c 58%,#c2410c 100%) !important;
+    background-color:#ea580c !important;
+    color:#fff !important;
+  }
+  #tutorGrid .gc-clean-avatar, #studentGridContainer .gc-clean-avatar{
+    display:flex !important;
+    visibility:visible !important;
+    opacity:1 !important;
+  }
+  @media(max-width:760px){
+    #tutorGrid,#studentGridContainer{grid-template-columns:1fr !important;gap:10px !important;}
+  }
+</style>
+<script id="gc-authoritative-directory-repair-js">
+(function(){
+  'use strict';
+  function renderNow(){
+    try{
+      var c=document.getElementById('tutorGrid');
+      if(c){
+        c.style.display='grid'; c.style.visibility='visible'; c.style.opacity='1';
+        if(typeof window.renderTutorDirectory==='function') window.renderTutorDirectory();
+      }
+    }catch(e){console.warn('Tutor render repair:',e);}
+    try{
+      var s=document.getElementById('studentGridContainer');
+      if(s){
+        s.style.display='grid'; s.style.visibility='visible'; s.style.opacity='1';
+        if(typeof window.renderStudentDirectory==='function') window.renderStudentDirectory();
+      }
+    }catch(e){console.warn('Student render repair:',e);}
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){setTimeout(renderNow,120);});
+  else setTimeout(renderNow,120);
+})();
+</script>
+
+<!-- ===== GURU CONNECT COMPLETE MESSAGE CENTER ===== -->
+<div id="gcMessageCenterModal" class="gc-msg-overlay" aria-hidden="true">
+  <div class="gc-msg-modal" role="dialog" aria-modal="true" aria-labelledby="gcMessageTitle">
+    <div class="gc-msg-head">
+      <div>
+        <h3 id="gcMessageTitle"><i class="fa-solid fa-comments mr-2"></i>Message Center</h3>
+        <div id="gcMessageSubtitle" class="text-xs text-white/75 mt-1">Communicate securely through Guru Connect</div>
+      </div>
+      <button type="button" onclick="gcCloseMessageCenter()" class="w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div id="gcMessageTabs" class="gc-msg-tabs"></div>
+    <div id="gcMessagePanels"></div>
+  </div>
+</div>
+
+
+<script id="gc-complete-message-center-v2">
+(function(){
+  const KEY='gc_message_center_v2';
+
+  function arr(){ try{const x=JSON.parse(localStorage.getItem(KEY)||'[]');return Array.isArray(x)?x:[];}catch(e){return[];} }
+  function save(x){ localStorage.setItem(KEY,JSON.stringify(x)); }
+  function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+  function norm(v){return String(v||'').replace(/\D/g,'');}
+  function active(){
+    const name=localStorage.getItem('active_user_name')||'';
+    const phone=localStorage.getItem('active_user_phone')||'';
+    const role=localStorage.getItem('active_user_role')||'';
+    if(name&&phone&&['student','tutor'].includes(role)) return {id:norm(phone),name,phone,role};
+    return null;
+  }
+  function registeredUsers(){
+    let ts=[],ss=[];
+    try{ts=Array.isArray(window.tutorDirectoryList)?window.tutorDirectoryList:JSON.parse(localStorage.getItem('gc_registered_tutors')||'[]');}catch(e){}
+    try{ss=Array.isArray(window.studentDirectoryList)?window.studentDirectoryList:JSON.parse(localStorage.getItem('gc_registered_students')||'[]');}catch(e){}
+    const clean=(list,role)=>list.filter(x=>x && x.isDummy===false).map(x=>({id:norm(x.phone)||String(x.id||''),name:x.name || (role==='tutor'?'Tutor':'Student'),phone:x.phone||'',role}));
+    return clean(ts,'tutor').concat(clean(ss,'student')).filter(x=>x.id);
+  }
+  function recipients(){
+    return registeredUsers().filter(u=>!active() || u.id!==active().id);
+  }
+  function unreadFor(user){
+    if(!user)return 0;
+    return arr().filter(m=>!m.read && (
+      (m.toType==='user' && m.toId===user.id) ||
+      (m.toType==='role' && (m.toRole===user.role||m.toRole==='both')) ||
+      (m.toType==='admin' && user.role==='admin')
+    )).length;
+  }
+  function date(v){try{return new Date(v).toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short'});}catch(e){return v||'';}}
+  function open(){document.getElementById('gcMessageCenterModal')?.classList.add('open');document.getElementById('gcMessageCenterModal')?.setAttribute('aria-hidden','false');}
+  function close(){document.getElementById('gcMessageCenterModal')?.classList.remove('open');document.getElementById('gcMessageCenterModal')?.setAttribute('aria-hidden','true');}
+  window.gcCloseMessageCenter=close;
+
+  function shell(mode){
+    const tabs=document.getElementById('gcMessageTabs'), panels=document.getElementById('gcMessagePanels');
+    if(!tabs||!panels)return;
+    if(mode==='admin'){
+      tabs.innerHTML='<button class="gc-msg-tab active" data-tab="compose">Compose</button><button class="gc-msg-tab" data-tab="inbox">Inbox</button><button class="gc-msg-tab" data-tab="sent">Sent</button>';
+      panels.innerHTML='<div id="gcMsgCompose" class="gc-msg-panel active"></div><div id="gcMsgInbox" class="gc-msg-panel"></div><div id="gcMsgSent" class="gc-msg-panel"></div>';
+      tabs.querySelectorAll('.gc-msg-tab').forEach(b=>b.onclick=()=>activate(b.dataset.tab));
+      renderAdminCompose(); renderInbox({role:'admin',id:'admin'}); renderSent({role:'admin',id:'admin'});
+    }else{
+      tabs.innerHTML='<button class="gc-msg-tab active" data-tab="compose">Message Admin</button><button class="gc-msg-tab" data-tab="inbox">Inbox</button><button class="gc-msg-tab" data-tab="sent">Sent</button>';
+      panels.innerHTML='<div id="gcMsgCompose" class="gc-msg-panel active"></div><div id="gcMsgInbox" class="gc-msg-panel"></div><div id="gcMsgSent" class="gc-msg-panel"></div>';
+      tabs.querySelectorAll('.gc-msg-tab').forEach(b=>b.onclick=()=>activate(b.dataset.tab));
+      renderUserCompose(); renderInbox(active()); renderSent(active());
+    }
+  }
+  function activate(tab){
+    document.querySelectorAll('#gcMessageTabs .gc-msg-tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
+    document.querySelectorAll('#gcMessagePanels .gc-msg-panel').forEach(p=>p.classList.remove('active'));
+    const map={compose:'gcMsgCompose',inbox:'gcMsgInbox',sent:'gcMsgSent'};
+    document.getElementById(map[tab])?.classList.add('active');
+    if(tab==='inbox'){renderInbox(active()||{role:'admin',id:'admin'});}
+    if(tab==='sent'){renderSent(active()||{role:'admin',id:'admin'});}
+  }
+
+  function renderAdminCompose(){
+    const c=document.getElementById('gcMsgCompose');if(!c)return;
+    const users=recipients();
+    c.innerHTML=`<div class="gc-msg-grid">
+      <div class="gc-msg-field"><label>Message Type</label>
+        <select id="gcAdminMsgType">
+          <option value="individual">Individual Tutor / Student</option>
+          <option value="tutors">All Registered Tutors</option>
+          <option value="students">All Registered Students</option>
+          <option value="both">All Registered Tutors + Students</option>
+        </select>
+      </div>
+      <div class="gc-msg-field" id="gcAdminRecipientWrap"><label>Select Recipient</label>
+        <select id="gcAdminRecipient"><option value="">Choose registered member</option>${users.map(u=>`<option value="${esc(u.id)}">${esc(u.name)} — ${esc(u.role)}</option>`).join('')}</select>
+      </div>
+      <div class="gc-msg-field full"><label>Subject</label><input id="gcAdminSubject" maxlength="160" placeholder="Message subject"></div>
+      <div class="gc-msg-field full"><label>Message</label><textarea id="gcAdminBody" maxlength="5000" placeholder="Write your message..."></textarea></div>
+    </div>
+    <div class="gc-msg-actions"><button class="gc-msg-btn gc-msg-primary" onclick="gcAdminSendMessage()"><i class="fa-solid fa-paper-plane mr-1"></i> SEND MESSAGE</button></div>`;
+    const type=document.getElementById('gcAdminMsgType');
+    type.onchange=()=>document.getElementById('gcAdminRecipientWrap').style.display=type.value==='individual'?'flex':'none';
+  }
+  function renderUserCompose(){
+    const c=document.getElementById('gcMsgCompose');if(!c)return;
+    const u=active(); if(!u){c.innerHTML='<div class="gc-msg-empty">Please login as a registered Tutor or Student first.</div>';return;}
+    c.innerHTML=`<div class="gc-msg-grid">
+      <div class="gc-msg-field"><label>From</label><input value="${esc(u.name)} — ${esc(u.role)}" readonly></div>
+      <div class="gc-msg-field"><label>To</label><input value="Guru Connect Admin" readonly></div>
+      <div class="gc-msg-field full"><label>Subject</label><input id="gcUserSubject" maxlength="160" placeholder="Subject"></div>
+      <div class="gc-msg-field full"><label>Message</label><textarea id="gcUserBody" maxlength="5000" placeholder="Write your message to Admin..."></textarea></div>
+    </div>
+    <div class="gc-msg-actions"><button class="gc-msg-btn gc-msg-primary" onclick="gcUserSendMessage()"><i class="fa-solid fa-paper-plane mr-1"></i> SEND TO ADMIN</button></div>`;
+  }
+
+  function push(m){const a=arr();a.push(m);save(a);}
+
+  window.gcAdminSendMessage=function(){
+    const type=document.getElementById('gcAdminMsgType')?.value||'individual';
+    const subject=(document.getElementById('gcAdminSubject')?.value||'').trim();
+    const body=(document.getElementById('gcAdminBody')?.value||'').trim();
+    const id=document.getElementById('gcAdminRecipient')?.value||'';
+    if(!subject||!body){alert('Please enter subject and message.');return;}
+    const now=new Date().toISOString(), base={id:'m_'+Date.now()+'_'+Math.random().toString(36).slice(2),fromType:'admin',fromId:'admin',fromName:'Guru Connect Admin',subject,body,createdAt:now,read:false};
+    if(type==='individual'){
+      const u=recipients().find(x=>x.id===id);
+      if(!u){alert('Please select a registered Tutor or Student.');return;}
+      push({...base,toType:'user',toId:u.id,toRole:u.role,toName:u.name});
+    }else{
+      push({...base,toType:'role',toRole:type,toName:type==='tutors'?'All Registered Tutors':type==='students'?'All Registered Students':'All Registered Tutors + Students'});
+    }
+    alert('Message sent successfully.');
+    renderAdminCompose(); renderSent({role:'admin',id:'admin'});
+  };
+
+  window.gcUserSendMessage=function(){
+    const u=active();if(!u)return;
+    const subject=(document.getElementById('gcUserSubject')?.value||'').trim();
+    const body=(document.getElementById('gcUserBody')?.value||'').trim();
+    if(!subject||!body){alert('Please enter subject and message.');return;}
+    push({id:'m_'+Date.now()+'_'+Math.random().toString(36).slice(2),fromType:'user',fromId:u.id,fromRole:u.role,fromName:u.name,toType:'admin',toId:'admin',toName:'Guru Connect Admin',subject,body,createdAt:new Date().toISOString(),read:false});
+    alert('Your message has been sent to Guru Connect Admin.');
+    renderUserCompose(); renderSent(u);
+  };
+
+  function visible(m,u){
+    if(!u)return false;
+    if(u.role==='admin') return m.toType==='admin';
+    if(m.toType==='admin') return false;
+    if(m.toType==='user') return m.toId===u.id;
+    if(m.toType==='role') return m.toRole==='both'||m.toRole===u.role;
+    return false;
+  }
+  function renderInbox(u){
+    const c=document.getElementById('gcMsgInbox');if(!c)return;
+    const a=arr().filter(m=>visible(m,u)).sort((x,y)=>new Date(y.createdAt)-new Date(x.createdAt));
+    if(!a.length){c.innerHTML='<div class="gc-msg-empty"><i class="fa-regular fa-envelope-open text-2xl"></i><div class="mt-2">No messages yet.</div></div>';return;}
+    c.innerHTML='<div class="gc-msg-list">'+a.map(m=>`<div class="gc-msg-item ${m.read?'':'unread'}" data-mid="${esc(m.id)}"><div class="gc-msg-item-top"><div><div class="gc-msg-item-title">${esc(m.subject)}</div><div class="gc-msg-item-meta">From: ${esc(m.fromName)} • ${esc(date(m.createdAt))}</div></div>${m.read?'':'<span class="gc-msg-badge">NEW</span>'}</div><div class="gc-msg-item-body">${esc(m.body)}</div>${!m.read?`<div class="mt-2"><button class="gc-msg-btn gc-msg-secondary" onclick="gcMarkRead('${esc(m.id)}')">MARK AS READ</button></div>`:''}</div>`).join('')+'</div>';
+  }
+  function renderSent(u){
+    const c=document.getElementById('gcMsgSent');if(!c)return;
+    const a=arr().filter(m=>u.role==='admin'?m.fromType==='admin':m.fromId===u.id).sort((x,y)=>new Date(y.createdAt)-new Date(x.createdAt));
+    if(!a.length){c.innerHTML='<div class="gc-msg-empty">No sent messages yet.</div>';return;}
+    c.innerHTML='<div class="gc-msg-list">'+a.map(m=>`<div class="gc-msg-item"><div class="gc-msg-item-title">${esc(m.subject)}</div><div class="gc-msg-item-meta">To: ${esc(m.toName||'Community')} • ${esc(date(m.createdAt))}</div><div class="gc-msg-item-body">${esc(m.body)}</div></div>`).join('')+'</div>';
+  }
+  window.gcMarkRead=function(id){
+    const a=arr();const m=a.find(x=>x.id===id);if(m)m.read=true;save(a);renderInbox(active()||{role:'admin',id:'admin'});
+  };
+
+  window.gcOpenAdminMessages=function(){document.getElementById('gcMessageTitle').innerHTML='<i class="fa-solid fa-comments mr-2"></i>Admin Message Center';shell('admin');open();};
+  window.gcOpenUserMessages=function(){const u=active();if(!u){alert('Please login first.');return;}document.getElementById('gcMessageTitle').innerHTML='<i class="fa-solid fa-comments mr-2"></i>Message Center';shell('user');open();};
+
+  // Public hooks for dashboard buttons.
+  window.openMessageCenter=window.gcOpenUserMessages;
+  window.openAdminMessageCenter=window.gcOpenAdminMessages;
+
+  // Add a Message Center button to the currently rendered user dashboard.
+  /* Lightweight dashboard shortcut observer.
+     Guard against observing our own button insertion, which previously caused
+     a mutation loop and could make the page appear to hang. */
+  const observer=new MutationObserver(function(){
+    const d=document.getElementById('userDashboardContent');
+    if(d && !document.querySelector('[data-gc-message-shortcut]')){
+      const b=document.createElement('button');
+      b.type='button';b.setAttribute('data-gc-message-shortcut','1');
+      b.className='gc-msg-shortcut fixed bottom-24 right-5 z-40 bg-blue-700 hover:bg-blue-800 text-white font-black px-4 py-3 rounded-2xl shadow-xl text-xs';
+      b.innerHTML='<i class="fa-solid fa-comments mr-1"></i> MESSAGE CENTER';
+      b.onclick=gcOpenUserMessages;
+      document.body.appendChild(b);
+      observer.disconnect();
+    }
+  });
+  observer.observe(document.body,{childList:true,subtree:true});
+
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
+  document.getElementById('gcMessageCenterModal')?.addEventListener('click',e=>{if(e.target.id==='gcMessageCenterModal')close();});
+})();
+</script>
+
+
+<style id="gc-index-card-design-final">
+/* ===== PROFILE CARD DESIGN RESTORED FROM THE EARLIER INDEX VERSION ===== */
+#tutorGrid,#studentGridContainer{
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:12px !important;
 }
-#gcV3FullProfileModal.gc-v3-modal.open{
-  display:block!important;
-  visibility:visible!important;
-  pointer-events:auto!important;
+.gc-v4-preview-card{
+  min-width:0 !important;
+  min-height:82px !important;
+  padding:10px 12px !important;
+  border-radius:15px !important;
+  display:flex !important;
+  align-items:center !important;
+  gap:10px !important;
+  box-sizing:border-box !important;
+  position:relative !important;
+  overflow:hidden !important;
+  box-shadow:0 7px 18px rgba(15,23,42,.12) !important;
+  border:1px solid rgba(15,23,42,.09) !important;
+}
+.gc-v4-tutor.gc-v4-verified{
+  background:linear-gradient(135deg,#7dd3fc,#38bdf8 58%,#0ea5e9) !important;
+  color:#082f49 !important;
+}
+.gc-v4-tutor.gc-v4-registered{
+  background:#fffdf5 !important;
+  color:#172c67 !important;
+  border-color:#e7e1cf !important;
+}
+.gc-v4-student{
+  background:linear-gradient(135deg,#fff3a3,#ffd34e 58%,#f2ad19) !important;
+  color:#5a3600 !important;
+}
+.gc-v4-preview-main{min-width:0 !important;flex:1 !important}
+.gc-v4-preview-name{
+  display:flex !important;
+  align-items:center !important;
+  gap:7px !important;
+  min-width:0 !important;
+}
+.gc-v4-preview-name h3{
+  margin:0 !important;
+  min-width:0 !important;
+  flex:1 !important;
+  font-size:16px !important;
+  line-height:1.08 !important;
+  font-weight:950 !important;
+  white-space:normal !important;
+  overflow-wrap:anywhere !important;
+  word-break:normal !important;
+  color:inherit !important;
+}
+/* White name patch, as requested previously */
+.gc-v4-tutor .gc-v4-preview-name h3{
+  background:#fff !important;
+  color:#122657 !important;
+  border-radius:10px !important;
+  padding:7px 11px !important;
+  box-shadow:0 4px 12px rgba(0,0,0,.16) !important;
+}
+.gc-v4-student .gc-v4-preview-name h3{
+  background:rgba(255,255,255,.72) !important;
+  color:#5a3600 !important;
+  border-radius:10px !important;
+  padding:7px 11px !important;
+}
+.gc-v4-verified-patch{
+  width:48px !important;
+  height:48px !important;
+  min-width:48px !important;
+  flex:0 0 48px !important;
+  border-radius:50% !important;
+  background:#fff !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  padding:3px !important;
+  box-sizing:border-box !important;
+  box-shadow:0 5px 16px rgba(0,0,0,.28) !important;
+  border:3px solid #fff !important;
+}
+.gc-v4-verified-patch img{
+  width:100% !important;
+  height:100% !important;
+  object-fit:contain !important;
+  display:block !important;
+  border-radius:50% !important;
+}
+.gc-v4-preview-meta{
+  display:flex !important;
+  gap:5px !important;
+  margin-top:7px !important;
+  min-width:0 !important;
+  flex-wrap:wrap !important;
+}
+.gc-v4-preview-meta span{
+  font-size:9px !important;
+  line-height:1.15 !important;
+  border-radius:7px !important;
+  padding:4px 6px !important;
+  min-width:0 !important;
+  max-width:100% !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+  white-space:nowrap !important;
+  background:rgba(255,255,255,.28) !important;
+  border:1px solid rgba(255,255,255,.32) !important;
+}
+.gc-v4-registered .gc-v4-preview-meta span{
+  background:#f5f1e6 !important;
+  border-color:#e8dfc9 !important;
+}
+.gc-v4-preview-meta b{
+  font-size:7px !important;
+  letter-spacing:.02em !important;
+  margin-right:2px !important;
+}
+.gc-v4-more{
+  flex:0 0 auto !important;
+  border:0 !important;
+  border-radius:9px !important;
+  background:#fff !important;
+  color:#0f4bb8 !important;
+  padding:8px 9px !important;
+  font-size:9px !important;
+  font-weight:950 !important;
+  cursor:pointer !important;
+  white-space:nowrap !important;
+  box-shadow:0 3px 9px rgba(0,0,0,.14) !important;
+}
+.gc-v4-registered .gc-v4-more{color:#6b5b20 !important}
+.gc-v4-student-more{color:#8a5a00 !important}
+.gc-v4-more:hover{transform:translateY(-1px) !important}
+.gc-v4-modal-tick{
+  width:46px !important;
+  height:46px !important;
+  vertical-align:middle !important;
+  margin-left:10px !important;
+  position:relative !important;
+  top:3px !important;
+}
+.gc-v4-tutor-head{
+  background:linear-gradient(135deg,#38bdf8,#0284c7) !important;
+}
+.gc-v4-student-head{
+  background:linear-gradient(135deg,#ffd54f,#f59e0b) !important;
+}
+@media(max-width:760px){
+  #tutorGrid,#studentGridContainer{
+    grid-template-columns:1fr !important;
+    gap:8px !important;
+  }
+  .gc-v4-preview-card{
+    min-height:70px !important;
+    padding:8px 9px !important;
+    border-radius:13px !important;
+    gap:7px !important;
+  }
+  .gc-v4-preview-name h3{
+    font-size:14px !important;
+    padding:6px 8px !important;
+  }
+  .gc-v4-verified-patch{
+    width:39px !important;
+    height:39px !important;
+    min-width:39px !important;
+    flex-basis:39px !important;
+    padding:2px !important;
+  }
+  .gc-v4-preview-meta{margin-top:5px !important;gap:3px !important}
+  .gc-v4-preview-meta span{font-size:8px !important;padding:3px 4px !important}
+  .gc-v4-preview-meta b{font-size:6.5px !important}
+  .gc-v4-more{font-size:8px !important;padding:7px !important}
 }
 </style>
 
-
-<script id="gc-open-final-fix">
+<script id="gc-index-card-renderers-final">
 (function(){
-  function showProfile(){
-    var m=document.getElementById('gcV3FullProfileModal');
-    if(m){
-      m.style.display='';
-      m.style.visibility='';
-      m.style.pointerEvents='';
-      m.classList.add('open');
+  function escX(v){
+    return String(v==null?'':v).replace(/[&<>"']/g,m=>({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[m]));
+  }
+  function getTickX(){
+    try{ if(typeof VERIFIED_TICK_V3!=='undefined' && VERIFIED_TICK_V3) return VERIFIED_TICK_V3; }catch(e){}
+    try{ if(typeof VERIFIED_TICK_LOGO_URL!=='undefined' && VERIFIED_TICK_LOGO_URL) return VERIFIED_TICK_LOGO_URL; }catch(e){}
+    return '';
+  }
+  function ratingX(t){
+    try{ if(typeof ratingV4==='function') return ratingV4(t); }catch(e){}
+    return t.rating || '5.0';
+  }
+  function requirementX(s){
+    try{ if(typeof illustrativeRequirement==='function') return illustrativeRequirement(s); }catch(e){}
+    return s.requirement || s.learningRequirement || 'Learning requirement not specified';
+  }
+
+  window.renderTutorDirectory=function(){
+    const c=document.getElementById('tutorGrid');
+    if(!c || !Array.isArray(window.tutorDirectoryList)) return;
+    const per=window.tutorsPerPage||6;
+    const page=window.tutorDirectoryList.slice(
+      ((window.currentTutorPage||1)-1)*per,
+      (window.currentTutorPage||1)*per
+    );
+    const tick=getTickX();
+    c.innerHTML='';
+    page.forEach(t=>{
+      const verified=!!t.verified;
+      const id=escX(t.id||'');
+      const name=escX(t.name||'Tutor');
+      const subject=escX(t.subject||'Not specified');
+      const rate=escX(t.price||t.rate||'—');
+      const rating=escX(ratingX(t));
+      c.insertAdjacentHTML('beforeend',
+        `<article class="gc-v4-preview-card gc-v4-tutor ${verified?'gc-v4-verified':'gc-v4-registered'}">
+          <div class="gc-v4-preview-main">
+            <div class="gc-v4-preview-name">
+              <h3 title="${name}">${name}</h3>
+              ${verified && tick ? `<span class="gc-v4-verified-patch" title="Verified Tutor"><img src="${tick}" alt="Verified Tutor"></span>` : ''}
+            </div>
+            <div class="gc-v4-preview-meta">
+              <span><b>RATING</b> ★ ${rating}</span>
+              <span><b>SUBJECT</b> ${subject}</span>
+              <span><b>RATE</b> ${rate}/hr</span>
+            </div>
+          </div>
+          <button class="gc-v4-more" onclick="openTutorProfile('${id}')">MORE <i class="fa-solid fa-chevron-right"></i></button>
+        </article>`
+      );
+    });
+    try{ if(typeof renderTutorPagination==='function') renderTutorPagination(); }catch(e){}
+  };
+
+  window.renderStudentDirectory=function(){
+    const c=document.getElementById('studentGridContainer');
+    if(!c || !Array.isArray(window.studentDirectoryList)) return;
+    const per=window.GC_STUDENTS_PER_PAGE||6;
+    const page=window.studentDirectoryList.slice(
+      ((window.currentStudentPage||1)-1)*per,
+      (window.currentStudentPage||1)*per
+    );
+    c.innerHTML='';
+    page.forEach(s=>{
+      const id=escX(s.id||'');
+      const name=escX(s.name||'Student');
+      const req=escX(requirementX(s));
+      const course=escX(s.std||s.course||'—');
+      const stream=escX(s.stream||'—');
+      c.insertAdjacentHTML('beforeend',
+        `<article class="gc-v4-preview-card gc-v4-student">
+          <div class="gc-v4-preview-main">
+            <div class="gc-v4-preview-name"><h3 title="${name}">${name}</h3></div>
+            <div class="gc-v4-preview-meta">
+              <span><b>CLASS</b> ${course}</span>
+              <span><b>STREAM</b> ${stream}</span>
+              <span><b>REQUIREMENT</b> ${req}</span>
+            </div>
+          </div>
+          <button class="gc-v4-more gc-v4-student-more" onclick="openStudentProfile('${id}')">MORE <i class="fa-solid fa-chevron-right"></i></button>
+        </article>`
+      );
+    });
+    try{ if(typeof renderPaginationNumbers==='function') renderPaginationNumbers(); }catch(e){}
+  };
+
+  function repaint(){
+    try{window.renderTutorDirectory();}catch(e){}
+    try{window.renderStudentDirectory();}catch(e){}
+  }
+  setTimeout(repaint,80);
+  setTimeout(repaint,500);
+})();
+</script>
+
+</body>
+</html>
+<!-- GURU CONNECT — FINAL SAFE PROFILE CARD REDESIGN -->
+<style id="gc-final-safe-card-design">
+  :root{--gc-navy:#0b1f4d;--gc-navy2:#123a78;--gc-navy3:#071633;--gc-orange:#f26a00;--gc-orange2:#d84f00;--gc-ink:#0b1f4d;--gc-white:#fff;}
+  /* Keep the existing two-column profile area intact. */
+  #tutorGrid.gc-clean-directory,#studentGridContainer.gc-clean-directory,
+  #tutorGrid,#studentGridContainer{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:14px!important;
+    align-items:stretch!important;
+  }
+  .gc-safe-card{
+    position:relative!important;display:grid!important;grid-template-columns:76px minmax(0,1fr) auto!important;
+    align-items:center!important;min-width:0!important;min-height:112px!important;
+    padding:12px 13px!important;border-radius:19px!important;overflow:hidden!important;
+    box-sizing:border-box!important;color:#fff!important;
+    border:1px solid rgba(255,255,255,.25)!important;
+    box-shadow:0 10px 25px rgba(8,24,56,.18)!important;
+    isolation:isolate!important;
+  }
+  .gc-safe-card::before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(120deg,rgba(255,255,255,.07),transparent 45%,rgba(255,255,255,.04));pointer-events:none}
+  .gc-safe-card::after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;right:-100px;bottom:-110px;border:1px solid rgba(255,255,255,.10);z-index:-1;pointer-events:none}
+  .gc-safe-tutor{background:linear-gradient(135deg,var(--gc-navy) 0%,var(--gc-navy2) 62%,var(--gc-navy3) 100%)!important}
+  .gc-safe-student{background:linear-gradient(135deg,var(--gc-orange) 0%,var(--gc-orange2) 70%,#b93e00 100%)!important}
+  .gc-safe-avatar{width:68px!important;height:68px!important;min-width:68px!important;border-radius:50%!important;overflow:hidden!important;background:#fff!important;border:3px solid rgba(255,255,255,.96)!important;box-shadow:0 6px 15px rgba(0,0,0,.22)!important;display:flex!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important}
+  .gc-safe-avatar img{width:100%!important;height:100%!important;object-fit:cover!important;display:block!important}
+  .gc-safe-avatar-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#eef3fb;color:var(--gc-navy);font-size:25px;font-weight:900}
+  .gc-safe-student .gc-safe-avatar-fallback{color:var(--gc-orange2);background:#fff3ec}
+  .gc-safe-main{min-width:0!important;padding:0 10px!important}
+  .gc-safe-brand{position:absolute;top:8px;right:12px;font-size:7px;line-height:1;letter-spacing:.16em;font-weight:1000;color:rgba(255,255,255,.72);text-transform:uppercase;pointer-events:none}
+  .gc-safe-name-row{display:flex!important;align-items:center!important;gap:7px!important;min-width:0!important;padding-right:74px!important}
+  .gc-safe-name{margin:0!important;min-width:0!important;max-width:100%!important;font-size:17px!important;line-height:1.12!important;font-weight:950!important;color:#fff!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;letter-spacing:.01em!important}
+  .gc-safe-role{margin-top:4px!important;font-size:9px!important;font-weight:800!important;opacity:.86!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  .gc-safe-meta{display:flex!important;flex-wrap:wrap!important;gap:5px!important;margin-top:7px!important;min-width:0!important}
+  .gc-safe-meta span{display:inline-flex!important;align-items:center!important;gap:3px!important;min-width:0!important;max-width:100%!important;padding:4px 6px!important;border-radius:7px!important;background:rgba(255,255,255,.11)!important;border:1px solid rgba(255,255,255,.24)!important;color:#fff!important;font-size:8px!important;line-height:1.05!important;font-weight:800!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  .gc-safe-meta b{font-size:6.5px!important;letter-spacing:.04em!important;opacity:.72!important}
+  .gc-safe-more{position:relative!important;z-index:10!important;align-self:end!important;justify-self:end!important;border:1px solid rgba(255,255,255,.35)!important;border-radius:10px!important;background:rgba(255,255,255,.10)!important;color:#fff!important;padding:8px 10px!important;font-size:9px!important;font-weight:950!important;cursor:pointer!important;white-space:nowrap!important;box-shadow:0 4px 12px rgba(0,0,0,.12)!important;transition:.18s ease!important}
+  .gc-safe-more:hover{background:#fff!important;color:var(--gc-navy)!important;transform:translateY(-1px)!important}
+  .gc-safe-student .gc-safe-more:hover{color:var(--gc-orange2)!important}
+  .gc-safe-verified{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;min-width:22px;border-radius:50%;background:#fff;padding:2px;box-sizing:border-box;box-shadow:0 3px 9px rgba(0,0,0,.22)}
+  .gc-safe-verified img{width:100%;height:100%;object-fit:contain;display:block}
+
+  /* Branded popup: same visual language as the horizontal card, without changing the page layout. */
+  #gcSafeProfileModal{position:fixed;inset:0;z-index:1000000;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(3,12,30,.62);backdrop-filter:blur(7px)}
+  #gcSafeProfileModal.open{display:flex}
+  .gc-safe-modal-card{width:min(920px,calc(100vw - 32px));max-height:min(680px,calc(100vh - 32px));overflow:auto;border-radius:24px;background:#f6f8fc;box-shadow:0 28px 80px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.85);position:relative}
+  .gc-safe-modal-head{display:grid;grid-template-columns:96px minmax(0,1fr) auto;align-items:center;gap:16px;padding:18px 20px;color:#fff;position:relative;overflow:hidden}
+  .gc-safe-modal-head.tutor{background:linear-gradient(135deg,var(--gc-navy),var(--gc-navy2) 62%,var(--gc-navy3))}
+  .gc-safe-modal-head.student{background:linear-gradient(135deg,var(--gc-orange),var(--gc-orange2) 70%,#b93e00)}
+  .gc-safe-modal-head::after{content:"GURU CONNECT • GC CARD";position:absolute;right:20px;top:13px;font-size:8px;letter-spacing:.15em;font-weight:1000;opacity:.68}
+  .gc-safe-modal-avatar{width:92px;height:92px;border-radius:18px;background:#fff;border:4px solid rgba(255,255,255,.95);overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(0,0,0,.24)}
+  .gc-safe-modal-avatar img{width:100%;height:100%;object-fit:cover;display:block}
+  .gc-safe-modal-avatar i{font-size:42px;color:var(--gc-navy)}
+  .gc-safe-modal-head.student .gc-safe-modal-avatar i{color:var(--gc-orange2)}
+  .gc-safe-modal-role{font-size:10px;font-weight:900;letter-spacing:.12em;opacity:.82;margin-bottom:5px}
+  .gc-safe-modal-name{font-size:28px;font-weight:1000;line-height:1.05;margin:0;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .gc-safe-modal-sub{margin-top:6px;font-size:12px;font-weight:750;opacity:.88}
+  .gc-safe-modal-close{position:absolute;right:14px;bottom:12px;width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(0,0,0,.14);color:#fff;cursor:pointer;font-size:16px}
+  .gc-safe-modal-body{padding:16px 18px 18px;background:#f6f8fc}
+  .gc-safe-info-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+  .gc-safe-info{background:#fff;border:1px solid #dbe3ef;border-radius:14px;padding:11px 12px;min-width:0;box-shadow:0 4px 12px rgba(15,23,42,.05)}
+  .gc-safe-info small{display:block;color:#64748b;font-size:8px;font-weight:950;letter-spacing:.08em;margin-bottom:4px}
+  .gc-safe-info strong{display:block;color:#102a5c;font-size:12px;line-height:1.2;word-break:break-word}
+  .gc-safe-about{margin-top:10px;background:#fff;border:1px solid #dbe3ef;border-radius:14px;padding:12px;color:#334155}
+  .gc-safe-about h3{margin:0 0 5px;color:#102a5c;font-size:11px;font-weight:950}
+  .gc-safe-about p{margin:0;font-size:12px;line-height:1.5}
+  .gc-safe-actions{display:flex;gap:8px;margin-top:12px}
+  .gc-safe-action{flex:1;border:0;border-radius:12px;padding:11px 14px;font-weight:950;cursor:pointer}
+  .gc-safe-action.primary{background:var(--gc-navy);color:#fff}.gc-safe-action.student-primary{background:var(--gc-orange2);color:#fff}.gc-safe-action.secondary{background:#e7edf5;color:#102a5c}
+  @media(max-width:760px){
+    #tutorGrid,#studentGridContainer{grid-template-columns:1fr!important;gap:9px!important}
+    .gc-safe-card{grid-template-columns:58px minmax(0,1fr) auto!important;min-height:92px!important;padding:9px!important;gap:7px!important}
+    .gc-safe-avatar{width:54px!important;height:54px!important;min-width:54px!important}
+    .gc-safe-main{padding:0 5px!important}.gc-safe-name{font-size:14px!important}.gc-safe-role{font-size:8px!important}.gc-safe-meta{margin-top:5px!important;gap:3px!important}.gc-safe-meta span{font-size:7px!important;padding:3px 4px!important}.gc-safe-more{font-size:8px!important;padding:7px 7px!important}.gc-safe-brand{font-size:6px;right:8px;top:7px}
+    .gc-safe-modal-card{width:calc(100vw - 20px);max-height:calc(100vh - 20px);border-radius:18px}.gc-safe-modal-head{grid-template-columns:66px minmax(0,1fr);gap:11px;padding:14px}.gc-safe-modal-avatar{width:64px;height:64px;border-radius:14px}.gc-safe-modal-name{font-size:20px}.gc-safe-modal-sub{font-size:10px}.gc-safe-modal-close{right:9px;bottom:9px}.gc-safe-info-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.gc-safe-modal-body{padding:11px}.gc-safe-info{padding:9px}.gc-safe-info strong{font-size:10px}.gc-safe-actions{flex-direction:column}
+  }
+</style>
+<script id="gc-final-safe-card-js">
+(function(){
+  'use strict';
+  function esc(v){return String(v??'').replace(/[&<>"']/g,function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]})}
+  function list(kind){try{return kind==='tutor'&&Array.isArray(window.tutorDirectoryList)?window.tutorDirectoryList:(kind==='student'&&Array.isArray(window.studentDirectoryList)?window.studentDirectoryList:[])}catch(e){return[]}}
+  function page(kind){try{return kind==='tutor'?(typeof currentTutorPage!=='undefined'?currentTutorPage:1):(typeof currentStudentPage!=='undefined'?currentStudentPage:1)}catch(e){return 1}}
+  function per(kind){try{return kind==='tutor'?(typeof tutorsPerPage!=='undefined'?tutorsPerPage:6):6}catch(e){return 6}}
+  function photo(o){return o&&(o.photoData||o.photo||o.image||o.avatar||o.profileImage)||''}
+  function tick(){try{return (typeof VERIFIED_TICK_LOGO_URL!=='undefined'&&VERIFIED_TICK_LOGO_URL)||(typeof VERIFIED_TICK_V3!=='undefined'&&VERIFIED_TICK_V3)||''}catch(e){return''}}
+  function rating(o){try{if(o.rating)return String(o.rating);if(o._manualRating)return Number(o._manualRating).toFixed(1)}catch(e){}return '4.5'}
+  function avatar(o,kind){var p=photo(o), icon=kind==='tutor'?'fa-chalkboard-user':'fa-user-graduate';return p?'<img src="'+esc(p)+'" alt="'+esc(o.name||kind)+'" onerror="this.onerror=null;this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"/><span class="gc-safe-avatar-fallback" style="display:none"><i class="fa-solid '+icon+'"></i></span>':'<span class="gc-safe-avatar-fallback"><i class="fa-solid '+icon+'"></i></span>'}
+  function render(kind){
+    var id=kind==='tutor'?'tutorGrid':'studentGridContainer',c=document.getElementById(id);if(!c)return;
+    var items=list(kind),p=page(kind),pp=per(kind),shown=items.slice((p-1)*pp,p*pp);c.innerHTML='';c.classList.add('gc-safe-directory');
+    shown.forEach(function(o){
+      var isTutor=kind==='tutor',verified=isTutor&&o.verified===true, oid=String(o.id||''), name=String(o.name||(isTutor?'Tutor':'Student'));
+      var subject=isTutor?String(o.subject||'Not specified'):String(o.stream||o.course||'Student');
+      var line2=isTutor?(''+String(o.qualification||o.experience||'Registered Tutor')):String(o.course||o.std||'Junior College');
+      var meta=isTutor?['★ '+rating(o),subject,(o.price||o.rate||'—')+'/hr',o.experience||'—']:['CLASS '+String(o.course||o.std||'—'),'STREAM '+String(o.stream||'—'),'LOOKING FOR '+String(o.learningRequirement||o.subject||'Not specified')];
+      var el=document.createElement('article');el.className='gc-safe-card '+(isTutor?'gc-safe-tutor':'gc-safe-student');el.dataset.profileId=oid;el.dataset.profileType=kind;
+      var tickHtml=verified&&tick()?'<span class="gc-safe-verified"><img src="'+esc(tick())+'" alt="Verified"></span>':'';
+      el.innerHTML='<div class="gc-safe-brand">GURU CONNECT • GC CARD</div><div class="gc-safe-avatar">'+avatar(o,kind)+'</div><div class="gc-safe-main"><div class="gc-safe-name-row"><h3 class="gc-safe-name" title="'+esc(name)+'">'+esc(name)+'</h3>'+tickHtml+'</div><div class="gc-safe-role">'+esc(isTutor?(verified?'VERIFIED TUTOR':'REGISTERED TUTOR'):'STUDENT')+' • '+esc(line2)+'</div><div class="gc-safe-meta">'+meta.map(function(x){return '<span>'+esc(x)+'</span>'}).join('')+'</div></div><button type="button" class="gc-safe-more">MORE <i class="fa-solid fa-chevron-right"></i></button>';
+      c.appendChild(el);
+    });
+    if(isTutor&&typeof renderTutorPaginationNumbers==='function'){try{renderTutorPaginationNumbers()}catch(e){}} else if(!isTutor&&typeof renderPaginationNumbers==='function'){try{renderPaginationNumbers()}catch(e){}}
+  }
+  function ensureModal(){var m=document.getElementById('gcSafeProfileModal');if(m)return m;m=document.createElement('div');m.id='gcSafeProfileModal';m.innerHTML='<div class="gc-safe-modal-card" role="dialog" aria-modal="true"><button class="gc-safe-modal-close" type="button" aria-label="Close"><i class="fa-solid fa-xmark"></i></button><div id="gcSafeProfileContent"></div></div>';document.body.appendChild(m);m.addEventListener('click',function(e){if(e.target===m||e.target.closest('.gc-safe-modal-close'))closeModal()});return m}
+  function closeModal(){var m=document.getElementById('gcSafeProfileModal');if(m)m.classList.remove('open');document.documentElement.classList.remove('gc-safe-modal-open')}
+  function openProfile(kind,id){
+    var o=list(kind).find(function(x){return String(x.id)===String(id)});if(!o)return;
+    var m=ensureModal(),c=document.getElementById('gcSafeProfileContent'),isTutor=kind==='tutor',verified=isTutor&&o.verified===true,p=photo(o),role=isTutor?(verified?'VERIFIED TUTOR':'REGISTERED TUTOR'):'STUDENT';
+    var headClass=isTutor?'tutor':'student',subject=isTutor?(o.subject||'Not specified'):(o.stream||o.course||'Student');
+    var av=p?'<img src="'+esc(p)+'" alt="'+esc(o.name||role)+'" onerror="this.onerror=null;this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"/><i class="fa-solid '+(isTutor?'fa-chalkboard-user':'fa-user-graduate')+'" style="display:none"></i>':'<i class="fa-solid '+(isTutor?'fa-chalkboard-user':'fa-user-graduate')+'"></i>';
+    var info=isTutor?[
+      ['RATING','★ '+rating(o)],['RATE / HR',o.price||o.rate||'Not provided'],['EXPERIENCE',o.experience||'Not provided'],['QUALIFICATION',o.qualification||'Not provided'],['COLLEGE / INSTITUTE',o.teachingCollege||o.college||'Not provided'],['SUBJECTS',o.subject||'Not provided'],['LOCATION',o.address||o.location||'Not provided'],['MEMBER SINCE',o.memberSince||'Not provided'],['GC ID',o.gcId||o.id||'—']
+    ]:[
+      ['CLASS',o.course||o.std||'Not provided'],['STREAM',o.stream||'Not provided'],['LOCATION',o.address||o.location||'Not provided'],['MEMBER SINCE',o.memberSince||'Not provided'],['LOOKING FOR',o.learningRequirement||o.subject||'Not specified'],['GC ID',o.gcId||o.id||'—']
+    ];
+    var about=o.aboutMe||(isTutor?'Professional educator profile on GURU CONNECT.':'Learning profile on GURU CONNECT.');
+    c.innerHTML='<div class="gc-safe-modal-head '+headClass+'"><div class="gc-safe-modal-avatar">'+av+'</div><div><div class="gc-safe-modal-role">'+role+'</div><h2 class="gc-safe-modal-name">'+esc(o.name||role)+(verified&&tick()?'<span class="gc-safe-verified"><img src="'+esc(tick())+'" alt="Verified"></span>':'')+'</h2><div class="gc-safe-modal-sub">'+esc(subject)+(o.stream?' • '+esc(o.stream):'')+'</div></div><button type="button" class="gc-safe-modal-close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button></div><div class="gc-safe-modal-body"><div class="gc-safe-info-grid">'+info.map(function(a){return '<div class="gc-safe-info"><small>'+esc(a[0])+'</small><strong>'+esc(a[1])+'</strong></div>'}).join('')+'</div><div class="gc-safe-about"><h3><i class="fa-solid fa-id-card"></i> GURU CONNECT PROFILE</h3><p>'+esc(about)+'</p></div><div class="gc-safe-actions"><button type="button" class="gc-safe-action '+(isTutor?'primary':'student-primary')+'" id="gcSafeConnect"><i class="fa-solid fa-link"></i> '+(isTutor?'CONNECT WITH TUTOR':'CONNECT WITH STUDENT')+'</button><button type="button" class="gc-safe-action secondary" id="gcSafeClose">CLOSE</button></div></div>';
+    c.querySelectorAll('.gc-safe-modal-close,#gcSafeClose').forEach(function(b){b.onclick=closeModal});
+    c.querySelector('#gcSafeConnect').onclick=function(){closeModal();if(isTutor&&typeof connectWithTutor==='function')connectWithTutor(o.id);else if(!isTutor&&typeof connectWithStudent==='function')connectWithStudent(o.id)};
+    m.classList.add('open');
+  }
+  document.addEventListener('click',function(e){var b=e.target.closest('.gc-safe-more');if(!b)return;var card=b.closest('.gc-safe-card');if(!card)return;openProfile(card.dataset.profileType,card.dataset.profileId)});
+  window.renderTutorDirectory=function(){render('tutor')};
+  window.renderStudentDirectory=function(){render('student')};
+  window.openTutorProfile=function(id){openProfile('tutor',id)};
+  window.openStudentProfile=function(id){
+    var s=list('student').find(function(x){return String(x.id)===String(id)});if(!s)return;
+    var viewer=typeof getActiveViewer==='function'?getActiveViewer():null;
+    if(viewer&&viewer.isRegistered&&viewer.role==='student'&&String(viewer.phone||'').replace(/\D/g,'')===String(s.phone||'').replace(/\D/g,'')){if(typeof openUserDashboard==='function')openUserDashboard();return}
+    if(!viewer||!viewer.isRegistered){if(typeof showProtectedPopup==='function')showProtectedPopup('STUDENT PROFILE PROTECTED','Please register and verify your email before accessing student profiles.','fa-lock');return}
+    if(viewer.role!=='tutor'){if(typeof showProtectedPopup==='function')showProtectedPopup('REGISTERED TUTOR ACCESS ONLY','Only a registered Tutor can access student profile information.','fa-user-tie');return}
+    if(typeof isRealStudent==='function'&&!isRealStudent(s)){if(typeof contactSentPopup==='function')contactSentPopup();return}
+    openProfile('student',id);
+  };
+  function boot(){setTimeout(function(){render('tutor');render('student')},80)}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+})();
+</script>
+
+
+<!-- GURU CONNECT — FINAL TUTOR VISIBILITY / UNIFORM COLOR FIX -->
+<style id="gc-final-tutor-visible-fix">
+  /* Never let legacy card CSS hide the directory. */
+  #tutorGrid{display:grid!important;visibility:visible!important;opacity:1!important;}
+  #tutorGrid.gc-clean-directory{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important;}
+  #tutorGrid .gc-clean-card{display:flex!important;visibility:visible!important;opacity:1!important;}
+
+  /* Every tutor uses ONE uniform green theme. */
+  #tutorGrid .gc-clean-card.gc-clean-verified,
+  #tutorGrid .gc-clean-card.gc-clean-registered{
+    background:linear-gradient(135deg,#16a34a 0%,#15803d 55%,#166534 100%)!important;
+    background-image:linear-gradient(135deg,#16a34a 0%,#15803d 55%,#166534 100%)!important;
+    color:#fff!important;
+    border-color:rgba(255,255,255,.28)!important;
+  }
+  #tutorGrid .gc-clean-card .gc-clean-name-shell{background:#fff!important;}
+  #tutorGrid .gc-clean-card .gc-clean-name{color:#123b25!important;}
+  #tutorGrid .gc-clean-card .gc-clean-more{color:#166534!important;background:#fff!important;}
+  #tutorGrid .gc-clean-card .gc-clean-avatar-fallback{color:#15803d!important;background:#f0fdf4!important;}
+
+  @media(max-width:760px){
+    #tutorGrid.gc-clean-directory{grid-template-columns:1fr!important;gap:9px!important;}
+  }
+</style>
+<script id="gc-final-tutor-visible-js">
+(function(){
+  'use strict';
+  function boot(){
+    try{
+      var c=document.getElementById('tutorGrid');
+      if(!c) return;
+      c.classList.add('gc-clean-directory');
+      c.style.display='grid';
+      c.style.visibility='visible';
+      c.style.opacity='1';
+      if(typeof window.renderTutorDirectory==='function') window.renderTutorDirectory();
+      /* Render once more after all legacy scripts finish. */
+      setTimeout(function(){
+        try{
+          if(typeof window.renderTutorDirectory==='function') window.renderTutorDirectory();
+          c.style.display='grid'; c.style.visibility='visible'; c.style.opacity='1';
+        }catch(e){}
+      },250);
+    }catch(e){console.warn('Tutor visibility fix:',e);}
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot);
+  else boot();
+})();
+</script>
+
+
+<!-- GURU CONNECT — AUTHORITATIVE PROFILE RENDER FIX -->
+<style id="gc-authoritative-profile-fix">
+#tutorGrid, #studentGridContainer{display:grid!important;visibility:visible!important;opacity:1!important;}
+#tutorGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important;}
+#studentGridContainer{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important;}
+.gc-author-card{position:relative;display:flex!important;align-items:center;min-height:104px;padding:14px 16px;border-radius:18px;box-sizing:border-box;overflow:hidden;color:#fff!important;box-shadow:0 10px 24px rgba(15,23,42,.16);border:1px solid rgba(255,255,255,.22);}
+.gc-author-tutor{background:linear-gradient(135deg,#166534,#15803d 55%,#16a34a)!important;}
+.gc-author-student{background:linear-gradient(135deg,#c2410c,#ea580c 55%,#f97316)!important;}
+.gc-author-brand{position:absolute;right:13px;top:9px;font-size:8px;letter-spacing:1.5px;font-weight:900;opacity:.72;}
+.gc-author-avatar{width:68px;height:68px;min-width:68px;border-radius:50%;overflow:hidden;background:rgba(255,255,255,.95);display:flex;align-items:center;justify-content:center;margin-right:13px;border:3px solid rgba(255,255,255,.9);box-shadow:0 5px 14px rgba(0,0,0,.18);}
+.gc-author-avatar img{width:100%;height:100%;object-fit:cover;display:block;}
+.gc-author-avatar i{font-size:28px;color:#166534;}
+.gc-author-student .gc-author-avatar i{color:#ea580c;}
+.gc-author-main{min-width:0;flex:1;padding-top:8px;}
+.gc-author-name-row{display:flex;align-items:center;gap:7px;min-width:0;margin-bottom:7px;}
+.gc-author-name{margin:0;background:#fff;color:#123b25!important;border-radius:9px;padding:7px 10px;font-size:16px;line-height:1.05;font-weight:950;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;}
+.gc-author-student .gc-author-name{color:#7c2d12!important;}
+.gc-author-role{font-size:9px;font-weight:900;letter-spacing:.8px;margin-bottom:7px;opacity:.9;}
+.gc-author-meta{display:flex;gap:5px;flex-wrap:wrap;}
+.gc-author-meta span{font-size:8px;font-weight:800;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);padding:4px 6px;border-radius:7px;white-space:nowrap;max-width:150px;overflow:hidden;text-overflow:ellipsis;}
+.gc-author-more{flex:0 0 auto;border:0;border-radius:10px;background:#fff;color:#166534!important;font-weight:950;font-size:9px;padding:9px 11px;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,.14);margin-left:9px;}
+.gc-author-student .gc-author-more{color:#c2410c!important;}
+.gc-author-verified{width:27px;height:27px;min-width:27px;border-radius:50%;background:#fff;padding:2px;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 3px 8px rgba(0,0,0,.2);}
+.gc-author-verified img{width:100%;height:100%;object-fit:contain;}
+#gcAuthorModal{position:fixed;inset:0;z-index:999999;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,.72);backdrop-filter:blur(7px);padding:20px;}
+#gcAuthorModal.open{display:flex;}
+.gc-author-modal-card{width:min(920px,96vw);max-height:90vh;overflow:auto;border-radius:24px;background:#fff;box-shadow:0 30px 80px rgba(0,0,0,.35);}
+.gc-author-modal-head{position:relative;display:flex;align-items:center;gap:18px;padding:24px;color:#fff;}
+.gc-author-modal-head.tutor{background:linear-gradient(135deg,#166534,#15803d 55%,#16a34a);}
+.gc-author-modal-head.student{background:linear-gradient(135deg,#c2410c,#ea580c 55%,#f97316);}
+.gc-author-modal-avatar{width:94px;height:94px;min-width:94px;border-radius:50%;overflow:hidden;background:#fff;border:4px solid rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;}
+.gc-author-modal-avatar img{width:100%;height:100%;object-fit:cover;}
+.gc-author-modal-avatar i{font-size:40px;color:#166534;}
+.gc-author-modal-head.student .gc-author-modal-avatar i{color:#ea580c;}
+.gc-author-modal-role{font-size:10px;font-weight:900;letter-spacing:1.2px;opacity:.85;}
+.gc-author-modal-name{margin:5px 0;font-size:27px;font-weight:950;}
+.gc-author-modal-sub{font-size:13px;font-weight:700;opacity:.9;}
+.gc-author-modal-brand{position:absolute;right:24px;top:18px;font-size:10px;letter-spacing:2px;font-weight:900;opacity:.75;}
+.gc-author-modal-close{position:absolute;right:16px;bottom:16px;width:38px;height:38px;border:0;border-radius:50%;background:#fff;color:#334155;cursor:pointer;font-size:18px;}
+.gc-author-modal-body{padding:22px;}
+.gc-author-info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.gc-author-info{padding:14px;border:1px solid #e2e8f0;border-radius:14px;background:#f8fafc;}
+.gc-author-info small{display:block;font-size:8px;font-weight:900;letter-spacing:.7px;color:#64748b;margin-bottom:5px;}
+.gc-author-info strong{font-size:14px;color:#0f172a;}
+.gc-author-about{margin-top:14px;padding:16px;border-radius:15px;background:#f1f5f9;color:#334155;}
+.gc-author-about h3{margin:0 0 7px;font-size:12px;color:#0f172a;}
+.gc-author-about p{margin:0;font-size:13px;line-height:1.55;}
+@media(max-width:760px){#tutorGrid,#studentGridContainer{grid-template-columns:1fr!important}.gc-author-card{min-height:88px;padding:10px}.gc-author-avatar{width:54px;height:54px;min-width:54px}.gc-author-name{font-size:13px}.gc-author-meta span{font-size:7px;padding:3px 4px}.gc-author-more{font-size:8px;padding:7px 8px}.gc-author-info-grid{grid-template-columns:1fr 1fr}.gc-author-modal-head{padding:18px}.gc-author-modal-avatar{width:72px;height:72px;min-width:72px}.gc-author-modal-name{font-size:21px}}
+</style>
+<script id="gc-authoritative-profile-render-fix">
+(function(){
+  'use strict';
+  function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]});}
+  function tutors(){try{return (typeof tutorDirectoryList!=='undefined'&&Array.isArray(tutorDirectoryList))?tutorDirectoryList:[];}catch(e){return[];}}
+  function students(){try{return (typeof studentDirectoryList!=='undefined'&&Array.isArray(studentDirectoryList))?studentDirectoryList:[];}catch(e){return[];}}
+  function tick(){try{return (typeof VERIFIED_TICK_V3!=='undefined'&&VERIFIED_TICK_V3)||'';}catch(e){return'';}}
+  function avatar(o,isTutor){var p=o.photoData||o.photo||o.image||o.avatar||o.profileImage||'';var icon=isTutor?'fa-chalkboard-user':'fa-user-graduate';if(p)return '<img src="'+esc(p)+'" alt="'+esc(o.name||'Profile')+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'block\'"> <i class="fa-solid '+icon+'" style="display:none"></i>';return '<i class="fa-solid '+icon+'"></i>';}
+  function rating(o){return o.rating||o.ratings||o.averageRating||'4.5';}
+  function renderTutors(){var c=document.getElementById('tutorGrid');if(!c)return;c.innerHTML='';var list=tutors(),per=(typeof tutorsPerPage!=='undefined'?tutorsPerPage:6),pg=(typeof currentTutorPage!=='undefined'?currentTutorPage:1),items=list.slice((pg-1)*per,pg*per);items.forEach(function(t){var verified=!!t.verified,id=String(t.id||''),name=String(t.name||'Tutor');var meta=['★ '+rating(t),t.subject||'Not specified',(t.price||t.rate||'—')+'/hr',t.experience||'—'];var el=document.createElement('article');el.className='gc-author-card gc-author-tutor';el.innerHTML='<span class="gc-author-brand">GURU CONNECT</span><div class="gc-author-avatar">'+avatar(t,true)+'</div><div class="gc-author-main"><div class="gc-author-name-row"><h3 class="gc-author-name">'+esc(name)+'</h3>'+(verified&&tick()?'<span class="gc-author-verified"><img src="'+esc(tick())+'" alt="Verified"></span>':'')+'</div><div class="gc-author-role">'+(verified?'VERIFIED TUTOR':'REGISTERED TUTOR')+'</div><div class="gc-author-meta">'+meta.map(function(x){return '<span>'+esc(x)+'</span>';}).join('')+'</div></div><button type="button" class="gc-author-more">MORE <i class="fa-solid fa-chevron-right"></i></button>';el.querySelector('.gc-author-more').onclick=function(){openProfile('tutor',id);};c.appendChild(el);});try{if(typeof renderTutorPagination==='function')renderTutorPagination();}catch(e){}}
+  function renderStudents(){var c=document.getElementById('studentGridContainer');if(!c)return;c.innerHTML='';var list=students(),per=(typeof GC_STUDENTS_PER_PAGE!=='undefined'?GC_STUDENTS_PER_PAGE:6),pg=(typeof currentStudentPage!=='undefined'?currentStudentPage:1),items=list.slice((pg-1)*per,pg*per);items.forEach(function(s){var id=String(s.id||''),name=String(s.name||'Student');var meta=['CLASS '+(s.std||s.course||'—'),'STREAM '+(s.stream||'—'),s.learningRequirement||s.subject||'Looking for tutor'];var el=document.createElement('article');el.className='gc-author-card gc-author-student';el.innerHTML='<span class="gc-author-brand">GURU CONNECT</span><div class="gc-author-avatar">'+avatar(s,false)+'</div><div class="gc-author-main"><div class="gc-author-name-row"><h3 class="gc-author-name">'+esc(name)+'</h3></div><div class="gc-author-role">STUDENT</div><div class="gc-author-meta">'+meta.map(function(x){return '<span>'+esc(x)+'</span>';}).join('')+'</div></div><button type="button" class="gc-author-more">MORE <i class="fa-solid fa-chevron-right"></i></button>';el.querySelector('.gc-author-more').onclick=function(){openProfile('student',id);};c.appendChild(el);});try{if(typeof renderPaginationNumbers==='function')renderPaginationNumbers();}catch(e){}}
+  function modal(){var m=document.getElementById('gcAuthorModal');if(m)return m;m=document.createElement('div');m.id='gcAuthorModal';m.innerHTML='<div class="gc-author-modal-card"><div id="gcAuthorModalContent"></div></div>';document.body.appendChild(m);m.addEventListener('click',function(e){if(e.target===m)close();});return m;}
+  function close(){var m=document.getElementById('gcAuthorModal');if(m)m.classList.remove('open');}
+  window.openProfile=function(kind,id){var o=(kind==='tutor'?tutors():students()).find(function(x){return String(x.id)===String(id);});if(!o)return;var isTutor=kind==='tutor',m=modal(),c=document.getElementById('gcAuthorModalContent'),role=isTutor?(o.verified?'VERIFIED TUTOR':'REGISTERED TUTOR'):'STUDENT',sub=isTutor?(o.subject||'Tutor'):(o.stream||o.course||'Student'),info=isTutor?[['RATING','★ '+rating(o)],['RATE / HR',o.price||o.rate||'Not provided'],['EXPERIENCE',o.experience||'Not provided'],['QUALIFICATION',o.qualification||'Not provided'],['LOCATION',o.location||o.address||'Not provided'],['GC ID',o.gcId||o.id||'—']]:[['CLASS',o.std||o.course||'Not provided'],['STREAM',o.stream||'Not provided'],['LOCATION',o.location||o.address||'Not provided'],['MEMBER SINCE',o.memberSince||'Not provided'],['LOOKING FOR',o.learningRequirement||o.subject||'Not specified'],['GC ID',o.gcId||o.id||'—']];c.innerHTML='<div class="gc-author-modal-head '+(isTutor?'tutor':'student')+'"><span class="gc-author-modal-brand">GURU CONNECT • GC CARD</span><div class="gc-author-modal-avatar">'+avatar(o,isTutor)+'</div><div><div class="gc-author-modal-role">'+role+'</div><h2 class="gc-author-modal-name">'+esc(o.name||role)+'</h2><div class="gc-author-modal-sub">'+esc(sub)+'</div></div><button class="gc-author-modal-close" type="button">×</button></div><div class="gc-author-modal-body"><div class="gc-author-info-grid">'+info.map(function(a){return '<div class="gc-author-info"><small>'+esc(a[0])+'</small><strong>'+esc(a[1])+'</strong></div>';}).join('')+'</div><div class="gc-author-about"><h3>GURU CONNECT PROFILE</h3><p>'+esc(o.aboutMe||(isTutor?'Professional tutor profile on GURU CONNECT.':'Student learning profile on GURU CONNECT.'))+'</p></div></div>';c.querySelector('.gc-author-modal-close').onclick=close;m.classList.add('open');};
+  window.renderTutorDirectory=renderTutors;window.renderStudentDirectory=renderStudents;
+  function boot(){renderTutors();renderStudents();setTimeout(function(){renderTutors();renderStudents();},350);}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+})();
+</script>
+
+
+<!-- ================================================================
+     GURU CONNECT — DASHBOARD / MESSAGING / STUDENT FEES ENHANCEMENT
+     Adds:
+     • Registered ID everywhere in personal/admin views
+     • 3 achievement/requirement photos + captions
+     • Editable About Me / Learning Requirement
+     • Tutor/Student → Admin + Tutor/Student peer messaging
+     • Admin → individual Tutor/Student + all Tutors + all Students + everyone
+     • Student Helpline fee status: Mark Fees Paid / Revoke Fees Paid
+     • Local persistence for the single-file/GitHub demo
+================================================================ -->
+<style id="gc-v7-dashboard-enhancement-style">
+.gc-v7-panel{margin-top:20px;border:1px solid #e2e8f0;border-radius:22px;background:#fff;box-shadow:0 8px 28px rgba(15,23,42,.08);overflow:hidden}
+.gc-v7-panel-head{padding:16px 18px;background:linear-gradient(135deg,#eff6ff,#f8fafc);border-bottom:1px solid #e2e8f0}
+.gc-v7-panel-head h4{margin:0;color:#0f172a;font-size:15px;font-weight:950}
+.gc-v7-panel-head p{margin:5px 0 0;color:#64748b;font-size:11px;line-height:1.5}
+.gc-v7-panel-body{padding:16px 18px}
+.gc-v7-id{display:inline-flex;align-items:center;gap:6px;background:#0f172a;color:#fff;border-radius:999px;padding:6px 10px;font-size:10px;font-weight:900;letter-spacing:.03em}
+.gc-v7-profile-card{display:grid;grid-template-columns:96px minmax(0,1fr);gap:16px;align-items:center;border-radius:20px;padding:16px;background:linear-gradient(135deg,#f8fafc,#fff);border:1px solid #e2e8f0}
+.gc-v7-profile-photo{width:96px;height:96px;border-radius:22px;overflow:hidden;background:#e2e8f0;border:4px solid #fff;box-shadow:0 7px 18px rgba(15,23,42,.13);display:flex;align-items:center;justify-content:center}
+.gc-v7-profile-photo img{width:100%;height:100%;object-fit:cover}
+.gc-v7-profile-name{font-size:22px;font-weight:950;color:#0f172a;line-height:1.15}
+.gc-v7-profile-meta{font-size:11px;color:#64748b;margin-top:6px;line-height:1.6}
+.gc-v7-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.gc-v7-field{display:flex;flex-direction:column;gap:6px}
+.gc-v7-field.full{grid-column:1/-1}
+.gc-v7-field label{font-size:10px;font-weight:950;text-transform:uppercase;letter-spacing:.05em;color:#475569}
+.gc-v7-field input,.gc-v7-field textarea,.gc-v7-field select{width:100%;border:1px solid #cbd5e1;border-radius:12px;padding:10px 11px;font-size:12px;background:#fff;outline:none}
+.gc-v7-field textarea{min-height:105px;resize:vertical;line-height:1.55}
+.gc-v7-field input:focus,.gc-v7-field textarea:focus,.gc-v7-field select:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.gc-v7-save{border:0;border-radius:12px;background:#2563eb;color:#fff;padding:11px 16px;font-size:11px;font-weight:950;cursor:pointer;box-shadow:0 5px 13px rgba(37,99,235,.2)}
+.gc-v7-photo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gc-v7-photo-slot{border:1px dashed #94a3b8;border-radius:16px;padding:10px;background:#f8fafc}
+.gc-v7-photo-preview{width:100%;height:130px;border-radius:12px;background:#e2e8f0;display:flex;align-items:center;justify-content:center;overflow:hidden;color:#64748b;font-size:10px;font-weight:800;text-align:center}
+.gc-v7-photo-preview img{width:100%;height:100%;object-fit:cover}
+.gc-v7-photo-slot input{width:100%;margin-top:8px;font-size:10px}
+.gc-v7-photo-slot input[type=file]{max-width:100%}
+.gc-v7-caption{margin-top:7px;width:100%;border:1px solid #cbd5e1;border-radius:9px;padding:7px 8px;font-size:10px}
+.gc-v7-actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-top:13px}
+.gc-v7-note{font-size:10px;color:#64748b;line-height:1.5}
+.gc-v7-fee-paid{display:inline-flex;align-items:center;gap:4px;padding:4px 8px;border-radius:999px;background:#dcfce7;color:#166534;font-size:9px;font-weight:950}
+.gc-v7-fee-pending{display:inline-flex;align-items:center;gap:4px;padding:4px 8px;border-radius:999px;background:#fee2e2;color:#991b1b;font-size:9px;font-weight:950}
+.gc-v7-admin-actions{display:flex;flex-wrap:wrap;gap:5px;justify-content:flex-end}
+.gc-v7-small-btn{border:0;border-radius:8px;padding:6px 8px;font-size:9px;font-weight:900;color:#fff;cursor:pointer}
+.gc-v7-blue{background:#2563eb}.gc-v7-green{background:#16a34a}.gc-v7-red{background:#dc2626}.gc-v7-slate{background:#475569}
+@media(max-width:700px){
+ .gc-v7-profile-card{grid-template-columns:72px minmax(0,1fr);gap:11px;padding:12px}
+ .gc-v7-profile-photo{width:72px;height:72px;border-radius:17px}
+ .gc-v7-profile-name{font-size:18px}
+ .gc-v7-form{grid-template-columns:1fr}.gc-v7-field.full{grid-column:auto}
+ .gc-v7-photo-grid{grid-template-columns:1fr}
+ .gc-v7-photo-preview{height:170px}
+ .gc-v7-panel-body{padding:12px}
+}
+</style>
+<script id="gc-v7-dashboard-enhancement">
+(function(){
+  'use strict';
+
+  const V7_MSG_KEY='gc_message_center_v2';
+  const escV7 = v => String(v==null?'':v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  const normV7 = v => String(v||'').replace(/\D/g,'');
+  const getMsgsV7 = () => { try { return JSON.parse(localStorage.getItem(V7_MSG_KEY)||'[]'); } catch(e){ return []; } };
+  const saveMsgsV7 = a => { try { localStorage.setItem(V7_MSG_KEY,JSON.stringify(a)); } catch(e){ alert('Browser storage is full. Please use smaller photos.'); } };
+  const pushMsgV7 = m => { const a=getMsgsV7(); a.push(m); saveMsgsV7(a); };
+
+  function dirsV7(){
+    let tutors=[],students=[];
+    try{ tutors=Array.isArray(window.tutorDirectoryList)?window.tutorDirectoryList:[]; }catch(e){}
+    try{ students=Array.isArray(window.studentDirectoryList)?window.studentDirectoryList:[]; }catch(e){}
+    return {
+      tutors:tutors.filter(x=>x && x.isDummy===false),
+      students:students.filter(x=>x && x.isDummy===false)
+    };
+  }
+  function recipientsV7(){
+    const d=dirsV7();
+    const t=d.tutors.map(x=>({id:normV7(x.phone)||String(x.id||''),profileId:String(x.id||''),name:x.name||'Tutor',role:'tutor'}));
+    const s=d.students.map(x=>({id:normV7(x.phone)||String(x.id||''),profileId:String(x.id||''),name:x.name||'Student',role:'student'}));
+    const me=normV7(localStorage.getItem('active_user_phone'));
+    return t.concat(s).filter(x=>x.id && x.id!==me);
+  }
+  function activeV7(){
+    const phone=localStorage.getItem('active_user_phone')||'', role=localStorage.getItem('active_user_role')||'', name=localStorage.getItem('active_user_name')||'';
+    if(!phone || !['student','tutor'].includes(role)) return null;
+    const d=dirsV7(); const list=role==='student'?d.students:d.tutors;
+    const p=list.find(x=>normV7(x.phone)===normV7(phone));
+    return p ? {id:normV7(p.phone)||String(p.id||''),profileId:String(p.id||''),name:p.name||name,role} : {id:normV7(phone),profileId:'',name,role};
+  }
+  function profileByActiveV7(){
+    const u=activeV7(); if(!u)return null;
+    const d=dirsV7(); const list=u.role==='student'?d.students:d.tutors;
+    return list.find(x=>normV7(x.phone)===normV7(u.id))||list.find(x=>String(x.id)===String(u.profileId))||null;
+  }
+  function ensureProfileFieldsV7(p){
+    if(!p)return;
+    if(!Array.isArray(p.showcasePhotos)) p.showcasePhotos=[null,null,null];
+    while(p.showcasePhotos.length<3)p.showcasePhotos.push(null);
+    if(!p.aboutMe)p.aboutMe='';
+    if(p.registrationRole==='student' && p.learningRequirement==null)p.learningRequirement='';
+  }
+
+  function compressImageV7(file){
+    return new Promise(resolve=>{
+      if(!file){resolve('');return;}
+      const reader=new FileReader();
+      reader.onload=e=>{
+        const img=new Image();
+        img.onload=()=>{
+          const max=900, scale=Math.min(1,max/Math.max(img.width,img.height));
+          const c=document.createElement('canvas');
+          c.width=Math.max(1,Math.round(img.width*scale)); c.height=Math.max(1,Math.round(img.height*scale));
+          const ctx=c.getContext('2d'); ctx.drawImage(img,0,0,c.width,c.height);
+          resolve(c.toDataURL('image/jpeg',.78));
+        };
+        img.onerror=()=>resolve('');
+        img.src=e.target.result;
+      };
+      reader.onerror=()=>resolve('');
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function saveDirsV7(){
+    if(typeof saveRegisteredDirectories==='function') saveRegisteredDirectories();
+    try{
+      localStorage.setItem('gc_registered_students',JSON.stringify((window.studentDirectoryList||[]).filter(x=>x.isDummy===false)));
+      localStorage.setItem('gc_registered_tutors',JSON.stringify((window.tutorDirectoryList||[]).filter(x=>x.isDummy===false)));
+    }catch(e){}
+  }
+
+  function photoHtmlV7(p,i){
+    const item=p.showcasePhotos && p.showcasePhotos[i];
+    return `<div class="gc-v7-photo-slot">
+      <div class="gc-v7-photo-preview" id="gcV7PhotoPreview${i}">
+        ${item&&item.data?`<img src="${escV7(item.data)}" alt="Achievement or requirement ${i+1}">`:`<span><i class="fa-solid fa-image text-xl"></i><br>PHOTO ${i+1}<br>Achievement / Requirement</span>`}
+      </div>
+      <input id="gcV7Photo${i}" type="file" accept="image/*">
+      <input id="gcV7Caption${i}" class="gc-v7-caption" maxlength="120" placeholder="Caption (optional)" value="${escV7(item&&item.caption||'')}">
+    </div>`;
+  }
+
+  function enhancedDashboardAppendV7(profile){
+    if(!profile)return;
+    ensureProfileFieldsV7(profile);
+    const c=document.getElementById('userDashboardContent'); if(!c)return;
+    const role=profile.registrationRole||localStorage.getItem('active_user_role')||'student';
+    const id=profile.id||'Not assigned';
+    const title=role==='tutor'?'Tutor Profile':'Student Profile';
+    const meta=role==='tutor'
+      ? `${profile.subject||'Junior College Tutor'} • ${profile.stream||''}`
+      : `${profile.course||profile.std||'Student'} • ${profile.stream||''}`;
+    const img=profile.photoData||((role==='tutor'&&typeof GC_TUTOR_DEFAULT_AVATAR!=='undefined')?GC_TUTOR_DEFAULT_AVATAR:(typeof GC_STUDENT_DEFAULT_AVATAR!=='undefined'?GC_STUDENT_DEFAULT_AVATAR:''));
+    const about=profile.aboutMe||'';
+    c.insertAdjacentHTML('afterbegin',`
+      <div class="gc-v7-panel">
+        <div class="gc-v7-panel-head">
+          <h4><i class="fa-solid fa-id-card-clip mr-1 text-blue-600"></i> MY REGISTERED PROFILE</h4>
+          <p>Your registered ID is permanent for this profile and is also used by the Admin Dashboard.</p>
+        </div>
+        <div class="gc-v7-panel-body">
+          <div class="gc-v7-profile-card">
+            <div class="gc-v7-profile-photo">${img?`<img src="${escV7(img)}" alt="${escV7(profile.name)}">`:'<i class="fa-solid fa-user text-3xl text-slate-400"></i>'}</div>
+            <div>
+              <div class="gc-v7-profile-name">${escV7(profile.name||'Member')}</div>
+              <div class="gc-v7-profile-meta">${escV7(meta)}</div>
+              <div class="mt-3"><span class="gc-v7-id"><i class="fa-solid fa-fingerprint"></i> REGISTERED ID: ${escV7(id)}</span></div>
+            </div>
+          </div>
+
+          <div class="gc-v7-panel mt-4">
+            <div class="gc-v7-panel-head"><h4><i class="fa-solid fa-pen-to-square mr-1 text-blue-600"></i> EDIT MY PROFILE</h4><p>Update your About Me and, for students, your current learning requirement.</p></div>
+            <div class="gc-v7-panel-body">
+              <div class="gc-v7-form">
+                <div class="gc-v7-field full"><label>About Me</label><textarea id="gcV7AboutMe" maxlength="2500" placeholder="Tell students/tutors/admin about yourself, your strengths, experience, goals or requirements...">${escV7(about)}</textarea></div>
+                ${role==='student'?`<div class="gc-v7-field full"><label>Learning Requirement</label><textarea id="gcV7LearningRequirement" maxlength="2000" placeholder="What do you need help with?">${escV7(profile.learningRequirement||'')}</textarea></div>`:''}
+              </div>
+              <div class="gc-v7-actions"><button class="gc-v7-save" type="button" onclick="gcV7SaveProfile()"><i class="fa-solid fa-floppy-disk mr-1"></i> SAVE PROFILE</button></div>
+            </div>
+          </div>
+
+          <div class="gc-v7-panel mt-4">
+            <div class="gc-v7-panel-head"><h4><i class="fa-solid fa-images mr-1 text-blue-600"></i> ACHIEVEMENTS / REQUIREMENTS — 3 PHOTO SLOTS</h4><p>Upload up to 3 pictures. These are stored in this browser and displayed in your personal profile dashboard.</p></div>
+            <div class="gc-v7-panel-body">
+              <div class="gc-v7-photo-grid">${[0,1,2].map(i=>photoHtmlV7(profile,i)).join('')}</div>
+              <div class="gc-v7-actions"><button class="gc-v7-save" type="button" onclick="gcV7SavePhotos()"><i class="fa-solid fa-cloud-arrow-up mr-1"></i> SAVE 3 PHOTOS</button></div>
+            </div>
+          </div>
+
+          <div class="gc-v7-panel mt-4">
+            <div class="gc-v7-panel-head"><h4><i class="fa-solid fa-eye mr-1 text-blue-600"></i> PROFILE PREVIEW</h4><p>This is the information you control from your dashboard.</p></div>
+            <div class="gc-v7-panel-body">
+              <div class="gc-v7-profile-card">
+                <div class="gc-v7-profile-photo">${img?`<img src="${escV7(img)}" alt="${escV7(profile.name)}">`:'<i class="fa-solid fa-user text-3xl text-slate-400"></i>'}</div>
+                <div><div class="gc-v7-profile-name">${escV7(profile.name||'Member')}</div><div class="gc-v7-profile-meta"><strong>REGISTERED ID:</strong> ${escV7(id)}<br>${escV7(meta)}</div></div>
+              </div>
+              <div class="mt-4 p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                <div class="text-[10px] uppercase font-black tracking-wider text-slate-500">ABOUT ME</div>
+                <div class="mt-2 text-sm text-slate-700 whitespace-pre-line">${escV7(about||'No About Me information added yet.')}</div>
+              </div>
+              ${role==='student'?`<div class="mt-3 p-4 rounded-2xl bg-blue-50 border border-blue-200"><div class="text-[10px] uppercase font-black tracking-wider text-blue-700">LEARNING REQUIREMENT</div><div class="mt-2 text-sm text-slate-700 whitespace-pre-line">${escV7(profile.learningRequirement||'No learning requirement added yet.')}</div></div>`:''}
+              <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                ${(profile.showcasePhotos||[]).slice(0,3).map((x,i)=>x&&x.data?`<div class="rounded-2xl overflow-hidden border border-slate-200 bg-white"><img src="${escV7(x.data)}" class="w-full h-36 object-cover"><div class="p-2 text-[10px] font-bold text-slate-600">${escV7(x.caption||'Achievement / Requirement '+(i+1))}</div></div>`:`<div class="rounded-2xl border border-dashed border-slate-300 bg-slate-50 h-44 flex items-center justify-center text-[10px] font-bold text-slate-400 text-center p-3">PHOTO ${i+1}<br>Not uploaded</div>`).join('')}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>`);
+    [0,1,2].forEach(i=>{
+      document.getElementById('gcV7Photo'+i)?.addEventListener('change',async function(){
+        const data=await compressImageV7(this.files&&this.files[0]);
+        if(data) document.getElementById('gcV7PhotoPreview'+i).innerHTML=`<img src="${escV7(data)}" alt="Preview">`;
+      });
+    });
+  }
+
+  const oldRenderUserDashboardV7 = window.renderUserDashboard || (typeof renderUserDashboard==='function'?renderUserDashboard:null);
+  window.renderUserDashboard=function(profile){
+    if(oldRenderUserDashboardV7) oldRenderUserDashboardV7(profile);
+    setTimeout(()=>enhancedDashboardAppendV7(profile),0);
+  };
+  try{ renderUserDashboard=window.renderUserDashboard; }catch(e){}
+
+  window.gcV7SaveProfile=function(){
+    const p=profileByActiveV7(); if(!p){alert('Please login again.');return;}
+    p.aboutMe=(document.getElementById('gcV7AboutMe')?.value||'').trim();
+    if(p.registrationRole==='student') p.learningRequirement=(document.getElementById('gcV7LearningRequirement')?.value||'').trim();
+    ensureProfileFieldsV7(p); saveDirsV7();
+    if(typeof renderUserDashboard==='function') renderUserDashboard(p);
+    alert('Profile updated successfully.');
+  };
+
+  window.gcV7SavePhotos=async function(){
+    const p=profileByActiveV7(); if(!p){alert('Please login again.');return;}
+    ensureProfileFieldsV7(p);
+    for(let i=0;i<3;i++){
+      const input=document.getElementById('gcV7Photo'+i), cap=document.getElementById('gcV7Caption'+i);
+      if(input && input.files && input.files[0]){
+        const data=await compressImageV7(input.files[0]);
+        if(data)p.showcasePhotos[i]={data,caption:(cap?.value||'').trim()};
+      }else if(cap){
+        p.showcasePhotos[i]=p.showcasePhotos[i]||null;
+        if(p.showcasePhotos[i])p.showcasePhotos[i].caption=cap.value.trim();
+      }
+    }
+    saveDirsV7();
+    if(typeof renderUserDashboard==='function') renderUserDashboard(p);
+    alert('Your 3 achievement / requirement photo slots have been saved.');
+  };
+
+  /* -------- USER MESSAGE CENTER: Admin + particular Tutor/Student -------- */
+  const oldRenderUserComposeV7 = window.renderUserCompose;
+  window.gcV7OpenUserMessages=function(){
+    if(typeof window.gcOpenUserMessages==='function') window.gcOpenUserMessages();
+    setTimeout(()=>{
+      try{ window.renderUserCompose=gcV7RenderUserCompose; }catch(e){}
+      try{ gcV7RenderUserCompose(); }catch(e){}
+    },0);
+  };
+  function gcV7RenderUserCompose(){
+    const c=document.getElementById('gcMsgCompose'), u=activeV7(); if(!c||!u)return;
+    const rec=recipientsV7();
+    c.innerHTML=`<div class="gc-msg-grid">
+      <div class="gc-msg-field"><label>From</label><input value="${escV7(u.name)} — ${escV7(u.role)} — ID: ${escV7(u.profileId||u.id)}" readonly></div>
+      <div class="gc-msg-field"><label>To</label>
+        <select id="gcV7MsgRecipient">
+          <option value="admin|admin">GURU CONNECT ADMIN</option>
+          <option disabled>────────── TUTORS / STUDENTS ──────────</option>
+          ${rec.map(x=>`<option value="user|${escV7(x.id)}|${escV7(x.role)}|${escV7(x.profileId)}">${escV7(x.name)} — ${escV7(x.role)} — ID: ${escV7(x.profileId||x.id)}</option>`).join('')}
+        </select>
+      </div>
+      <div class="gc-msg-field full"><label>Subject</label><input id="gcV7MsgSubject" maxlength="160" placeholder="Message subject"></div>
+      <div class="gc-msg-field full"><label>Message</label><textarea id="gcV7MsgBody" maxlength="5000" placeholder="Write your message..."></textarea></div>
+    </div>
+    <div class="gc-msg-actions"><button class="gc-msg-btn gc-msg-primary" onclick="gcV7SendUserMessage()"><i class="fa-solid fa-paper-plane mr-1"></i> SEND MESSAGE</button></div>`;
+  }
+  window.gcV7SendUserMessage=function(){
+    const u=activeV7(); if(!u)return;
+    const target=(document.getElementById('gcV7MsgRecipient')?.value||'').split('|');
+    const subject=(document.getElementById('gcV7MsgSubject')?.value||'').trim();
+    const body=(document.getElementById('gcV7MsgBody')?.value||'').trim();
+    if(!subject||!body){alert('Please enter subject and message.');return;}
+    const now=new Date().toISOString(), base={id:'m_'+Date.now()+'_'+Math.random().toString(36).slice(2),fromType:'user',fromId:u.id,fromProfileId:u.profileId,fromRole:u.role,fromName:u.name,subject,body,createdAt:now,read:false};
+    if(target[0]==='admin') pushMsgV7({...base,toType:'admin',toId:'admin',toName:'Guru Connect Admin'});
+    else if(target[0]==='user') pushMsgV7({...base,toType:'user',toId:target[1],toRole:target[2],toProfileId:target[3]||'',toName:recipientsV7().find(x=>x.id===target[1])?.name||'Member'});
+    else return;
+    alert('Message sent successfully.');
+    gcV7RenderUserCompose();
+    if(typeof window.renderSent==='function') try{window.renderSent(u)}catch(e){}
+  };
+
+  /* Replace the existing dashboard message shortcut so it uses the enhanced composer. */
+  document.addEventListener('click',function(e){
+    const b=e.target.closest&&e.target.closest('[data-gc-message-shortcut]');
+    if(b){e.preventDefault();gcV7OpenUserMessages();}
+  },true);
+
+  /* -------- ADMIN: Registered ID + Student Helpline Fees -------- */
+  const oldAdminRenderV7=window.renderAdminQueue || (typeof renderAdminQueue==='function'?renderAdminQueue:null);
+  window.gcV7AdminMarkFeesPaid=function(id){
+    const s=(window.studentDirectoryList||[]).find(x=>String(x.id)===String(id)); if(!s)return;
+    s.helpline=s.helpline||{registered:false};
+    s.helpline.feesPaid=true; s.helpline.feesPaidAt=new Date().toISOString();
+    saveDirsV7(); if(oldAdminRenderV7)oldAdminRenderV7(); else if(window.renderAdminQueue)window.renderAdminQueue();
+  };
+  window.gcV7AdminRevokeFeesPaid=function(id){
+    const s=(window.studentDirectoryList||[]).find(x=>String(x.id)===String(id)); if(!s)return;
+    if(!confirm(`Revoke Helpline fees paid status for ${s.name}?`))return;
+    s.helpline=s.helpline||{registered:false}; s.helpline.feesPaid=false; s.helpline.feesPaidAt='';
+    saveDirsV7(); if(oldAdminRenderV7)oldAdminRenderV7(); else if(window.renderAdminQueue)window.renderAdminQueue();
+  };
+
+  function addAdminColumnsV7(){
+    const tt=document.getElementById('adminTutorQueueTable');
+    const st=document.getElementById('adminStudentQueueTable');
+    const thT=document.querySelector('#adminTutorSection thead tr');
+    const thS=document.querySelector('#adminStudentSection thead tr');
+    if(thT && !thT.querySelector('.gc-v7-id-head')) thT.insertAdjacentHTML('afterbegin','<th class="p-3 sm:p-4 gc-v7-id-head">Registered ID</th>');
+    if(thS && !thS.querySelector('.gc-v7-fee-head')) thS.querySelector('th:last-child')?.insertAdjacentHTML('beforebegin','<th class="p-3 sm:p-4 gc-v7-fee-head">Helpline Fees</th>');
+    if(tt){
+      [...tt.querySelectorAll('tr')].forEach((tr,i)=>{
+        if(!tr.querySelector('.gc-v7-id-cell')){
+          const t=(window.tutorDirectoryList||[])[i];
+          const td=document.createElement('td');td.className='p-3 sm:p-4 font-mono text-blue-700 font-black gc-v7-id-cell';td.textContent=t?.id||'—';tr.insertBefore(td,tr.firstElementChild);
+        }
+      });
+    }
+    if(st){
+      const students=(window.studentDirectoryList||[]).slice(0,50);
+      [...st.querySelectorAll('tr')].forEach((tr,i)=>{
+        if(tr.querySelector('.gc-v7-fee-cell'))return;
+        const s=students[i]; if(!s)return;
+        const h=s.helpline||{registered:false}; const paid=h.feesPaid===true;
+        const td=document.createElement('td');td.className='p-3 sm:p-4 gc-v7-fee-cell';
+        td.innerHTML=`<div>${paid?'<span class="gc-v7-fee-paid"><i class="fa-solid fa-circle-check"></i> FEES PAID</span>':'<span class="gc-v7-fee-pending"><i class="fa-solid fa-clock"></i> FEES PENDING</span>'}</div>
+          <div class="mt-2 text-[9px] text-slate-500">${h.registered?escV7(h.plan||'Helpline Plan'):'No Helpline Plan'}</div>
+          <div class="mt-2 gc-v7-admin-actions">${paid
+            ?`<button class="gc-v7-small-btn gc-v7-slate" onclick="gcV7AdminRevokeFeesPaid('${escV7(s.id)}')">REVOKE FEES PAID</button>`
+            :`<button class="gc-v7-small-btn gc-v7-green" onclick="gcV7AdminMarkFeesPaid('${escV7(s.id)}')">MARK FEES PAID</button>`}</div>`;
+        const action=tr.lastElementChild; tr.insertBefore(td,action);
+      });
     }
   }
 
-  var ot=window.openTutorProfile;
-  if(typeof ot==='function'){
-    window.openTutorProfile=function(id){
-      document.documentElement.classList.add('gc-profile-open');
-      document.body.classList.add('gc-profile-open','gc-v3-profile-page');
-      ot(id);
-      showProfile();
-    };
+  window.renderAdminQueue=function(){
+    if(oldAdminRenderV7)oldAdminRenderV7();
+    setTimeout(addAdminColumnsV7,0);
+  };
+  try{ renderAdminQueue=window.renderAdminQueue; }catch(e){}
+
+  /* Admin message center already supports individual/all; add explicit "EVERYONE" label
+     while keeping its existing recipient logic intact. */
+  function patchAdminMessageTextV7(){
+    const t=document.getElementById('gcAdminMsgType');
+    if(!t)return;
+    const o=t.querySelector('option[value="both"]');
+    if(o)o.textContent='ALL TUTORS + ALL STUDENTS (EVERYONE)';
+  }
+  document.addEventListener('click',e=>{
+    if(e.target.closest&&e.target.closest('[onclick*="openAdminMessageCenter"]'))setTimeout(patchAdminMessageTextV7,0);
+  },true);
+
+  /* Keep IDs visible in admin dashboard whenever it is opened/refreshed. */
+  const obs=new MutationObserver(()=>{ if(document.getElementById('staffAdminDashboard') && !document.getElementById('staffAdminDashboard').classList.contains('hidden')) addAdminColumnsV7(); });
+  obs.observe(document.body,{childList:true,subtree:true});
+
+})();
+</script>
+
+</body>
+</html>
+
+
+<!-- ===== GURU CONNECT FINAL FIX: VERIFIED TICK + ADMIN INDIVIDUAL RECIPIENT NAMES ===== -->
+<style id="gc-final-fix-style">
+.gc-final-verified-tick{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:27px!important;height:27px!important;min-width:27px!important;border-radius:50%!important;background:#fff!important;padding:3px!important;box-sizing:border-box!important;box-shadow:0 2px 8px rgba(0,0,0,.22)!important;vertical-align:middle!important;margin-left:5px!important}
+.gc-final-verified-tick svg{width:100%!important;height:100%!important;display:block!important}
+.gc-admin-person-option{font-weight:800}
+</style>
+<script id="gc-final-fix-runtime">
+(function(){
+  'use strict';
+  const esc = v => String(v==null?'':v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  const norm = v => String(v||'').replace(/\D/g,'');
+  const tickSVG = '<svg viewBox="0 0 24 24" aria-label="Verified Tutor" role="img"><circle cx="12" cy="12" r="11" fill="#fff"/><path d="M7.1 12.2l3.1 3.1 6.8-7" fill="none" stroke="#1877F2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  function tutors(){try{return Array.isArray(window.tutorDirectoryList)?window.tutorDirectoryList:[]}catch(e){return[]}}
+  function students(){try{return Array.isArray(window.studentDirectoryList)?window.studentDirectoryList:[]}catch(e){return[]}}
+  function people(){
+    return tutors().filter(x=>x&&x.isDummy===false).map(x=>({id:norm(x.phone)||String(x.id||''),profileId:String(x.id||''),name:String(x.name||'Tutor'),role:'tutor'}))
+      .concat(students().filter(x=>x&&x.isDummy===false).map(x=>({id:norm(x.phone)||String(x.id||''),profileId:String(x.id||''),name:String(x.name||'Student'),role:'student'})));
   }
 
-  var os=window.openStudentProfile;
-  if(typeof os==='function'){
-    window.openStudentProfile=function(id){
-      document.documentElement.classList.add('gc-profile-open');
-      document.body.classList.add('gc-profile-open','gc-v3-profile-page');
-      os(id);
-      showProfile();
-    };
+  /* Guaranteed visual verified tick. This does not depend on an external image URL. */
+  function addVerifiedTicks(){
+    const list=tutors();
+    document.querySelectorAll('[data-tutor-id]').forEach(card=>{
+      const id=String(card.getAttribute('data-tutor-id')||'');
+      if(!id)return;
+      const t=list.find(x=>String(x.id||'')===id);
+      if(!t || t.verified!==true)return;
+      const row=card.querySelector('.gc-clean-name-shell,.gc-author-name-row,.gc-safe-name-row');
+      if(row && !row.querySelector('.gc-final-verified-tick')){
+        row.insertAdjacentHTML('beforeend','<span class="gc-final-verified-tick" title="Verified Tutor">'+tickSVG+'</span>');
+      }
+    });
   }
+  const tickObserver=new MutationObserver(addVerifiedTicks);
+  tickObserver.observe(document.body,{childList:true,subtree:true});
+  document.addEventListener('DOMContentLoaded',()=>setTimeout(addVerifiedTicks,50));
+  setTimeout(addVerifiedTicks,100);
+  setTimeout(addVerifiedTicks,500);
+
+  /* Admin compose: show the ACTUAL individual registered member name + role + Registered ID. */
+  function adminRecipients(){return people();}
+  function adminComposeFixed(){
+    const c=document.getElementById('gcMsgCompose'); if(!c)return;
+    const users=adminRecipients();
+    c.innerHTML=`<div class="gc-msg-grid">
+      <div class="gc-msg-field"><label>MESSAGE TYPE</label>
+        <select id="gcAdminMsgType">
+          <option value="individual">INDIVIDUAL TUTOR / STUDENT</option>
+          <option value="tutors">ALL REGISTERED TUTORS</option>
+          <option value="students">ALL REGISTERED STUDENTS</option>
+          <option value="both">ALL TUTORS + ALL STUDENTS (EVERYONE)</option>
+        </select>
+      </div>
+      <div class="gc-msg-field" id="gcAdminRecipientWrap"><label>SELECT INDIVIDUAL RECIPIENT</label>
+        <select id="gcAdminRecipient" class="gc-admin-person-option">
+          <option value="">— Select a registered Tutor or Student —</option>
+          ${users.map(u=>`<option value="${esc(u.id)}" data-role="${esc(u.role)}" data-profile-id="${esc(u.profileId)}">${esc(u.name)} — ${u.role==='tutor'?'TUTOR':'STUDENT'} — REGISTERED ID: ${esc(u.profileId||u.id)}</option>`).join('')}
+        </select>
+        <div id="gcAdminRecipientPreview" style="font-size:10px;color:#475569;font-weight:800;margin-top:6px;">Choose an individual recipient to see their name and Registered ID.</div>
+      </div>
+      <div class="gc-msg-field full"><label>SUBJECT</label><input id="gcAdminSubject" maxlength="160" placeholder="Message subject"></div>
+      <div class="gc-msg-field full"><label>MESSAGE</label><textarea id="gcAdminBody" maxlength="5000" placeholder="Write your message..."></textarea></div>
+    </div>
+    <div class="gc-msg-actions"><button class="gc-msg-btn gc-msg-primary" onclick="gcFinalAdminSendMessage()"><i class="fa-solid fa-paper-plane mr-1"></i> SEND MESSAGE</button></div>`;
+    const type=document.getElementById('gcAdminMsgType');
+    const wrap=document.getElementById('gcAdminRecipientWrap');
+    const sel=document.getElementById('gcAdminRecipient');
+    const preview=document.getElementById('gcAdminRecipientPreview');
+    const sync=()=>{
+      const individual=type.value==='individual'; wrap.style.display=individual?'flex':'none';
+      if(!individual){preview.textContent='Community message selected — no individual recipient required.';return;}
+      const u=users.find(x=>x.id===sel.value);
+      preview.innerHTML=u ? '<i class="fa-solid fa-user-check"></i> Selected: <strong>'+esc(u.name)+'</strong> • '+(u.role==='tutor'?'Tutor':'Student')+' • <strong>Registered ID: '+esc(u.profileId||u.id)+'</strong>' : 'Choose an individual recipient to see their name and Registered ID.';
+    };
+    type.onchange=sync; sel.onchange=sync; sync();
+  }
+
+  window.gcFinalAdminSendMessage=function(){
+    const type=document.getElementById('gcAdminMsgType')?.value||'individual';
+    const subject=(document.getElementById('gcAdminSubject')?.value||'').trim();
+    const body=(document.getElementById('gcAdminBody')?.value||'').trim();
+    const id=document.getElementById('gcAdminRecipient')?.value||'';
+    if(!subject||!body){alert('Please enter subject and message.');return;}
+    const users=adminRecipients();
+    const now=new Date().toISOString();
+    const base={id:'m_'+Date.now()+'_'+Math.random().toString(36).slice(2),fromType:'admin',fromId:'admin',fromName:'Guru Connect Admin',subject,body,createdAt:now,read:false};
+    let msg;
+    if(type==='individual'){
+      const u=users.find(x=>x.id===id);
+      if(!u){alert('Please select an individual registered Tutor or Student.');return;}
+      msg={...base,toType:'user',toId:u.id,toRole:u.role,toProfileId:u.profileId,toName:u.name};
+    }else{
+      msg={...base,toType:'role',toRole:type,toName:type==='tutors'?'All Registered Tutors':type==='students'?'All Registered Students':'All Registered Tutors + Students'};
+    }
+    try{
+      const a=JSON.parse(localStorage.getItem('gc_message_center_v2')||'[]');
+      a.push(msg);localStorage.setItem('gc_message_center_v2',JSON.stringify(a));
+      alert('Message sent successfully to '+(msg.toName||'the selected community')+'.');
+      adminComposeFixed();
+      if(typeof window.renderSent==='function')try{window.renderSent({role:'admin',id:'admin'})}catch(e){}
+    }catch(e){alert('Unable to save the message in this browser.');}
+  };
+
+  window.gcOpenAdminMessagesFinal=function(){
+    const modal=document.getElementById('gcMessageCenterModal');
+    if(!modal)return;
+    const title=document.getElementById('gcMessageTitle'); if(title)title.innerHTML='<i class="fa-solid fa-comments mr-2"></i>Admin Message Center';
+    modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
+    const tabs=document.getElementById('gcMessageTabs'), panels=document.getElementById('gcMessagePanels');
+    if(!tabs||!panels)return;
+    tabs.innerHTML='<button class="gc-msg-tab active" data-tab="compose">Compose</button><button class="gc-msg-tab" data-tab="inbox">Inbox</button><button class="gc-msg-tab" data-tab="sent">Sent</button>';
+    panels.innerHTML='<div id="gcMsgCompose" class="gc-msg-panel active"></div><div id="gcMsgInbox" class="gc-msg-panel"></div><div id="gcMsgSent" class="gc-msg-panel"></div>';
+    tabs.querySelectorAll('.gc-msg-tab').forEach(b=>b.onclick=function(){
+      tabs.querySelectorAll('.gc-msg-tab').forEach(x=>x.classList.toggle('active',x===b));
+      panels.querySelectorAll('.gc-msg-panel').forEach(x=>x.classList.remove('active'));
+      document.getElementById('gcMsg'+b.dataset.tab.charAt(0).toUpperCase()+b.dataset.tab.slice(1))?.classList.add('active');
+      if(b.dataset.tab==='compose')adminComposeFixed();
+      if(b.dataset.tab==='inbox'&&typeof window.renderInbox==='function')window.renderInbox({role:'admin',id:'admin'});
+      if(b.dataset.tab==='sent'&&typeof window.renderSent==='function')window.renderSent({role:'admin',id:'admin'});
+    });
+    adminComposeFixed();
+    if(typeof window.renderInbox==='function')window.renderInbox({role:'admin',id:'admin'});
+    if(typeof window.renderSent==='function')window.renderSent({role:'admin',id:'admin'});
+  };
+
+  /* Replace every existing Admin Message Center entry point with the fixed version. */
+  window.openAdminMessageCenter=window.gcOpenAdminMessages=window.gcOpenAdminMessagesFinal;
+  document.addEventListener('click',function(e){
+    const b=e.target.closest&&e.target.closest('[onclick*="openAdminMessageCenter"], [onclick*="gcOpenAdminMessages"]');
+    if(b){e.preventDefault();window.gcOpenAdminMessagesFinal();}
+  },true);
 })();
 </script>
