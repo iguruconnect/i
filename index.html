@@ -2778,15 +2778,10 @@ html, body, button, input, select, textarea {
             <div class="max-w-5xl mx-auto text-center relative z-10 flex flex-col items-center">
                 
                 <!-- Front Page Banner Image Integration -->
-                <div class="w-full max-w-4xl bg-transparent mb-6">
+                <div class="w-full max-w-4xl bg-transparent mt-8 sm:mt-14 mb-2 flex justify-center items-center">
                     <img src="front page banner.png" alt="Empowering Education Banner" class="w-full h-auto object-contain rounded-2xl sm:rounded-3xl shadow-2xl mx-auto block max-h-[340px] sm:max-h-[420px]">
                 </div>
 
-                <div class="flex justify-center w-full mt-2">
-                    <a href="#registrationSection" class="w-full sm:w-auto bg-white text-brand-blue hover:bg-slate-100 font-bold px-6 py-3.5 sm:px-8 sm:py-4 rounded-xl transition shadow-xl text-xs sm:text-base tracking-wider text-center">
-                        GET STARTED <i class="fa-solid fa-arrow-down ml-2"></i>
-                    </a>
-                </div>
             </div>
         </section>
 
@@ -7256,6 +7251,73 @@ html, body, button, input, select, textarea {
 })();
 </script>
 
+
+<style id="gc-user-close-and-hero-final">
+/* FINAL FIX: profile details are a true full-screen page */
+body.gc-v3-profile-page{
+  overflow:hidden!important;
+  height:100dvh!important;
+}
+#gcV3FullProfileModal.gc-v3-modal.open{
+  position:fixed!important;
+  inset:0!important;
+  width:100vw!important;
+  height:100dvh!important;
+  z-index:999999!important;
+  display:flex!important;
+  background:#f8fafc!important;
+}
+#gcV3FullProfileModal .gc-v3-modal-card{
+  width:100%!important;
+  height:100dvh!important;
+  max-height:none!important;
+  border-radius:0!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+}
+
+/* Empowering Education image lower + centered inside blue hero patch */
+#home > div > div:first-child{
+  margin-top:2.5rem!important;
+  margin-bottom:.5rem!important;
+  display:flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+}
+@media(max-width:640px){
+  #home > div > div:first-child{margin-top:1.75rem!important}
+}
+</style>
+
+<script id="gc-user-close-final">
+(function(){
+  /* CLOSE = hide profile page and return to the website */
+  window.gcV3CloseProfile=function(){
+    var m=document.getElementById('gcV3FullProfileModal');
+    if(m) m.classList.remove('open');
+    document.body.classList.remove('gc-v3-profile-page');
+
+    try{
+      if(history.state && history.state.gcProfile){
+        history.replaceState(null,'',location.href.split('#')[0]);
+      }else if(location.hash.indexOf('#profile-')===0){
+        history.replaceState(null,'',location.href.split('#')[0]);
+      }
+    }catch(e){}
+
+    window.scrollTo(0,0);
+  };
+
+  /* Browser Back also returns cleanly to the website */
+  window.addEventListener('popstate',function(){
+    var m=document.getElementById('gcV3FullProfileModal');
+    if(m && m.classList.contains('open')){
+      m.classList.remove('open');
+      document.body.classList.remove('gc-v3-profile-page');
+    }
+  });
+})();
+</script>
 </body>
 </html>
 <style id="gc-profile-fullscreen-final">
