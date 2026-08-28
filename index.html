@@ -8142,7 +8142,7 @@ body.gc-v3-profile-page{
       tabs.innerHTML='<button class="gc-msg-tab active" data-tab="compose">Compose</button><button class="gc-msg-tab" data-tab="inbox">Inbox</button><button class="gc-msg-tab" data-tab="sent">Sent</button>';
       panels.innerHTML='<div id="gcMsgCompose" class="gc-msg-panel active"></div><div id="gcMsgInbox" class="gc-msg-panel"></div><div id="gcMsgSent" class="gc-msg-panel"></div>';
       tabs.querySelectorAll('.gc-msg-tab').forEach(b=>b.onclick=()=>activate(b.dataset.tab));
-      renderAdminCompose(); renderInbox({role:'admin',id:'admin'}); renderSent({role:'admin',id:'admin'});
+      window.renderAdminCompose(); renderInbox({role:'admin',id:'admin'}); renderSent({role:'admin',id:'admin'});
     }else{
       tabs.innerHTML='<button class="gc-msg-tab active" data-tab="compose">Message Admin</button><button class="gc-msg-tab" data-tab="inbox">Inbox</button><button class="gc-msg-tab" data-tab="sent">Sent</button>';
       panels.innerHTML='<div id="gcMsgCompose" class="gc-msg-panel active"></div><div id="gcMsgInbox" class="gc-msg-panel"></div><div id="gcMsgSent" class="gc-msg-panel"></div>';
@@ -9320,5 +9320,173 @@ body.gc-v3-profile-page{
     const b=e.target.closest&&e.target.closest('[onclick*="openAdminMessageCenter"], [onclick*="gcOpenAdminMessages"]');
     if(b){e.preventDefault();window.gcOpenAdminMessagesFinal();}
   },true);
+})();
+</script>
+
+
+<!-- GURU CONNECT — FINAL ADMIN MESSAGE TARGETING + HELPLINE PLAN + VERIFIED TICK FIX -->
+<style id="gc-final-request-fixes">
+/* Tutor cards: requested GREY theme instead of green */
+#tutorGrid .gc-clean-card.gc-clean-verified,
+#tutorGrid .gc-clean-card.gc-clean-registered,
+#tutorGrid .gc-v4-tutor.gc-v4-verified,
+#tutorGrid .gc-v4-tutor.gc-v4-registered {
+  background:linear-gradient(135deg,#64748b 0%,#475569 52%,#334155 100%) !important;
+  background-image:linear-gradient(135deg,#64748b 0%,#475569 52%,#334155 100%) !important;
+  color:#fff !important;
+  border-color:rgba(255,255,255,.35) !important;
+}
+/* Guaranteed blue verified tick: does not depend on an external image */
+#tutorGrid .gc-clean-card.gc-clean-verified .gc-clean-name-shell::after,
+#tutorGrid .gc-v4-tutor.gc-v4-verified .gc-v4-preview-name::after {
+  content:"✓" !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  flex:0 0 23px !important;
+  width:23px !important;
+  height:23px !important;
+  margin-left:5px !important;
+  border-radius:50% !important;
+  background:#fff !important;
+  color:#2563eb !important;
+  font-size:15px !important;
+  line-height:1 !important;
+  font-weight:1000 !important;
+  box-shadow:0 2px 7px rgba(0,0,0,.22) !important;
+  position:relative !important;
+  z-index:20 !important;
+}
+#tutorGrid .gc-clean-card.gc-clean-verified .gc-clean-tick,
+#tutorGrid .gc-v4-tutor.gc-v4-verified .gc-clean-tick { display:none !important; }
+#tutorGrid .gc-clean-card .gc-clean-name-shell { background:#fff !important; }
+#tutorGrid .gc-clean-card .gc-clean-name { color:#0f172a !important; }
+#tutorGrid .gc-clean-card .gc-clean-more { color:#334155 !important; background:#fff !important; }
+
+/* Admin individual recipient confirmation */
+.gc-admin-target-preview{margin-top:8px;padding:9px 11px;border:1px solid #bfdbfe;background:#eff6ff;border-radius:11px;color:#1e3a8a;font-size:11px;font-weight:800;display:none}
+.gc-admin-plan-cell{min-width:240px}
+.gc-admin-plan-select{width:100%;border:1px solid #cbd5e1;border-radius:9px;padding:7px 8px;background:#fff;font-weight:800;font-size:11px}
+.gc-admin-fee-status{display:inline-block;margin-top:5px;padding:3px 7px;border-radius:999px;font-size:9px;font-weight:950}
+.gc-admin-fee-paid{background:#dcfce7;color:#166534}.gc-admin-fee-pending{background:#f1f5f9;color:#475569}
+</style>
+<script id="gc-final-request-fixes-js">
+(function(){
+  'use strict';
+  function E(v){return String(v==null?'':v).replace(/[&<>"']/g,function(m){return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m]})}
+  function allMembers(){
+    var ts=Array.isArray(tutorDirectoryList)?tutorDirectoryList:[];
+    var ss=Array.isArray(studentDirectoryList)?studentDirectoryList:[];
+    return ts.concat(ss).filter(function(x){return x && x.isDummy===false;});
+  }
+  function findMember(id){return allMembers().find(function(x){return String(x.id)===String(id);});}
+  function planPrice(plan){return (STUDENT_HELPLINE_PLAN_PRICES&&STUDENT_HELPLINE_PLAN_PRICES[plan]!=null)?STUDENT_HELPLINE_PLAN_PRICES[plan]:0;}
+  function persist(){try{if(typeof saveRegisteredDirectories==='function')saveRegisteredDirectories();}catch(e){}}
+
+  /* ---------- ADMIN MESSAGE CENTER ---------- */
+  window.renderAdminCompose=function(){
+    var c=document.getElementById('gcMsgCompose'); if(!c)return;
+    var ts=(Array.isArray(tutorDirectoryList)?tutorDirectoryList:[]).filter(function(x){return x&&!x.isDummy;});
+    var ss=(Array.isArray(studentDirectoryList)?studentDirectoryList:[]).filter(function(x){return x&&!x.isDummy;});
+    function opts(list,role){return list.map(function(u){return '<option value="'+E(u.id)+'">'+E(u.name||role)+' — REGISTERED ID: '+E(u.id)+'</option>';}).join('');}
+    c.innerHTML='<div class="gc-msg-grid">'+
+      '<div class="gc-msg-field"><label>Message Type</label><select id="gcAdminMsgType">'+
+      '<option value="individual_student">1. Message Individual Student</option>'+
+      '<option value="individual_tutor">2. Message Individual Tutor</option>'+
+      '<option value="tutors">3. Message All Tutors</option>'+ 
+      '<option value="students">4. Message All Students</option>'+ 
+      '<option value="both">5. Message All Tutors + Students</option>'+ 
+      '</select></div>'+ 
+      '<div class="gc-msg-field" id="gcAdminRecipientWrap"><label id="gcAdminRecipientLabel">Select Student</label>'+ 
+      '<select id="gcAdminRecipient"><option value="">Choose a registered student</option>'+opts(ss,'Student')+'</select>'+ 
+      '<div id="gcAdminTargetPreview" class="gc-admin-target-preview"></div></div>'+ 
+      '<div class="gc-msg-field full"><label>Subject</label><input id="gcAdminSubject" maxlength="160" placeholder="Message subject"></div>'+ 
+      '<div class="gc-msg-field full"><label>Message</label><textarea id="gcAdminBody" maxlength="5000" placeholder="Write your message..."></textarea></div>'+ 
+      '</div><div class="gc-msg-actions"><button class="gc-msg-btn gc-msg-primary" onclick="gcAdminSendMessage()"><i class="fa-solid fa-paper-plane mr-1"></i> SEND MESSAGE</button></div>';
+    var type=document.getElementById('gcAdminMsgType'), wrap=document.getElementById('gcAdminRecipientWrap'), sel=document.getElementById('gcAdminRecipient'), label=document.getElementById('gcAdminRecipientLabel'), preview=document.getElementById('gcAdminTargetPreview');
+    function refresh(){
+      var v=type.value, list=v==='individual_tutor'?ts:ss;
+      if(v==='individual_student'||v==='individual_tutor'){
+        wrap.style.display='flex'; label.textContent=v==='individual_tutor'?'Select Tutor':'Select Student';
+        sel.innerHTML='<option value="">Choose a registered '+(v==='individual_tutor'?'Tutor':'Student')+'</option>'+opts(list,v==='individual_tutor'?'Tutor':'Student');
+      }else{wrap.style.display='none';preview.style.display='none';}
+    }
+    type.onchange=refresh;
+    sel.onchange=function(){var u=findMember(sel.value);if(u){preview.style.display='block';preview.innerHTML='<i class="fa-solid fa-user-check mr-1"></i> Sending to <strong>'+E(u.name)+'</strong> · '+E(u.registrationRole||u.role||'')+' · Registered ID: <strong>'+E(u.id)+'</strong>';}else preview.style.display='none';};
+    refresh();
+  };
+
+  window.gcAdminSendMessage=function(){
+    var type=document.getElementById('gcAdminMsgType')?.value||'individual_student';
+    var subject=(document.getElementById('gcAdminSubject')?.value||'').trim();
+    var body=(document.getElementById('gcAdminBody')?.value||'').trim();
+    var rid=document.getElementById('gcAdminRecipient')?.value||'';
+    if(!subject||!body){alert('Please enter subject and message.');return;}
+    var base={id:'m_'+Date.now()+'_'+Math.random().toString(36).slice(2),fromType:'admin',fromId:'admin',fromName:'Guru Connect Admin',subject:subject,body:body,createdAt:new Date().toISOString(),read:false};
+    var key='gc_message_center_v2', a=[]; try{a=JSON.parse(localStorage.getItem(key)||'[]');if(!Array.isArray(a))a=[];}catch(e){}
+    if(type==='individual_student'||type==='individual_tutor'){
+      var u=findMember(rid), expected=type==='individual_tutor'?'tutor':'student';
+      if(!u || String(u.registrationRole||u.role||'').toLowerCase()!==expected){alert('Please select a registered '+(expected==='tutor'?'Tutor':'Student')+'.');return;}
+      a.push(Object.assign({},base,{toType:'user',toId:u.id,toRole:expected,toName:u.name||expected,toRegisteredId:u.id}));
+    }else{
+      a.push(Object.assign({},base,{toType:'role',toRole:type,toName:type==='tutors'?'All Registered Tutors':type==='students'?'All Registered Students':'All Registered Tutors + Students'}));
+    }
+    localStorage.setItem(key,JSON.stringify(a));
+    alert('Message sent successfully.');
+    window.renderAdminCompose();
+    if(typeof renderSent==='function')renderSent({role:'admin',id:'admin'});
+  };
+
+  /* ---------- STUDENT HELPLINE PLAN CONTROLS IN ADMIN DASHBOARD ---------- */
+  window.adminChangeStudentHelplinePlan=function(id,plan){
+    var s=(Array.isArray(studentDirectoryList)?studentDirectoryList:[]).find(function(x){return String(x.id)===String(id);});
+    if(!s)return;
+    if(!plan){return;}
+    var old=s.helpline||{};
+    s.helpline={registered:true,plan:plan,course:old.course||s.course||'',subject:old.subject||s.subject||'',subjectCount:Number(old.subjectCount||1),amount:planPrice(plan),feeStatus:old.feeStatus||'PENDING'};
+    persist();
+    if(typeof renderAdminQueue==='function')renderAdminQueue();
+    alert('Helpline plan for '+(s.name||'Student')+' changed to '+plan+'. Fee: ₹'+planPrice(plan).toLocaleString('en-IN'));
+  };
+  window.adminMarkStudentFeesPaid=function(id){
+    var s=(Array.isArray(studentDirectoryList)?studentDirectoryList:[]).find(function(x){return String(x.id)===String(id);});if(!s)return;
+    s.helpline=s.helpline||{registered:true,plan:'FREE',amount:0};s.helpline.registered=true;s.helpline.feeStatus='PAID';s.helpline.paidStatus='PAID';persist();if(typeof renderAdminQueue==='function')renderAdminQueue();
+  };
+  window.adminRevokeStudentFeesPaid=function(id){
+    var s=(Array.isArray(studentDirectoryList)?studentDirectoryList:[]).find(function(x){return String(x.id)===String(id);});if(!s)return;
+    s.helpline=s.helpline||{registered:true,plan:'FREE',amount:0};s.helpline.feeStatus='PENDING';s.helpline.paidStatus='PENDING';persist();if(typeof renderAdminQueue==='function')renderAdminQueue();
+  };
+  var oldRenderAdminQueue=window.renderAdminQueue;
+  window.renderAdminQueue=function(){
+    try{if(typeof oldRenderAdminQueue==='function')oldRenderAdminQueue();}catch(e){}
+    var table=document.getElementById('adminStudentQueueTable'); if(!table)return;
+    var students=(Array.isArray(studentDirectoryList)?studentDirectoryList:[]).slice(0,50);
+    table.innerHTML=students.map(function(s){
+      var h=s.helpline||{};var plan=h.plan||'FREE';var paid=(h.feeStatus||h.paidStatus||'PENDING')==='PAID';
+      var plans=['FREE','PRO','PRIME','PREMIUM','GENX','GENX PRO'];
+      return '<tr class="border-b border-slate-200 hover:bg-slate-50 text-slate-700">'+
+        '<td class="p-3 sm:p-4 font-mono text-blue-600 font-bold">'+E(s.id)+'</td>'+
+        '<td class="p-3 sm:p-4 font-bold text-brand-dark">'+E(s.name||'Student')+'</td>'+
+        '<td class="p-3 sm:p-4">'+E((s.std||'')+' • '+(s.stream||''))+'</td>'+
+        '<td class="p-3 sm:p-4">'+E(s.subject||h.subject||'')+'</td>'+
+        '<td class="p-3 sm:p-4 gc-admin-plan-cell"><select class="gc-admin-plan-select" onchange="adminChangeStudentHelplinePlan(\''+E(s.id)+'\',this.value)">'+plans.map(function(p){return '<option value="'+p+'" '+(p===plan?'selected':'')+'>'+p+' — ₹'+planPrice(p).toLocaleString('en-IN')+'</option>';}).join('')+'</select><span class="gc-admin-fee-status '+(paid?'gc-admin-fee-paid':'gc-admin-fee-pending')+'">'+(paid?'FEES PAID':'FEES PENDING')+'</span></td>'+
+        '<td class="p-3 sm:p-4 text-right space-x-1">'+(paid?'<button onclick="adminRevokeStudentFeesPaid(\''+E(s.id)+'\')" class="bg-slate-600 text-white px-2.5 py-1.5 rounded text-[10px] font-bold">Revoke Fees Paid</button>':'<button onclick="adminMarkStudentFeesPaid(\''+E(s.id)+'\')" class="bg-emerald-600 text-white px-2.5 py-1.5 rounded text-[10px] font-bold">Mark Fees Paid</button>')+' <button onclick="adminEditStudent(\''+E(s.id)+'\')" class="bg-amber-500 text-white px-2.5 py-1.5 rounded text-[10px]">Edit</button> <button onclick="adminDeleteStudent(\''+E(s.id)+'\')" class="bg-red-600 text-white px-2.5 py-1.5 rounded text-[10px]">Delete</button></td></tr>';
+    }).join('');
+    var head=table.closest('table')?.querySelector('thead tr');
+    if(head && !head.querySelector('[data-gc-plan-head]')){head.insertAdjacentHTML('beforeend','<th data-gc-plan-head class="p-3 sm:p-4">Helpline Plan / Fees</th><th class="p-3 sm:p-4 text-right">Admin Actions</th>');}
+    /* Existing original header already has Admin Actions, so remove the duplicate first one. */
+    if(head){var ths=head.querySelectorAll('th');if(ths.length>6){var actionHeads=[].slice.call(ths).filter(function(x){return x.textContent.trim()==='Admin Actions';});if(actionHeads.length>1)actionHeads[0].remove();}}
+  };
+
+  function boot(){
+    /* Force the latest admin compose after the dashboard/message modal opens. */
+    var obs=new MutationObserver(function(){
+      var c=document.getElementById('gcMsgCompose');
+      if(c && document.getElementById('gcAdminMsgType') && document.getElementById('gcAdminMsgType').options.length<5)window.renderAdminCompose();
+    });
+    obs.observe(document.body,{childList:true,subtree:true});
+    setTimeout(function(){try{window.renderAdminQueue();}catch(e){}},500);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 })();
 </script>
