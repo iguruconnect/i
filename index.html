@@ -7291,30 +7291,48 @@ body.gc-v3-profile-page{
 
 <script id="gc-user-close-final">
 (function(){
-  /* CLOSE = hide profile page and return to the website */
-  window.gcV3CloseProfile=function(){
+  function closeProfileNow(){
     var m=document.getElementById('gcV3FullProfileModal');
-    if(m) m.classList.remove('open');
-    document.body.classList.remove('gc-v3-profile-page');
+
+    if(m){
+      m.classList.remove('open');
+      m.style.display='none';
+      m.style.visibility='hidden';
+      m.style.pointerEvents='none';
+    }
+
+    document.documentElement.classList.remove('gc-profile-open');
+    document.body.classList.remove('gc-profile-open','gc-v3-profile-page');
+    document.documentElement.style.overflow='';
+    document.body.style.overflow='';
 
     try{
-      if(history.state && history.state.gcProfile){
-        history.replaceState(null,'',location.href.split('#')[0]);
-      }else if(location.hash.indexOf('#profile-')===0){
-        history.replaceState(null,'',location.href.split('#')[0]);
-      }
+      history.replaceState(null,'',window.location.href.split('#')[0]);
     }catch(e){}
 
+    /* Do NOT restore display in a timeout. The CSS above keeps it closed. */
     window.scrollTo(0,0);
-  };
+  }
 
-  /* Browser Back also returns cleanly to the website */
+  window.gcV3CloseProfile=closeProfileNow;
+
+  /* Capture dynamically generated CLOSE / BACK buttons before inline onclick. */
+  document.addEventListener('click',function(e){
+    var btn=e.target.closest && e.target.closest(
+      '#gcV3FullProfileModal .gc-v3-secondary,' +
+      '#gcV3FullProfileModal .gc-v3-back,' +
+      '#gcV3FullProfileModal .gc-v3-close'
+    );
+    if(!btn) return;
+
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    closeProfileNow();
+  },true);
+
   window.addEventListener('popstate',function(){
     var m=document.getElementById('gcV3FullProfileModal');
-    if(m && m.classList.contains('open')){
-      m.classList.remove('open');
-      document.body.classList.remove('gc-v3-profile-page');
-    }
+    if(m && m.classList.contains('open')) closeProfileNow();
   });
 })();
 </script>
@@ -7366,7 +7384,59 @@ html.gc-profile-open, body.gc-profile-open{overflow:hidden!important;height:100%
   if(typeof oldStudent==='function'){
     window.openStudentProfile=function(id){lockPage(); oldStudent(id); var m=document.getElementById('gcV3FullProfileModal'); if(m)m.classList.add('open');};
   }
-  var oldClose=window.gcV3CloseProfile;
-  window.gcV3CloseProfile=function(){unlockPage(); if(typeof oldClose==='function')oldClose.apply(this,arguments); var m=document.getElementById('gcV3FullProfileModal'); if(m)m.classList.remove('open');};
+  /* Do not override gcV3CloseProfile here. The authoritative close handler
+     above also unlocks the page and catches dynamically-created CLOSE buttons. */
+})();
+</script>
+
+
+<style id="gc-close-final-css">
+/* FINAL CLOSE FIX:
+   The profile surface must be invisible unless it explicitly has .open.
+   This overrides the earlier fullscreen display:block rule. */
+#gcV3FullProfileModal.gc-v3-modal:not(.open){
+  display:none!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+#gcV3FullProfileModal.gc-v3-modal.open{
+  display:block!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+}
+</style>
+
+
+<script id="gc-open-final-fix">
+(function(){
+  function showProfile(){
+    var m=document.getElementById('gcV3FullProfileModal');
+    if(m){
+      m.style.display='';
+      m.style.visibility='';
+      m.style.pointerEvents='';
+      m.classList.add('open');
+    }
+  }
+
+  var ot=window.openTutorProfile;
+  if(typeof ot==='function'){
+    window.openTutorProfile=function(id){
+      document.documentElement.classList.add('gc-profile-open');
+      document.body.classList.add('gc-profile-open','gc-v3-profile-page');
+      ot(id);
+      showProfile();
+    };
+  }
+
+  var os=window.openStudentProfile;
+  if(typeof os==='function'){
+    window.openStudentProfile=function(id){
+      document.documentElement.classList.add('gc-profile-open');
+      document.body.classList.add('gc-profile-open','gc-v3-profile-page');
+      os(id);
+      showProfile();
+    };
+  }
 })();
 </script>
