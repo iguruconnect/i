@@ -2625,6 +2625,34 @@ html, body, button, input, select, textarea {
 .gc-profile-card.gc-registered-card .gc-role-pill,
 .gc-profile-card.gc-registered-card .gc-role-icon { color:#C2410C !important; }
 </style>
+<style id="gc-mobile-popup-final-fix">
+/* Mobile profile popup: always fit viewport and scroll internally */
+#gcV3FullProfileModal{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;max-height:100dvh!important;overflow:hidden!important;padding:10px!important;box-sizing:border-box!important;z-index:99999!important;align-items:center!important;justify-content:center!important}
+#gcV3FullProfileModal.open{display:flex!important}
+#gcV3FullProfileModal .gc-v3-modal-card{width:min(720px,100%)!important;max-width:720px!important;max-height:calc(100dvh - 20px)!important;height:auto!important;overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scrolling:touch!important}
+#gcV3FullProfileModal #gcV3FullProfileContent{min-height:0!important}
+#gcV3FullProfileModal .gc-v3-full-body{min-height:0!important}
+@media(max-width:640px){#gcV3FullProfileModal{padding:7px!important;align-items:center!important}#gcV3FullProfileModal .gc-v3-modal-card{max-height:calc(100dvh - 14px)!important;border-radius:18px!important}#gcV3FullProfileModal .gc-v3-full-head{padding:13px 14px!important}#gcV3FullProfileModal .gc-v3-full-body{padding:14px!important}#gcV3FullProfileModal .gc-v3-stat-row{gap:7px!important;flex-wrap:wrap!important}#gcV3FullProfileModal .gc-v3-modal-actions{position:sticky!important;bottom:0!important;padding-top:10px!important;background:linear-gradient(180deg,rgba(255,255,255,.72),#fff 35%)!important;z-index:3!important}#gcV3FullProfileModal .gc-v6-profile-head{padding:13px!important}#gcV3FullProfileModal .gc-v6-name-tick{width:38px!important;height:38px!important;min-width:38px!important}}
+/* Verified tutor = popup blue */
+.gc-tutor-card.gc-verified-card,.gc-verified-card,.gc-v4-tutor.gc-v4-verified,.gc-v6-head-verified{background:#2563EB!important;color:#fff!important;border-color:#1D4ED8!important}
+/* Banner centered cleanly inside brand-blue hero */
+#home{display:flex!important;justify-content:center!important;align-items:center!important;text-align:center!important;padding-top:34px!important;padding-bottom:34px!important}
+#home>div{width:100%!important;max-width:1200px!important;margin:0 auto!important;display:flex!important;justify-content:center!important;align-items:center!important}
+#home>div>div{width:100%!important;max-width:920px!important;margin:0 auto!important;display:flex!important;justify-content:center!important;align-items:center!important}
+#home>div>div img{display:block!important;width:100%!important;max-width:920px!important;height:auto!important;margin:0 auto!important;object-fit:contain!important}
+@media(max-width:640px){#home{padding:22px 12px!important}#home>div>div{max-width:100%!important}#home>div>div img{max-height:none!important;width:100%!important}}
+</style>
+
+<style id="gc-mobile-profile-fix">
+@media (max-width: 640px){
+  #gcV3FullProfileModal{padding:10px !important;align-items:center !important;overflow:hidden !important;}
+  #gcV3FullProfileModal > div{width:calc(100vw - 20px) !important;max-width:390px !important;max-height:calc(100dvh - 20px) !important;height:auto !important;border-radius:22px !important;overflow:hidden !important;}
+  #gcV3FullProfileModal .gc-v3-full-body{max-height:calc(100dvh - 210px) !important;overflow-y:auto !important;-webkit-overflow-scrolling:touch !important;padding:14px !important;}
+  #gcV3FullProfileModal .gc-v3-full-head{padding:14px !important;}
+  #gcV3FullProfileModal .gc-v3-modal-actions{position:sticky !important;bottom:0 !important;background:inherit !important;padding:10px 0 2px !important;z-index:5 !important;display:grid !important;grid-template-columns:1fr 82px !important;gap:8px !important;}
+  #gcV3FullProfileModal .gc-v3-primary,#gcV3FullProfileModal .gc-v3-secondary{min-width:0 !important;width:100% !important;font-size:11px !important;padding:11px 7px !important;white-space:nowrap !important;}
+}
+</style>
 </head>
 <body class="bg-brand-lightBg text-brand-dark font-sans antialiased min-h-screen flex flex-col justify-between overflow-x-hidden relative">
 
