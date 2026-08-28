@@ -784,6 +784,54 @@
 }
 </style>
 
+
+<style id="gc-single-line-identity-tools">
+/* Compact single-line identity: profile name + SIM + right-facing Wi-Fi stay together. */
+.gc-profile-card .gc-identity-row{
+  display:flex!important;
+  align-items:center!important;
+  gap:6px!important;
+  margin:1px 0 4px!important;
+  min-width:0!important;
+}
+.gc-profile-card .gc-identity-row .gc-photo-wrap{
+  flex:0 0 52px!important; width:52px!important; height:52px!important;
+}
+.gc-profile-card .gc-identity-row .gc-name-area{
+  flex:1 1 auto!important; min-width:0!important;
+}
+.gc-profile-card .gc-name-patch{
+  width:auto!important; min-width:0!important; min-height:32px!important;
+  padding:3px 5px!important; gap:4px!important;
+  justify-content:flex-start!important;
+}
+.gc-profile-card .gc-name-patch h3{
+  font-size:13px!important; line-height:1!important;
+  white-space:nowrap!important; overflow:hidden!important; text-overflow:ellipsis!important;
+  overflow-wrap:normal!important;
+}
+.gc-profile-card .gc-blue-tick{width:23px!important;height:23px!important;flex:0 0 23px!important}
+.gc-profile-card .gc-subtitle{font-size:6px!important;margin-top:2px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+.gc-profile-card .gc-identity-tools{
+  flex:0 0 auto!important; display:flex!important; align-items:center!important;
+  justify-content:flex-end!important; gap:4px!important; margin-left:auto!important;
+}
+.gc-profile-card .gc-identity-tools .gc-chip{
+  width:27px!important;height:19px!important;border-radius:4px!important;
+}
+.gc-profile-card .gc-identity-tools .gc-contactless{
+  color:#2563eb!important; font-size:19px!important;
+  transform:rotate(90deg)!important; margin:0!important;
+}
+.gc-profile-card .gc-chip-row{display:none!important}
+@media(max-width:479px){
+  .gc-profile-card .gc-identity-row .gc-photo-wrap{flex-basis:49px!important;width:49px!important;height:49px!important}
+  .gc-profile-card .gc-name-patch h3{font-size:12px!important}
+  .gc-profile-card .gc-blue-tick{width:21px!important;height:21px!important;flex-basis:21px!important}
+  .gc-profile-card .gc-identity-tools .gc-chip{width:25px!important;height:18px!important}
+  .gc-profile-card .gc-identity-tools .gc-contactless{font-size:17px!important}
+}
+</style>
 </head>
 <body class="bg-brand-lightBg text-brand-dark font-sans antialiased min-h-screen flex flex-col justify-between overflow-x-hidden relative">
 
@@ -2303,13 +2351,6 @@
                         <span class="gc-card-code">GC CARD</span>
                     </div>
 
-                    <div class="gc-chip-row">
-                        <span class="gc-chip">
-                            <span></span><span></span><span></span><span></span>
-                        </span>
-                        <i class="fa-solid fa-wifi gc-contactless"></i>
-                    </div>
-
                     <div class="gc-identity-row">
                         <div class="gc-photo-wrap">${photoMarkup}</div>
                         <div class="gc-name-area">
@@ -2317,6 +2358,12 @@
                                 <h3>${stu.name}</h3>
                             </div>
                             <div class="gc-subtitle"><strong>JUNIOR COLLEGE STUDENT</strong></div>
+                        </div>
+                        <div class="gc-identity-tools" aria-label="Card contactless icons">
+                            <span class="gc-chip">
+                                <span></span><span></span><span></span><span></span>
+                            </span>
+                            <i class="fa-solid fa-wifi gc-contactless"></i>
                         </div>
                     </div>
 
@@ -2493,13 +2540,6 @@
                         <span class="gc-card-code">GC CARD</span>
                     </div>
 
-                    <div class="gc-chip-row">
-                        <span class="gc-chip">
-                            <span></span><span></span><span></span><span></span>
-                        </span>
-                        <i class="fa-solid fa-wifi gc-contactless"></i>
-                    </div>
-
                     <div class="gc-identity-row">
                         <div class="gc-photo-wrap">${photoMarkup}</div>
                         <div class="gc-name-area ${verified ? 'gc-verified-name-area' : ''}">
@@ -2508,6 +2548,12 @@
                                 ${verified ? `<img src="${VERIFIED_TICK_LOGO_URL}" alt="Verified" class="gc-blue-tick">` : ''}
                             </div>
                             <div class="gc-subtitle"><strong>JUNIOR COLLEGE FACULTY</strong></div>
+                        </div>
+                        <div class="gc-identity-tools" aria-label="Card contactless icons">
+                            <span class="gc-chip">
+                                <span></span><span></span><span></span><span></span>
+                            </span>
+                            <i class="fa-solid fa-wifi gc-contactless"></i>
                         </div>
                     </div>
 
@@ -3749,8 +3795,6 @@
             const dateInput = document.getElementById('stu_registration_date');
             if (dateInput) dateInput.value = new Date().toLocaleDateString('en-IN');
             updateAuthBadge();
-            renderStudentDirectory();
-            renderTutorDirectory();
             checkStaffSessionState();
         });
         </script>
@@ -3779,7 +3823,7 @@
     const tutor=role==='tutor', gallery=pics(p), phone=p.phone?String(p.phone).replace(/\d(?=\d{4})/g,'•'):'Protected', subject=p.subject||(tutor?'Junior College Tutor':'Learning Requirement');
     const stats=tutor?[['★',p.rating||'4.9','Rating'],['👥',p.students||'315+','Students Taught'],['⌛',p.experience||'—','Experience'],['₹',p.price||'—','Hourly Rate']]:[['🎓',p.std||'—','Class'],['📚',p.stream||'—','Stream'],['☎',p.helpline?.plan||'FREE','Helpline Plan'],['📅',typeof formatRegistrationDate==='function'?formatRegistrationDate(p.registrationDate):'—','Registered']];
     const hero=`<section class="gc-profile-hero ${tutor?'':'student'}"><div class="gc-profile-wave"></div>${header()}<div class="gc-profile-main"><div class="gc-profile-identity">${photo(p.photoData||p.photo||p.image||p.avatar||p.profileImage||'',p.name,'gc-profile-big-photo')}<div><div class="gc-profile-name-row"><div class="gc-profile-name">${esc(p.name||'Profile')}</div>${tutor&&p.verified?`<img class="gc-profile-big-tick" src="${TICK_SRC}" alt="Verified Tutor">`:''}</div><div class="gc-profile-role">${esc(tutor?subject:(p.course||'Junior College Student'))}</div><div class="gc-profile-line"><span><i class="fa-solid fa-graduation-cap"></i> ${esc(tutor?(p.qualification||'Qualification not provided'):(p.college||'College not provided'))}</span><span><i class="fa-solid fa-location-dot"></i> ${esc(tutor?(p.address||'Location not provided'):(p.stream||'Stream not provided'))}</span><span><i class="fa-solid fa-calendar-days"></i> ${esc(typeof formatRegistrationDate==='function'?formatRegistrationDate(p.registrationDate):'Registered member')}</span></div></div><div class="gc-profile-chipbox"><div class="gc-final-chip"></div><div class="gc-final-contactless">)))</div></div></div><div class="gc-profile-stats">${stats.map(x=>`<div class="gc-profile-stat"><strong>${esc(x[0])} ${esc(x[1])}</strong><small>${esc(x[2])}</small></div>`).join('')}</div></div></section>`;
-    const details=tutor?`<div class="gc-profile-cardbox"><h3>About Me</h3><p>${esc(p.aboutMe||'No About Me information has been added yet.')}</p></div>${field('Educational Qualification',p.qualification)}${field('Teaching College',p.teachingCollege||p.college)}${field('Subject Expertise',p.subject)}${field('Experience',p.experience)}${field('Rate / Hour',p.price)}${field('Residential Address',p.address)}<div class="gc-profile-cardbox"><h3>Verification & Membership</h3><div class="gc-profile-tags"><span class="gc-profile-tag">${p.verified?'✓ Identity Verified':'Registered Tutor'}</span><span class="gc-profile-tag">${esc(p.stream||'Junior College')}</span><span class="gc-profile-tag">GURU CONNECT</span></div></div>`:`<div class="gc-profile-cardbox"><h3>About Me</h3><p>${esc(p.aboutMe||'No About Me information has been added yet.')}</p></div>${field('Course',p.course||((p.std||'')+' '+(p.stream||'')))}${field('College',p.college)}${field('Class',p.std)}${field('Division',p.division)}${field('Roll Number',p.rollNumber)}${field('Subject / Learning Requirement',p.subject)}<div class="gc-profile-cardbox"><h3>Helpline Subscription</h3><p>${esc(p.helpline?.registered?((p.helpline.plan||'Plan')+' • ₹'+Number(p.helpline.amount||0).toLocaleString('en-IN')):'Not subscribed')}</p></div><div class="gc-profile-cardbox"><h3>Learning Requirement</h3><p>${esc(p.learningRequirement||'No learning requirement has been added yet.')}</p></div>`;
+    const details=tutor?`<div class="gc-profile-cardbox"><h3>About Me</h3><p>${esc(p.aboutMe||'No About Me information has been added yet.')}</p></div>${field('Educational Qualification',p.qualification)}${field('Teaching College',p.teachingCollege||p.college)}${field('Subject Expertise',p.subject)}${field('Experience',p.experience)}${field('Rate / Hour',p.price)}${field('Residential Address',p.address)}<div class="gc-profile-cardbox"><h3>Verification & Membership</h3><div class="gc-profile-tags"><span class="gc-profile-tag">${p.verified?'✓ Identity Verified':'Registered Tutor'}</span><span class="gc-profile-tag">${esc(p.stream||'Junior College')}</span><span class="gc-profile-tag">GURU CONNECT</span></div></div>`:`<div class="gc-profile-cardbox"><h3>About Me</h3><p>${esc(p.aboutMe||'No About Me information has been added yet.')}</p></div>${field('Course',p.course||((p.std||'')+' '+(p.stream||'')))}${field('College',p.college)}${field('Class',p.std)}${field('Division',p.division)}${field('Roll Number',p.rollNumber)}${field('Subject / Learning Requirement',p.subject)}<div class="gc-profile-cardbox"><h3>Helpline Service Plan</h3>${p.helpline?.registered?`<div class="gc-profile-tags"><span class="gc-profile-tag"><i class="fa-solid fa-headset"></i> ${esc(p.helpline.plan||'Plan')}</span><span class="gc-profile-tag"><i class="fa-solid fa-indian-rupee-sign"></i> ₹${Number(p.helpline.amount||0).toLocaleString('en-IN')}</span></div><p style="margin-top:8px">Membership: <strong>${esc(p.helpline.plan||'Plan')}</strong>. Helpline service is ${p.helpline.plan==='FREE'?'available under the one-time free allowance.':'active according to the selected membership plan.'}</p>`:`<p>Not subscribed to Helpline Service.</p>`}</div><div class="gc-profile-cardbox"><h3>Learning Requirement</h3><p>${esc(p.learningRequirement||'No learning requirement has been added yet.')}</p></div>`;
     const galleryHtml=gallery.length?`<div class="gc-profile-cardbox"><h3>${tutor?'Achievements / Showcase':'Achievements / Learning Needs'}</h3><div class="gc-profile-gallery">${gallery.map((x,i)=>`<img src="${esc(x)}" alt="${tutor?'Achievement':'Learning need'} ${i+1}">`).join('')}</div></div>`:'';
     const contact=`<div class="gc-profile-cardbox gc-profile-contact"><h3>Contact Information</h3><div class="gc-profile-tags"><span class="gc-profile-tag"><i class="fa-solid fa-phone"></i> ${esc(phone)}</span><span class="gc-profile-tag"><i class="fa-solid fa-envelope"></i> ${esc(p.email||'Protected')}</span></div><div class="gc-profile-actions"><button class="gc-profile-action primary" onclick="closeGcProfilePage()"><i class="fa-solid fa-arrow-left"></i> BACK TO WEBSITE</button>${tutor?`<button class="gc-profile-action secondary" onclick="closeGcProfilePage();alert('Use the Connect button on the tutor listing to start a connection.')"><i class="fa-solid fa-link"></i> CONNECT</button>`:''}</div><div class="gc-profile-back"><button onclick="closeGcProfilePage()">CLOSE PROFILE</button></div></div>`;
     document.getElementById('gcProfilePage').innerHTML=`<div class="gc-profile-shell">${hero}<div class="gc-profile-body">${details}${galleryHtml}${contact}</div></div>`;
@@ -3865,8 +3909,8 @@
   window.changeGcV2StudentPlan=function(id){const s=students().find(x=>String(x.id)===String(id));if(!s)return;const safe=String(id).replace(/[^a-zA-Z0-9_-]/g,'');const plan=document.getElementById('gcV2Plan_'+safe)?.value||'FREE';s.helpline={...(s.helpline||{}),registered:true,plan,amount:Number(plans[plan]||0)};persist();if(typeof renderAdminQueue==='function')renderAdminQueue();renderAdminPlanControl();alert(`${s.name}'s plan has been changed to ${plan}.`);};
   function renderAdminPlanControl(){const p=document.getElementById('gcV2PlanPanel');if(p)p.outerHTML=adminPlanHtml();}
   function installAdmin(){const dash=document.getElementById('staffAdminDashboard');if(!dash)return;let msg=document.getElementById('gcV2AdminMessages');if(!msg){dash.querySelector(':scope > div')?.insertAdjacentHTML('beforeend',adminMessageHtml());}let plan=document.getElementById('gcV2PlanPanel');if(!plan){dash.querySelector(':scope > div')?.insertAdjacentHTML('beforeend',adminPlanHtml());}window.gcV2MessageTypeChanged();renderAdminMessageLog();}
-  const oldCheck=window.checkStaffSessionState;window.checkStaffSessionState=function(){if(typeof oldCheck==='function')oldCheck();setTimeout(installAdmin,0);};
-  const oldRenderQueue=window.renderAdminQueue;window.renderAdminQueue=function(){if(typeof oldRenderQueue==='function')oldRenderQueue();setTimeout(()=>{installAdmin();renderAdminMessageLog();renderAdminPlanControl();},0);};
+  const oldCheck=window.checkStaffSessionState;window.checkStaffSessionState=function(){if(typeof oldCheck==='function')oldCheck();installAdmin();};
+  const oldRenderQueue=window.renderAdminQueue;window.renderAdminQueue=function(){if(typeof oldRenderQueue==='function')oldRenderQueue();installAdmin();renderAdminMessageLog();renderAdminPlanControl();};
 
   // Extend existing admin edit modals without cropping the dashboard.
   function addEditFields(){
@@ -3883,8 +3927,7 @@
     // Ensure dashboard content is never clipped by the original outer overflow rule.
     const dash=document.getElementById('staffAdminDashboard');if(dash){dash.style.overflow='visible';const outer=dash.firstElementChild;if(outer){outer.style.overflow='visible';outer.style.maxHeight='none';}}
     addEditFields();
-    setTimeout(()=>{if(document.getElementById('staffAdminDashboard')?.classList.contains('hidden')===false)installAdmin();},100);
-    setTimeout(()=>{try{window.renderTutorDirectory();window.renderStudentDirectory();}catch(e){}},120);
+    if(document.getElementById('staffAdminDashboard')?.classList.contains('hidden')===false) installAdmin();
   });
 })();
 </script>
@@ -4078,10 +4121,10 @@ function bindStars(){const s=document.getElementById('gcV3Stars');if(!s||s.datas
 window.gcV3SubmitReview=function(studentId){const tid=document.getElementById('gcV3ReviewTutor')?.value,r=Number(document.getElementById('gcV3Stars')?.dataset.rating||0),text=document.getElementById('gcV3ReviewText')?.value.trim();if(!tid||!r||!text)return alert('Please select a tutor, rating and write your review.');const t=tutors().find(x=>String(x.id)===String(tid));if(!t)return;const reviews=JSON.parse(localStorage.getItem('gc_tutor_reviews')||'[]');reviews.push({id:'GCR-'+Date.now(),tutorId:tid,studentId,rating:r,text,createdAt:new Date().toISOString()});localStorage.setItem('gc_tutor_reviews',JSON.stringify(reviews));const all=reviews.filter(x=>String(x.tutorId)===String(tid));t.reviewCount=all.length;t.rating=(all.reduce((sum,x)=>sum+Number(x.rating||0),0)/all.length).toFixed(1);try{if(typeof saveRegisteredDirectories==='function')saveRegisteredDirectories();}catch(e){};alert('Thank you. Your tutor review has been submitted.');};
 function attachUserFeatures(){const p=typeof getCurrentUserProfile==='function'?getCurrentUserProfile():null;if(p)addUserMessageAndReview(p);bindStars();}
 function boot(){try{window.renderTutorDirectory();window.renderStudentDirectory();}catch(e){};installAdminControls();attachUserFeatures();}
-document.addEventListener('DOMContentLoaded',()=>{boot();setTimeout(boot,300);setTimeout(boot,1000);});
+document.addEventListener('DOMContentLoaded',()=>{boot();});
 const oldRender=window.renderAdminQueue;window.renderAdminQueue=function(){if(typeof oldRender==='function')oldRender();setTimeout(()=>{installAdminControls();renderPlans();renderMsgLog();},30);};
 const oldDash=window.openUserDashboard;window.openUserDashboard=function(){if(typeof oldDash==='function')oldDash();setTimeout(attachUserFeatures,50);setTimeout(bindStars,100);};
-setInterval(()=>{if(!document.getElementById('gcV3AdminControls')&&document.getElementById('staffAdminDashboard')&&!document.getElementById('staffAdminDashboard').classList.contains('hidden'))installAdminControls();},500);
+// Performance fix: removed continuous 500ms admin polling. Admin controls are installed on dashboard/session events only.
 })();
 </script>
 
@@ -4270,6 +4313,14 @@ setInterval(()=>{if(!document.getElementById('gcV3AdminControls')&&document.getE
   .gc-profile-card .gc-name-patch h3{font-size:12px!important}
   .gc-profile-card .gc-blue-tick{width:22px!important;height:22px!important;min-width:22px!important;flex-basis:22px!important}
 }
+</style>
+<style id="gc-performance-fix">
+/* Performance: isolate repeated profile cards so browser layout/paint stays local. */
+#tutorGrid,#studentGridContainer{contain:layout style paint;}
+.gc-final-card{contain:layout paint;will-change:auto;}
+.gc-profile-page{contain:layout paint;}
+/* Avoid expensive animation work on low-power/mobile devices. */
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
 </style>
 </body>
 </html>
