@@ -4084,5 +4084,192 @@ const oldDash=window.openUserDashboard;window.openUserDashboard=function(){if(ty
 setInterval(()=>{if(!document.getElementById('gcV3AdminControls')&&document.getElementById('staffAdminDashboard')&&!document.getElementById('staffAdminDashboard').classList.contains('hidden'))installAdminControls();},500);
 })();
 </script>
+
+
+<!-- GURU CONNECT FINAL COMPACT CARD / RIGHT-FACING WIFI PATCH -->
+<style id="gc-final-card-user-patch">
+/* Compact white preview cards */
+.gc-profile-card{
+  background:#fff!important;
+  min-height:0!important;
+  height:158px!important;
+  max-height:158px!important;
+  padding:7px 9px 8px!important;
+  border-radius:15px!important;
+  overflow:hidden!important;
+  display:flex!important;
+  flex-direction:column!important;
+}
+/* Remove every decorative line/orbit/dot around the brand */
+.gc-profile-card .gc-card-dots,
+.gc-profile-card .gc-card-orbit,
+.gc-profile-card .gc-orbit-a,
+.gc-profile-card .gc-orbit-b,
+.gc-profile-card .gc-card-top,
+.gc-profile-card .gc-card-code{display:none!important}
+/* Brand row */
+.gc-profile-card .gc-card-brand{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:4px!important;
+  height:20px!important;
+  min-height:20px!important;
+  margin:0!important;
+  padding:0!important;
+  line-height:1!important;
+}
+.gc-profile-card .gc-card-brand img{
+  width:20px!important;
+  height:20px!important;
+  object-fit:contain!important;
+  box-shadow:none!important;
+}
+.gc-profile-card .gc-card-brand span{
+  font-size:9px!important;
+  line-height:1!important;
+  font-weight:1000!important;
+  color:#0f172a!important;
+}
+.gc-profile-card .gc-card-brand b{color:#2563eb!important}
+/* Chip + WiFi row */
+.gc-profile-card .gc-chip-row{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  height:25px!important;
+  min-height:25px!important;
+  margin:0!important;
+  padding:0 1px!important;
+}
+.gc-profile-card .gc-chip{
+  width:30px!important;
+  height:20px!important;
+  border-radius:4px!important;
+  flex:0 0 30px!important;
+}
+/* WiFi: blue, leaning/facing RIGHT — strongest arc on the right */
+.gc-profile-card .gc-contactless,
+.gc-profile-card .gc-v2-wifi{
+  color:#1769e8!important;
+  font-size:22px!important;
+  line-height:1!important;
+  display:inline-block!important;
+  transform:rotate(90deg) skewX(-7deg) scaleY(1.08)!important;
+  transform-origin:center!important;
+  margin-right:1px!important;
+  margin-left:auto!important;
+}
+/* Identity becomes a single compact row */
+.gc-profile-card .gc-identity-row{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+  min-height:60px!important;
+  height:60px!important;
+  margin:0!important;
+  padding:0!important;
+}
+.gc-profile-card .gc-photo-wrap{
+  width:52px!important;
+  height:52px!important;
+  min-width:52px!important;
+  padding:2px!important;
+  margin:0!important;
+  border-radius:50%!important;
+  box-shadow:0 2px 7px rgba(15,23,42,.12)!important;
+}
+.gc-profile-card .gc-name-area{
+  min-width:0!important;
+  margin:0!important;
+  text-align:left!important;
+}
+.gc-profile-card .gc-name-patch{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:4px!important;
+  padding:0!important;
+  margin:0!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  max-width:100%!important;
+}
+.gc-profile-card .gc-name-patch h3{
+  margin:0!important;
+  padding:0!important;
+  color:#0f172a!important;
+  font-size:13px!important;
+  line-height:1.05!important;
+  font-weight:1000!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+/* Verified tick +20% */
+.gc-profile-card .gc-blue-tick{
+  width:23px!important;
+  height:23px!important;
+  min-width:23px!important;
+  flex:0 0 23px!important;
+  object-fit:contain!important;
+}
+.gc-profile-card .gc-subtitle{
+  color:#2563eb!important;
+  font-size:8px!important;
+  font-weight:900!important;
+  margin:3px 0 0!important;
+  text-align:left!important;
+  line-height:1!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+.gc-profile-card.gc-registered-card .gc-subtitle{color:#ea580c!important}
+.gc-profile-card.gc-student-card .gc-subtitle{color:#15803d!important}
+/* Only VIEW PROFILE on the preview */
+.gc-profile-card .gc-info-grid,
+.gc-profile-card .gc-rating-strip,
+.gc-profile-card .gc-subject-box,
+.gc-profile-card .gc-connect-btn{display:none!important}
+.gc-profile-card .gc-action-row{
+  display:block!important;
+  width:100%!important;
+  margin:2px 0 0!important;
+  padding:0!important;
+}
+.gc-profile-card .gc-view-btn{
+  display:block!important;
+  width:100%!important;
+  min-height:25px!important;
+  height:25px!important;
+  padding:4px 7px!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:6px!important;
+  background:#2563eb!important;
+  color:#fff!important;
+  font-size:8px!important;
+  line-height:1!important;
+  font-weight:1000!important;
+}
+.gc-profile-card.gc-registered-card .gc-view-btn{background:#f97316!important}
+.gc-profile-card.gc-student-card .gc-view-btn{background:#16a34a!important}
+/* Colorful borders, white card body */
+.gc-profile-card.gc-verified-card{border:2px solid #2563eb!important}
+.gc-profile-card.gc-registered-card{border:2px solid #f97316!important}
+.gc-profile-card.gc-student-card{border:2px solid #16a34a!important}
+/* Keep directory cards compact on all screens */
+#tutorGrid,#studentGridContainer{align-items:start!important}
+#tutorGrid .gc-profile-card,#studentGridContainer .gc-profile-card{margin-bottom:0!important}
+@media(max-width:640px){
+  .gc-profile-card{height:150px!important;max-height:150px!important;padding:6px 8px 7px!important}
+  .gc-profile-card .gc-photo-wrap{width:48px!important;height:48px!important;min-width:48px!important}
+  .gc-profile-card .gc-name-patch h3{font-size:12px!important}
+  .gc-profile-card .gc-blue-tick{width:22px!important;height:22px!important;min-width:22px!important;flex-basis:22px!important}
+}
+</style>
 </body>
 </html>
