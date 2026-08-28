@@ -7451,6 +7451,76 @@ body.gc-v3-profile-page{
 })();
 </script>
 
+
+<style id="gc-final-dark-tutor-colors">
+/* FINAL TUTOR COLOR POLISH
+   Verified Tutor = deep/dark blue
+   Registered Tutor = dark pastel orange
+*/
+
+/* Main tutor profile cards */
+.gc-tutor-card.gc-verified-card,
+.gc-verified-card{
+  background:#123B8F !important;
+  background-image:linear-gradient(135deg,#173B91 0%,#12357F 55%,#0B245E 100%) !important;
+  color:#fff !important;
+}
+
+.gc-tutor-card.gc-registered-card,
+.gc-registered-card{
+  background:#C96A2B !important;
+  background-image:linear-gradient(135deg,#D9823B 0%,#C96A2B 55%,#A94F20 100%) !important;
+  color:#fff !important;
+}
+
+/* Compact tutor directory cards */
+.gc-v4-tutor.gc-v4-verified{
+  background:linear-gradient(135deg,#173B91 0%,#12357F 55%,#0B245E 100%) !important;
+  color:#fff !important;
+}
+
+.gc-v4-tutor.gc-v4-registered{
+  background:linear-gradient(135deg,#D9823B 0%,#C96A2B 55%,#A94F20 100%) !important;
+  color:#fff !important;
+  border-color:rgba(255,255,255,.28) !important;
+}
+
+/* V3 preview cards */
+.gc-v3-tutor.is-verified,
+.gc-v3-tutor.gc-v4-verified{
+  background:linear-gradient(135deg,#173B91 0%,#12357F 55%,#0B245E 100%) !important;
+  color:#fff !important;
+}
+
+.gc-v3-tutor:not(.is-verified){
+  background:linear-gradient(135deg,#D9823B 0%,#C96A2B 55%,#A94F20 100%) !important;
+  color:#fff !important;
+}
+
+/* Full tutor profile headers */
+.gc-v4-tutor-head,
+.gc-v3-full-head.tutor-head{
+  background:linear-gradient(135deg,#173B91 0%,#12357F 55%,#0B245E 100%) !important;
+}
+
+/* Keep registered-tutor orange distinctly softer/darker than bright orange */
+.gc-clean-registered{
+  background:linear-gradient(135deg,#D9823B 0%,#C96A2B 55%,#A94F20 100%) !important;
+}
+
+.gc-clean-profile-head.registered{
+  background:linear-gradient(135deg,#D9823B 0%,#C96A2B 55%,#A94F20 100%) !important;
+}
+
+/* Verified tutor clean/full-page surfaces */
+.gc-clean-verified{
+  background:linear-gradient(135deg,#173B91 0%,#12357F 55%,#0B245E 100%) !important;
+}
+.gc-clean-profile-head.verified{
+  background:linear-gradient(135deg,#173B91 0%,#12357F 55%,#0B245E 100%) !important;
+}
+</style>
+
 </body>
 </html>
 <style id="gc-profile-fullscreen-final">
