@@ -7258,3 +7258,53 @@ html, body, button, input, select, textarea {
 
 </body>
 </html>
+<style id="gc-profile-fullscreen-final">
+/* FINAL: More opens a true full-screen profile surface. The directory underneath is
+   completely hidden and locked; only the profile surface can scroll. */
+html.gc-profile-open, body.gc-profile-open{overflow:hidden!important;height:100%!important;overscroll-behavior:none!important}
+#gcV3FullProfileModal.gc-v3-modal,
+#gcV3FullProfileModal.gc-v3-modal.open{
+  position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;
+  margin:0!important;padding:0!important;z-index:2147483000!important;
+  display:block!important;background:#f8fafc!important;overflow:hidden!important;
+}
+#gcV3FullProfileModal .gc-v3-modal-backdrop{
+  position:fixed!important;inset:0!important;width:100%!important;height:100%!important;
+  background:#f8fafc!important;opacity:1!important;pointer-events:none!important;
+}
+#gcV3FullProfileModal .gc-v3-modal-card{
+  position:relative!important;z-index:2!important;width:100%!important;max-width:none!important;
+  height:100dvh!important;max-height:none!important;margin:0!important;border-radius:0!important;
+  border:0!important;box-shadow:none!important;background:#f8fafc!important;
+  overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scrolling:touch!important;
+  overscroll-behavior:contain!important;padding-bottom:env(safe-area-inset-bottom)!important;
+}
+#gcV3FullProfileModal .gc-v3-page-topbar{
+  position:sticky!important;top:0!important;z-index:20!important;
+  background:rgba(248,250,252,.97)!important;backdrop-filter:blur(10px)!important;
+  border-bottom:1px solid #e2e8f0!important;padding:12px max(16px,env(safe-area-inset-left))!important;
+}
+#gcV3FullProfileModal .gc-v3-close{display:none!important}
+#gcV3FullProfileModal #gcV3FullProfileContent{width:100%!important;min-height:100%!important}
+#gcV3FullProfileModal .gc-v3-full-body{padding-bottom:32px!important}
+@media(max-width:640px){
+ #gcV3FullProfileModal .gc-v3-page-topbar{padding:10px 12px!important}
+ #gcV3FullProfileModal .gc-v3-back{font-size:13px!important;padding:9px 12px!important}
+}
+</style>
+<script id="gc-profile-fullscreen-final-js">
+(function(){
+  function lockPage(){document.documentElement.classList.add('gc-profile-open');document.body.classList.add('gc-profile-open');}
+  function unlockPage(){document.documentElement.classList.remove('gc-profile-open');document.body.classList.remove('gc-profile-open');}
+  var oldOpen=window.openTutorProfile;
+  if(typeof oldOpen==='function'){
+    window.openTutorProfile=function(id){lockPage(); oldOpen(id); var m=document.getElementById('gcV3FullProfileModal'); if(m)m.classList.add('open');};
+  }
+  var oldStudent=window.openStudentProfile;
+  if(typeof oldStudent==='function'){
+    window.openStudentProfile=function(id){lockPage(); oldStudent(id); var m=document.getElementById('gcV3FullProfileModal'); if(m)m.classList.add('open');};
+  }
+  var oldClose=window.gcV3CloseProfile;
+  window.gcV3CloseProfile=function(){unlockPage(); if(typeof oldClose==='function')oldClose.apply(this,arguments); var m=document.getElementById('gcV3FullProfileModal'); if(m)m.classList.remove('open');};
+})();
+</script>
