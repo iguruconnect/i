@@ -2602,6 +2602,11 @@ html, body, button, input, select, textarea {
 </style>
 
 <style id="gc-inter-font-final">html,body,.gc-profile-card,.gc-profile-card *{font-family:Inter,Arial,sans-serif!important;} .gc-profile-card .gc-name-patch h3{font-family:"Roboto Condensed",Inter,Arial,sans-serif!important;}</style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#123b8f">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
 </head>
 <body class="bg-brand-lightBg text-brand-dark font-sans antialiased min-h-screen flex flex-col justify-between overflow-x-hidden relative">
 
@@ -4062,17 +4067,50 @@ html, body, button, input, select, textarea {
 
         // Illustrative Junior College student directory. Subjects are randomly varied but always valid for the displayed stream.
         let studentDirectoryList = [];
-        const studentNames = ["Student naam hai mera", "Kalyani", "Aarav Sharma", "Priya Kulkarni", "Rahul Deshmukh", "Sneha Joshi", "Amit Patil", "Neha Shinde", "Rohit Verma"];
-        for(let i=1; i<=150; i++) {
+        // 1,000 UNIQUE illustrative student profiles.
+        const GC_STUDENT_FIRST_NAMES = [
+            "Aarav","Aditi","Aditya","Akanksha","Akash","Alisha","Aman","Ameya","Ananya","Aniket",
+            "Anjali","Arjun","Arnav","Arya","Ashish","Avni","Ayush","Bhavya","Chaitanya","Diya",
+            "Esha","Farhan","Gauri","Ishaan","Isha","Jai","Janhavi","Kajal","Karan","Kavya",
+            "Khushi","Krishna","Manas","Manya","Meera","Mihir","Mira","Mohit","Myra","Nandini",
+            "Nikhil","Nisha","Om","Palak","Parth","Pihu","Pranav","Prisha","Rahul","Riya",
+            "Rohan","Rohit","Rudra","Saanvi","Sakshi","Samarth","Sana","Sanika","Sara","Shivam",
+            "Shreya","Simran","Sneha","Soham","Tanay","Tanvi","Tanya","Tejas","Ved","Vansh",
+            "Varun","Veda","Vihaan","Vikas","Vikram","Yash","Yashvi","Zara","Zoya","Ayesha"
+        ];
+        const GC_STUDENT_LAST_NAMES = [
+            "Sharma","Verma","Patil","Kulkarni","Deshmukh","Joshi","Pillai","Mehta","Shinde","Gupta",
+            "Jadhav","Chavan","More","Pawar","Bhosale","Kale","Sawant","Naik","Mishra","Tiwari",
+            "Singh","Yadav","Rathod","Gaikwad","Thakur","Kadam","Salunkhe","Dixit","Nair","Iyer",
+            "Reddy","Rao","Menon","Kapoor","Malhotra","Saxena","Sinha","Das","Banerjee","Mukherjee",
+            "Chatterjee","Ghosh","Basu","Dutta","Sen","Roy","Bhat","Shetty","Hegde","Pai",
+            "Desai","Vora","Shah","Trivedi","Pandey","Tripathi","Srivastava","Agrawal","Jain","Khatri",
+            "Arora","Bansal","Sethi","Ahuja","Sodhi","Bhatt","Gawande","Wagh","Thombre","Mhatre",
+            "Kamble","Borkar","Kharat","Gore","Inamdar","Mane","Kshirsagar","Vaidya","Bhujbal","Londhe"
+        ];
+
+        for(let i=1; i<=1000; i++) {
+            const first = GC_STUDENT_FIRST_NAMES[(i - 1) % GC_STUDENT_FIRST_NAMES.length];
+            const lastIndex = Math.floor((i - 1) / GC_STUDENT_FIRST_NAMES.length) % GC_STUDENT_LAST_NAMES.length;
+            const last = GC_STUDENT_LAST_NAMES[lastIndex];
+            const cycle = Math.floor((i - 1) / (GC_STUDENT_FIRST_NAMES.length * GC_STUDENT_LAST_NAMES.length));
+            const uniqueName = cycle > 0
+                ? `${first} ${last} ${cycle + 1}`
+                : `${first} ${last}`;
             const stream = JC_STREAMS[deterministicIndex(i * 17, JC_STREAMS.length)];
             const subject = validSubjectForStream(stream, "", i * 31);
+
             studentDirectoryList.push({
-                id: "GC-STU-" + (1000 + i),
-                name: studentNames[(i - 1) % studentNames.length],
+                id: "GC-STU-" + String(1000 + i),
+                name: uniqueName,
                 std: i % 3 === 0 ? "FYJC (11th)" : "SYJC (12th)",
                 stream,
                 subject,
+                course: "Junior College",
+                learningRequirement: `Looking for guidance in ${subject}`,
                 phone: "",
+                location: "Maharashtra",
+                memberSince: "Jan 2026",
                 isDummy: true,
                 registrationStatus: "illustrative"
             });
@@ -4220,21 +4258,68 @@ html, body, button, input, select, textarea {
             { name: "Pooja Kulkarni", subject: "English", rate: "₹580/hr", exp: "5 Years", verified: false, stream: "Arts" }
         ];
 
-        for(let j=1; j<=108; j++) {
-            const base = tutorNamesData[(j - 1) % tutorNamesData.length];
-            const stream = base.stream;
+        // 1,000 UNIQUE illustrative tutor profiles.
+        // Names are generated from separate first/last-name pools so no illustrative
+        // tutor card is a duplicate of another tutor card.
+        const GC_TUTOR_FIRST_NAMES = [
+            "Aarav","Aditi","Aditya","Akanksha","Akash","Alok","Amrita","Ananya","Aniket","Anjali",
+            "Arjun","Arpita","Aryan","Ashish","Asmita","Atul","Bhavna","Chetan","Deepa","Deepak",
+            "Dev","Diya","Esha","Gaurav","Isha","Ishaan","Jatin","Kajal","Karan","Kavita",
+            "Kiran","Komal","Kunal","Lakshmi","Madhuri","Manish","Meera","Mihir","Mohit","Monika",
+            "Naina","Naksh","Namita","Neeraj","Neha","Nikhil","Nisha","Pallavi","Pankaj","Pooja",
+            "Pradeep","Pragya","Priya","Rahul","Raj","Rajat","Rajesh","Rakesh","Rhea","Rishi",
+            "Ritu","Rohan","Rohit","Sachin","Sakshi","Sameer","Sanjay","Sarika","Shivam","Shreya",
+            "Sneha","Sonali","Sonal","Sourabh","Tanvi","Tarun","Tanya","Tejas","Uday","Vaishali",
+            "Varun","Vikas","Vikram","Vinay","Vishal","Yash","Yogesh","Zoya"
+        ];
+        const GC_TUTOR_LAST_NAMES = [
+            "Sharma","Verma","Patil","Kulkarni","Deshmukh","Joshi","Pillai","Mehta","Shinde","Gupta",
+            "Jadhav","Chavan","More","Pawar","Bhosale","Kale","Sawant","Naik","Mishra","Tiwari",
+            "Singh","Yadav","Rathod","Gaikwad","Thakur","Kadam","Salunkhe","Dixit","Nair","Iyer",
+            "Reddy","Rao","Menon","Kapoor","Malhotra","Saxena","Sinha","Das","Banerjee","Mukherjee",
+            "Chatterjee","Ghosh","Basu","Dutta","Sen","Roy","Bhat","Shetty","Hegde","Pai",
+            "Desai","Vora","Shah","Trivedi","Pandey","Tripathi","Srivastava","Agrawal","Jain","Gupta",
+            "Khatri","Arora","Bansal","Sethi","Ahuja","Sodhi","Bhatt","Joshi","Gawande","Wagh",
+            "Thombre","Mhatre","Kamble","Borkar","Kharat","Gore","Inamdar","Mane","Kshirsagar","Vaidya",
+            "Bhujbal","Londhe","Dabhade","Koli","Sutar","Pote","Moghe","Bhave","Ranade","Apte",
+            "Limaye","Phadke","Gokhale","Lele","Oke","Tambe","Vartak","Karnik","Godbole","Kelkar"
+        ];
+
+        for(let j=1; j<=1000; j++) {
+            const first = GC_TUTOR_FIRST_NAMES[(j - 1) % GC_TUTOR_FIRST_NAMES.length];
+            const lastIndex = Math.floor((j - 1) / GC_TUTOR_FIRST_NAMES.length) % GC_TUTOR_LAST_NAMES.length;
+            const last = GC_TUTOR_LAST_NAMES[lastIndex];
+            const cycle = Math.floor((j - 1) / (GC_TUTOR_FIRST_NAMES.length * GC_TUTOR_LAST_NAMES.length));
+            const uniqueName = cycle > 0
+                ? `${first} ${last} ${cycle + 1}`
+                : `${first} ${last}`;
+            const stream = JC_STREAMS[deterministicIndex(j * 17, JC_STREAMS.length)];
+            const subject = validSubjectForStream(stream, "", j * 31);
+            const verified = (j % 4 === 0 || j % 11 === 0);
+            const experienceYears = 2 + (j % 14);
+            const rate = 450 + ((j * 37) % 651);
+
             tutorDirectoryList.push({
-                id: j,
-                name: base.name + (j > tutorNamesData.length ? " " + Math.ceil(j/tutorNamesData.length) : ""),
-                subject: validSubjectForStream(stream, base.subject, j),
+                id: "GC-TUT-" + String(j).padStart(4, "0"),
+                name: uniqueName,
+                subject,
                 stream,
-                price: base.rate,
-                experience: base.exp,
+                price: `₹${rate}/hr`,
+                experience: `${experienceYears} Years`,
                 college: "Junior College Faculty",
-                verified: base.verified,
+                teachingCollege: "Junior College Faculty",
+                qualification: `${stream} Graduate / Post Graduate`,
+                address: "Maharashtra",
+                aboutMe: `Illustrative ${stream} tutor profile for GURU CONNECT. Available for Junior College ${subject} guidance.`,
+                verified,
                 phone: "98" + String(10000000 + j).slice(-8),
                 utr: "100000" + String(j).padStart(6, "0"),
-                paidStatus: base.verified ? "PAID" : "PENDING",
+                paidStatus: verified ? "PAID" : "PENDING",
+                rating: (4.2 + ((j * 7) % 9) / 10).toFixed(1),
+                reviewCount: 20 + ((j * 13) % 481),
+                students: `${50 + ((j * 17) % 451)}+`,
+                location: "Maharashtra",
+                memberSince: "Jan 2026",
                 isDummy: true,
                 registrationStatus: "illustrative"
             });
@@ -7032,6 +7117,94 @@ html, body, button, input, select, textarea {
     document.addEventListener('DOMContentLoaded',function(){setTimeout(finalRender,60);});
   }else{
     setTimeout(finalRender,60);
+  }
+})();
+</script>
+
+
+<script id="gc-fast-optimizer">
+(function () {
+  'use strict';
+
+  // Fast GitHub/static-hosting optimization layer.
+  // The site's existing functionality remains the source of truth.
+
+  const GC_FAST = {
+    renderQueued: false,
+    lastRender: 0,
+    idle: window.requestIdleCallback || function (cb) { return setTimeout(cb, 1); }
+  };
+
+  // De-duplicate illustrative records without touching registered users.
+  function dedupeDirectory(list) {
+    if (!Array.isArray(list)) return list;
+    const seen = new Set();
+    return list.filter(function (item) {
+      if (!item || item.isDummy === false) return true;
+      const key = [
+        item.name || '',
+        item.subject || '',
+        item.stream || '',
+        item.registrationStatus || ''
+      ].join('|').toLowerCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  }
+
+  function optimizeDirectories() {
+    try {
+      if (Array.isArray(window.tutorDirectoryList)) {
+        window.tutorDirectoryList = dedupeDirectory(window.tutorDirectoryList);
+      }
+      if (Array.isArray(window.studentDirectoryList)) {
+        window.studentDirectoryList = dedupeDirectory(window.studentDirectoryList);
+      }
+    } catch (e) {
+      console.warn('GURU CONNECT fast optimizer:', e);
+    }
+  }
+
+  // Coalesce repeated render calls caused by multiple scripts.
+  ['renderTutorDirectory', 'renderStudentDirectory'].forEach(function (fnName) {
+    try {
+      const original = window[fnName];
+      if (typeof original !== 'function' || original.__gcFastWrapped) return;
+
+      const wrapped = function () {
+        const args = arguments;
+        if (GC_FAST.renderQueued) return;
+        GC_FAST.renderQueued = true;
+
+        GC_FAST.idle(function () {
+          GC_FAST.renderQueued = false;
+          try {
+            optimizeDirectories();
+            original.apply(this, args);
+          } catch (e) {
+            console.error('GURU CONNECT render error:', e);
+          }
+        });
+      };
+      wrapped.__gcFastWrapped = true;
+      window[fnName] = wrapped;
+    } catch (e) {}
+  });
+
+  // Run after the page and existing application scripts have initialized.
+  function boot() {
+    optimizeDirectories();
+    GC_FAST.idle(function () {
+      try { if (typeof window.renderTutorDirectory === 'function') window.renderTutorDirectory(); } catch (e) {}
+      try { if (typeof window.renderStudentDirectory === 'function') window.renderStudentDirectory(); } catch (e) {}
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot, { once: true });
+  } else {
+    boot();
   }
 })();
 </script>
